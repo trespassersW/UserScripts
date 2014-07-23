@@ -9,7 +9,7 @@ Almost instantly you will see a tooltip with the translation.
 =====
 
 ![screenshot](http://imageshack.us/a/img692/6452/ma.gif)
-
+![screenshot1](http://imageshack.us/a/img854/1950/f7c.gif)
 ![screenshot2](http://imageshack.us/a/img692/4493/cyq.gif)
 
 =====
