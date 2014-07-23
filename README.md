@@ -7,5 +7,9 @@
 * ### [ru-en-hyphens-global](show/ru-en-hyphens-global.md)
 
   пере-нос слов / hyphen-ation
+
+* ### [musicmp3 download booster](show/musicmp3_download_booster.md)
+
+   автоматизация закачки треков с сайта musicmp3spb.org
   
 ----
