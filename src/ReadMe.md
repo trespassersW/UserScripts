@@ -1,11 +1,10 @@
-## [musicmp3 download booster](musicmp3_download_booster.user.js) *[`Install`](/trespassersW/UserScripts/raw/master/src/musicmp3_download_booster.user.js)
+## [musicmp3 download booster](musicmp3_download_booster.user.js) *[`Install`](/trespassersW/UserScripts/raw/master/src/musicmp3_download_booster.user.js)*
 
 #### **Script summary:**  автоматизация закачки треков с сайта musicmp3spb.org 
 
 скрипт добавляет к странице со списком треков новый пункт меню <Cсылки>, 
 по клику на который загружаются прямые ссылки на все перечисленные треки, 
-после чего, используя менеджер загрузки, можно скачивать все треки скопом 
-- без утомительной мышиной возни.
+после чего, используя менеджер загрузки, можно скачивать все треки скопом - без утомительной мышиной возни.
 
 ====
 
