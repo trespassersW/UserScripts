@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<LINK REL="SHORTCUT ICON"  HREF="favicon.ico">
+<title>  English Idiom </title>
+<style>
+/*=======  night ============*/
+.nite #outer {
+background: #002500;
+}
+.nite #inner > div {
+ text-shadow: rgb(0,12,0) 10px -10px 6px;
+ color: #324b32;
+}
+.nite .stanza span.e {
+background: #0f1f00;
+color: #4f4f32;
+}
+.nite #X { border: 1px dotted #003f00; color: #003f00;}
+/*=======  morning =========*/
+.morn #outer {
+background: #469743;
+}
+.morn #inner > div {
+ text-shadow: #4E9537 4px -4px 4px;
+ color: #236832;
+}
+.morn .stanza span.e {
+background: #81D156;
+color: #3f5f00;
+}
+.morn #X { border: 1px dotted #4E9536; color: #4E9536;}
+
+/*=======  day ==============*/
+.noon #outer {
+background: #C3A954;
+}
+.noon #inner > div {
+ text-shadow: #9C8743 4px -4px 4px;
+ color: #9C6200;
+}
+.noon .stanza span.e {
+background: #E4CC8F;
+color: #70570D;
+}
+.noon #X { border: 1px dotted #814400; color: #814400;}
+
+/*=======  evening =========*/
+.even #outer {
+background: #469743;
+}
+.even #inner > div {
+ text-shadow: #00826A 4px -4px 4px;
+ color: #00394C;
+}
+.even .stanza span.e {
+background: #216860;
+color: #00394C;
+}
+.even #X { border: 1px dotted #193456; color:#193456; }
+
+/*===========================*/
+
+#outer {
+ display: table; position: absolute; 
+ height: 100%; width: 100%;
+ margin: 0;  padding: 0; top:0;
+}
+#middle{
+ display: table-cell;
+ margin: 0;a
+ padding: 0;
+ vertical-align: middle;
+}
+#inner{
+ margin: 0 auto;
+ width: 66em;
+ overflow: visible;
+ text-align: center;
+}
+#inner > div {
+ opacity:0.35;
+ white-space: normal;
+}
+body{ padding:0;margin:0; }
+#idiom  {
+ font-family:verdana,sans-serif;
+ font-size: 2.5em; 
+ font-weight: bold;
+}
+.stanza {
+ padding: 1em 0;
+}
+.stanza span.e {
+border-radius: 12px;
+padding: 0 12px;
+}
+/*:first-of-type*/
+.stanza span.r{
+ opacity: .2;
+ transition: all 1.5s;
+}
+.stanza span.r:hover, .stanza span.e:hover + span.r{
+ opacity: 1;
+ transition: all .3s;
+}
+
+#X {position:fixed; top:1px; right:12px; font-weight:bold;
+background: transparent; z-index:999;cursor:pointer;
+}
+[descr] {
+    position: relative;
+    text-decoration: underline;
+    cursor: pointer;
+}
+[descr]::after {
+    visibility:hidden;
+    opacity: 0;
+    content: attr(descr);
+    position: absolute;
+    right: 0;    top: 24px;
+    min-width: 200px;
+    background-color: rgba(0,0,0,.2);
+    padding: 12px;
+    color: #9e9;
+    font-size: 16px;
+    border-radius: 10px;
+    transition: all 1s;
+}
+
+[descr]:hover::after {
+    visibility:visible;
+    opacity: 1;
+    transition: all .5s;
+}
+
+</style>
+<link href="zbg.css" media="all" rel="stylesheet" type="text/css"></link>
+<script src="sayings.js"></script>
+<script>
+function $(id, d){ return (d||document).getElementById(id); }
+function S(e){ e.preventDefault(),e.stopPropagation(); }
+ 
+var pw=sayings;
+var px; 
+if(!px){ px=[]; for(var i=0; i<3; i++) px.push(-1); }
+
+function sayed(x){
+ for( var i=0,il=px.length; i<il; i++ )  
+  if( x === px[i]) return i;
+ px.pop();
+ px.shift(x);
+ return  -1;
+}
+var pl=2;
+
+function gpw(ix){
+ var t= pw[ix].split(/\s\-\s/);
+ if(t.length>0 && t[0]){
+ t='<span class=e>'+ t[0] +'</span> <span class=r> - ' + t.slice(1).join(' - ') +
+ '</span>';
+ }
+ return t;
+}
+
+var _dt='auto';
+
+function dayTime(t){
+ if(t) _dt=t;
+ if(!t) t=_dt;
+ if(t=='auto' ){
+  var h= (new Date()).getHours();
+  if( h<7 ) t= 'nite';
+  else if( h<11 ) t= 'morn';
+  else if( h<19 ) t= 'noon';
+  else if( h<23 ) t= 'even';
+  else t='nite';
+ }
+  if($('body').className != t)
+  $('body').className=t;
+}
+
+function Idiom(){
+var txt="<div class=stanza>"
+for(var i, ix, j=0; j<pl; j++){
+ txt += "<div>"
+ for (i=0; i<3; i++){
+   ix = Math.round(Math.random()*(pw.length-1));
+   if(sayed(ix) < 0) break;
+ }
+ txt += gpw(ix)+"</div>";
+}
+ return txt+"</div>"
+}
+
+function kernPoem(){ "use strict";
+var pEl = $("idiom");
+ dayTime();
+ if(!pEl)
+   throw 'kernPoem not found';
+ if(! document.querySelector(".stanza") )
+   pEl.innerHTML="";
+  pEl.innerHTML = Idiom()+pEl.innerHTML; 
+  dayTime();
+  scroll(0,0);
+}
+/* * /
+/* */
+</script>
+</head> <body class=morn id=body>
+<h2 id="X" descr="X - clear; 0 - auto; 1 - night; 2 - morn; 3 - day; 4 - evening; click/space/enter - next phrase">
+X
+</h2>
+<div id=outer>
+ <div id=middle>
+  <div  id="inner">
+  <div class=menu_button contenteditable="false"  id=idiom >
+<!--         self-defense -- >
+<!-- -->
+   <div>* * *</div>
+</div>
+<script>
+</script>
+
+</div>
+</div>
+<script>
+
+//how to separate click frome mouse selection?
+var _md=0;
+$("idiom").addEventListener('mousedown',
+function(e){
+ var m=e.shiftKey | (e.ctrlKey<<1) | (e.altKey<<2) | (e.metaKey<<3);
+ if(!m) _md=1;
+},false);
+$("idiom").addEventListener('mouseup',
+function(e){
+ if(_md) S(e),kernPoem();
+ _md=0;
+},false);
+$("idiom").addEventListener('mousemove',
+function(e){
+ _md=0; 
+},false);
+/* * /
+$("idiom").addEventListener('click',function(e){
+if(!e.shiftKey && !e.ctrlKey && !e.altKey ) kernPoem()}
+,false);
+/* */
+
+function xlear(){
+ $("idiom").innerHTML="пустота <br>  nil  <br>  nothing <br> emptyness";
+}
+
+addEventListener('keydown',
+ function(e){
+ var m=e.shiftKey | (e.ctrlKey<<1) | (e.altKey<<2) | (e.metaKey<<3);
+   if(m==0 && (e.keyCode==32 || e.keyCode== 13) )
+    kernPoem(), S(e);
+   else if(m==0 && e.keyCode==  88)//X
+    xlear(),S(e);
+   else if(m==0 && e.keyCode==0x30)
+    dayTime('auto'),S(e);
+   else if(m==0 && e.keyCode==0x31)
+    dayTime('nite'),S(e);
+   else if(m==0 && e.keyCode==0x32)
+    dayTime('morn'),S(e);
+   else if(m==0 && e.keyCode==0x33)
+    dayTime('noon'),S(e);
+   else if(m==0 && e.keyCode==0x34)
+    dayTime('even'),S(e);
+//   else  console.log(" k: "+e.keyCode);
+ }, false);
+
+$("X").addEventListener('click',xlear,false);
+/* * /
+$("outer").addEventListener('keydown', 
+ function(e){
+ var m=e.shiftKey | (e.ctrlKey<<1) | (e.altKey<<2) | (e.metaKey<<3);
+   if(!m && e.keyCode==27 )
+   xlear(),e.preventDefault();
+ },false);
+
+/* */
+dayTime('auto');
+kernPoem(); 
+</script>
+</body></html>
