@@ -1,4 +1,4 @@
-### Yandex-two-columns **[[`JS`]](../src/Yandex-two-columns.user.js)**     **[[`Install`]](https://github.com//trespassersW/UserScripts/raw/master/src/Yandex-two-columns.user.js)**
+### Yandex-two-columns **[[`JS`]](../src/Yandex-two-columns.user.js)**     **[[`Install`]](https://github.com/trespassersW/UserScripts/raw/master/src/Yandex-two-columns.user.js)**
 
 #### **Script summary:** две колонки результатов Яндекса - и ничего лишнего 
 
