@@ -1,0 +1,16 @@
+/* turn ON hyphenation */
+@-moz-document
+ url-prefix(http://)
+,url-prefix(https://)
+,url-prefix(file://)
+
+{
+ div,p, li, td, dd
+{-moz-hyphens: auto  }
+/**/
+ [class*="button"],[class*="menu"],[id*="button"],[id*="menu"] 
+,[class*="button"] *,[class*="menu"] *,[id*="button"] *,[id*="menu"] *
+,[class^="b-head__layout-column"] * 
+{-moz-hyphens: none !important}
+}
+/**/
