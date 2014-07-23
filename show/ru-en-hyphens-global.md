@@ -1,10 +1,9 @@
 ### **ru-en-hyphens-global** **[[`source`]](../src/ru-en-hyphens-global.user.js)** **[[`Install`]](https://github.com/trespassersW/UserScripts/raw/master/src/ru-en-hyphens-global.user.js)**
 
-##### **Script summary:**  Translates selected text into a ‘tooltip’ via Google translate 
+#### **Script summary:** пере-нос слов / hyphen-ation
 
-Select word or phrase with **Alt** key pressed - then hover over an icon below the selection. 
-
-Almost instantly you will see a tooltip with the translation. 
+скрипт включает функцию расстаноки переносов слов в тексте страницы (hyphens).
+ работает в Фф 8+ 
 
 =====
 
