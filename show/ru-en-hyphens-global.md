@@ -1,4 +1,4 @@
-### **ru-en-hyphens-global** **[[`source`]](../src/ru-en-hyphens-global.user.js)** **[[`Install`]](https://github.com/trespassersW/UserScripts/raw/master/src/ru-en-hyphens-global.user.js)**
+### **ru-en-hyphens-global** **[[`source`]](../src/ru-en-hyphens-global.user.js)** **[[`Install`]](https://github.com/trespassersW/UserScripts/raw/master/src/ru-en-hyphens-global.user.js "You must Have GreseMonkey installed")**
 
 #### **Script summary:** пере-нос слов / hyphen-ation
 
