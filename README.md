@@ -1,7 +1,10 @@
 ## trespassersW userscripts
 
+### [translate.google tooltip](show/translate.google_tooltip.md) 
+  Translates selected text into a ‘tooltip’ via Google translate 
 
-### [ru-en-hyphens-global](src/ru-en-hyphens-global.user.js)  **[[`Install`]](https://github.com/trespassersW/UserScripts/raw/master/src/ru-en-hyphens-global.user.js)**
+###  ru-en-hyphens-global  **[[`source`]](src/ru-en-hyphens-global.user.js)**   **[[`Install`]](https://github.com/trespassersW/UserScripts/raw/master/src/ru-en-hyphens-global.user.js)**
+
 
 #### **Script summary:** пере-нос слов / hyphen-ation
 
