@@ -1,4 +1,4 @@
-### **[translate.google tooltip]** **[`source`](src/translate.google_tooltip.user.js)** **[[`Install`]](https://github.com/trespassersW/UserScripts/raw/master/src/translate.google_tooltip.user.js)**
+### **translate.google tooltip** **[`source`](src/translate.google_tooltip.user.js)** **[[`Install`]](https://github.com/trespassersW/UserScripts/raw/master/src/translate.google_tooltip.user.js)**
 
 ##### **Script summary:**  Translates selected text into a ‘tooltip’ via Google translate 
 
