@@ -25,4 +25,4 @@
 
 =====
 
-[ ![(C)](http://i.creativecommons.org/l/by/3.0/80x15.png "copyleft") (http://creativecommons.org/licenses/by/3.0/)] © **Yandex-two-columns** by *trespassersW*
+[![C](http://i.creativecommons.org/l/by/3.0/80x15.png "copyleft")] (http://creativecommons.org/licenses/by/3.0/) © **Yandex-two-columns** by *trespassersW*
