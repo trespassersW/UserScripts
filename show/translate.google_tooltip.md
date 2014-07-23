@@ -11,7 +11,7 @@ Almost instantly you will see a tooltip with the translation.
 ![screenshot](http://imageshack.us/a/img692/6452/ma.gif)<br>
 ![screenshot1](http://imageshack.us/a/img854/1950/f7c.gif)<br>
 
-Please look more closely at the picture below:
+Please look more closely at the picture below:<br>
 ![screenshot2](http://imageshack.us/a/img692/4493/cyq.gif)
 
 =====
