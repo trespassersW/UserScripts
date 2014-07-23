@@ -14,6 +14,6 @@ Almost instantly you will see a tooltip with the translation.
 
 =====
 
-This is a distant descendant of lazyttrick's Google Translator Tooltip
+ This is a distant descendant of lazyttrick's Google Translator Tooltip
 
 ----
