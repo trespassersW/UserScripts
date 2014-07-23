@@ -4,6 +4,10 @@
 
   Translates selected text into a ‘tooltip’ via Google translate 
 
+* ### [Yandex-two-columns](show/Yandex-two-columns.md) 
+
+  две колонки результатов Яндекса - и ничего лишнего
+
 * ### [ru-en-hyphens-global](show/ru-en-hyphens-global.md)
 
   пере-нос слов / hyphen-ation
