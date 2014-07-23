@@ -18,8 +18,10 @@
 <hr>
 
 При помощи пункта меню *Инструменты → Greasemonkey → Команды скриптов* можно изменить число колонок. <br>
-<hr>
-2014-06-15 новый дизайн йандекса>
+
+=====
+2014-06-15 новый дизайн йандекса<br>
 2014-07-22 * задний фон
-<hr>
+
+=====
 [![C](http://i.creativecommons.org/l/by/3.0/80x15.png "copyleft")] (http://creativecommons.org/licenses/by/3.0/) © **Yandex-two-columns** by *trespassersW*
