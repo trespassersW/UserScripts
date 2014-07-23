@@ -1,5 +1,5 @@
-### musicmp3 download booster **[[`JS`]](../src/musicmp3_download_booster.user.js)**     **[[`Install`]](/trespassersW/UserScripts/raw/master/src/musicmp3_download_booster.user.js)**
-
+### musicmp3 download booster **[[`JS`]](../src/musicmp3_download_booster.user.js)**     **[[`Install`]](https://github.com//trespassersW/UserScripts/raw/master/src/musicmp3_download_booster.user.js)**
+https://github.com/trespassersW/UserScripts/edit/master/show/musicmp3_download_booster.md
 #### **Script summary:**  автоматизация закачки треков с сайта musicmp3spb.org 
 
 скрипт добавляет к странице со списком треков новый пункт меню <Cсылки>, 
