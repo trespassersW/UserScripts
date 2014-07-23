@@ -1,6 +1,6 @@
 ### Yandex-two-columns **[[`JS`]](../src/Yandex-two-columns.user.js)**     **[[`Install`]](https://github.com//trespassersW/UserScripts/raw/master/src/Yandex-two-columns.user.js)**
 
-### **Script summary:** две колонки результатов Яндекса - и ничего лишнего 
+#### **Script summary:** две колонки результатов Яндекса - и ничего лишнего 
 
 ====
 
@@ -25,4 +25,4 @@
 
 =====
 
-[![C](http://i.creativecommons.org/l/by/3.0/80x15.png)](http://creativecommons.org/licenses/by/3.0/)] © Yandex-two-columns by trespassersW 
+[ ![(C)](http://i.creativecommons.org/l/by/3.0/80x15.png "copyleft") (http://creativecommons.org/licenses/by/3.0/)] © **Yandex-two-columns** by *trespassersW*
