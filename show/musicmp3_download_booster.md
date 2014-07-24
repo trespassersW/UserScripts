@@ -1,4 +1,4 @@
-| ![музыка мрЗ](/res/mmp3.gif) ***musicmp3 download booster** |  **[[`source`]](/src/musicmp3_download_booster.user.js)**  **[[`Install`]](/../../raw/master/src/musicmp3_download_booster.user.js)** |
+| ![музыка мрЗ](/res/mmp3.gif) | ***musicmp3 download booster*** |  **[[`source`]](/src/musicmp3_download_booster.user.js)**  **[[`Install`]](/../../raw/master/src/musicmp3_download_booster.user.js)** |
 | :----: | :---- | ---------------------- |
 #### **Script summary:**  автоматизация закачки треков с сайта musicmp3spb.org 
 
