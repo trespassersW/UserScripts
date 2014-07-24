@@ -1,5 +1,5 @@
-### Yandex-two-columns **[[`JS`]](../src/Yandex-two-columns.user.js)**     **[[`Install`]](/../../raw/master/src/Yandex-two-columns.user.js)**
-
+| ![ya2ay](/res/ya.jpg) | ***Yandex-two-columns*** |  **[[`JS`]](../src/Yandex-two-columns.user.js)**     **[[`Install`]](/../../raw/master/src/Yandex-two-columns.user.js)**
+| :----: | :---- | ----- |
 #### **Script summary:** две колонки результатов Яндекса - и ничего лишнего 
 
 Скрипт пытается максимизировать объём полезной информации, 
