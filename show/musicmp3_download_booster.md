@@ -1,4 +1,4 @@
-### musicmp3 download booster **[[`JS`]](../src/musicmp3_download_booster.user.js)**     **[[`Install`]](https://github.com//trespassersW/UserScripts/raw/master/src/musicmp3_download_booster.user.js)**
+### musicmp3 download booster **[[`JS`]](../src/musicmp3_download_booster.user.js)**     **[[`Install`]](/../../raw/master/src/musicmp3_download_booster.user.js)**
 
 #### **Script summary:**  автоматизация закачки треков с сайта musicmp3spb.org 
 
