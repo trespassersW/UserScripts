@@ -1,5 +1,5 @@
 <b>английские идиомы</b>
-
+![run](https://github.com/trespassersW/UserScripts/raw/master/htm/engidioms/sayings.htm)
 *See <b>[screenshot](https://i.imgur.com/uYRuJPw.gif).</b>*
 
 * sayings.htm страничка
