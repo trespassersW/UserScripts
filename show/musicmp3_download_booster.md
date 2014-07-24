@@ -1,6 +1,6 @@
 | ![музыка мрЗ](/res/mmp3.gif) | ***musicmp3 download booster*** |  **[[`source`]](/src/musicmp3_download_booster.user.js)**  **[[`Install`]](/../../raw/master/src/musicmp3_download_booster.user.js)** |
 | :----: | :---- | ---------------------- |
-#### **Script summary:**  автоматизация закачки треков с сайта musicmp3spb.org 
+#### *Script summary:*  автоматизация закачки треков с сайта musicmp3spb.org 
 
 скрипт добавляет к странице со списком треков новый пункт меню <Cсылки>, 
 по клику на который загружаются прямые ссылки на все перечисленные треки, 
