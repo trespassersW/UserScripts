@@ -18,5 +18,3 @@
 | [**altWheelScroll**](/../../raw/master/src/altWheelScroll.user.js) | alt+wheel = horisontal scroll
 | [**halt!**](/../../raw/master/src/halt!.user.js) | stops aeonian page loading
 | [**greasyforkorg_langfilter**](/../../raw/master/src/greasyforkorg_langfilter.user.js) | no CJK posts
-
-
