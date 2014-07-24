@@ -1,4 +1,6 @@
-### **translate.google tooltip** **[[`source`]](../src/translate.google_tooltip.user.js)** **[[`Install`]](/../../raw/master/src/translate.google_tooltip.user.js)**
+|  |  | |
+| :----: | :---- | ---------------------- |
+| ![babelfish](/res/babelfish.gif) | ***translate.google tooltip*** | **[[`source`]](../src/translate.google_tooltip.user.js)** **[[`Install`]](/../../raw/master/src/translate.google_tooltip.user.js)** |
 
 ##### **Script summary:**  Translates selected text into a ‘tooltip’ via Google translate 
 
