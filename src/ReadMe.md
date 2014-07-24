@@ -6,8 +6,8 @@
 |	[**ru-en-hyphens-global**](/../../raw/master/src/ru-en-hyphens-global.user.js) | hyph-ens пере-носы
 |	**ru-en-hyphens-global.css** | stylish css for **ru-en-hyphens-global.js**
 |	[**translate.google_tooltip**](/../../raw/master/src/translate.google_tooltip.user.js) | G translator
-| [**Yandex-two-columns**](/../../raw/master/src/translate.google_tooltip.user.js) | йандекс 2 колонки
-| [**OUJS_forum_fix**](/../../raw/master/src/.user.js) | patch
+| [**Yandex-two-columns**](/../../raw/master/src/Yandex-two-columns.user.js) | йандекс 2 колонки
+| [**OUJS_forum_fix**](/../../raw/master/src/OUJS_forum_fix.user.js) | patch
 | [**googleprivacy**](/../../raw/master/src/googleprivacy.user.js) | unredirector
 | [**sputnikru_direct_links**](/../../raw/master/src/sputnikru_direct_links.user.js) | unredirector
 | [**Y-marker**](/../../raw/master/src/.user.js) | bookmark positions inside webpage
