@@ -12,7 +12,7 @@
 
 =====
 
-![screenshot](https://df6a.https.cdn.softlayer.net/80DF6A/static.userstyles.org/style_screenshots/57878_after.gif)
+![screenshot](../res/ya2shot.gif)
 
 =====
 

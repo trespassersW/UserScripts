@@ -7,10 +7,10 @@ Almost instantly you will see a tooltip with the translation.
 
 =====
 
-![screenshot](http://imageshack.us/a/img692/6452/ma.gif)<br>
-![screenshot1](http://imageshack.us/a/img854/1950/f7c.gif)<br>
+![screenshot](../res/tg1.gif)<br>
+![screenshot1](../res/tg2.gif)<br>
 ***Please look more closely at the picture below:***<br>
-![screenshot2](http://imageshack.us/a/img692/4493/cyq.gif)
+![screenshot2](../res/tg3.gif)
 
 =====
 

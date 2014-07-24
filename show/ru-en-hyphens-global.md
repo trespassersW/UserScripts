@@ -8,7 +8,7 @@
 
 =====
 
-![screenshot](http://img826.imageshack.us/img826/2619/hyphenation.gif)
+![screenshot](../res/ruenhy.gif)
 
 =====
 

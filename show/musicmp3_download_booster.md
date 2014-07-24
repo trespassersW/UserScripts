@@ -8,7 +8,7 @@
 
 ====
 
-![screenshot](http://s3.amazonaws.com/uso_ss/17834/large.gif?1341839116)
+![screenshot](../res/mmp3shot.gif)
 
 Есть [инструкция](http://userscripts-mirror.org/topics/87458.html) по настройке 
 менеджера загрузки [DownThemAll](http://www.downthemall.net/) для закачки треков с [musicmp3spb.org](http://musicmp3spb.org)
