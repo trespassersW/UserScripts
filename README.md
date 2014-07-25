@@ -8,3 +8,5 @@ pic | tit | dsc
 ![misicmp3](res/mmp3.gif) | **[musicmp3 download booster](show/musicmp3_download_booster.md)** | автоматизация закачки треков с сайта musicmp3spb.org
   
 ----
+
+![more scripts...](src/ReadMe.md)
