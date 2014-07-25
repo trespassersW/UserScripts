@@ -1,7 +1,6 @@
 | install | description |
 | -----   | :--------- |
 | **google_cache_comeback** ![src](/res/JS.png) | |
-
 |	[**musicmp3_download_booster**](/../../raw/master/src/musicmp3_download_booster.user.js) | автоматизация закачки треков с сайта musicmp3spb.org
 | [**musicmp3_tempfile_download_autostart**](/../../raw/master/src/musicmp3_tempfile_download_autostart.user.js) | механизация закачки треков с сайта musicmp3spb.org
 |	[**ru-en-hyphens-global**](/../../raw/master/src/ru-en-hyphens-global.user.js) | hyph-ens пере-носы
