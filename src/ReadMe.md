@@ -10,7 +10,7 @@
 |	**googleprivacy** | [![src](/res/Script.png)](googleprivacy.user.js) [![dwn](/res/Down.png)](/../../raw/master/src/googleprivacy.user.js) |unredirector
 |	**sputnikru_direct_links** | [![src](/res/Script.png)](sputnikru_direct_links.user.js) [![dwn](/res/Down.png)](/../../raw/master/src/sputnikru_direct_links.user.js) |unredirector
 |	**Y-marker** | [![src](/res/Script.png)](Y-marker.user.js) [![dwn](/res/Down.png)](/../../raw/master/src/Y-marker.user.js) |bookmark positions inside webpage
-|	**uso-mirror** | [![src](/res/Script.png)](uso-mirror.user.js) [![dwn](/res/Down.png)](/../../raw/master/src/uso-mirror.user.js) |hyph-ens пере-носы
+|	**uso-mirror** | [![src](/res/Script.png)](uso-mirror.user.js) [![dwn](/res/Down.png)](/../../raw/master/src/uso-mirror.user.js) |redirector
 |	**uso8080** | [![src](/res/Script.png)](uso8080.user.js) [![dwn](/res/Down.png)](/../../raw/master/src/uso8080.user.js) |redirector
 |	**userstyles_forum_spamfilter** | [![src](/res/Script.png)](userstyles_forum_spamfilter.user.js) [![dwn](/res/Down.png)](/../../raw/master/src/userstyles_forum_spamfilter.user.js) |now hilights post authors
 |	**altWheelScroll** | [![src](/res/Script.png)](altWheelScroll.user.js) [![dwn](/res/Down.png)](/../../raw/master/src/altWheelScroll.user.js) | alt+wheel = horisontal scroll
