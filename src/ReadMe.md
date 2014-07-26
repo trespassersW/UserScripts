@@ -2,7 +2,7 @@
 | ----- | :---:  | :--------- | ---- |
 | **google_cache_comeback** | [![src](/res/Script.png)](google_cache_comeback.user.js)  [ ![dwn](/res/Down.png)](/../../raw/master/src/google_cache_comeback.user.js) | Brings back links to cached pages in the Google search results
 |	**musicmp3_download_booster** | [![src](/res/Script.png)](musicmp3_download_booster.user.js) [ ![dwn](/res/Down.png)](/../../raw/master/src/musicmp3_download_booster.user.js) | автоматизация закачки треков с сайта musicmp3spb.org
-|	**musicmp3_tempfile_download_autostart** | [![src](/res/Script.png)](musicmp3_download_booster) [![dwn](/res/Down.png)](/../../raw/master/src/musicmp3_tempfile_download_autostart.user.js) | механизация закачки треков с сайта musicmp3spb.org
+|	**musicmp3_tempfile_download_autostart** | [![src](/res/Script.png)](musicmp3_download_booster.user.js) [![dwn](/res/Down.png)](/../../raw/master/src/musicmp3_tempfile_download_autostart.user.js) | механизация закачки треков с сайта musicmp3spb.org
 |	**ru-en-hyphens-global** | [![src](/res/Script.png)](ru-en-hyphens-global.user.js) [ ![dwn](/res/Down.png)](/../../raw/master/src/ru-en-hyphens-global.user.js) |hyph-ens пере-носы
 |	**translate.google_tooltip** | [![src](/res/Script.png)](translate.google_tooltip.user.js) [![dwn](/res/Down.png)](/../../raw/master/src/translate.google_tooltip.user.js) | G translator
 |	**Yandex-two-columns** | [![src](/res/Script.png)](Yandex-two-columns.user.js) [![dwn](/res/Down.png)](/../../raw/master/src/Yandex-two-columns.user.js) |Йандекс 2 колонки
