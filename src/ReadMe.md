@@ -14,6 +14,9 @@
 |	**uso8080** | [![src](/res/Script.png)](uso8080.user.js) [![dwn](/res/Down.png)](/../../raw/master/src/uso8080.user.js) |redirector
 |	**userstyles_forum_spamfilter** | [![src](/res/Script.png)](userstyles_forum_spamfilter.user.js) [![dwn](/res/Down.png)](/../../raw/master/src/userstyles_forum_spamfilter.user.js) |now hilights post authors
 |	**altWheelScroll** | [![src](/res/Script.png)](altWheelScroll.user.js) [![dwn](/res/Down.png)](/../../raw/master/src/altWheelScroll.user.js) | alt+wheel = horisontal scroll
-|	**halt!** | [![src](/res/Script.png)](halt.user.js) [![dwn](/res/Down.png)](/../../raw/master/src/halt.user.js) |stops aeonian page loading[
+|	**halt!** | [![src](/res/Script.png)](halt!.user.js) [![dwn](/res/Down.png)](/../../raw/master/src/halt!.user.js) |stops aeonian page loading
+
+-------------
 
 [/](../README.md)
+
