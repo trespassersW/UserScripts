@@ -13,7 +13,7 @@
 // @run-at document-end
 // ==/UserScript==
 /* */
-//http://userscripts.org/scripts/show/100699
+// http://userscripts-mirror.org/scripts/show/100699
 
 const zong='mmp3_zong_name';
 if( location.href.indexOf("musicmp3spb.org/a")>0 ){       //окно списка песенок
