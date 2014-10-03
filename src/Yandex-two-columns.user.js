@@ -6,8 +6,8 @@
 // @include  /^https?:\/\/(www\.)?yandex\..+\/(yand)?search.+/
 // @run-at document-start
 // @author   trespassersW
-// -homepageURL http://userscripts.org/scripts/show/120602
-// -updateURL https://userscripts.org/scripts/source/120602.meta.js
+// -homepageURL http://userscripts-mirror.org/scripts/show/120602
+// -updateURL https://userscripts-mirror.org/scripts/source/120602.meta.js
 // @version 2.014.1002
 // @date 2014-10-02
 // @grant GM_setValue
