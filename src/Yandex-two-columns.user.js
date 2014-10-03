@@ -8,13 +8,13 @@
 // @author   trespassersW
 // -homepageURL http://userscripts-mirror.org/scripts/show/120602
 // -updateURL https://userscripts-mirror.org/scripts/source/120602.meta.js
-// @version 2.014.1002
-// @date 2014-10-02
+// @version 2.014.1003
+// @date 2014-10-03
 // @grant GM_setValue
 // @grant GM_getValue
 // @grant GM_addStyle
 // @grant GM_registerMenuCommand
-// 2014-10-02 - updated css, icon
+// 2014-10-03 - a fix
 // @icon data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAQCAYAAAB3AH1ZAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAADPElEQVRIx42VzWsbVxTFf5KsKTKp6RcooUHCYNCqC0MW9WYgkEWg2Sj2IlQbk4AFaejCgSz8HzhQvBBtClJApJuAYywJBCLZGjzOLkSUFBREJzHGiVzPdCKPXsfzXhbyKLKYNLpw4fDOmXPvu2/mTYTw+Bb4mk/Hf0NYG0N/AOx+SpSs1+vLaoxwXdcEfnBd1xxHX6/Xl4Hk/xVP6LquCyH2pZRqnAR+HFcrhNjXdV0HEkHByEgD6Var9cv09PT8qVVPEHn0G5Hn2/DvPzD5OfLuJgCxWGzR9/0yQPROFo4cmPoK9d0cauEmxD87ZdVutzdmZmZuA38DRIe4c4VC4XI6nZ6XUjKcrBfh6Rb+1VvISzmwuh84iA+w1UVeyuFfvQVPt2C9yKhXOp2eLxQKl4Fzw41pyWTyomVZr4QQajTlgq682kMlhFBeY1OpKxcGHHAzwOrKBeU1Nvu62kMlF3QV5mdZ1qtkMnkR0IIJpKrV6nVN0877vs9oRl60kfFJfN9HdgVqzx5wgBZgtWcju6Kvi08SedEmzE/TtPPVavU6kBo0kMlkrnmeR1j6U2eh8biPuy68cQYcoA3wGwe/6/Zx4zH+1Fk+5pnJZK4BqYmTBiZs2yYajYZ+GuLn23xz4wb+8z+J9Hooq4tt24PjC/AZq0vk9yLx8h/Ed3bo3L9P74PuVJy8PxNBxdeGYay7rktYHs7OsreyAoZBT0p6MOCAiQD3gJ6UYBjsraxwODvLxzwNw1gHXgcNvMzn8xuWZe2GHkGnQ3xtjf2lJQ6yWY6UCj2CI6U4yGbZX1oivraG3+mEjt+yrN18Pr8BvAwaELZtPyuVSveOj48ZzdjqKk4igZ3LIaTEgQEHxAPsAEJK7FwOJ5EgtrpKmF+pVLpn2/YzQAwfeqtYLDaazeaTU7vf2sKr1bCXl/EAcXxMF4YnEA9w94T3oK+v1frPD/k1m80nxWKxAbTCbsIvUqnUQrlcvptIJL4c4+fC3Nzcr9vb2z+No3Vd93BxcfGOaZqPAGv0JgSwTNPcqVQqD8K+39F0HOct8M5xnLfj6CuVygPTNHeC4mETCOJ7IDPGpt4BPhADzoyh/wswhhfeA9PtjejwVJkmAAAAAElFTkSuQmCC
 // ==/UserScript==
 
@@ -43,7 +43,7 @@ function stickStyle(I,C){  // (id,css)
  var D=document,W=window,A="appendChild",N;
  N=D.createElement("style");N.type="text/css";
  N[A](D.createTextNode(C));
- if(W[I]) delete W[I];
+ if(W[I]) W[I].parentNode.removeChild(W[I]);
  W[I]=(D.head||D.documentElement)[A](N);
 }
 
