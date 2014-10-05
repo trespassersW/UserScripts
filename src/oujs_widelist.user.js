@@ -3,14 +3,16 @@
 // @namespace   trespassersW
 // @description extends list of scripts shown by OUJS to 100% width
 // @include https://openuserjs.org/*
-// @license: MIT
-// @version 2.015.1005
+// @license MIT
+// @version 2014.1005.1
+//  .1005.1 tiny fixes
 // @created 2014-10-05
 // @updated 2014-10-05
-// @run-at document-start
+// @run-at document-end
 // @grant GM_none
 // ==/UserScript==
 (function(){ "use strict";
+if(!document.querySelector(".tr-link")) return;
 var css="\
 .col-sm-8 {\
  width: 100% !important;\
@@ -18,6 +20,7 @@ var css="\
 .col-sm-4 {\
  position: absolute !important;\
  right: 0 !important;\
+ z-index: 9!important;\
 }\
 .col-sm-4 div.panel {\
  margin-bottom: 4px !important;\
@@ -28,7 +31,7 @@ var css="\
  background: white;\
  content: '\\21a7';\
  position: absolute;\
- left: -12px; top: 2px;\
+ left: -6px; top: 2px;\
  font-size: 20px;\
  color: gray;\
 }\
@@ -66,22 +69,25 @@ var css="\
 .tr-link td.rating  {\
  line-height: 1 !important;\
 }\
+.tr-link {\
+ background-image: linear-gradient(to top,\
+ rgba(255,255,255, .75), rgba(237,237,255, .75) );\
+}\
 /* hide username in author's scripts list */\
 .col-xs-12 .tr-link a.tr-link-a ~ span.inline-block{\
  display: none !important;\
 }\
-.oujsort-desc:after {content: '\\2193'}\
-.oujsort-asc:after {content: '\\2191'}\
+.oujsort-desc:after {content: '\\2193'; color: #DF691A;}\
+.oujsort-asc:after {content: '\\2191'; color: #DF691A;}\
 ";
 //
-function stickStyle(css){ "use strict";
+function stickStyle(css){
  var s=document.createElement("style"); s.type="text/css";
  s.appendChild(document.createTextNode(css));
  return (document.head||document.documentElement).appendChild(s);
 }
 
 stickStyle(css);
-
 function toObj(s) {
  var r = {}, c = s.split('&'), t;
  for(var i = 0; i < c.length; i++) {
@@ -101,7 +107,7 @@ var defaultOrder = {
  size: 'desc', rating: 'desc', installs: 'desc', comments: 'desc' 
 }
 
-window.addEventListener("load",function(e) {
+//window.addEventListener("load",function(e) {
 var a, ah, lh = hp(location.href), o,i,il;
 if(lh&&lh.orderBy) {
  a=document.querySelectorAll("th.text-center >a");
@@ -129,6 +135,6 @@ a = document.querySelectorAll("div.col-sm-4 > div.panel");
     o.appendChild( aa.pop() );
   a[0].parentNode.appendChild(o);
  }
-},false);
+//},false);
 
 })();
