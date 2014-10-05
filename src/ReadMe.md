@@ -15,6 +15,7 @@
 |	**userstyles_forum_spamfilter** | [![src](/res/Script.png)](userstyles_forum_spamfilter.user.js) [![dwn](/res/HDown.png)](/../../raw/master/src/userstyles_forum_spamfilter.user.js) |now hilights post authors
 |	**altWheelScroll** | [![src](/res/Script.png)](altWheelScroll.user.js) [![dwn](/res/HDown.png)](/../../raw/master/src/altWheelScroll.user.js) | alt+wheel = horisontal scroll
 |	**halt!** | [![src](/res/Script.png)](halt!.user.js) [![dwn](/res/HDown.png)](/../../raw/master/src/halt!.user.js) |stops aeonian page loading
+|	**OUJS widelist** | [![src](/res/Script.png)](oujs_widelist.user.js) [![dwn](/res/HDown.png)](/../../raw/master/src/oujs_widelist.user.js) |extends list of scripts shown by OUJS to 100% width
 
 -------------
 
