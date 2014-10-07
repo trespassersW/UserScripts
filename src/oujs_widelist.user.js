@@ -26,7 +26,7 @@ div.container-fluid  div.row  div.container-fluid.col-sm-8\
 div.container-fluid  div.row  div.container-fluid.col-sm-4\
 {width:25%}\
 "); 
- return; // no tables - do nothing more
+ return; // no tables; do nothing more
 }
 
 stickStyle("\
