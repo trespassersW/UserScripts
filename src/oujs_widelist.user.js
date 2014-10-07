@@ -6,7 +6,7 @@
 // @license MIT
 // @version 2014.1007.7
 //  .1007.7  user rank
-//  .1007.6  run on DOMContentLoaded - less flickering?
+//  .1007.6  run on DOMContentLoaded -- less flickering?
 //  .1006.5  narrow right panel in script title page
 //  .1006.3 put in order table header; classic 'click on link' behavior recovered
 // @created 2014-10-05
