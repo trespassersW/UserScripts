@@ -4,10 +4,10 @@
 // @description extends list of scripts shown by OUJS to 100% width
 // @include https://openuserjs.org/*
 // @license MIT
-// @version 2014.1005.1
-//  .1005.1 tiny fixes
+// @version 2014.1006.0
+//  .1006.0 table header fixes
 // @created 2014-10-05
-// @updated 2014-10-05
+// @updated 2014-10-06
 // @run-at document-end
 // @grant GM_none
 // ==/UserScript==
@@ -39,7 +39,7 @@ var css="\
  border: thin solid red !important;\
  color: red !important;\
 }\
-.col-sm-4 .col-sm-40 \
+.col-sm-4 .col-sm-404 \
 {\
  position:absolute !important;\
  visibility: hidden !important;\
@@ -48,7 +48,7 @@ var css="\
  transition-property: visibility;\
  transition-delay: 750ms\
 }\
-.col-sm-4:hover .col-sm-40\
+.col-sm-4:hover .col-sm-404\
 {\
  visibility: visible !important;\
  display: block !important;\
@@ -77,8 +77,10 @@ var css="\
 .col-xs-12 .tr-link a.tr-link-a ~ span.inline-block{\
  display: none !important;\
 }\
-.oujsort-desc:after {content: '\\2193'; color: #DF691A;}\
-.oujsort-asc:after {content: '\\2191'; color: #DF691A;}\
+.oujsort-desc:after {content: '\\2193';  visibility:hidden;}\
+.oujsort-asc:after  {content: '\\2191';  visibility:hidden;}\
+.oujsort-desc:hover:after, .oujsort-asc:hover:after{ visibility: visible;}\
+.oujsort-sel:after {visibility: visible; }\
 ";
 //
 function stickStyle(css){
@@ -101,33 +103,43 @@ function hp(h) {
  if(x>-1) r=toObj(h.substr(x+1));
  return r;
 }
+
+var odir=[ 'asc', 'desc' ];
 var defaultOrder = {
- topic: 'asc', name: 'asc', category: 'asc', users: 'asc', 
- views: 'desc', created: 'desc', updated: 'desc',
- size: 'desc', rating: 'desc', installs: 'desc', comments: 'desc' 
-}
+ topic: 0, name: 0, category: 0, users: 0, 
+ views: 1, created: 1, updated: 1, 
+ size: 1, rating: 1, installs: 1, comments: 1 
+};
 
 //window.addEventListener("load",function(e) {
-var a, ah, lh = hp(location.href), o,i,il;
-if(lh&&lh.orderBy) {
- a=document.querySelectorAll("th.text-center >a");
+
+var a, ah, lh = hp(location.href), o,i,il,t;
+//if(lh) {
+ a=document.querySelectorAll('th >a[href*="orderBy"]');
  for( il=a.length, i=0; i<il; i++ ) {
   ah=hp(a[i].href);
-  if(ah) if(ah.orderBy==lh.orderBy) { // mark sorted column
-    a[i].classList.add("oujsort-"+lh.orderDir);
-   }else{ // set commonsensical sorting order
-    o= defaultOrder[ah.orderBy];
-    if(o && o!=ah.orderDir )
+  if(ah && ah.orderBy) {
+   o= defaultOrder[ah.orderBy]; o=odir[o]; 
+   if(o){ t=0;
+    if( lh && lh.orderBy && (t= (ah.orderBy==lh.orderBy)) ) // selected?
+     o= ah.orderDir; 
+   // mark sorted column
+    a[i].classList.add("oujsort-"+o);
+    if(t) a[i].classList.add("oujsort-sel");
+    if( o!=ah.orderDir )    // set commonsensical sorting order
      a[i].href=a[i].href.replace('&orderDir='+ah.orderDir,'&orderDir='+o);
-   }
+   } 
+  }
  }
-}
+//}
+
+//},false);
 
 // rearrange right panel to get transition working
 a = document.querySelectorAll("div.col-sm-4 > div.panel");
  if(a.length>1) {
   o = document.createElement('div');
-  o.className="col-sm-40";
+  o.className="col-sm-404";
   var aa=[];
   for( i=a.length-1; i>0; i-- ) 
     aa.push(a[i].parentNode.removeChild(a[i]));
