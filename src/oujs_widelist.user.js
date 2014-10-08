@@ -4,11 +4,10 @@
 // @description extends list of scripts shown by OUJS to 100% width
 // @include https://openuserjs.org/*
 // @license MIT
-// @version 2014.1007.7
-//  .1007.7  user rank
-//  .1007.6  run on DOMContentLoaded -- less flickering?
-//  .1006.5  narrow right panel in script title page
-//  .1006.3 put in order table header; classic 'click on link' behavior recovered
+// @version 2014.1008.8
+//  .1007.8  right panel in script title page -- width: 25%
+//  .1007.6  run on DOMContentLoaded - less flickering?
+//  .1006.3  put in order table header - classic 'click on link' behavior
 // @created 2014-10-05
 // @updated 2014-10-06
 // @run-at document-start
@@ -18,13 +17,14 @@
 window.addEventListener('DOMContentLoaded',
 function(evnt) {"use strict";
 
-if(!document.querySelector(".tr-link")) { 
 // shrink right panel
- stickStyle("\
+if(!document.querySelector(".tr-link")){  
+stickStyle("\
 div.container-fluid  div.row  div.container-fluid.col-sm-8\
 {width:75%}\
 div.container-fluid  div.row  div.container-fluid.col-sm-4\
 {width:25%}\
+.col-sm-4 .nav > li > a {padding: 10px 1px !important;'}\
 "); 
  return; // no tables - do nothing more
 }
