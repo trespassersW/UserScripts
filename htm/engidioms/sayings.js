@@ -435,7 +435,6 @@ two noes make a yes - два отрицания равны утверждени�
 we made an appointment for tomorrow - мы условились встретиться завтра^\
 what makes him tick - чем он живет, что придает ему силы^\
 you can't make an omelet without breaking eggs - лес рубят-щепки летят^\
-Dictum sapienti sat est, verb. sap., verbum sap -для умного достачно^\
 "+
 /* http://study-english.info/everyday-idioms.php */
 "\
@@ -1799,6 +1798,10 @@ Zero in on - сосредоточиться - We decided to zero in on grammar f
 Zero-sum game - выигрышно-проигрышная ситуация при которой, если выигрывает один, то неизменно проигрывает другой - It was a zero-sum game between the salesperson and the customer, and we couldn’t tell who would win and who would lose.^\
 Zonk out - быстро заснуть, “вырубиться” - I couldn’t get a coherent word out of Stan as he had zonked out.^\
 Zoom in on (someone or something) - электронное увеличение изображения во время фотографирования - The photographer zoomed in on the butterfly which was sitting on a flower.^\
+"+
+/* my findings */
+"I jumped the gun a bit - я немного поторопился^\
+Dictum sapienti sat est, verb. sap., verbum sap - для умного достачно - word to the wise^\
 "
 ;
 sayings=sayings.split("^");
