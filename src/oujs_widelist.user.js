@@ -2,17 +2,20 @@
 // @name        OUJS widelist
 // @namespace   trespassersW
 // @description extends list of scripts shown by OUJS to 100% width
-// @include https://openuserjs.org/*
+// @include     /^https?:\/\/openuserjs\.org(\/.*)?$/
 // @license MIT
-// @version 2014.1008.8
+// @downloadURL https://openuserjs.org/install/trespassersW/OUJS_widelist.user.js
+// @updateURL   https://openuserjs.org/install/trespassersW/OUJS_widelist.user.js
+// @version 2014.1106.10
+//  .1106.10  sort by author; http://; fix; 
 //  .1007.8  right panel in script title page -- width: 25%
 //  .1007.6  run on DOMContentLoaded - less flickering?
 //  .1006.3  put in order table header - classic 'click on link' behavior
 // @created 2014-10-05
-// @updated 2014-10-08
+// @updated 2014-11-06
 // @run-at document-start
 // @grant GM_none
-// @icon  data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAbCAMAAABVyG9ZAAADAFBMVEXb5eDa5N/T3Neqwsd7orBRh5g7eI56oa+twsGJrLUycIYAWHcKT3AOUXKIq7S1ycg/fJITVHUQUnM+e5G3zMuuw8IpZoEAVnUMXHwiYHsnZH9llKO7zs3K2dfN29jH2NWzyMuNrLJBfJEqZoC+0M/Z497i6N3l7OHY494+dIsSU3QoZX/E1dOevsFBfZOuxsYmY34SZIC5zMwFTW46d43Y4t2Ao6sCWXgzbYnP4Nl3oa2kvMDV39rW4dw8eY8VVXaswcB/oqq0ycnX4dyQr7TO29lCfpS2zMkeXXje5drM29ghX3rH19XF1tRSiJmvxcm9zsyMrLKivL8AV3ZUiZoYZX9xnao2e5HB0tEXWXfP3Nlul6U2bofJ2NbZ5N+4zM0mYn4ZWnhJh5pwnKmfub23zcrF19TB1NKwxMOFp64mb4mmwsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABUAAAAEvkAAAAAmAC4fJEAFlIS+iAAIQB4fJEAFRORAD0AAHwNAAB8kP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAigAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf+AA0AXoAACkS93AAAAAUABUAEvuQ6QBCmHz/fJH///+RQo/QnHxFAAEAAAAS+WQAgAAUwBAAEvuQ6QAAQHz/fJH///8AAAD/DQCYfJAAEvqBCe8At3yMAAABnJME//+TjAEYAZzLkQCrAAAAAWJLR0T/pQfyxQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAZxJREFUeNptUutf00AQ3AskaZu59AXYK6CI5qrR1GjDO1JExWJ5Cr5A8f3k///ONk2gv5b95UPuJjuZnR2itMTIy+WFMTZuWpZp54xhIF9wILngFFxjoFEUS2VcVqU6ccU+OSUBeaOmVK33iaznMqw4xWdnemb25q252/NOD0v7jBIf7twlTzca2qN79yVkNREj8j7w4KHQQVOpZqDFoxDw84m4AvD4iSCrxRLRimhhcQlYXmHKHJOvkrYq4VocB2El0k/XgfYGtz2TKG96QSt87gnhLYStwHvBOm2GTKD2Um/xTe/PXoCmftUBzG0iS0K9bigZJ3pFLLuNHQVERNsRoHavhWiPCfd1E2sZYUkf1PqENss4ZBn1KxlvUhljR8Ax6ajyNkjF07u++GTk97zAKBtZfHDSkYXr4+MJ9YzqdktsFJ1K+G7f3qrEp8+U2nt28uVrZi+JibrEt+8/fv76/efvv3WHja8Xs1XmGAPKHaU6Q6vkvqo/GIDiYDgMd7ktE6D93x3KFK2c22YUmfZGTCNBZDuTZySi19QFdzg4TBOA1ygAAAAASUVORK5CYII=
+// @icon  data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAADAFBMVEX///8AAABVhZgUWHcHT3DB0s+sxMaatrwzb4iMrrVumaYmZYBEfJCxx8jL2tZ7oqxlk6EMUXIdYX0ybobR3dm6zs2fu8BNgpU7dYyQsbeFqbIRVnUsaoMbXXpynKhbi5u70M1Ado7O3NjY495ShZdIfpIWW3lqlqObuL2nwMQiYn4qZ4Gvxsi0yso1cId4n6pij55ymqZEeo8JT3DE1dI+eY+Ts7mivcA1cIi+0dBWiJoAdQBzAGoAXwBjAGkAbwBwAC4AbgAAAGcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8AAAAEvYAAAAAmAAIfJEBc8wS98gAIQB4fJEAFRORAD0AAHwNAAB8kP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAigAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADLAAAAADES9RgAAAC8ABUAEviQ6QBCmHz/fJH///+RQo/QnHxFAAEAAAAS9wwAgAC8wBAAEviQ6QAAQHz/fJH///8AAAD/DQBAfJAAEviBCe8At3ygAAABoXMK//9zoAFwS0q0AAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAALiMAAC4jAXilP3YAAAFWSURBVHjaVVJte4IgFOVZG8106E0ZTEmXvWgarQXD6v//sEHa2/kC3MO593IuCA1INK5NJwl6RonDMxf+e1CN9WOc5vEIejTL+q7qVmtQkIl9C3YVP1dRx+1xdow+FrjwM7v97RkauGv5NkEJImM2A9Wkl7r5SAE3OsEmxLj8iKYAR2wJHAOILy1Dnr0KHkpZjFQ2sfIwU7OcvFUiLibFMa4o5lYi0YkBxBh54mA00YaJlNiraw85Pkr00k9LV9ATK3riKstRLWDdLeR8Li8tnthug1IFhSPAQ5IHPaHP7ZhEjnCploSyuHPxBQ043jQuVV+chO2eOkHevMjqUnxoFx+awnR11cRmaLd/oCnrlWh3wsbp8MDekj9DtmnBlvmnvFmC6OpiItYW1NxNvNl+9lAaPNp+HRRkPjwP6jpapSw7ZTV5/gyM256C6PkzOJBvKaVOrsd/ZTMxqn69OqgAAAAASUVORK5CYII=
 // ==/UserScript==
 window.addEventListener('DOMContentLoaded',
 function(evnt) {"use strict";
@@ -101,6 +104,7 @@ stickStyle("\
 .oujsort-sel:after {visibility: visible !important;}\
 /*fixiez ?!11*/\
 th a{display: inline!important;}\
+#oujsort-author{margin-left: 3em;}\
 ");
 //
 function stickStyle(css){
@@ -122,29 +126,50 @@ function hp(h) {
  if(x>-1) r=toObj(h.substr(x+1));
  return r;
 }
+function insAfter(n,e){
+  if(e.nextElementSibling)
+   return e.parentNode.insertBefore(n,e.nextElementSibling);
+  else
+   return e.parentNode.appendChild(n);
+}
+
 //
 var odir=[ 'asc', 'desc' ];
 var defaultOrder = {
- topic: 0, name: 0, category: 0, users: 0, 
+ topic: 0, name: 0, category: 0, users: 0, author: 0,
  views: 1, created: 1, updated: 1, role: 0,
  size: 1, rating: 1, installs: 1, comments: 1 
 };
 
-// put in order table header
 var a, ah,lh, o,i,il;
+
 lh = hp(location.href);
+
+// append 'Author'
+ a= ! /users\/.+?\/scripts/.test(location.href)  &&
+   document.querySelector('span.inline-block a[href^="/users"]') &&
+   document.querySelector('th a[href*="orderBy=name"]');
+ if(a){ 
+  o= a.cloneNode(false);
+  o.textContent="Author";
+  o.href=o.href.replace("orderBy=name","orderBy=author");
+  o.id="oujsort-author";
+  insAfter(o,a);
+ }
+// put in order table header
  a=document.querySelectorAll('th >a[href*="orderBy"]');
  for( il=a.length, i=0; i<il; i++ ) {
   ah=hp(a[i].href);
   if(ah && ah.orderBy) {
-   o= defaultOrder[ah.orderBy]; o=odir[o]; 
+   o= odir[defaultOrder[ah.orderBy]];
    if(o) { 
-    if( lh && lh.orderBy && (ah.orderBy==lh.orderBy) ) // selected?
-      o= ah.orderDir, 
+    if( lh && lh.orderBy && (ah.orderBy==lh.orderBy) ){ // selected?
+      o= ah.orderDir= odir[ (lh.orderDir==odir[0])+0 ]; // toggle dir
       a[i].classList.add("oujsort-sel"); // mark currently sorted col
+    }
     a[i].classList.add("oujsort-"+o);
     if( o!=ah.orderDir )    // set commonsensical sorting order
-     a[i].href=a[i].href.replace('&orderDir='+ah.orderDir,'&orderDir='+o);
+     a[i].href=a[i].href.replace(/&orderDir=(asc|desc)/,'&orderDir='+o);
    } 
   }
  }
