@@ -3,9 +3,9 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 14.11.08
-// @created 2014-11-08
-// @updated 2014-11-08
+// @version 14.11.10.0
+// @created 2014-11-10
+// @updated 2014-11-10
 // @author  trespassersW
 // @licence MIT
 // @run-at document-end
@@ -47,40 +47,52 @@ function css(){
 stickStyle('\
 .fsort-butt, .tables.file  {position: relative; }\
 .fsort-butt:before{\
- position: absolute; left:-0em; top: -1em; \
+ position: absolute; left:1.5em; top: -1em; \
  cursor: pointer;\
  content: "";\
  z-index:99999;\
  width: 0;  height: 0;\
  opacity:.2;\
  }\
-.fsort-butt.fsort-asc:before,\
-.fsort-butt.fsort-desc.fsort-sel:hover:before\
+.fsort-asc:before,\
+.fsort-desc.fsort-sel:hover:before\
 {\
  border-left: 6px solid transparent;\
  border-right: 6px solid transparent;\
- border-bottom: 14px solid black;\
+ border-bottom: 14px solid #444;\
  border-top: 0;\
 }\
-.fsort-butt.fsort-desc:before,\
-.fsort-butt.fsort-asc.fsort-sel:hover:before{\
+.fsort-desc:before,\
+.fsort-asc.fsort-sel:hover:before{\
  border-left: 6px solid transparent;\
  border-right: 6px solid transparent;\
  border-bottom: 0;\
- border-top: 14px solid black;\
+ border-top: 14px solid #444;\
  }\
+.fsort-butt.fsort-desc.fsort-sel:hover:before,\
+.fsort-butt.fsort-asc.fsort-sel:before{\
+ border-bottom: 14px solid #4183C4;\
+ border-top: 0;\
+ }\
+.fsort-butt.fsort-desc.fsort-sel:before,\
+.fsort-butt.fsort-asc.fsort-sel:hover:before{\
+ border-bottom: 0;\
+ border-top: 14px solid #4183C4;\
+ }\
+\
 .fsort-butt.fsort-sel:before{ opacity: .6 }\
 .fsort-butt:hover:before{ opacity: 1 !important;}\
 /* patches */\
 table.files td.age {text-align: left !important;}\
 table.files td.message {overflow-x: visible}\
-');
+');//#80A6CD
 }
 var ii=0;
 var d0=[0,0,1];
 var C=[{c:1, d: 0, s: 0},{c:2, d: 0, s: 0},{c:3, d: 1, s: 0}];
+var ASC;
 var oa=[],ca=[];
-var D=document;
+var D=document, TB;
 
 function setC(n){
  for(var i=0,il=C.length; i<il; i++ ){
@@ -89,48 +101,95 @@ function setC(n){
   oa[i].className='fsort-butt fsort-'+(C[i].d?'desc':'asc')+(C[i].s?' fsort-sel':'') ;
  }
 }
+
+function isDir(x){
+ return (TB.rows[x].cells[0].querySelector("span.octicon-file-directory")) != null;
+}
+
+var sort_fn =[
+function(a,b){
+ var x=isDir(a), y=isDir(b);
+ if(x!=y) return (x<y)*2-1;
+ x=TB.rows[a].cells[1].querySelector('span.css-truncate>a').textContent;
+ x=TB.rows[b].cells[1].querySelector('span.css-truncate>a').textContent;
+ return x==y? 0: ((x>y)^ASC)*2-1;
+ return 0;
+}
+,
+function(a,b){
+ var x=isDir(a), y=isDir(b);
+ if(x!=y) return (x<y)*2-1;
+ x=TB.rows[a].cells[2].querySelector('span.css-truncate>a').textContent;
+ y=TB.rows[b].cells[2].querySelector('span.css-truncate>a').textContent;
+ return x==y? 0: ((x>y)^ASC)*2-1;
+}
+,
+function(a,b){
+ var x=isDir(a), y=isDir(b);
+ if(x!=y) return (x<y)*2-1;
+ x=TB.rows[a].cells[3].querySelector('span.css-truncate>time').getAttribute('datetime');
+ y=TB.rows[b].cells[3].querySelector('span.css-truncate>time').getAttribute('datetime');
+ return x==y? 0: ((x>y)^ASC)*2-1;
+}
+]
+//
 function doSort(t){
- var tp=outerNode(t,'TBODY');
- if(!tp){
- console.log(++ii +' *GHSFL* TBODY not found' )
- return;}
+ TB=outerNode(t,'TBODY');
+ var tb=[],ix=[], i, tl;
+ if(!TB) throw' *GHSFL* TBODY not found';
  var n=t.fsort_N;
- C[n].d^=1; 
+ tl=TB.rows.length;
+ ASC=C[n];
+ ASC=C[n].d^=C[n].s;
+ for( i=0; i<tl; i++)
+  ix.push(i);
+ if(oa[0])
+  oa[0].parentNode.removeChild(oa[0]),
+  oa[1].parentNode.removeChild(oa[1]),
+  oa[2].parentNode.removeChild(oa[2]);
+ ix.sort(sort_fn[n]);
+ for( i=0; i<tl; i++)
+  tb.push(TB.rows[ix[i]].innerHTML);
+ for( i=0; i<tl; i++)
+  TB.rows[i].innerHTML=tb[i];
  setC(n);
- console.log(++ii +' 3ae6ucb ' +  t.fsort_N)
+ gitDir1(0);
 }
 
 function onClik(e){doSort(e.target)}
 
-
-function gitDir(){
- if(document.querySelector('.fsort-butt')) {console.log('y}|{E');return;}
+function gitDir1(x){
+ if(x && document.querySelector('.fsort-butt')) {return;}
  var c,o;
- oa=[],ca=[];
+ ca=[];
  c= D.querySelector('.file-wrap table.files td.content >span');
- if(!c) {console.log( '*GHSFL* no content'); return}
+ if(!c) throw '*GHSFL* no content';
  ca.push(c);
  c=D.querySelector('.file-wrap table.files td.message >span');
- if(!c) {console.log( '*GHSFL* no messages'); return}
+ if(!c) throw '*GHSFL* no messages';
  ca.push(c);
  c=D.querySelector('.file-wrap table.files td.age >span');
- if(!c) {console.log( '*GHSFL* no ages'); return}
+ if(!c) throw '*GHSFL* no ages';
  ca.push(c);
- o=D.createElement('span'); 
- o.textContent=''; o.fsort_N=0;
- o.addEventListener('mousedown',onClik,false);
- oa.push(o);
- o=o.cloneNode(true); o.fsort_N=1;
- o.addEventListener('mousedown',onClik,false)
- oa.push(o);
- o=o.cloneNode(true); o.fsort_N=2;
- o.addEventListener('mousedown',onClik,false)
- oa.push(o);
- setC(-1);
- insBefore(oa[0],ca[0]);
- insBefore(oa[1],ca[1]);
- insBefore(oa[2],ca[2]);
+ if(x){ oa=[];
+  o=D.createElement('span'); 
+  o.textContent=''; o.fsort_N=0;
+  o.addEventListener('mousedown',onClik,false);
+  oa.push(o);
+  o=o.cloneNode(true); o.fsort_N=1;
+  o.addEventListener('mousedown',onClik,false)
+  oa.push(o);
+  o=o.cloneNode(true); o.fsort_N=2;
+  o.addEventListener('mousedown',onClik,false)
+  oa.push(o);
+  setC(-1);
+ }
+  insBefore(oa[0],ca[0]);
+  insBefore(oa[1],ca[1]);
+  insBefore(oa[2],ca[2]);
 }
+
+function gitDir(x){gitDir1(1)}
 
 css();
 gitDir();
@@ -148,9 +207,13 @@ var  observer = new MO(function(mutations) {
   });
 });
 observer.observe(D.body, { attributes: true, subtree: true } );
-
 /* attributes: true , childList: true, subtree: true,  
   characterData: true,  attributeOldValue:true,  characterDataOldValue:true
 */
 
 })()};
+
+/*
+ to do: persistent settings; sorting by file extensions; toggling date/time display mode 
+ ... do we really need it?
+*/
