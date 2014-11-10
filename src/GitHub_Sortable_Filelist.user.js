@@ -110,8 +110,8 @@ var sort_fn =[
 function(a,b){
  var x=isDir(a), y=isDir(b);
  if(x!=y) return (x<y)*2-1;
- x=TB.rows[a].cells[1].querySelector('span.css-truncate>a').textContent;
- x=TB.rows[b].cells[1].querySelector('span.css-truncate>a').textContent;
+ x=TB.rows[a].cells[1].querySelector('span.css-truncate-target a').textContent;
+ y=TB.rows[b].cells[1].querySelector('span.css-truncate-target a').textContent;
  return x==y? 0: ((x>y)^ASC)*2-1;
  return 0;
 }
@@ -119,8 +119,8 @@ function(a,b){
 function(a,b){
  var x=isDir(a), y=isDir(b);
  if(x!=y) return (x<y)*2-1;
- x=TB.rows[a].cells[2].querySelector('span.css-truncate>a').textContent;
- y=TB.rows[b].cells[2].querySelector('span.css-truncate>a').textContent;
+ x=TB.rows[a].cells[2].querySelector('span.css-truncate').textContent;
+ y=TB.rows[b].cells[2].querySelector('span.css-truncate').textContent;
  return x==y? 0: ((x>y)^ASC)*2-1;
 }
 ,
