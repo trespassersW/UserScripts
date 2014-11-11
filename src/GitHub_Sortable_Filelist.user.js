@@ -3,9 +3,10 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 14.11.10.0
+// @version 14.11.11.1
+//  .1 optimization; span.title
 // @created 2014-11-10
-// @updated 2014-11-10
+// @updated 2014-11-11
 // @author  trespassersW
 // @licence MIT
 // @run-at document-end
@@ -14,7 +15,8 @@
 
 if(document.querySelector('.file-wrap')){
 
-(function(){
+(function(){ "use strict";
+var llii=0; function _l(m){ if(1) console.log(++llii +': '+m) }
 
 function stickStyle(css){
  var s=document.createElement("style"); s.type="text/css";
@@ -38,11 +40,7 @@ function outerNode(target, node) {
   }catch(e){};
  return null;
 }
-/*.file-wrap table.files td.icon,\
-.file-wrap table.files td.content,\
-.file-wrap table.files td.message,\
-.file-wrap table.files td.age\
-*/
+
 function css(){
 stickStyle('\
 .fsort-butt, .tables.file  {position: relative; }\
@@ -84,7 +82,7 @@ stickStyle('\
 .fsort-butt:hover:before{ opacity: 1 !important;}\
 /* patches */\
 table.files td.age {text-align: left !important;}\
-table.files td.message {overflow-x: visible}\
+table.files td.message {overflow-y: visible !important;}\
 ');//#80A6CD
 }
 var ii=0;
@@ -93,12 +91,13 @@ var C=[{c:1, d: 0, s: 0},{c:2, d: 0, s: 0},{c:3, d: 1, s: 0}];
 var ASC;
 var oa=[],ca=[];
 var D=document, TB;
-
+var catcher;
 function setC(n){
  for(var i=0,il=C.length; i<il; i++ ){
   if(i!=n) C[i].s= 0, C[i].d=d0[i];
   else C[i].s=1;
   oa[i].className='fsort-butt fsort-'+(C[i].d?'desc':'asc')+(C[i].s?' fsort-sel':'') ;
+  oa[i].title=C[i].d? '\u21ca' : '\u21c8';
  }
 }
 
@@ -106,48 +105,63 @@ function isDir(x){
  return (TB.rows[x].cells[0].querySelector("span.octicon-file-directory")) != null;
 }
 
-var sort_fn =[
-function(a,b){
- var x=isDir(a), y=isDir(b);
- if(x!=y) return (x<y)*2-1;
- x=TB.rows[a].cells[1].querySelector('span.css-truncate-target a').textContent;
- y=TB.rows[b].cells[1].querySelector('span.css-truncate-target a').textContent;
- return x==y? 0: ((x>y)^ASC)*2-1;
- return 0;
-}
+var sDir,sCells;
+
+var sort_p= [ // prepare data for sorting
+ function(){
+  sDir=[],sCells=[];
+  for(var tl=TB.rows.length, a=0; a<tl; a++){
+   sDir.push(isDir(a));
+   sCells.push(TB.rows[a].cells[1].querySelector('span.css-truncate-target a').textContent);
+  }
+ }
 ,
-function(a,b){
- var x=isDir(a), y=isDir(b);
- if(x!=y) return (x<y)*2-1;
- x=TB.rows[a].cells[2].querySelector('span.css-truncate').textContent;
- y=TB.rows[b].cells[2].querySelector('span.css-truncate').textContent;
- return x==y? 0: ((x>y)^ASC)*2-1;
-}
+ function(){
+  sDir=[],sCells=[];
+  for(var tl=TB.rows.length, a=0; a<tl; a++){
+   sDir.push(isDir(a));
+   sCells.push(TB.rows[a].cells[2].querySelector('span.css-truncate').textContent);
+  }
+ }
 ,
-function(a,b){
- var x=isDir(a), y=isDir(b);
- if(x!=y) return (x<y)*2-1;
- x=TB.rows[a].cells[3].querySelector('span.css-truncate>time').getAttribute('datetime');
- y=TB.rows[b].cells[3].querySelector('span.css-truncate>time').getAttribute('datetime');
- return x==y? 0: ((x>y)^ASC)*2-1;
-}
+ function(){
+  sDir=[],sCells=[];
+  for(var tl=TB.rows.length, a=0; a<tl; a++){
+   sDir.push(isDir(a));
+   sCells.push(TB.rows[a].cells[3].querySelector('span.css-truncate>time').getAttribute('datetime'));
+  } 
+ }
 ]
+
+function sort_fn(a,b){ 
+ var x=sDir[a], y=sDir[b];
+ if(x!=y) return ((x<y)<<1)-1;
+ x= sCells[a], y= sCells[b];
+ return x==y? 0: (((x>y)^ASC)<<1)-1;
+}
+var CNn={content: 0, message: 1, age: 2}
+
+function oClr(){
+ var o= catcher.querySelectorAll('.fsort-butt')
+ for(var ol=o.length,i=0;i<ol;i++)
+  o[i].parentNode.removeChild(o[i]);
+}
 //
 function doSort(t){
  TB=outerNode(t,'TBODY');
  var tb=[],ix=[], i, tl;
- if(!TB) throw' *GHSFL* TBODY not found';
- var n=t.fsort_N;
+ if(!TB) throw "*GHSFL* TBODY not found";
+ var n=CNn[t.parentNode.className];
+ if(typeof n=="undefined") throw "*GHSFL* undefined col";
+ _l('n:'+n);
  tl=TB.rows.length;
  ASC=C[n];
  ASC=C[n].d^=C[n].s;
  for( i=0; i<tl; i++)
   ix.push(i);
- if(oa[0])
-  oa[0].parentNode.removeChild(oa[0]),
-  oa[1].parentNode.removeChild(oa[1]),
-  oa[2].parentNode.removeChild(oa[2]);
- ix.sort(sort_fn[n]);
+ oClr();
+ sort_p[n]();
+ ix.sort(sort_fn);
  for( i=0; i<tl; i++)
   tb.push(TB.rows[ix[i]].innerHTML);
  for( i=0; i<tl; i++)
@@ -159,7 +173,10 @@ function doSort(t){
 function onClik(e){doSort(e.target)}
 
 function gitDir1(x){
- if(x && document.querySelector('.fsort-butt')) {return;}
+ if(x && document.querySelector('.fsort-butt')) {
+  _l('gitDir'+x+' - already'); return;
+ }
+ _l('gitDir'+x)
  var c,o;
  ca=[];
  c= D.querySelector('.file-wrap table.files td.content >span');
@@ -171,16 +188,13 @@ function gitDir1(x){
  c=D.querySelector('.file-wrap table.files td.age >span');
  if(!c) throw '*GHSFL* no ages';
  ca.push(c);
- if(x){ oa=[];
+ if(x){  oClr(); oa=[];
   o=D.createElement('span'); 
-  o.textContent=''; o.fsort_N=0;
-  o.addEventListener('mousedown',onClik,false);
+  o.textContent=''; 
   oa.push(o);
-  o=o.cloneNode(true); o.fsort_N=1;
-  o.addEventListener('mousedown',onClik,false)
+  o=o.cloneNode(true); 
   oa.push(o);
-  o=o.cloneNode(true); o.fsort_N=2;
-  o.addEventListener('mousedown',onClik,false)
+  o=o.cloneNode(true); 
   oa.push(o);
   setC(-1);
  }
@@ -189,12 +203,24 @@ function gitDir1(x){
   insBefore(oa[2],ca[2]);
 }
 
-function gitDir(x){gitDir1(1)}
+function gitDir(){
+ gitDir1(1);
+}
 
+catcher= D.querySelector('#js-repo-pjax-container');
+if(!catcher) throw "*GHSFL* err0r";
+
+catcher.addEventListener('mousedown',function(e){
+if(e.target.nodeName && e.target.nodeName=='SPAN' &&
+   e.target.className.indexOf('fsort-butt')>-1)
+ { onClik(e); }
+}
+,false);
+_l('startup()');
 css();
 gitDir();
-
-var target = document.body; //D.querSelector('.file-wrap');
+window.GH_SFL=C;
+var target = catcher; //document.body; //D.querSelector('.file-wrap');
 var  MO = window.MutationObserver;
 if(!MO) MO= window.WebKitMutationObserver;
 if(!MO) return;
@@ -203,7 +229,7 @@ var  observer = new MO(function(mutations) {
     if( m.type= "attributes" &&  
         m.target.nodeName == 'DIV' &&  
         m.target.className == "file-wrap" )
-      gitDir(m.target);
+      gitDir(0);
   });
 });
 observer.observe(D.body, { attributes: true, subtree: true } );
