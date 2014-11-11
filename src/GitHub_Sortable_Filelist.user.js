@@ -3,8 +3,9 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 14.11.11.1
+// @version 14.11.11.2
 //  .1 optimization; span.title
+//  .2 no dbg msg
 // @created 2014-11-10
 // @updated 2014-11-11
 // @author  trespassersW
@@ -16,7 +17,7 @@
 if(document.querySelector('.file-wrap')){
 
 (function(){ "use strict";
-var llii=0; function _l(m){ if(1) console.log(++llii +': '+m) }
+var llii=0; function _l(m){ if(0) console.log(++llii +': '+m) }
 
 function stickStyle(css){
  var s=document.createElement("style"); s.type="text/css";
@@ -106,32 +107,24 @@ function isDir(x){
 }
 
 var sDir,sCells;
-
-var sort_p= [ // prepare data for sorting
- function(){
-  sDir=[],sCells=[];
-  for(var tl=TB.rows.length, a=0; a<tl; a++){
-   sDir.push(isDir(a));
-   sCells.push(TB.rows[a].cells[1].querySelector('span.css-truncate-target a').textContent);
-  }
- }
-,
- function(){
-  sDir=[],sCells=[];
-  for(var tl=TB.rows.length, a=0; a<tl; a++){
-   sDir.push(isDir(a));
+ var fa=[
+  function(a){
+  sCells.push(TB.rows[a].cells[1].querySelector('span.css-truncate-target a').textContent);
+  },
+  function(a){
    sCells.push(TB.rows[a].cells[2].querySelector('span.css-truncate').textContent);
-  }
- }
-,
- function(){
-  sDir=[],sCells=[];
-  for(var tl=TB.rows.length, a=0; a<tl; a++){
-   sDir.push(isDir(a));
+  },
+  function(a){
    sCells.push(TB.rows[a].cells[3].querySelector('span.css-truncate>time').getAttribute('datetime'));
-  } 
+  }
+ ]
+function sort_p(n){// prepare data for sorting
+ sDir=[],sCells=[];
+ for(var tl=TB.rows.length, a=0; a<tl; a++){
+   sDir.push(isDir(a));
+   fa[n](a);
  }
-]
+}
 
 function sort_fn(a,b){ 
  var x=sDir[a], y=sDir[b];
@@ -155,12 +148,11 @@ function doSort(t){
  if(typeof n=="undefined") throw "*GHSFL* undefined col";
  _l('n:'+n);
  tl=TB.rows.length;
- ASC=C[n];
  ASC=C[n].d^=C[n].s;
  for( i=0; i<tl; i++)
   ix.push(i);
  oClr();
- sort_p[n]();
+ sort_p(n);
  ix.sort(sort_fn);
  for( i=0; i<tl; i++)
   tb.push(TB.rows[ix[i]].innerHTML);
