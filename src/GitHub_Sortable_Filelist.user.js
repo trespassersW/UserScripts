@@ -3,7 +3,7 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 14.11.11.4
+// @version 14.11.11.5
 //  .4 now works on all github pages
 // @created 2014-11-10
 // @updated 2014-11-11
@@ -13,9 +13,10 @@
 // @grant GM_none
 // ==/UserScript==
 
-if(document.body && document.querySelector('#js-repo-pjax-container')){ // .file-wrap
+if(document.body || document.querySelector('#js-repo-pjax-container')){ // .file-wrap
 
-(function(){ "use strict";
+(function(){ "use strict"; 
+
 var llii=0; function _l(m){ if(0) console.log(++llii +': '+m) }
 
 function stickStyle(css){
@@ -142,9 +143,9 @@ function oClr(){
 function doSort(t){
  TB=outerNode(t,'TBODY');
  var tb=[],ix=[], i, tl;
- if(!TB) throw "*GHSFL* TBODY not found";
+ if(!TB){  _l( "*GHSFL* TBODY not found"); return; }
  var n=CNn[t.parentNode.className];
- if(typeof n=="undefined") throw "*GHSFL* undefined col";
+ if(typeof n=="undefined"){  _l( "*GHSFL* undefined col"); return; }
  _l('n:'+n);
  tl=TB.rows.length;
  ASC=C[n].d^=C[n].s;
@@ -171,13 +172,13 @@ function gitDir1(x){
  var c,o;
  ca=[];
  c= D.querySelector('.file-wrap table.files td.content >span');
- if(!c) throw '*GHSFL* no content';
+ if(!c){ _l( '*GHSFL* no content') ; return; }
  ca.push(c);
  c=D.querySelector('.file-wrap table.files td.message >span');
- if(!c) throw '*GHSFL* no messages';
+ if(!c){ _l( '*GHSFL* no messages'); return; }
  ca.push(c);
  c=D.querySelector('.file-wrap table.files td.age >span');
- if(!c) throw '*GHSFL* no ages';
+ if(!c){_l( '*GHSFL* no ages'); return; }
  ca.push(c);
  if(x){  oClr(); oa=[];
   o=D.createElement('span'); 
@@ -199,7 +200,7 @@ function gitDir(){
 }
 
 catcher= D.querySelector('#js-repo-pjax-container');
-if(!catcher) throw "*GHSFL* err0r";
+if(!catcher){  _l( "*GHSFL* err0r"); return; }
 
 catcher.addEventListener('mousedown',function(e){
 if(e.target.nodeName && e.target.nodeName=='SPAN' &&
