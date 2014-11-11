@@ -3,9 +3,8 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 14.11.11.2
-//  .1 optimization; span.title
-//  .2 no dbg msg
+// @version 14.11.11.3
+//  .3 fixes
 // @created 2014-11-10
 // @updated 2014-11-11
 // @author  trespassersW
@@ -14,10 +13,10 @@
 // @grant GM_none
 // ==/UserScript==
 
-if(document.querySelector('.file-wrap')){
+if(document.querySelector('#js-repo-pjax-container')){ // .file-wrap
 
 (function(){ "use strict";
-var llii=0; function _l(m){ if(0) console.log(++llii +': '+m) }
+var llii=0; function _l(m){ if(1) console.log(++llii +': '+m) }
 
 function stickStyle(css){
  var s=document.createElement("style"); s.type="text/css";
@@ -221,7 +220,7 @@ var  observer = new MO(function(mutations) {
     if( m.type= "attributes" &&  
         m.target.nodeName == 'DIV' &&  
         m.target.className == "file-wrap" )
-      gitDir(0);
+      gitDir();
   });
 });
 observer.observe(D.body, { attributes: true, subtree: true } );
