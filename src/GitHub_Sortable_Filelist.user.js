@@ -3,8 +3,8 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 14.11.11.3
-//  .3 fixes
+// @version 14.11.11.4
+//  .4 now works on all github pages
 // @created 2014-11-10
 // @updated 2014-11-11
 // @author  trespassersW
@@ -13,10 +13,10 @@
 // @grant GM_none
 // ==/UserScript==
 
-if(document.querySelector('#js-repo-pjax-container')){ // .file-wrap
+if(document.body && document.querySelector('#js-repo-pjax-container')){ // .file-wrap
 
 (function(){ "use strict";
-var llii=0; function _l(m){ if(1) console.log(++llii +': '+m) }
+var llii=0; function _l(m){ if(0) console.log(++llii +': '+m) }
 
 function stickStyle(css){
  var s=document.createElement("style"); s.type="text/css";
