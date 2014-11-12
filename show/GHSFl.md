@@ -1,6 +1,6 @@
 ### **GitHub Sortable filelist** **[[`source`]](../src/GitHub_Sortable_Filelist.user.js)** **[[`Install`]](/../../raw/master/src/GitHub_Sortable_Filelist.user.js  "You must have GreaseMonkey installed")**
 
-#### description: _appends sorting function to github directories_
+#### description: *appends sorting function to github directories*
 
 =====
 
