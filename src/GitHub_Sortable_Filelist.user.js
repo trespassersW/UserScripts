@@ -4,7 +4,7 @@
 // @description appends sorting function to github directories
 // @include https://github.com/*
 // @version 14.11.16.9
-//  .9 right-aligned date/time column; fixed .ext sorting
+//  .9 right-aligned date/time col; proper local time; .ext sorting fix; 
 //  .8 sorting by file extention
 //  .7 date/time display mode switching
 //  .4 now works on all github pages
@@ -70,7 +70,6 @@ stickStyle('\
 .fsort-butt:before{\n\
  position: absolute; display: inline-block;\n\
  cursor: pointer;\n\
- z-index:99999;\n\
  content: "";\n\
  width: 16px;  height: 16px;\n\
 }\n\
@@ -79,7 +78,7 @@ stickStyle('\
  left:1.5em; top: -1em;\n\
  width: 0;  height: 0;\n\
 }\n\
-td.age.fsort-butt.fsort-asc:before,td.age..fsort-butt.fsort-desc:before{\n\
+td.age.fsort-butt.fsort-asc:before,td.age.fsort-butt.fsort-desc:before{\n\
  right:3em;\n\
 }\n\
 .fsort-asc:before,.fsort-desc:before{\n\
@@ -181,21 +180,30 @@ function setC(n){
  }
 }
 
+function dd(s)
+{ s=s.toString(); if(s.length<2)return'0'+s; return s}
+function d2s(n){
+ return {  
+   d: n.getFullYear()+'-'+dd(n.getMonth())+'-'+dd(n.getDate()),
+   t: dd(n.getHours())+':'+dd(n.getMinutes())+':'+dd(n.getSeconds())
+ }
+}
+
 function setDateTime(){
- try{ //014-10-02T16:09:05Z
- var DT=D.querySelectorAll('td.age span.css-truncate time'),dtm;
- for(var dt, dl=DT.length, i=0; i<dl; i++){
-  dt = DT[i].getAttribute('datetime').match(/([0-9\-]+).([0-9\:]+)./);
+ var dt,dtm;
+ var DT=D.querySelectorAll('td.age span.css-truncate time')
+ for(var dl=DT.length, i=0; i<dl; i++){
+  dt= d2s(new Date( DT[i].getAttribute('datetime') )); // 2014-07-24T17:06:11Z
   dtm=D.createElement('span');
   dtm.className='fsort-time';
   dtm.title= DT[i].title;
   if(/minut|hour|just/.test(DT[i].textContent))
-   dtm.textContent=dt[2];
+   dtm.textContent=dt.t;
   else
-   dtm.textContent=dt[1];
+   dtm.textContent=dt.d;
   insAfter(dtm,DT[i]);
  }
- }catch(e){(_l(e+'\n*GHSFL* wrong datetime'))}
+// }catch(e){(console.log(e+'\n*GHSFL* wrong datetime'))}
 }
 
 function isDir(x){
@@ -385,7 +393,3 @@ observer.observe(D.body, { attributes: true, subtree: true } );
 */
 
 })()};
-/*
- to do: persistent settings; sorting by file extensions; toggling date/time display mode 
- ... do we really need it?
-*/
