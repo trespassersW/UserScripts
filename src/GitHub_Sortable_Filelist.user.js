@@ -3,14 +3,17 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 14.11.14.8
+// @version 14.11.16.9
+//  .9 right-aligned date/time column; fixed .ext sorting
 //  .8 sorting by file extention
 //  .7 date/time display mode switching
 //  .4 now works on all github pages
 // @created 2014-11-10
 // @updated 2014-11-14
 // @author  trespassersW
-// @licence MIT
+// @license MIT
+// @icon https://github.com/trespassersW/UserScripts/raw/master/res/github64.png
+// (C) Icon: Aaron Nichols CC Attribution 3.0 Unported
 // @run-at document-end
 // @grant GM_none
 // ==/UserScript==
@@ -18,10 +21,10 @@
 if(document.body || document.querySelector('#js-repo-pjax-container')){ // .file-wrap
 
 var llii=0; function _l(m){/* * /
- console.log(++llii +': '+m) 
+ console.log(++llii +': '+m)
 /* */
 }
-
+var fakejs = // avoid compiler warning
 (function(){ "use strict"; 
 
 var ii=0,tt;
@@ -60,96 +63,110 @@ function savePrefs(){
 }
 
 function css(){
-
 stickStyle('\
-.fsort-butt,\
-.tables.xxfile td.content, .tables.file td.message, .tables.file td.age\
- {position: relative; }\
-.fsort-butt:before{\
- position: absolute; display: inline-block;\
- cursor: pointer;\
- z-index:99999;\
- content: "";\
- width: 16px;  height: 16px;\
-}\
-.fsort-butt.fsort-asc:before,.fsort-butt.fsort-desc:before{\
- opacity:.2;\
- left:1.5em; top: -1em;\
- width: 0;  height: 0;\
-}\
-.fsort-asc:before,.fsort-desc:before{\
- border-style: solid;\
- border-color: #654;\
-}\
-.fsort-asc:before,\
-.fsort-desc.fsort-sel:hover:before\
-{\
- border-left: 6px solid transparent;\
- border-right: 6px solid transparent;\
- border-bottom-width: 14px;\
- border-top-width: 0;\
-}\
-.fsort-desc:before,\
-.fsort-asc.fsort-sel:hover:before{\
- border-left: 6px solid transparent;\
- border-right: 6px solid transparent;\
- border-bottom-width: 0;\
- border-top-width: 14px;\
- }\
-\
-.fsort-sel:before,\
-.fsort-sel:before{\
- border-bottom-color: #4183C4 !important;\
- border-top-color: #4183C4 !important;\
-}\
-\
-.fsort-butt.fsort-sel:before{ opacity: .6 }\
-.fsort-butt:hover:before{ opacity: 1 !important;}\
-\
-#fsort-clock:before{\
- left:3em; top:-1.2em;\
- border-radius: 16px;\
- opacity:1;\
+.fsort-butt,\n\
+.tables.file td.content, .tables.file td.message, .tables.file td.age\n\
+ {position: relative; }\n\
+.fsort-butt:before{\n\
+ position: absolute; display: inline-block;\n\
+ cursor: pointer;\n\
+ z-index:99999;\n\
+ content: "";\n\
+ width: 16px;  height: 16px;\n\
+}\n\
+.fsort-butt.fsort-asc:before,.fsort-butt.fsort-desc:before{\n\
+ opacity:.2;\n\
+ left:1.5em; top: -1em;\n\
+ width: 0;  height: 0;\n\
+}\n\
+td.age.fsort-butt.fsort-asc:before,td.age..fsort-butt.fsort-desc:before{\n\
+ right:3em;\n\
+}\n\
+.fsort-asc:before,.fsort-desc:before{\n\
+ border-style: solid;\n\
+ border-color: #654;\n\
+}\n\
+.fsort-asc:before,\n\
+.fsort-desc.fsort-sel:hover:before\n\
+{\n\
+ border-left: 6px solid transparent;\n\
+ border-right: 6px solid transparent;\n\
+ border-bottom-width: 14px;\n\
+ border-top-width: 0;\n\
+}\n\
+.fsort-desc:before,\n\
+.fsort-asc.fsort-sel:hover:before{\n\
+ border-left: 6px solid transparent;\n\
+ border-right: 6px solid transparent;\n\
+ border-bottom-width: 0;\n\
+ border-top-width: 14px;\n\
+ }\n\
+\n\
+.fsort-sel:before,\n\
+.fsort-sel:before{\n\
+ border-bottom-color: #4183C4 !important;\n\
+ border-top-color: #4183C4 !important;\n\
+}\n\
+\n\
+.fsort-butt.fsort-sel:before{ opacity: .6 }\n\
+.fsort-butt:hover:before{ opacity: 1 !important;}\n\
+\n\
+#fsort-clock:before{\n\
+ left:4.5em; top:-1.2em;\n\
+ border-radius: 16px;\n\
+ opacity:1;\n\
  content: url(data:image/png;base64,\
-iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAlZJREFUeNqkU0tLG1EUvjORFJPMw6mhTUgxy75EUxiJj6CGLKQV0o2IQd3pxp2bbPs/3MVCIHSRgC3uXBhCSErjtLRkK7TcNCYhk4eGPHvO6AwjXXrgu/fOOff77plzz2VGoxF5iI3hEA6HCcuyxGKxEIZhOMBLcHsAwt0+FfAbDvsFaA4GAzIcDkkqlboVMNlzB8+vzgUCq3N+v+xyOl3opFdXNJfN5nPn52dNVT0DV/FeBjpZcjrfR/b3Dzwul0e02ciPiwsyPTtLptxur7C25n0xMzMfPzoSypQmdREWB0iLt3NcKLK3dzAhSR5+fFxT/JbPG+row9g2HABZhpBjCMA/vZYDgRVOFD02q5WwDKOROp2OIYA+jDlgz8Ly8gpyDIF+v++d9vlkXDdubshlpaKhWCwaawTGsHg+WZaRY9QAPiYEUXyinzY1OanNzWbTWGv7gPynViO4FzlmARavcWgivw2FSDAYJDubm4TjOA0Oh4O8WVwk80tLGscsoLZUtWwThGf6afFEgmxvbZGP8biRAbac2u2S60ajjByjBr1e7/JrJqOMQSNhmmiCJGlknHVAAckjuI1cOq0gx3wLyudkMt1ttejgTkAXMRsWkO106KdEIo0cQwAC9b+l0umHaPRYrVaphWX/63n0XasqjR4eHlNKT5FzrxPBoXxXFEtkY6Ozs7u78G59/dVTt/sxdkSJ0uqXk5OfsVgsU6lUUjzPKzqPwdfo8/lIF4pTr9dJu92WID0/tjZAv8MKti48tqzdbq+JUAsrNFWhULgVeIj9E2AAamUckFr2UCoAAAAASUVORK5CYII=\
-);}\
-#fsort-clock:before{ background-color: #CCC  }\
-#fsort-clock.fsort-on:before{ background-color: #4183C4  }\
-\
-#fsort-ext:before{\
- left:4em; top:-14px;\
- border-radius: 6px;\
- width:28px;height:16px;\
- opacity:.6;\
- content: url(data:image/png;base64,\
-iVBORw0KGgoAAAANSUhEUgAAABoAAAANCAYAAAC3mX7tAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAABWUlEQVQ4y+2SP0sDQRDFT7BQTGtnITYSK8Emha1NCrXwC4gWYiUKiiB4jYKdWAmC4AewtxEExSqVjZ1/OEgwrEQwkLvbmd/aTCBI0IBYCD7YYmaYfW/mTRT9VWRZNq6qm79OBBwBrueGPM8ngWvgHbgXkQX7aC+EEFR1x+IDi7dUdQOQYACuviSp1+tDQA2oquoycAlInucT1Wp1EHgA3r3300AG3FUqlX4RKQOvQFNVV0Rk9ksiEZkzRbtJkgx476faqq1etnoK4L0vdazuqefVqepq6ALgKIqiKI7jPuDRcpVPHn1P5JwrxHHc1zHRofe+1H5pmo6akCWrv4QQgojMdxA9AI3vzPfAsXOuACRAXVW3VXUNOM2yrNhsNofNh1qapmPAG5A45wpGdGMiToD9bvdftKZ9I54ALoCGXd5tq9UaAc7Mr0Wbbr09vfk3Azybf+fRP36KDxJ2sN2uMATcAAAAAElFTkSuQmCC\
-);}\
-#fsort-ext:before{ background-color: #CCC}\
-.fsort-on:before{ background-color: #4183C4 !important;}\
-.fsort-on:hover:before{ opacity:1}\
-\
-table.files td.age .css-truncate.css-truncate-target{\
- width: 99% !important; \
- max-width: none !important;\
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAlZJREFUeNqkU0tLG1EUvjORFJPMw6mhTUgxy75EUxiJj6CGLKQV0o2IQd3pxp2bbPs/3MVCIHSRgC3uXBhCSErjtLRkK7TcNCYhk4eGPHvO6AwjXXrgu/fOOff77plzz2VGoxF5iI3hEA6HCcuyxGKxEIZhOMBLcHsAwt0+FfAbDvsFaA4GAzIcDkkqlboVMNlzB8+vzgUCq3N+v+xyOl3opFdXNJfN5nPn52dNVT0DV/FeBjpZcjrfR/b3Dzwul0e02ciPiwsyPTtLptxur7C25n0xMzMfPzoSypQmdREWB0iLt3NcKLK3dzAhSR5+fFxT/JbPG+row9g2HABZhpBjCMA/vZYDgRVOFD02q5WwDKOROp2OIYA+jDlgz8Ly8gpyDIF+v++d9vlkXDdubshlpaKhWCwaawTGsHg+WZaRY9QAPiYEUXyinzY1OanNzWbTWGv7gPynViO4FzlmARavcWgivw2FSDAYJDubm4TjOA0Oh4O8WVwk80tLGscsoLZUtWwThGf6afFEgmxvbZGP8biRAbac2u2S60ajjByjBr1e7/JrJqOMQSNhmmiCJGlknHVAAckjuI1cOq0gx3wLyudkMt1ttejgTkAXMRsWkO106KdEIo0cQwAC9b+l0umHaPRYrVaphWX/63n0XasqjR4eHlNKT5FzrxPBoXxXFEtkY6Ozs7u78G59/dVTt/sxdkSJ0uqXk5OfsVgsU6lUUjzPKzqPwdfo8/lIF4pTr9dJu92WID0/tjZAv8MKti48tqzdbq+JUAsrNFWhULgVeIj9E2AAamUckFr2UCoAAAAASUVORK5CYII=\n\
+);}\n\
+#fsort-clock:before{ background-color: #CCC  }\n\
+#fsort-clock.fsort-on:before{ background-color: #4183C4  }\n\
+\n\
+td.age .fsort-butt.fsort-asc:before,td.age .fsort-butt.fsort-desc:before{\
+left:3em !important;\
 }\
-table.files td.age span.css-truncate time{\
- position: relative !important;\
-}\
-\
-/* patches */\
-table.files td.age {text-align: left !important; padding: 0 4px !important;\
-}\
-table.files td.message {overflow: visible !important;}\
+#fsort-ext:before{\n\
+ left:4em; top:-14px;\n\
+ border-radius: 6px;\n\
+ width:28px;height:16px;\n\
+ opacity:.3;\n\
+ content:\ url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAANCAYAAAC3mX7tAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAABWUlEQVQ4y+2SP0sDQRDFT7BQTGtnITYSK8Emha1NCrXwC4gWYiUKiiB4jYKdWAmC4AewtxEExSqVjZ1/OEgwrEQwkLvbmd/aTCBI0IBYCD7YYmaYfW/mTRT9VWRZNq6qm79OBBwBrueGPM8ngWvgHbgXkQX7aC+EEFR1x+IDi7dUdQOQYACuviSp1+tDQA2oquoycAlInucT1Wp1EHgA3r3300AG3FUqlX4RKQOvQFNVV0Rk9ksiEZkzRbtJkgx476faqq1etnoK4L0vdazuqefVqepq6ALgKIqiKI7jPuDRcpVPHn1P5JwrxHHc1zHRofe+1H5pmo6akCWrv4QQgojMdxA9AI3vzPfAsXOuACRAXVW3VXUNOM2yrNhsNofNh1qapmPAG5A45wpGdGMiToD9bvdftKZ9I54ALoCGXd5tq9UaAc7Mr0Wbbr09vfk3Azybf+fRP36KDxJ2sN2uMATcAAAAAElFTkSuQmCC);\n\
+}\n\
+#fsort-ext:before{ background-color: #CCC}\n\
+.fsort-sel ~ #fsort-ext:before  {opacity:.6;}\n\
+.fsort-on:before{ background-color: #4183C4 !important;}\n\
+.fsort-on:hover:before{ opacity:1}\n\
+\n\
+table.files td.age .css-truncate.css-truncate-target{\n\
+ width: 99% !important; \n\
+ max-width: none !important;\n\
+}\n\
+/*table.files td.age span.css-truncate time{\n\
+ position: relative !important;\n\
+}*/\n\
+.fsort-time {\n\
+ visibility: hidden;\n\
+ display: none;\n\
+}\n\
+\n\
+/* patches */\n\
+table.files td.age {text-align: right !important; padding-right: 10px !important;\n\
+width:10em!important;\n\
+min-width:10em!important;\n\
+max-width:none!important;\n\
+overflow:visible!important;\n\
+}\n\
+table.files td.message {overflow: visible !important;}\n\
 ');
 
+
 dtStyle=stickStyle('\
-table.files td.age span.css-truncate time{\
+td.age  span.css-truncate time{\
  visibility: hidden !important;\
+ display: none !important;\
 }\
-table.files td.age span.css-truncate > time:before{\
- content: attr(time-or-date);\
+td.age  span.css-truncate .fsort-time {\
  visibility: visible !important;\
- position: absolute !important;\
+ display: inline !important;\
 }\
 ')
 }
@@ -165,13 +182,16 @@ function setC(n){
 
 function setDateTime(){
  try{ //014-10-02T16:09:05Z
- var DT=D.querySelectorAll('td.age span.css-truncate time'),res;
+ var DT=D.querySelectorAll('td.age span.css-truncate time'),dtm;
  for(var dt, dl=DT.length, i=0; i<dl; i++){
   dt = DT[i].getAttribute('datetime').match(/([0-9\-]+).([0-9\:]+)./);
+  dtm=D.createElement('span');
+  dtm.className='fsort-time';
   if(/minut|hour|just/.test(DT[i].textContent))
-   DT[i].setAttribute("time-or-date",dt[2]);
+   dtm.textContent=dt[2];
   else
-   DT[i].setAttribute("time-or-date",dt[1]);
+   dtm.textContent=dt[1];
+  insAfter(dtm,DT[i]);
  }
  }catch(e){(_l(e+'\n*GHSFL* wrong datetime'))}
 }
@@ -192,15 +212,21 @@ var sDir,sCells,sExts;
    return TB.rows[a].cells[3].querySelector('span.css-truncate>time').getAttribute('datetime');
   }
  ]
+
+var b9='\x20\x20\x20'; b9+=b9+b9;
+function pad9(s){
+ if(s.length<9) return (s+b9).substr(0,9);
+ return s;
+}
 function sort_p(n){// prepare data for sorting
  sDir=[],sCells=[];
  for(var tl=TB.rows.length, a=0; a<tl; a++) sDir.push(isDir(a));
- console.log(' sp:'+n+' ext:'+prefs.ext);
  if( n === 0 && prefs.ext ){
   for( a=0; a<tl; a++){ // f.x -> x.f
-   var m, x=fa[n](a);
+   var x=fa[n](a),
    m= x.match(/(.*)(\..*)$/);
-   if(m && m.length==3) x=m[2]+m[1];
+   if(!m || !m[2]) m=['',x,''];
+   x=pad9(m[2])+' '+m[1];
    sCells.push(x);
   }
  }else for( a=0; a<tl; a++) sCells.push(fa[n](a));
