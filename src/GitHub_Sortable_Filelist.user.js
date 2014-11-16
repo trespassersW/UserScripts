@@ -191,7 +191,8 @@ function d2s(n){
 
 function setDateTime(){
  var dt,dtm;
- var DT=D.querySelectorAll('td.age span.css-truncate time')
+ var DT=D.querySelectorAll('td.age span.css-truncate time');
+ try{
  for(var dl=DT.length, i=0; i<dl; i++){
   dt= d2s(new Date( DT[i].getAttribute('datetime') )); // 2014-07-24T17:06:11Z
   dtm=D.createElement('span');
@@ -203,7 +204,7 @@ function setDateTime(){
    dtm.textContent=dt.d;
   insAfter(dtm,DT[i]);
  }
-// }catch(e){(console.log(e+'\n*GHSFL* wrong datetime'))}
+ }catch(e){(console.log(e+'\n*GHSFL* wrong datetime'))}
 }
 
 function isDir(x){
