@@ -146,6 +146,7 @@ table.files td.age .css-truncate.css-truncate-target{\n\
 .fsort-time {\n\
  visibility: hidden;\n\
  display: none;\n\
+ padding-right: 14px;\n\
 }\n\
 \n\
 /* patches */\n\
@@ -187,6 +188,7 @@ function setDateTime(){
   dt = DT[i].getAttribute('datetime').match(/([0-9\-]+).([0-9\:]+)./);
   dtm=D.createElement('span');
   dtm.className='fsort-time';
+  dtm.title= DT[i].title;
   if(/minut|hour|just/.test(DT[i].textContent))
    dtm.textContent=dt[2];
   else
