@@ -4,7 +4,7 @@
 
 =====
 
-[![screenshot](../res/gitoujs.png "filelist sorted by date")](/../../raw/master/res/gitgfo.png)
+[![screenshot](../res/gitgm.png  "filelist sorted by date")](/../../raw/master/res/gitgfo.png)
 
 =====
 
