@@ -12,15 +12,15 @@
 // @updated 2014-11-17
 // @author  trespassersW
 // @license MIT
-// @icon https://github.com/trespassersW/UserScripts/raw/master/res/github64.png
+// @icon https://i.imgur.com/8buFLcs.png
 // (C) Icon: Aaron Nichols CC Attribution 3.0 Unported
 // @run-at document-end
 // @grant GM_none
 // ==/UserScript==
 
-if(document.body || document.querySelector('#js-repo-pjax-container')){ // .file-wrap
+if(document.body && document.querySelector('#js-repo-pjax-container')){ // .file-wrap
 
-var llii=0; _l= function(){/* * /
+var llii=0, _l= function(){/* * /
  for (var s=++llii +':', li=arguments.length, i = 0; i<li; i++) 
   s+=' ' + arguments[i];
  console.log(s)
@@ -130,7 +130,8 @@ left:3em !important;\
  border-radius: 6px;\n\
  width:28px;height:16px;\n\
  opacity:.3;\n\
- content:\ url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAANCAYAAAC3mX7tAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAABWUlEQVQ4y+2SP0sDQRDFT7BQTGtnITYSK8Emha1NCrXwC4gWYiUKiiB4jYKdWAmC4AewtxEExSqVjZ1/OEgwrEQwkLvbmd/aTCBI0IBYCD7YYmaYfW/mTRT9VWRZNq6qm79OBBwBrueGPM8ngWvgHbgXkQX7aC+EEFR1x+IDi7dUdQOQYACuviSp1+tDQA2oquoycAlInucT1Wp1EHgA3r3300AG3FUqlX4RKQOvQFNVV0Rk9ksiEZkzRbtJkgx476faqq1etnoK4L0vdazuqefVqepq6ALgKIqiKI7jPuDRcpVPHn1P5JwrxHHc1zHRofe+1H5pmo6akCWrv4QQgojMdxA9AI3vzPfAsXOuACRAXVW3VXUNOM2yrNhsNofNh1qapmPAG5A45wpGdGMiToD9bvdftKZ9I54ALoCGXd5tq9UaAc7Mr0Wbbr09vfk3Azybf+fRP36KDxJ2sN2uMATcAAAAAElFTkSuQmCC);\n\
+ content:url(data:image/png;base64,\
+iVBORw0KGgoAAAANSUhEUgAAABoAAAANCAYAAAC3mX7tAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAABWUlEQVQ4y+2SP0sDQRDFT7BQTGtnITYSK8Emha1NCrXwC4gWYiUKiiB4jYKdWAmC4AewtxEExSqVjZ1/OEgwrEQwkLvbmd/aTCBI0IBYCD7YYmaYfW/mTRT9VWRZNq6qm79OBBwBrueGPM8ngWvgHbgXkQX7aC+EEFR1x+IDi7dUdQOQYACuviSp1+tDQA2oquoycAlInucT1Wp1EHgA3r3300AG3FUqlX4RKQOvQFNVV0Rk9ksiEZkzRbtJkgx476faqq1etnoK4L0vdazuqefVqepq6ALgKIqiKI7jPuDRcpVPHn1P5JwrxHHc1zHRofe+1H5pmo6akCWrv4QQgojMdxA9AI3vzPfAsXOuACRAXVW3VXUNOM2yrNhsNofNh1qapmPAG5A45wpGdGMiToD9bvdftKZ9I54ALoCGXd5tq9UaAc7Mr0Wbbr09vfk3Azybf+fRP36KDxJ2sN2uMATcAAAAAElFTkSuQmCC);\n\
 }\n\
 #fsort-ext:before{ background-color: #CCC}\n\
 .fsort-sel ~ #fsort-ext:before  {opacity:.6;}\n\
