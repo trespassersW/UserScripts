@@ -9,7 +9,7 @@
 //  .7 date/time display mode switching
 //  .4 now works on all github pages
 // @created 2014-11-10
-// @updated 2014-11-14
+// @updated 2014-11-17
 // @author  trespassersW
 // @license MIT
 // @icon https://github.com/trespassersW/UserScripts/raw/master/res/github64.png
@@ -20,7 +20,7 @@
 
 if(document.body || document.querySelector('#js-repo-pjax-container')){ // .file-wrap
 
-var llii=0; function _l(){/* * /
+var llii=0; _l= function(){/* * /
  for (var s=++llii +':', li=arguments.length, i = 0; i<li; i++) 
   s+=' ' + arguments[i];
  console.log(s)
