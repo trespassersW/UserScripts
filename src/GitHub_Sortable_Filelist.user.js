@@ -3,8 +3,9 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 14.11.17.11
-//  .11 patch for the very first page
+// @version 14.11.18.12
+//  .12 new age format; fix for chrome
+//  .11 patch for the very first page;
 //  .10 datetime auto-updating fix; right-aligned datetime column; proper local time; .ext sorting fix; 
 //  .8 sorting by file extention
 //  .7 date/time display mode switching
@@ -151,17 +152,23 @@ table.files td.age .css-truncate.css-truncate-target{\n\
  display: none;\n\
  padding-right: 14px;\n\
 }\n\
+.fsort-time i {\
+ display:inline-block;\
+ color: #BBB;\
+ font-style: normal;\
+ transform:  scale(0.9);\
+/* font-size: 12px;*/\
+}\
 \n\
 /* patches */\n\
 table.files td.age {text-align: right !important; padding-right: 10px !important;\n\
-width:10em!important;\n\
-min-width:10em!important;\n\
+width:12em!important;\n\
+min-width:12em!important;\n\
 max-width:none!important;\n\
 overflow:visible!important;\n\
 }\n\
 table.files td.message {overflow: visible !important;}\n\
 ');
-
 
 dtStyle=stickStyle('\
 td.age  span.css-truncate time{\
@@ -187,34 +194,43 @@ function setC(n){
 function dd(s)
 { s=s.toString(); if(s.length<2)return'0'+s; return s}
 function d2s(n){
+ var hs=dd(n.getHours())+':'+dd(n.getMinutes());
  return {  
-   d: n.getFullYear()+'-'+dd(n.getMonth())+'-'+dd(n.getDate()),
-   t: dd(n.getHours())+':'+dd(n.getMinutes())+':'+dd(n.getSeconds())
+   d: n.getFullYear()+'-'+dd(n.getMonth())+'-'+dd(n.getDate())+' <i>'+ hs+'</i>',
+   t: hs+':'+dd(n.getSeconds())
  }
 }
 
 function setDateTime(x){
- var dt,dtm;
+ var dt,dtm,dta,dtd,tc,m,now,t;
  var DT=D.querySelectorAll('td.age span.css-truncate time');
+ _l('sDT',x?'refresh':'create');
  try{
+  now = new Date();
  for(var dl=DT.length, i=0; i<dl; i++){
-  dt= d2s(new Date( DT[i].getAttribute('datetime') )); // 2014-07-24T17:06:11Z
+  dta=DT[i].getAttribute('datetime');
+  dtd=new Date(dta);
+  dt= d2s(dtd); // 2014-07-24T17:06:11Z
+  dtm=null;
   if(x){
    dtm=DT[i].parentNode.querySelector('.fsort-time');
-  }else{
+  }
+  if(!dtm){
    dtm=D.createElement('span');
    dtm.className='fsort-time';
+   x=0;
   }
-  if(!x || dtm.title != DT[i].title){
-    dtm.title= DT[i].title;
-    if(/minut|hour|just/.test(DT[i].textContent))
-     dtm.textContent=dt.t;
-    else
-     dtm.textContent=dt.d;
+  if(!x || !dtm.title || dtm.title != DT[i].title)
+  { dtm.title= DT[i].title;
+    t= dt.d;
+    if( (now.getTime() -  dtd.getTime() <= 12*3600*1000) ||
+        (now.getDate() == dtd.getDate() )
+      )  t=dt.t;
+    dtm.innerHTML=t;
   }
   if(!x) insAfter(dtm,DT[i]);
  }
- }catch(e){(console.log(e+'\n*GHSFL* wrong datetime'))}
+ }catch(e){(console.log(e+'\n*GHSFL* wrong datetime'+x))}
 }
 
 function isDir(x){
@@ -318,7 +334,7 @@ function gitDir1(x){
  if(x && document.querySelector('.fsort-butt')) {
   _l('gitDir'+x+ '- already'); return;
  }
- _l('gitDir'+x)
+ _l('gitDir',x?'create':'refresh')
  var c,o;
  ca=[];
  c= D.querySelector('.file-wrap table.files td.content >span');
@@ -407,7 +423,9 @@ var  observer = new MO(function(mutations) {
       {
         if( t.parentNode.parentNode.className=="age" )
         {
- //_l('T'+mutI++,ml,' T:' +m.type,'N:'+t.nodeName, 'C:',"age" ) ;
+//_l('T'+mutI++,ml,' T:' +m.type,'N:'+t.nodeName, 'C:',"age" ) ;
+            if(!catcher.querySelector('.fsort-butt'))
+              gitDir(1); //chrome ?!11
             setDateTime(1); 
             __started=1;
             return;
@@ -420,7 +438,9 @@ var  observer = new MO(function(mutations) {
     {
        if( t.className=='age' ) 
          {
- //_l('C'+mutI++,ml,' T:' +m.type,'N:'+t.nodeName,'C:'+ t.className,t.querySelector('TIME').textContent) ;
+            if(!catcher.querySelector('.fsort-butt'))
+              gitDir(1); //chrome ?!11
+//_l('C'+mutI++,ml,' T:' +m.type,'N:'+t.nodeName,'C:'+ t.className,t.querySelector('TIME').textContent) ;
           setDateTime(1);
           return;
          }
