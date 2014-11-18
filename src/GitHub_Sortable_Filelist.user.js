@@ -20,7 +20,7 @@
 // @grant GM_none
 // ==/UserScript==
 
-if(document.body && document.querySelector('#js-repo-pjax-container')){ // .file-wrap
+if(document.body && document.querySelector('#js-repo-pjax-container')){
 
 var llii=0, _l= function(){/* * /
  for (var s=++llii +':', li=arguments.length, i = 0; i<li; i++) 
