@@ -196,7 +196,7 @@ function dd(s)
 function d2s(n){
  var hs=dd(n.getHours())+':'+dd(n.getMinutes());
  return {  
-   d: n.getFullYear()+'-'+dd(n.getMonth())+'-'+dd(n.getDate())+' <i>'+ hs+'</i>',
+   d: n.getFullYear()+'-'+dd(n.getMonth()+1)+'-'+dd(n.getDate())+' <i>'+ hs+'</i>',
    t: hs+':'+dd(n.getSeconds())
  }
 }
@@ -223,8 +223,9 @@ function setDateTime(x){
   if(!x || !dtm.title || dtm.title != DT[i].title)
   { dtm.title= DT[i].title;
     t= dt.d;
-    if( (now.getTime() -  dtd.getTime() <= 12*3600*1000) ||
-        (now.getDate() == dtd.getDate() )
+    if( (now.getTime() -  dtd.getTime() < 12*3600*1000) ||
+        ((now.getTime() -  dtd.getTime() < 24*3600*1000) &&
+         (now.getDate() == dtd.getDate()) )
       )  t=dt.t;
     dtm.innerHTML=t;
   }
