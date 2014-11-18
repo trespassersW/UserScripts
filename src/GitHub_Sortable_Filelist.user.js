@@ -3,13 +3,14 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 14.11.17.10
+// @version 14.11.17.11
+//  .11 patch for the very first page
 //  .10 datetime auto-updating fix; right-aligned datetime column; proper local time; .ext sorting fix; 
 //  .8 sorting by file extention
 //  .7 date/time display mode switching
 //  .4 now works on all github pages
 // @created 2014-11-10
-// @updated 2014-11-17
+// @updated 2014-11-18
 // @author  trespassersW
 // @license MIT
 // @icon https://i.imgur.com/8buFLcs.png
@@ -365,6 +366,7 @@ if(e.target.nodeName && e.target.nodeName=='SPAN' &&
  { onClik(e); }
 }
 ,false);
+
 _l('startup()');
 
 try {
@@ -384,26 +386,47 @@ var target = catcher; //document.body; //D.querSelector('.file-wrap');
 var  MO = window.MutationObserver;
 if(!MO) MO= window.WebKitMutationObserver;
 if(!MO) return;
-var mutI;
+var __started=0;
+var mutI=0;
 var  observer = new MO(function(mutations) {
-   mutI=0;
-   mutations.forEach(function(m) {
-    var t=m.target; 
-    if( m.type== "attributes" ) {  
-      if(  t.nodeName == 'DIV' &&  
-           t.className == "file-wrap" && 
-           0===mutI++
-      ){  gitDir();  }
-      return; 
+
+ for(var m,t, ml=mutations.length, i=0; i<ml; i++) 
+ {
+    m=mutations[i],t = m.target; 
+    if( m.type=="attributes")
+    {
+      if( t.nodeName == 'DIV' &&  
+          t.className == "file-wrap"
+        ){ 
+           gitDir(); 
+           return;
+         }
+        
+// patch for the very first page
+      if( 0===__started && t.nodeName=='TIME' ) 
+      {
+        if( t.parentNode.parentNode.className=="age" )
+        {
+ //_l('T'+mutI++,ml,' T:' +m.type,'N:'+t.nodeName, 'C:',"age" ) ;
+            setDateTime(1); 
+            __started=1;
+            return;
+        }
+        else continue;
+      }
     }
-    
-    if( m.type=="childList" && t.className=='age' &&
-        0===mutI++ ){ 
- _l('.'+mutI,' T:' +m.type,'N:'+t.nodeName,'C:'+ t.className,t.querySelector('TIME').textContent) ;
-      setDateTime(1);
-    }
-    return;
-   })
+      
+    if( m.type=="childList" ) 
+    {
+       if( t.className=='age' ) 
+         {
+ //_l('C'+mutI++,ml,' T:' +m.type,'N:'+t.nodeName,'C:'+ t.className,t.querySelector('TIME').textContent) ;
+          setDateTime(1);
+          return;
+         }
+        else continue;
+     }
+ }
 });
 
 observer.observe(D.body, { attributes: true, childList: true, subtree: true } );
