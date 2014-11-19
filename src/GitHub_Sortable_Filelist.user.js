@@ -3,7 +3,8 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 14.11.18.12
+// @version 14.11.19.13
+// 14.11.19.13 fixes for latest github changes
 //  .12 new age format; fix for chrome
 //  .11 patch for the very first page;
 //  .10 datetime auto-updating fix; right-aligned datetime column; proper local time; .ext sorting fix; 
@@ -155,7 +156,7 @@ table.files td.age .css-truncate.css-truncate-target{\n\
 .fsort-time i {\
  display:inline-block;\
  color: #BBB;\
- font-style: normal;\
+ font-style: normal !important;;\
  transform:  scale(0.9);\
 /* font-size: 12px;*/\
 }\
@@ -168,6 +169,7 @@ max-width:none!important;\n\
 overflow:visible!important;\n\
 }\n\
 table.files td.message {overflow: visible !important;}\n\
+/*.file-wrap .include-fragment-error { display: table-row !important;}*/\
 ');
 
 dtStyle=stickStyle('\
@@ -235,19 +237,33 @@ function setDateTime(x){
 }
 
 function isDir(x){
- return (TB.rows[x].cells[0].querySelector("span.octicon-file-directory")) != null;
+ var c= TB.rows[x].cells[0].querySelector("span");
+ if(c.className.indexOf("-directory")>0) return 0;
+ if(c.className.indexOf("-file")>0) return -1;
+ return 1;
 }
-
+function getCell(r,c,s,p){
+ var rc=TB.rows[r].cells[c],q=null;
+ if(typeof rc == "undefined") {
+ _l('r:',r,'c:',c,'- ???' );
+ }else
+   q=rc.querySelector(s);
+ if(q) q= p? q.getAttribute(p): q.textContent;
+ if(q) return q;
+ return "";
+}
 var sDir,sCells,sExts;
  var fa=[
   function(a){
-   return TB.rows[a].cells[1].querySelector('span.css-truncate-target a').textContent;
+   return getCell(a,1,'span.css-truncate-target a');
   },
   function(a){
-   return TB.rows[a].cells[2].querySelector('span.css-truncate').textContent;
+   return getCell(a,2,'span.css-truncate');
   },
   function(a){
-   return TB.rows[a].cells[3].querySelector('span.css-truncate>time').getAttribute('datetime');
+   var c = getCell(a,3,'span.css-truncate>time','datetime');
+   if(c) return c;
+   return "2099-12-31T23:59:59Z"
   }
  ]
 
@@ -258,7 +274,8 @@ function pad9(s){
 }
 function sort_p(n){// prepare data for sorting
  sDir=[],sCells=[];
- for(var tl=TB.rows.length, a=0; a<tl; a++) sDir.push(isDir(a));
+ for(var tl=TB.rows.length, a=0; a<tl; a++) 
+   sDir.push(isDir(a));
  if( n === 0 && prefs.ext ){
   for( a=0; a<tl; a++){ // f.x -> x.f
    var x=fa[n](a),
@@ -272,7 +289,7 @@ function sort_p(n){// prepare data for sorting
 
 function sort_fn(a,b){ 
  var x=sDir[a], y=sDir[b];
- if(x!=y) return ((x<y)<<1)-1;
+ if(x!=y) return ((x<y)? 1: -1);
  x= sCells[a], y= sCells[b];
  return x==y? 0: (((x>y)^ASC)<<1)-1;
 }
@@ -280,7 +297,7 @@ function sort_fn(a,b){
 var CNn={content: 0, message: 1, age: 2}
 
 function oClr(){
- var o= catcher.querySelectorAll('.fsort-butt')
+ var o= catcher.querySelectorAll('.fsort-butt,.fsort-time')
  for(var ol=o.length,i=0;i<ol;i++)
   o[i].parentNode.removeChild(o[i]);
 }
@@ -372,7 +389,6 @@ function gitDir1(x){
 function gitDir(){
  gitDir1(1);
 }
-
 
 catcher= D.querySelector('#js-repo-pjax-container');
 if(!catcher){  _l( "*GHSFL* err0r"); return; }
