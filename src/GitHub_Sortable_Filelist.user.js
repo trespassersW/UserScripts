@@ -3,7 +3,8 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 14.11.19.13
+// @version 14.11.19.20
+//  .20 maquillage
 // 14.11.19.13 fixes for latest github changes
 //  .12 new age format; fix for chrome
 //  .11 patch for the very first page;
@@ -12,7 +13,7 @@
 //  .7 date/time display mode switching
 //  .4 now works on all github pages
 // @created 2014-11-10
-// @updated 2014-11-18
+// @updated 2014-11-20
 // @author  trespassersW
 // @license MIT
 // @icon https://i.imgur.com/8buFLcs.png
@@ -72,74 +73,78 @@ stickStyle('\
 .fsort-butt,\n\
 .tables.file td.content, .tables.file td.message, .tables.file td.age\n\
  {position: relative; }\n\
+ \n\
 .fsort-butt:before{\n\
  position: absolute; display: inline-block;\n\
  cursor: pointer;\n\
+ text-align:center; vertical-align: top;\n\
+ width: 18px;   height: 14px;\n\
+ line-height: 14px;\n\
+ padding:0; margin:0;\n\
+ border-color: transparent;\n\
+ border-width: 0;\n\
  content: "";\n\
- width: 16px;  height: 16px;\n\
 }\n\
 .fsort-butt.fsort-asc:before,.fsort-butt.fsort-desc:before{\n\
  opacity:.2;\n\
  left:1.5em; top: -1em;\n\
- width: 0;  height: 0;\n\
 }\n\
 td.age.fsort-butt.fsort-asc:before,td.age.fsort-butt.fsort-desc:before{\n\
  right:3em;\n\
 }\n\
 .fsort-asc:before,.fsort-desc:before{\n\
- border-style: solid;\n\
- border-color: #654;\n\
+ background-color: #654;\n\
+}\n\
+.fsort-asc:before{\n\
+ border-radius: 24px 24px 8px 8px;\n\
+}\n\
+.fsort-desc:before{\n\
+ border-radius: 8px 8px 24px 24px;\n\
 }\n\
 .fsort-asc:before,\n\
 .fsort-desc.fsort-sel:hover:before\n\
 {\n\
- border-left: 6px solid transparent;\n\
- border-right: 6px solid transparent;\n\
- border-bottom-width: 14px;\n\
- border-top-width: 0;\n\
+content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAMCAYAAABbayygAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAqklEQVR42mNgQAIfPnzg//fv3z4g3vjs2TNOBmzg27dv0kAFl/5DAZB95OPHj4Ioin79+qUFlHj0Hw0Axa5+//5dFqzo58+fGkCB9/9xAKDcw69fv0ow/P37twAqAAJLkRQsgLGBapIZQO4ACk798+eP9+/fv21gkkArZYAKYoFy09++fcuL4lZ0hQy4wMAqtIQpBEaAFE6FL1684AL6chcQb1m1ahUTshwAw2kAJAeNI30AAAAASUVORK5CYII=);\n\
 }\n\
 .fsort-desc:before,\n\
-.fsort-asc.fsort-sel:hover:before{\n\
- border-left: 6px solid transparent;\n\
- border-right: 6px solid transparent;\n\
- border-bottom-width: 0;\n\
- border-top-width: 14px;\n\
- }\n\
+.fsort-asc.fsort-sel:hover:before{\n\content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAMCAYAAABbayygAAAACXBIWXMAAAsTAAALEwEAmpwYAAAApUlEQVR42mNgQAKrVq1i+vfv3xYg3vXixQsuBlzg27dvUv+h4Pfv35Y4FX7//l0GSaHNYFH49u1bXqAvp//9+zcWXeGfP3+8gXJTP378KMgAVJAMkwQKLkBiLwXifyA2UE0Bw9evXyWA/If/cQCg3PufP39qwNwmCxS4ikXRo1+/fmmhuBXkDqDEESRFl4ARII3V18+ePeMEKtgIxPs+fPjAjywHANCcACRZ1c8XAAAAAElFTkSuQmCC);\n\
+}\n\
 \n\
 .fsort-sel:before,\n\
 .fsort-sel:before{\n\
- border-bottom-color: #4183C4 !important;\n\
- border-top-color: #4183C4 !important;\n\
+  background-color: #4183C4 !important;\n\
 }\n\
 \n\
 .fsort-butt.fsort-sel:before{ opacity: .6 }\n\
 .fsort-butt:hover:before{ opacity: 1 !important;}\n\
 \n\
 #fsort-clock:before{\n\
- left:4.5em; top:-1.2em;\n\
+ left:5em; top: -15px; \n\
+ text-align:center; vertical-align: top; top:-15px;\n\
+ width: 16px; height: 16px;\
  border-radius: 16px;\n\
  opacity:1;\n\
- content: url(data:image/png;base64,\
-iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAlZJREFUeNqkU0tLG1EUvjORFJPMw6mhTUgxy75EUxiJj6CGLKQV0o2IQd3pxp2bbPs/3MVCIHSRgC3uXBhCSErjtLRkK7TcNCYhk4eGPHvO6AwjXXrgu/fOOff77plzz2VGoxF5iI3hEA6HCcuyxGKxEIZhOMBLcHsAwt0+FfAbDvsFaA4GAzIcDkkqlboVMNlzB8+vzgUCq3N+v+xyOl3opFdXNJfN5nPn52dNVT0DV/FeBjpZcjrfR/b3Dzwul0e02ciPiwsyPTtLptxur7C25n0xMzMfPzoSypQmdREWB0iLt3NcKLK3dzAhSR5+fFxT/JbPG+row9g2HABZhpBjCMA/vZYDgRVOFD02q5WwDKOROp2OIYA+jDlgz8Ly8gpyDIF+v++d9vlkXDdubshlpaKhWCwaawTGsHg+WZaRY9QAPiYEUXyinzY1OanNzWbTWGv7gPynViO4FzlmARavcWgivw2FSDAYJDubm4TjOA0Oh4O8WVwk80tLGscsoLZUtWwThGf6afFEgmxvbZGP8biRAbac2u2S60ajjByjBr1e7/JrJqOMQSNhmmiCJGlknHVAAckjuI1cOq0gx3wLyudkMt1ttejgTkAXMRsWkO106KdEIo0cQwAC9b+l0umHaPRYrVaphWX/63n0XasqjR4eHlNKT5FzrxPBoXxXFEtkY6Ozs7u78G59/dVTt/sxdkSJ0uqXk5OfsVgsU6lUUjzPKzqPwdfo8/lIF4pTr9dJu92WID0/tjZAv8MKti48tqzdbq+JUAsrNFWhULgVeIj9E2AAamUckFr2UCoAAAAASUVORK5CYII=\n\
+ content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAlZJREFUeNqkU0tLG1EUvjORFJPMw6mhTUgxy75EUxiJj6CGLKQV0o2IQd3pxp2bbPs/3MVCIHSRgC3uXBhCSErjtLRkK7TcNCYhk4eGPHvO6AwjXXrgu/fOOff77plzz2VGoxF5iI3hEA6HCcuyxGKxEIZhOMBLcHsAwt0+FfAbDvsFaA4GAzIcDkkqlboVMNlzB8+vzgUCq3N+v+xyOl3opFdXNJfN5nPn52dNVT0DV/FeBjpZcjrfR/b3Dzwul0e02ciPiwsyPTtLptxur7C25n0xMzMfPzoSypQmdREWB0iLt3NcKLK3dzAhSR5+fFxT/JbPG+row9g2HABZhpBjCMA/vZYDgRVOFD02q5WwDKOROp2OIYA+jDlgz8Ly8gpyDIF+v++d9vlkXDdubshlpaKhWCwaawTGsHg+WZaRY9QAPiYEUXyinzY1OanNzWbTWGv7gPynViO4FzlmARavcWgivw2FSDAYJDubm4TjOA0Oh4O8WVwk80tLGscsoLZUtWwThGf6afFEgmxvbZGP8biRAbac2u2S60ajjByjBr1e7/JrJqOMQSNhmmiCJGlknHVAAckjuI1cOq0gx3wLyudkMt1ttejgTkAXMRsWkO106KdEIo0cQwAC9b+l0umHaPRYrVaphWX/63n0XasqjR4eHlNKT5FzrxPBoXxXFEtkY6Ozs7u78G59/dVTt/sxdkSJ0uqXk5OfsVgsU6lUUjzPKzqPwdfo8/lIF4pTr9dJu92WID0/tjZAv8MKti48tqzdbq+JUAsrNFWhULgVeIj9E2AAamUckFr2UCoAAAAASUVORK5CYII=\n\
 );}\n\
 #fsort-clock:before{ background-color: #CCC  }\n\
 #fsort-clock.fsort-on:before{ background-color: #4183C4  }\n\
 \n\
-td.age .fsort-butt.fsort-asc:before,td.age .fsort-butt.fsort-desc:before{\
-left:3em !important;\
+td.age .fsort-butt.fsort-asc:before,td.age .fsort-butt.fsort-desc:before{\n\
+left:3em !important;\n\
 }\
 #fsort-ext:before{\n\
  left:4em; top:-14px;\n\
+ opacity:.6;\n\
+ width:28px; height: 14px;\n\
  border-radius: 6px;\n\
- width:28px;height:16px;\n\
- opacity:.3;\n\
- content:url(data:image/png;base64,\
-iVBORw0KGgoAAAANSUhEUgAAABoAAAANCAYAAAC3mX7tAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAABWUlEQVQ4y+2SP0sDQRDFT7BQTGtnITYSK8Emha1NCrXwC4gWYiUKiiB4jYKdWAmC4AewtxEExSqVjZ1/OEgwrEQwkLvbmd/aTCBI0IBYCD7YYmaYfW/mTRT9VWRZNq6qm79OBBwBrueGPM8ngWvgHbgXkQX7aC+EEFR1x+IDi7dUdQOQYACuviSp1+tDQA2oquoycAlInucT1Wp1EHgA3r3300AG3FUqlX4RKQOvQFNVV0Rk9ksiEZkzRbtJkgx476faqq1etnoK4L0vdazuqefVqepq6ALgKIqiKI7jPuDRcpVPHn1P5JwrxHHc1zHRofe+1H5pmo6akCWrv4QQgojMdxA9AI3vzPfAsXOuACRAXVW3VXUNOM2yrNhsNofNh1qapmPAG5A45wpGdGMiToD9bvdftKZ9I54ALoCGXd5tq9UaAc7Mr0Wbbr09vfk3Azybf+fRP36KDxJ2sN2uMATcAAAAAElFTkSuQmCC);\n\
+content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAANCAYAAAC3mX7tAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAABWUlEQVQ4y+2SP0sDQRDFT7BQTGtnITYSK8Emha1NCrXwC4gWYiUKiiB4jYKdWAmC4AewtxEExSqVjZ1/OEgwrEQwkLvbmd/aTCBI0IBYCD7YYmaYfW/mTRT9VWRZNq6qm79OBBwBrueGPM8ngWvgHbgXkQX7aC+EEFR1x+IDi7dUdQOQYACuviSp1+tDQA2oquoycAlInucT1Wp1EHgA3r3300AG3FUqlX4RKQOvQFNVV0Rk9ksiEZkzRbtJkgx476faqq1etnoK4L0vdazuqefVqepq6ALgKIqiKI7jPuDRcpVPHn1P5JwrxHHc1zHRofe+1H5pmo6akCWrv4QQgojMdxA9AI3vzPfAsXOuACRAXVW3VXUNOM2yrNhsNofNh1qapmPAG5A45wpGdGMiToD9bvdftKZ9I54ALoCGXd5tq9UaAc7Mr0Wbbr09vfk3Azybf+fRP36KDxJ2sN2uMATcAAAAAElFTkSuQmCC);\n\
 }\n\
-#fsort-ext:before{ background-color: #CCC}\n\
-.fsort-sel ~ #fsort-ext:before  {opacity:.6;}\n\
-.fsort-on:before{ background-color: #4183C4 !important;}\n\
-.fsort-on:hover:before{ opacity:1}\n\
+#fsort-ext:before{ background-color: #BBB}\n\
+#fsort-ext:hover:before{ opacity:1 !important;}\n\
+.fsort-butt:not([class*="fsort-sel"]) ~ .fsort-on#fsort-ext:not(:hover):before\n\
+ {opacity:.2 !important;}\n\
+.fsort-on:before{ background-color: #4183C4 !important; opacity: .5 !important;}\n\
+.fsort-on:hover:before{ opacity: 1 !important; }\n\
 \n\
 table.files td.age .css-truncate.css-truncate-target{\n\
  width: 99% !important; \n\
@@ -153,13 +158,13 @@ table.files td.age .css-truncate.css-truncate-target{\n\
  display: none;\n\
  padding-right: 14px;\n\
 }\n\
-.fsort-time i {\
+.fsort-time i {\n\
  display:inline-block;\
  color: #BBB;\
- font-style: normal !important;;\
- transform:  scale(0.9);\
-/* font-size: 12px;*/\
-}\
+ font-style: normal !important;\n\
+ transform:  scale(0.9);\n\
+/* font-size: 12px;*/\n\
+}\n\
 \n\
 /* patches */\n\
 table.files td.age {text-align: right !important; padding-right: 10px !important;\n\
@@ -169,7 +174,7 @@ max-width:none!important;\n\
 overflow:visible!important;\n\
 }\n\
 table.files td.message {overflow: visible !important;}\n\
-/*.file-wrap .include-fragment-error { display: table-row !important;}*/\
+/*.file-wrap .include-fragment-error { display: table-row !important;}*/\n\
 ');
 
 dtStyle=stickStyle('\
@@ -189,7 +194,7 @@ function setC(n){
   if(i!=n) C[i].s= 0, C[i].d=d0[i];
   else C[i].s=1;
   oa[i].className='fsort-butt fsort-'+(C[i].d?'desc':'asc')+(C[i].s?' fsort-sel':'') ;
-  oa[i].title=C[i].d? '\u21ca' : '\u21c8';
+  //oa[i].title=C[i].d? '\u21ca' : '\u21c8';
  }
 }
 
