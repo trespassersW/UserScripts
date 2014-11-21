@@ -6,8 +6,9 @@
 // @license MIT
 // @downloadURL https://openuserjs.org/install/trespassersW/OUJS_widelist.user.js
 // @updateURL   https://openuserjs.org/install/trespassersW/OUJS_widelist.user.js
-// @version 2014.1106.10
-//  .1106.10  sort by author; http://; fix; 
+// @version 2014.1121.11
+//  .1121.11  fix for closed issues :-/
+//  .1106.10  sort by author; http://; a fix; 
 //  .1007.8  right panel in script title page -- width: 25%
 //  .1007.6  run on DOMContentLoaded - less flickering?
 //  .1006.3  put in order table header - classic 'click on link' behavior
@@ -58,6 +59,8 @@ stickStyle("\
  border: thin solid red !important;\
  color: red !important;\
 }\
+h2.page-heading ~ nav.navbar /*14.11.21*/\
+{max-width: 65% !important;}\
 .col-sm-4 .col-sm-404\
 {\
  position:absolute !important;\
@@ -104,7 +107,7 @@ stickStyle("\
 .oujsort-sel:after {visibility: visible !important;}\
 /*fixiez ?!11*/\
 th a{display: inline!important;}\
-#oujsort-author{margin-left: 3em;}\
+#oujsort-sep{margin-left: 1.5em; margin-right: 1.5em; border-left: thin dotted gray; }\
 ");
 //
 function stickStyle(css){
@@ -129,8 +132,7 @@ function hp(h) {
 function insAfter(n,e){
   if(e.nextElementSibling)
    return e.parentNode.insertBefore(n,e.nextElementSibling);
-  else
-   return e.parentNode.appendChild(n);
+  return e.parentNode.appendChild(n);
 }
 
 //
@@ -150,11 +152,14 @@ lh = hp(location.href);
    document.querySelector('span.inline-block a[href^="/users"]') &&
    document.querySelector('th a[href*="orderBy=name"]');
  if(a){ 
+  o=document.createElement('span');
+  o.id="oujsort-sep";
+  i= insAfter(o,a);
   o= a.cloneNode(false);
   o.textContent="Author";
   o.href=o.href.replace("orderBy=name","orderBy=author");
   o.id="oujsort-author";
-  insAfter(o,a);
+  insAfter(o,i);
  }
 // put in order table header
  a=document.querySelectorAll('th >a[href*="orderBy"]');
@@ -184,6 +189,6 @@ a = document.querySelectorAll("div.col-sm-4 > div.panel");
     aa.push(a[i].parentNode.removeChild(a[i]));
   for( i=aa.length; i>0; i-- ) 
     o.appendChild( aa.pop() );
-  a[0].parentNode.appendChild(o);
+  insAfter(o,a[0]);
  }
 },false);
