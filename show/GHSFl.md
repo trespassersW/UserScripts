@@ -7,6 +7,7 @@
 [![screenshot](../res/gitgm.png  "filelist sorted by date")](/../../raw/master/res/gitgfo.png)
 
 =====
-
+ 14.11.19.20 un peu de maquillage
+ 14.11.19.13 fixes for latest github changes
  v14.11.17.10  date/time auto-updating fix; right-aligned datetime column; proper local time; .ext sorting fix; 
 
