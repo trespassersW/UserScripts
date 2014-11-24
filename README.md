@@ -1,5 +1,5 @@
-    | ![userpic](res/tpw.png) | <h4>trespassersW/UserScripts</h4>
-:---: | :--- | :---
+<hr>    | ![userpic](res/tpw.png)  | <hr>
+:---: | :---: | :---
    |   |  
 ![babelfish](res/babelfish.gif) | **[translate.google tooltip](show/translate.google_tooltip.md)** | Translates selected text into a ‘tooltip’ via Google translate
 ![Randekz](res/yaya.png) |  **[Yandex-two-columns](show/Yandex-two-columns.md)** | две колонки результатов Яндекса 
