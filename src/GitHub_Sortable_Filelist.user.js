@@ -3,7 +3,8 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 14.11.19.20
+// @version 14.11.19.2O
+//  .2O yet a tiny bit of makeup
 //  .20 maquillage
 // 14.11.19.13 fixes for latest github changes
 //  .12 new age format; fix for chrome
@@ -13,7 +14,7 @@
 //  .7 date/time display mode switching
 //  .4 now works on all github pages
 // @created 2014-11-10
-// @updated 2014-11-20
+// @updated 2014-11-25
 // @author  trespassersW
 // @license MIT
 // @icon https://i.imgur.com/8buFLcs.png
@@ -93,7 +94,7 @@ td.age.fsort-butt.fsort-asc:before,td.age.fsort-butt.fsort-desc:before{\n\
  right:3em;\n\
 }\n\
 .fsort-asc:before,.fsort-desc:before{\n\
- background-color: #654;\n\
+ background-color: #48C;\n\
 }\n\
 .fsort-asc:before{\n\
  border-radius: 24px 24px 8px 8px;\n\
