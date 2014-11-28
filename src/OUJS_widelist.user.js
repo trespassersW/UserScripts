@@ -6,8 +6,8 @@
 // @license MIT
 // @downloadURL https://openuserjs.org/install/trespassersW/OUJS_widelist.user.js
 // @updateURL   https://openuserjs.org/install/trespassersW/OUJS_widelist.user.js
-// @version 2014.1121.11
-//  .1121.11  fix for closed issues :-/
+// @version 2014.1128
+//  .1128   hidden Announcements on Discuss page
 //  .1106.10  sort by author; http://; a fix; 
 //  .1007.8  right panel in script title page -- width: 25%
 //  .1007.6  run on DOMContentLoaded - less flickering?
@@ -108,6 +108,38 @@ h2.page-heading ~ nav.navbar /*14.11.21*/\
 /*fixiez ?!11*/\
 th a{display: inline!important;}\
 #oujsort-sep{margin-left: 1.5em; margin-right: 1.5em; border-left: thin dotted gray; }\
+/* * /div.col-sm-12 div.list-group {\
+ border: thin dotted red!important;/* */\
+/* 14-11-28 */\
+.col-lg-3{\
+  background-color: rgba(88, 132, 160,1)  !important;\
+  display: block !important;\
+  position: fixed !important; float: none !important;\
+  top: 8em !important;\
+  left: 0 !important;\
+  width: 12px !important;\
+  height: auto !important;\
+  bottom: 1.3em !important;\
+  overflow: hidden !important;\
+  z-index: 9999 !important;\
+  text-indent: -9999px !important;\
+  border: 2px solid rgb(230,230,230) !important;\
+  border-width: 1px 2px 1px 0 !important;\
+  border-radius: 0 8px 8px 0 !important;\
+  padding: 0 0 0 4px !important;\
+  -webkit-transition-delay: .75s !important;\
+  transition-delay: .75s !important;\
+ }\
+.col-lg-3:hover {\
+   background-color: rgba(255, 255, 255, .9)  !important;\
+   width: 25% !important;\
+   text-indent: 0 !important;\
+   overflow-y: auto !important;\
+   -webkit-transition-delay: .05s !important;\
+   transition-delay: .3s !important;\
+ }\
+.col-lg-9 {width:100%!important;}\/* */\
+}\
 ");
 //
 function stickStyle(css){
