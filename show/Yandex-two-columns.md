@@ -12,7 +12,7 @@
 
 =====
 
-![screenshot](../res/ya2shot.gif)
+![screenshot](../res/yanTwoShot.png)
 
 =====
 
