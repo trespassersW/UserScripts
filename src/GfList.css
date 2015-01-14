@@ -124,7 +124,7 @@ content: " Name / Description";
     float: left;
     white-space: normal;
     word-wrap: break-word;;
-    -moz-hyphens: auto;
+    -moz-hyphens: none;
 }
 
 dd.script-list-author {width:12ex}
@@ -166,4 +166,12 @@ ol.script-list h2 { font-size: 12pt; }
 
 @-moz-document regexp("https://greasyfork\\.org/(.*?/)?(users/.*)$") {
 dd.script-list-author {display: none !important;}
+/* */
+.script-list h2 {
+    width: calc(60% + 10ex) !important;
+}
+.script-list dl {
+    max-width: calc(60% - 10ex) !important;
+}
+/* */
 }
