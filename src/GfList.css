@@ -4,7 +4,7 @@
     by wOxxOm [https://userstyles.org/users/67605]
 */
 @-moz-document domain("greasyfork.org") {
- body {
+ body#nobody {
     font-size: 12pt
   }
   body, .SiteTitle, select, input {
