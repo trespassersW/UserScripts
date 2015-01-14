@@ -1,0 +1,163 @@
+@namespace url(http://www.w3.org/1999/xhtml);
+/* 
+    forked from greasy-fork-compact [https://userstyles.org/styles/104650]
+    by wOxxOm [https://userstyles.org/users/67605]
+*/
+@-moz-document domain("greasyfork.org") {
+ body {
+    font-size: 12pt
+  }
+  body, .SiteTitle, select, input {
+    letter-spacing: 0
+  }
+}
+
+@-moz-document regexp("https://greasyfork\\.org/(.*?/)?(scripts(|/|[/?]\\D.*)|users/.*)$") {
+
+.width-constraint {
+    margin: 0px .5ex;
+    max-width: 100%;
+}
+
+#main-header {
+    padding-left: 2ex;
+    padding-right: 2ex;
+}
+    
+.script-list article {
+    margin-bottom: 0px;
+    padding: 0.8ex 0.2ex 0.6ex 0;
+}
+
+.script-list article::after {
+    clear: left;
+    content: "";
+    height: 2px;
+    display: block;
+}
+
+.script-list li {
+background-image: linear-gradient(to top,
+ rgba(255,255,255, .75), rgba(237,237,255, .75) );
+}
+
+.script-list { margin-top: 3em; }
+
+.script-list li:first-child h2,
+.script-list li:first-child dd { position: relative !important; }
+
+.script-list li:first-child h2 >a:before,
+.script-list li:first-child dd >span:before{ 
+position: absolute ; top: -3em; 
+font-weight: bold; font-size: small; font-style: normal; 
+color: #000;
+}
+
+.script-list li:first-child h2> a:before {
+content: " Name / Description";
+}
+.script-list li:first-child dd.script-list-author >span:before 
+{content: "Author";}
+.script-list li:first-child dd.script-list-daily-installs  >span:before 
+{content: "Daily/Total";}
+.xscript-list li:first-child dd.script-list-total-installs  >span:before 
+{content: "Total";}
+.script-list li:first-child dd.script-list-ratings  >span:before 
+{content: "\0a0\0a0\0a0\0a0 Ratings";}
+.script-list li:first-child dd.script-list-created-date  >span:before 
+{content: "Created"; top: -3.5em;}
+.script-list li:first-child dd.script-list-updated-date  >span:before 
+{content: "Updated"; }
+
+
+.script-list h2 {
+    width: 60%;
+    float: left;
+    clear: left;
+    word-wrap: break-word;
+}
+
+.script-list h2 a {
+    font-size: 10.5pt;
+    line-height: 1.2;
+
+
+    display: block;
+    float: left;
+    text-decoration: none;
+}
+
+.script-list-author a {
+    font-size: 9pt;
+    text-decoration: none;
+    white-space: normal;
+}
+
+.script-list a:hover {
+    text-decoration: underline;
+}
+
+.description {
+    font-size: 10pt;
+    line-height:1.2;
+    display: inline !important;
+    float: left;
+    padding-left: 1ex;
+    padding-right: 1ex;
+}
+
+.script-list dl {
+    -moz-column-count: 1!important;
+
+    width: auto !important;
+    max-width: 40% !important;
+    margin: 0px;
+    display: inline !important;
+    font-size: 9pt !important;
+}
+.name-description-separator,
+.script-list dt {
+    display: none;
+}
+
+.script-list dd {
+    float: left;
+    white-space: normal;
+    word-wrap: break-word;;
+    -moz-hyphens: auto;
+}
+
+dd.script-list-author {width:12ex}
+dd.script-list-daily-installs {width:4ex; text-align:right}
+dd.script-list-total-installs {width:8ex; text-align:right}
+dd.script-list-ratings {width:13ex; word-wrap: normal !important;}
+span.good-rating-count {width:3ex; text-align:right}
+span.ok-rating-count   {width:2ex; text-align:right}
+span.bad-rating-count  {width:2ex; text-align:right}
+dd.script-list-created-date,
+dd.xscript-list-created-date
+{width:auto!important; transform: scale(0.85);}
+dd.script-list-updated-date{ float: right; }
+dd.script-list-updated-date span {padding-right: .5ex !important; }
+#script-list-option-groups{
+ overflow: hidden !important;
+ position: fixed !important;
+ right: 0 !important;
+ top: 2em !important;
+ z-index:999999!important;
+ max-height: 2em !important;
+ max-width:  12ex !important;
+ opacity: .5 !important;
+}
+#script-list-option-groups:hover{
+ max-height: none !important;
+ max-width: none !important;
+ opacity: 1 !important;
+}
+
+ol.script-list h2 { font-size: 12pt; }
+}
+
+@-moz-document regexp("https://greasyfork\\.org/(.*?/)?(users/.*)$") {
+dd.script-list-author {display: none !important;}
+}
