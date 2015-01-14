@@ -140,20 +140,26 @@ dd.xscript-list-created-date
 dd.script-list-updated-date{ float: right; }
 dd.script-list-updated-date span {padding-right: .5ex !important; }
 #script-list-option-groups{
- overflow: hidden !important;
- position: fixed !important;
- right: 0 !important;
- top: 2em !important;
- z-index:999999!important;
- max-height: 2em !important;
- max-width:  12ex !important;
- opacity: .5 !important;
+ overflow: hidden;
+ position: fixed;
+ right: 0;
+ top: 1.3em;
+ z-index:999999;
+ max-height: 3em;
+ max-width:  8em;
+ opacity: .5;
+ line-height: 1.1;
 }
+#script-list-sort li { display: none;}
+#script-list-sort li.list-current { display: list-item;}
+
 #script-list-option-groups:hover{
  max-height: none !important;
  max-width: none !important;
  opacity: 1 !important;
 }
+#script-list-option-groups:hover
+#script-list-sort li { display: list-item;}
 
 ol.script-list h2 { font-size: 12pt; }
 }
