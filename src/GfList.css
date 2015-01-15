@@ -39,10 +39,15 @@
 .script-list li {
 background-image: linear-gradient(to top,
  rgba(255,255,255, .75), rgba(237,237,255, .75) );
+ padding-bottom: .5em;
 }
 
 .script-list { margin-top: 3em; }
-
+/* fix 4  greasyfork_langfilter_user.js  */  
+.script-list li.greazy-forq-hiden:first-child > article{
+ display: block !important; visibility: visible !important;
+}
+ 
 .script-list li:first-child h2,
 .script-list li:first-child dd { position: relative !important; }
 
@@ -54,18 +59,18 @@ color: #000;
 }
 
 .script-list li:first-child h2> a:before {
-content: " Name / Description";
+content: " Name / Description"; 
 }
 .script-list li:first-child dd.script-list-author >span:before 
-{content: "Author";}
+{content: "Author"; }
 .script-list li:first-child dd.script-list-daily-installs  >span:before 
-{content: "Daily/Total";}
+{content: "Daily/Total"; }
 .xscript-list li:first-child dd.script-list-total-installs  >span:before 
-{content: "Total";}
+{content: "Total"; }
 .script-list li:first-child dd.script-list-ratings  >span:before 
-{content: "\0a0\0a0\0a0\0a0 Ratings";}
+{content: "\0a0\0a0\0a0\0a0 Ratings"; }
 .script-list li:first-child dd.script-list-created-date  >span:before 
-{content: "Created"; top: -3.5em;}
+{content: "Created"; top: -3.5em; }
 .script-list li:first-child dd.script-list-updated-date  >span:before 
 {content: "Updated"; }
 
@@ -125,20 +130,20 @@ content: " Name / Description";
     white-space: normal;
     word-wrap: break-word;;
     -moz-hyphens: none;
+   line-height: 1 !important;
 }
 
-dd.script-list-author {width:12ex}
+dd.script-list-author {width:9%;}
 dd.script-list-daily-installs {width:4ex; text-align:right}
 dd.script-list-total-installs {width:8ex; text-align:right}
 dd.script-list-ratings {width:13ex; word-wrap: normal !important;}
 span.good-rating-count {width:3ex; text-align:right}
 span.ok-rating-count   {width:2ex; text-align:right}
 span.bad-rating-count  {width:2ex; text-align:right}
-dd.script-list-created-date,
-dd.xscript-list-created-date
-{width:auto!important; transform: scale(0.85);}
+dd.script-list-created-date
+{width:auto!important; transform: scale(0.85);letter-spacing: -1px}
 dd.script-list-updated-date{ float: right; }
-dd.script-list-updated-date span {padding-right: .5ex !important; }
+dd.script-list-updated-date span {padding-right: .5ex; letter-spacing: -1px;}
 #script-list-option-groups{
  overflow: hidden;
  position: fixed;
@@ -168,10 +173,10 @@ ol.script-list h2 { font-size: 12pt; }
 dd.script-list-author {display: none !important;}
 /* */
 .script-list h2 {
-    width: calc(60% + 10ex) !important;
+    width: 68% !important;
 }
 .script-list dl {
-    max-width: calc(60% - 10ex) !important;
+    max-width: 32% !important;
 }
 /* */
 }
