@@ -1,7 +1,11 @@
 @namespace url(http://www.w3.org/1999/xhtml);
 /* 
-    forked from greasy-fork-compact [https://userstyles.org/styles/104650]
-    by wOxxOm [https://userstyles.org/users/67605]
+ GreasyFork wide scriptlist
+   forked from greasy-fork-compact [https://userstyles.org/styles/104650]
+   by wOxxOm [https://userstyles.org/users/67605]
+• 015-01-15 fix for greasyfork-org-langfilter.user.js
+• 015-01-15 fixes for GF.o translations
+• 015-01-16 better header layout
 */
 @-moz-document domain("greasyfork.org") {
  body#nobody {
@@ -52,26 +56,26 @@ background-image: linear-gradient(to top,
 .script-list li:first-child dd { position: relative !important; }
 
 .script-list li:first-child h2 >a:before,
+.script-list li:first-child dd >span:after,
 .script-list li:first-child dd >span:before{ 
 position: absolute ; top: -3em; 
 font-weight: bold; font-size: small; font-style: normal; 
 color: #000;
 }
+.script-list li:first-child dd > span:after {right: .5em;}
 
 .script-list li:first-child h2> a:before {
-content: " Name / Description"; 
+content: " Name / Description"; padding-left: 3em;
 }
 .script-list li:first-child dd.script-list-author >span:before 
 {content: "Author"; }
-.script-list li:first-child dd.script-list-daily-installs  >span:before 
+.script-list li:first-child dd.script-list-total-installs  >span:after
 {content: "Daily/Total"; }
-.xscript-list li:first-child dd.script-list-total-installs  >span:before 
-{content: "Total"; }
-.script-list li:first-child dd.script-list-ratings  >span:before 
-{content: "\0a0\0a0\0a0\0a0 Ratings"; }
-.script-list li:first-child dd.script-list-created-date  >span:before 
+.script-list li:first-child dd.script-list-ratings >span:after 
+{content: "Ratings"; padding-right: 2em;}
+.script-list li:first-child dd.script-list-created-date  >span:before
 {content: "Created"; top: -3.5em; }
-.script-list li:first-child dd.script-list-updated-date  >span:before 
+.script-list li:first-child dd.script-list-updated-date  >span:after
 {content: "Updated"; }
 
 
