@@ -3,8 +3,9 @@
  GreasyFork wide scriptlist
    forked from greasy-fork-compact [https://userstyles.org/styles/104650]
    by wOxxOm [https://userstyles.org/users/67605]
-• 015-01-15 fix for greasyfork-org-langfilter.user.js
+• 015-01-15 fix for greasyfork.org-langfilter.user.js
 • 015-01-15 fixes for GF.o translations
+• 015-01-18 name+description in single line
 • 015-01-16 better header layout
 */
 @-moz-document domain("greasyfork.org") {
@@ -91,8 +92,8 @@ content: " Name / Description"; padding-left: 3em;
     line-height: 1.2;
 
 
-    display: block;
-    float: left;
+    display: inline;
+/*    float: left;*/
     text-decoration: none;
 }
 
@@ -110,7 +111,7 @@ content: " Name / Description"; padding-left: 3em;
     font-size: 10pt;
     line-height:1.2;
     display: inline !important;
-    float: left;
+    /*float: left;*/
     padding-left: 1ex;
     padding-right: 1ex;
 }
@@ -130,7 +131,7 @@ content: " Name / Description"; padding-left: 3em;
 }
 
 .script-list dd {
-    float: left;
+/*    float: left;*/
     white-space: normal;
     word-wrap: break-word;;
     -moz-hyphens: none;
