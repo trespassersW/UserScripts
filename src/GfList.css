@@ -136,6 +136,7 @@ content: " Name / Description"; padding-left: 3em;
     word-wrap: break-word;;
     -moz-hyphens: none;
    line-height: 1 !important;
+   padding-top: .2em;
 }
 
 dd.script-list-author {width:9%;}
