@@ -7,13 +7,12 @@
 • 015-01-15 fixes for GF.o translations
 • 015-01-18 name+description in single line
 • 015-01-16 better header layout
+• 015-01-21 new layout of sorting/showing options
 */
 @-moz-document domain("greasyfork.org") {
  body#nobody {
-    font-size: 12pt
-  }
-  body, .SiteTitle, select, input {
-    letter-spacing: 0
+    position:absolute!important;
+    top:0!important;
   }
 }
 
@@ -32,6 +31,7 @@
 .script-list article {
     margin-bottom: 0px;
     padding: 0.8ex 0.2ex 0.6ex 0;
+
 }
 
 .script-list article::after {
@@ -152,25 +152,40 @@ dd.script-list-updated-date{ float: right; }
 dd.script-list-updated-date span {padding-right: .5ex; letter-spacing: -1px;}
 #script-list-option-groups{
  overflow: hidden;
- position: fixed;
- right: 0;
- top: 1.3em;
- z-index:999999;
- max-height: 3em;
- max-width:  8em;
- opacity: .5;
+ position: absolute;
+ margin: 0;
+ padding:4px;
+ left: 45%;
+ top: 2.5em;
+ z-index:9;
+ max-height: none;
+ max-width: 50%;
+ width: auto !important;
+ opacity: .7;
  line-height: 1.1;
+ background: rgba(248, 219, 219, .85);
+ border-radius: 0 0 6px 6px ;
 }
-#script-list-sort li { display: none;}
-#script-list-sort li.list-current { display: list-item;}
-
 #script-list-option-groups:hover{
- max-height: none !important;
- max-width: none !important;
- opacity: 1 !important;
+ opacity: .95 !important;
+ padding-bottom: 1em;
+
 }
+
+div.list-option-group[id^="script-list-"] {
+display: inline-block; 
+vertical-align: top;
+padding-top: 0; padding-bottom: 0;
+margin-top: 0; margin-bottom: 0;
+}
+
+[id^="script-list-"] li { display: none }
+[id^="script-list-"] li.list-current { display: list-item;}
 #script-list-option-groups:hover
-#script-list-sort li { display: list-item;}
+[id^="script-list-"] li { display: list-item;}
+
+#script-list-option-groups:hover
+[id^="script-list-"] li { display: list-item;}
 
 ol.script-list h2 { font-size: 12pt; }
 }
