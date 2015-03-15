@@ -3,9 +3,8 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 14.11.19.2O
-//  .2O yet a tiny bit of makeup
-//  .20 maquillage
+// @version 15.03.15
+// 15.03.15 css fixes: variable  width of content column;
 // 14.11.19.13 fixes for latest github changes
 //  .12 new age format; fix for chrome
 //  .11 patch for the very first page;
@@ -14,7 +13,7 @@
 //  .7 date/time display mode switching
 //  .4 now works on all github pages
 // @created 2014-11-10
-// @updated 2014-11-25
+// @updated 2015-03-25
 // @author  trespassersW
 // @license MIT
 // @icon https://i.imgur.com/8buFLcs.png
@@ -167,15 +166,24 @@ table.files td.age .css-truncate.css-truncate-target{\n\
 /* font-size: 12px;*/\n\
 }\n\
 \n\
-/* patches */\n\
+/* patches (--min-width:12em!important;) */\n\
 table.files td.age {text-align: right !important; padding-right: 10px !important;\n\
 width:12em!important;\n\
-min-width:12em!important;\n\
+\n\
 max-width:none!important;\n\
 overflow:visible!important;\n\
 }\n\
 table.files td.message {overflow: visible !important;}\n\
 /*.file-wrap .include-fragment-error { display: table-row !important;}*/\n\
+/* 150315 wide filelist */\n\
+div.wrapper div.container{\n\
+min-width: 980px!important;\n\
+width:90%!important;}\n\
+div.wrapper div#js-repo-pjax-container{\n\
+min-width: 790px!important;\n\
+width: calc(100% - 200px)!important;\n\
+}/* */\n\
+\
 ');
 
 dtStyle=stickStyle('\
