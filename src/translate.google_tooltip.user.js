@@ -194,6 +194,7 @@ function showLookupIcon(evt){
 	 ||(evt.ctrlKey && !Gctrl)
 	 ||(evt.altKey && !Galt)
    ) return;
+  evt.preventDefault(),evt.stopPropagation(); 
 	var divDic = getId('divDic');
 	var divLookup = getId('divLookup');
 	txtSel = getSelection(evt.target)+'';
