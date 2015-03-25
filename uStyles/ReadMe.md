@@ -5,25 +5,25 @@
 | **global-striped-grey-background.css** | [![src](stylish.png)](global-striped-grey-background.css) | reveals code on mouse hover | Displaces webpage's background by grey gradient strips |
 | **Google-columnizer.css** | [![src](stylish.png)](Google-columnizer.css) | Two columns of Google search results / yet another attempt to columnize Google with Stylish  |
 | **GreasyFork-wide-scriptlist.css** | [![src](stylish.png)](GreasyFork-wide-scriptlist.css) | wide list of scripts on GreasyFork.org  |
-| **lib-ru-reader.css** | [![src](stylish.png)](lib-ru-reader.css) | чтение книжек на Lib.ru, Samlib.ru, Lib.rus.ec, Flibusta.net  |
-| **lib-ru-reader-light.css** | [![src](stylish.png)](lib-ru-reader-light.css) | чтение книжек на Lib.ru, Samlib.ru, Lib.rus.ec, Flibusta.net (светлый фон, темный текст)  |
-| **lib-ru-reader-light-green.css** | [![src](stylish.png)](lib-ru-reader-light-green.css) | чтение книжек на Lib.ru, Samlib.ru, Lib.rus.ec, Flibusta.net (темный текст на светло-зеленом фоне)  |
-| **lurkmore-ru-slim-navigation.css** | [![src](stylish.png)](lurkmore-ru-slim-navigation.css) | lurkmore.to делаем чересчур широкую боковую панель поуже  |
+| **lib-ru-reader.css** | [![src](stylish.png)](lib-ru-reader.css) | С‡С‚РµРЅРёРµ РєРЅРёР¶РµРє РЅР° Lib.ru, Samlib.ru, Lib.rus.ec, Flibusta.net  |
+| **lib-ru-reader-light.css** | [![src](stylish.png)](lib-ru-reader-light.css) | С‡С‚РµРЅРёРµ РєРЅРёР¶РµРє РЅР° Lib.ru, Samlib.ru, Lib.rus.ec, Flibusta.net (СЃРІРµС‚Р»С‹Р№ С„РѕРЅ, С‚РµРјРЅС‹Р№ С‚РµРєСЃС‚)  |
+| **lib-ru-reader-light-green.css** | [![src](stylish.png)](lib-ru-reader-light-green.css) | С‡С‚РµРЅРёРµ РєРЅРёР¶РµРє РЅР° Lib.ru, Samlib.ru, Lib.rus.ec, Flibusta.net (С‚РµРјРЅС‹Р№ С‚РµРєСЃС‚ РЅР° СЃРІРµС‚Р»Рѕ-Р·РµР»РµРЅРѕРј С„РѕРЅРµ)  |
+| **lurkmore-ru-slim-navigation.css** | [![src](stylish.png)](lurkmore-ru-slim-navigation.css) | lurkmore.to РґРµР»Р°РµРј С‡РµСЂРµСЃС‡СѓСЂ С€РёСЂРѕРєСѓСЋ Р±РѕРєРѕРІСѓСЋ РїР°РЅРµР»СЊ РїРѕСѓР¶Рµ  |
 | **make-it-readable.css** | [![src](stylish.png)](make-it-readable.css) | narrow text column; legible font  |
 | **MDN-W3C-ToC.css** | [![src](stylish.png)](MDN-W3C-ToC.css) | Table of Contents in pop-up box for W3C & Mozilla documentation. |
-| **newsru-fixes.css** | [![src](stylish.png)](newsru-fixes.css) | заплатки для прессы — Kp.ru, Newsru.com  |
-| **ru-en-hyphens-global.css** | [![src](stylish.png)](ru-en-hyphens-global.css) | пере-носы слов / hyphen-ations  |
+| **newsru-fixes.css** | [![src](stylish.png)](newsru-fixes.css) | Р·Р°РїР»Р°С‚РєРё РґР»СЏ РїСЂРµСЃСЃС‹ вЂ” Kp.ru, Newsru.com  |
+| **ru-en-hyphens-global.css** | [![src](stylish.png)](ru-en-hyphens-global.css) | РїРµСЂРµ-РЅРѕСЃС‹ СЃР»РѕРІ / hyphen-ations  |
 | **scrollbarrier.css** | [![src](stylish.png)](scrollbarrier.css) | narrow scrollbar with slider in oblique stripes  |
 | **Tahoma-16px.css** | [![src](stylish.png)](Tahoma-16px.css) | Sets up neat font and economic line spacing for webpage's text content.  |
-| **thin-wikky.css** | [![src](stylish.png)](thin-wikky.css) | Hopefully adds a bit of readability to a wiki page / повышаем читабельность вики  |
+| **thin-wikky.css** | [![src](stylish.png)](thin-wikky.css) | Hopefully adds a bit of readability to a wiki page / РїРѕРІС‹С€Р°РµРј С‡РёС‚Р°Р±РµР»СЊРЅРѕСЃС‚СЊ РІРёРєРё  |
 | **userscripts-org-darkgrey-source.css** | [![src](stylish.png)](userscripts-org-darkgrey-source.css) | dark grey syntax highlighting for USO `[Source Code]`  |
 | **userstyle-uncover-meta.css** | [![src](stylish.png)](userstyle-uncover-meta.css) | - shows hidden stylish data  |
-| **Wiki-ToC-Icon.css** | [![src](stylish.png)](Wiki-ToC-Icon.css) | Hides the "Contents" section of a wiki page into a small icon at the bottom-right corner. Table of contents pops up when you hover over that icon. -- Прячет раздел "Содержание" вики-страниц в иконку в нижнем правом углу окна. Оглавление всплывает при наведении курсора на эту иконку.  |
-| **Yandex-two-columns.css** | [![src](stylish.png)](Yandex-two-columns.css) | Yandex.ru - две колонки результатов поиска - и ничего лишнего  |
+| **Wiki-ToC-Icon.css** | [![src](stylish.png)](Wiki-ToC-Icon.css) | Hides the "Contents" section of a wiki page into a small icon at the bottom-right corner. Table of contents pops up when you hover over that icon. -- РџСЂСЏС‡РµС‚ СЂР°Р·РґРµР» "РЎРѕРґРµСЂР¶Р°РЅРёРµ" РІРёРєРё-СЃС‚СЂР°РЅРёС† РІ РёРєРѕРЅРєСѓ РІ РЅРёР¶РЅРµРј РїСЂР°РІРѕРј СѓРіР»Сѓ РѕРєРЅР°. РћРіР»Р°РІР»РµРЅРёРµ РІСЃРїР»С‹РІР°РµС‚ РїСЂРё РЅР°РІРµРґРµРЅРёРё РєСѓСЂСЃРѕСЂР° РЅР° СЌС‚Сѓ РёРєРѕРЅРєСѓ.  |
+| **Yandex-two-columns.css** | [![src](stylish.png)](Yandex-two-columns.css) | Yandex.ru - РґРІРµ РєРѕР»РѕРЅРєРё СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ РїРѕРёСЃРєР° - Рё РЅРёС‡РµРіРѕ Р»РёС€РЅРµРіРѕ  |
 
 ------------
 
-[/](../README.md)
+my styles on [userstyles.org](https://userstyles.org/users/95149)
 
 
 
