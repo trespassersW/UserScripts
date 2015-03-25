@@ -1,0 +1,48 @@
+﻿@namespace url(http://www.w3.org/1999/xhtml);
+/* 
+ lurkmore.ru  - less navigation, moar content
+*/
+/*http://userstyles.org/styles/45866/lurkmore-ru-slim-navigation*/
+
+@-moz-document domain("lurkmore.to")
+{
+ #content 
+,#p-cactions
+{ margin-left:  168px !important }
+ #column-content 
+{ margin-left: -168px !important }
+ #column-one
+,#p-logo, #p-logo *
+,#p-categories, #p-navigation, #p-tb, #p-lang, #p-advert
+,.portlet
+{ width:        168px !important }
+[id^="p-"] h5 /* -8px для закругляния поребрика */
+{ width:        160px !important }
+/* вдруг у кого-то нет адблока */
+.ads_left, .ads_left *
+,[id^="Market"]
+,[id^="frame"]
+,[class^="addthis"]
+,[src*="counter"]
+,[src*="adv.jpg"]
+,[class^="teaser"]
+,#column-one IMG[src^="data"]
+{ display: none !important;}
+
+
+/**/
+/* текст поуже, интервалы поменьше */
+#bodyContent *
+{
+ font-family: tahoma,sans-serif !important
+;font-size: 16px !important
+;line-height: 120% !important 
+;max-width: 720px !important 
+;hyphens: auto !important
+/**/;-moz-hyphens: auto !important /* Ff8.0 */
+/**/;-webkit-hyphens: auto !important /*chrome13*/
+/**/; hyphens: auto !important /* */
+}
+table[class*="quote"]  {margin-left: 0 !important;}
+}
+

@@ -1,0 +1,73 @@
+﻿@-moz-document domain("userstyles.org") 
+/* */
+{
+#hidden-meta {
+ display: inline-block;
+ border: thin dotted magenta;
+ padding:  0 6px;
+}
+#hidden-meta > *:before {content: attr(id) ": ";}
+#control-panel { 
+ display: block !important;
+ visibility: visible !important;
+}
+
+#advanced-search { display: block !important; }
+#search-submit, #show-advanced-search {  display: none !important; }
+/** /
+#show-code pre { white-space: pre-line !important; }
+/** /
+#view-code { display: block !important;}
+/**/
+#left-sidebar {
+}
+#left-info {
+}
+.screenshot-thumbnail 
+,.screenshot-thumbnail img
+{
+max-height: 450px !important;
+max-width: 600px !important;
+height: auto !important;
+width: auto !important;
+overflow-y: hidden !important;
+}
+body {max-width: 100% !important; }
+.author-styles thead,
+.author-styles tbody tr:nth-of-type(2n) {
+ background: #E8EFEF !important;
+}
+.author-styles tbody tr:nth-of-type(2n+1) {
+ background: #F3F7F7 !important;
+}
+
+.author-styles thead th {
+ max-width: 5.5em;
+ -moz-hyphens: none;
+}
+#main-article,
+#show-code { margin-right: 1em !important;}
+
+/* */
+html > head { position: absolute; display: block; width: auto; z-index: 9999; 
+ bottom: -1em; left: -1em;  border: thin dotted magenta; visibility: hidden;
+ transform: scale(0.85);letter-spacing: 0px;
+ transition-delay: .5s;
+}
+html > head:hover{ visibility: visible !important;
+ transition-delay: .2s;
+}
+
+link[rel^="stylish"] { display: block;  text-decoration: none; 
+ color: #131;  background-color: #B2CACA; opacity: .75; 
+}
+link[rel^="stylish"]:hover{
+background-color: #bdb; opacity: 1;}
+link[rel^="stylish"]:before { content: attr(rel); padding: 2px 6px;}
+link[rel^="stylish-update-url"] {
+ color: red; border: thin dotted red; 
+}
+link[rel^="stylish-example-url"]{visibility: visible!important;}
+link[rel^="stylish-update-url"]:after{ content: ": Source";}
+/* */
+}

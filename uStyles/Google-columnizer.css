@@ -1,0 +1,324 @@
+﻿@namespace url(http://www.w3.org/1999/xhtml);
+/* 
+ userstyles.org/styles/63771/google-columnizer
+ 2015-02-25 -- hidden unneeded scrollbar
+ 2015-02-20 -- 'People also search for' bar at bottom of page
+ 2015-01-23 -- right col fixes
+ 2015-01-11 -- define wd.
+ 2014-07-22 -- background for search results items 
+ 2014-07-20 -- graphs footer
+ 2013-08-26 -- patch for chrome o_0
+ 2013-07-27 -- top-left ads
+ 2013-07-18 -- fixed result col width for google.ru >:O
+ 2013-05-31 -- fixes: utube & g+ images 
+ 2013-05-26 -- youtube items
+ 2013-02-11 -- affects www.google.* ; fixes for youTube paragraphs
+ 2013-02-06 -- right-panel content token <<<
+ 2012/09/08 -- share links killed; google images in one column
+ 2012/09/05 -- Page footer lurks in arrow at bottom right corner
+ 2012/09/03 -- hidden right panel, ajusted for chrome
+ 2012/06/07 -- hidden left & foot blocks
+*/
+@-moz-document url-prefix("http://www.google."),
+url-prefix("https://www.google.") 
+{
+#gsr div.mw #res 
+{/* # of columns. Pay attention to the comments: */
+ -moz-column-count: /*[[column-count]]*/ 2 /* */ !important; 
+ -webkit-column-count: /*[[column-count]]*/ 2 /* */ !important; 
+ column-count: /*[[column-count]]*/ 2 /* */ !important; 
+}
+#gsr div.mw #res 
+,div#ires
+{
+ -moz-column-gap:6px!important; 
+ -webkit-column-gap:6px!important; 
+ column-gap:6px!important; 
+ -moz-column-rule:  thin dotted gray !important;
+ -webkit-column-rule:  thin dotted gray !important;
+ column-rule:  thin dotted gray !important;
+  padding: 0px !important; 
+  width: auto !important; 
+}
+
+#gsr #mn {width: auto !important }  
+ 
+/* 2013 07-18: auto  ?wtf? 08-25: 100%  */
+div[style*="width:0"]
+,div[style*="width:auto"] /* 09-19 */
+{ width: 100% !important; max-width: 100% !important;}
+/* */
+
+/* fill all available space with content */
+#gsr #cnt #center_col, #gsr .mw, #gsr #cnt .ab_center_col{
+ width:auto !important; max-width:100% !important;
+ padding: 0px !important;
+}
+.s { max-width: 98% !important; position: static !important} /* 2012-08-30 */
+
+#gsr #center_col, #gsr #foot 
+{    margin-right: 4px !important; }
+#gsr li.g 
+{    margin-bottom: 4px !important; }
+/* page preview icon [>>]
+ apr-07 -- disappeared mysteriously -- and is it so important? */
+#gsr div.vspib {
+    padding: 0px !important;;
+    right: -4px !important;
+}
+#gsr .vspii .vspiic {
+    margin-left: 6px !important;
+    margin-top: 4px !important;
+    top: .2em !important;
+}/* */
+
+/* 2012-09-09 kill share links */
+#gsr span.pplsrsl, #gsr span.pplsrsli { position: absolute  !important; left: -9999px !important }
+
+#gsr .mw #foot{
+position: fixed !important;
+background-color: transparent !important;
+border: none !important;
+width:  24px !important;
+height: 20px !important;
+display: block !important;
+top: auto !important; left: auto !important;
+bottom: 0 !important;  right: 0 !important;
+overflow: hidden !important;
+text-indent: 0 !important;
+z-index: 9999 !important;
+opacity: .85 !important;
+padding-bottom: 16px !important;
+}
+
+#gsr  .mw #foot:hover{
+background-color: rgb(239, 239, 255) !important; 
+display: inline !important;
+overflow: auto !important;
+z-index: 999 !important;
+background-image: none !important;
+width: auto !important;
+max-width: 50% !important;
+height: auto !important;
+top: auto !important; left: auto !important; /* chrome needs this crap */
+bottom: 0 !important; right: 0 !important;
+border: solid #558 !important;
+border-width: 1px 0 0 1px !important;
+border-radius: 0 16px 0  16px !important;
+margin-right: 0px !important;
+margin-bottom: 0px !important;
+text-indent: 0 !important;
+opacity: 0.95 !important;
+}
+#gsr #center_col, #gsr #foot {
+    margin-left: 14px !important;
+}/* */
+/* shift << leftnav items * /
+.mdm .msel .kls 
+{    padding-left: 3px !important;}
+.mdm .mitem .kl, .mdm #showmodes 
+{    padding-left: 8px !important;}
+.mdm #bms 
+{    margin-left: 2px !important;}/* */
+/* shrink appbar */
+#gsr div#appbar >div 
+{    height: 36px !important; overflow: visible !important; } 
+#gsr div#appbar >div:empty
+{    display:none !important; } 
+#gsr #ab_ctls
+{    top: 2px !important;}
+#gsr #resultStats 
+{    top: 14px !important;}
+#gsr #ab_name
+{    top: 8px !important;}
+#gsr .gl, #gsr .gl, #foot a, #gsr .nobr, #gsr #res h3.r 
+{  white-space: normal !important; }
+/* rigyt panel */
+#gsr div#rhs_block >div:first-of-type:before
+,#gsr div#rhs_block >ol:before { content:" <<< " !important; 
+ right: 4px !important;  
+ top: 30px !important; position: fixed !important;
+ z-index: 9999 !important; 
+ color: #2254F4 !important; 
+}
+#gsr div#rhs_block >div:first-of-type
+,#gsr div#rhs_block >ol{
+ padding: 0.5em !important;
+
+}
+#gsr #rhs {
+background-color: rgb(239, 239, 255) !important;
+opacity: .5 !important; 
+display: block !important;
+position: fixed !important;
+top: 30px !important; right: 0 !important; left: auto !important; bottom: auto !important;
+min-width: 32px !important; width: 32px !important; 
+height: .7em !important; min-height: .7em !important;
+border: 1px solid #888 !important;
+/* */border-radius:  0 0 0 16px  !important;
+border-width: 0px 1px 1px 0px !important;/* */
+overflow: hidden !important;
+z-index: 9999 !important;
+/*text-indent: 9999px !important;*/
+border-left: 2px solid #BBB !important;
+padding: 4px !important;
+}
+
+#gsr #rhs:hover {
+opacity: .98 !important;
+width: auto !important; 
+max-width:none !important;
+height: auto !important;
+max-height: 91% !important;
+text-indent: 0 !important;
+overflow-y: auto !important;
+padding: 0 16px 0 0!important;
+margin: 0 !important;
+}
+
+/*html body#gsr.tbo div#main div div#cnt div#foot.tsf-p */
+#gsr .mw #foot:before {
+right: 10px !important; bottom: 4px !important; position: fixed !important;
+border: solid #888 !important;
+border-width: 1px 1px 0 1px !important;
+border-radius:  0 8px 8px 0 !important;
+content:url(
+data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAUCAYAAACXtf2DAAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAABdJREFUOMtjYBgFo2AUjIJRMApGwWAAAAeUAAFaJjdvAAAAAElFTkSuQmCC)
+!important;
+}
+#gsr .mw #foot a#pnnext:before { 
+right: 10px !important; bottom: 4px !important; position: fixed !important; opacity: 0.5 !important;
+border: none !important;
+content:url(
+data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAUCAYAAACXtf2DAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEC0lEQVR42q3VW0yTdxgGcOLFIiPWwXQLYxNYqQhxyGSZBJkiynlQJqXlUFracZiInEqlhfL1IAhUAuXQEmihQIECbpzmAhHIOiSOqTeoycyc0WzZlsjddrPdPO8+GMELXcwGX/K//X7f+7z/PJ+b20ueZMZZlj289NthUVvTgbi6V9x2+jmYqHEFJlXC91Q5/OMNd3zj63k7Crx1vNDFi1XSvjA5JeY1Uqig8Xe/RKN0x4A3j4pcoWkG8o0qI2FpGyWfu4KTMhO4qZ3DAem9nG0D+4LjXcelrTiczECitoJf3Ir08naIqmwIlQw8OpgxGP7Sl6R2zXFjmCHGO6qC2X8sj3n9iIjxPJTAcPwjGU9uxOMzRVaKlrdTZpWNBBVmiCrNJKu1orjJSQnlY3+xiJqb1rPrXwHexyomw74CiXmZpJ03SNq6CHHDNRLWjlGKog+JJQ76pNxOGSo7i1iRreomGWPDhaYRUlum6XzLVzgiHV4MzBz0eSHg9b5UJ7UsQ917F9V991BlXUWZ+RYKmr9Btn4O/MpxZKqdEGuGIK6xQ1LTC7m2dx2AyjyFusF5GEeXkaicXAvKGuQ/B7wWkqUrsK6gfuwRNV59TJecD6Huu0clHSskb1hEevU0SbRfUK5ulKSMA7mMnT7V2XHBuD7BFNWzgGniJvXO3yVl9w2E5Ax2Bgqt7lsAJ1igK7LfRuvMLzDPPkXz5E/QOh6gousO8o0uiGqvIdcwBZlhHLnaIci0/cjTbwBgAWwCsF1fxei3P2LA9RCZzJer+Zdn920AewL5LHALpplfyTy3Rs2TP0PneEAsQJsAyQxT7Blnp1gHBihP3785wfTWBCxA64Bj6QfKrp24LzPM7N8APAISdPk9N3GZjajp8ydUx0ZUvRHRd1sRSfUTWxHJmH7anGALaNuM6KJlDkGpRrNfQt2ziDy4MTpJx9frS6Ya+31S2VZRbr5Nhc1LJF5fsvIq+0XjlFM7TDmafkg1vewO+p4BjgUYnS6KLTA9PXBanfLckkPOlmrTLPPINi1A3LqAnCuzyKqbQrpmFCkKOxJLhyCsciBT1Y8slQ1idc8/t8joRHXXNM7VOxBwuuy6d8R57xde06SWEV5ArFzn7ntKv3He+Ujv7hOu3+0dpuf4hT+JKbIRv9RKAkU3pSssyFRaSK61obhxiKKymT/fCJNUeoVk7PpfVcF5N5KtChPFFbZRSnE7pZaYIFR0UFpJC/wicr/3ek94dFtdxOGeYMvuEk5KGhCX14Skz4z4ILkUnsH87r2Bya9uu+w43CgXL05JxwQaisyoobfDBGt7ePFnd6yuvYLiXNwzpXQoOp/28mIWPfyjfXb0hxOaoRj5UK75w8P3xMXdPuH/eZF/A7jSVZqMFgYfAAAAAElFTkSuQmCC
+) !important; 
+}
+#gsr .mw #foot a#pnprev:before {
+right: 36px !important; bottom: 4px !important; position: fixed !important; opacity: 0.5 !important;
+border: solid #000 !important;
+border-width: 1px 0 0 1px !important;
+border-radius:   8px  0 0 8px !important;
+content:url(
+data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAUCAYAAACXtf2DAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEDUlEQVR42q2VW0yTZxjHCReLjFgHwy2MbcBKRYgik2USYIoopzIos6UHWvq1lcNEpECptNB+PQhCK4FyaAm05YMWKKDjNBeIQMaQOKbeoCYzc0azZVsid9vNdvM8+4ZETXAxGzzJe/fm/3uf/3N4/fz+Y7yf2fjaAUGHRTy8/Fsu6avy28kIz2piRWaZb4cfr4bonFrYx9Yt7Zh4BNtKxPNafmcXt2BIggJZGWp8J7ls+4CoAjeDmd89fExug9wzl4Cv7MDw1CqM55rx7cOC7QH2CT2J8dLBh4I6FxRUdwKnoh2kWiccyCUhmWiHkNis/wdgcvv8aXFtdvXYXxUWH8r1ThDU2pFXYwdRnQvTFJ14styJQcykR4zIFDJofzb55iEBufdIMRmaWkOmk0Nkfs8c86Xi0SJP2CFiePFs21egdUzjOcsIykkXiDW9KKpzglBD4WfVFLIrvZin6ge+fgwlzVeRaF8Eovs6Su0rKKRWgfWphtwiHlPo4bDVk+vW0RVo9MyDxj4FNAAUBjdIG9wgaaBAohsCkdYHnNpxEJvmoLT1G6iy34Q65xrU998FrfsOEI4VCP6QMD5/Nd8ZEFfk6Vb3Xgf3/B20TdzAJhqgdUzhOesInjZSICMpJEgvyIyjKDV8gQX106hoXoTKrlXU9t/FC74H0HL5ETaNPcRS5yq8EVf4FFBycTZERH65Nrj0AEa//RFc19aABsAmAGgAFJsokBsGQGYYArl5HGTmKRDor0KJdQlqem6DwXsfWid/AvvsE2if+QXKqVvAiOU9BcjNM3vF+ol73uUfcBPwQgbTGxkUmwZowCDKjBsAlJunkAbgJgCN3vvYOvkz2OfW0TbzK5ZTN2F3NOe5RRHZjQEx+Vb7ecfchkUdWwB0BuTAM4sI08QLFn2HtPfYSFtkufIYL9IWlfTdgMCobOPWPXNCm5dRanti9S1hk3fhGeC0sR8InRuLdANQpB9GsX4cOerLKKGLXNa6jNX2W6hxrUEDdQ/pIqO062sIZKYbX9qmoUlnQ6NOVF070+SF+p5puga+jS6SaPugUOMCkWYA+HVeYCuHIE9FQYFuFAobp6Do0ixI2hdAbFsArmMe4k4pDf86aMFxQv+3EqS1qWLyz4qWIVQYaGG1AwtUDuCpepGjdGJ6uQsZEYmPd4UmmALCEk0B731iCgg/vnGiMhTGnLYR1isnOvgg/3BEkux7bmUb8FVdmF9pg7yKTsws68BkwoaMD1K2v+z2ROe+HhTL6f0oVwk5n1shs9gCx6TNEM+9AAzm0Z1b17tZWafeTeCtpwgb8AhPh6xMNTKYqUs7+uEERqaF7WGlL+5PK0HmSSUGx2TuLOCf2BWW6B8YfvT8xwrdH/FC1cir7v8NgTFVmh3S+TkAAAAASUVORK5CYII=)
+!important; 
+}
+
+/* div:empty {display: none !important} bug in Ff? */
+#gsr div[style*="white-space:nowrap"] /*" */
+{white-space: normal !important;} 
+/* I don't realize -- is it the war? */
+#gbz .gbzt, #gsr #gbz .gbgt
+{
+    color: #BBB !important;
+    background-color: #000 !important;
+}
+#gsr #gbz .gbzt:hover, #gsr #gbz .gbgt:hover   {
+    color: #FFF !important;
+}
+#gsr div#rcnt { margin-top: -1em !important }
+#gsr .thc {position: relative !important; display: block !important;} 
+
+
+/* from: [http://userstyles.org/styles/64844/google-search-plain-view-cached-similar-links]
+   by luckymouse [http://userstyles.org/users/14255] 
+*/
+#gsr li.g .f.kv span.vshid {display: inline !important;}
+#gsr li.g .f.kv span.vshid:not(:empty):before {content: " - "}
+#gsr li.g .f.kv span.vshid a {color: #12C !important; text-decoration: none !important;}
+#gsr li.g .f.kv span.vshid a:hover {text-decoration: underline !important;}
+/* 13-5-8 */
+#gsr div#ss-status { white-space: nowrap !important; }
+/* */
+#gsr div#tvcap:hover 
+{ height: auto !important; width: auto !important; 
+  opacity: .95 !important;
+  overflow: hidden !important;
+}
+#gsr div#tvcap {
+ position: absolute !important; 
+ margin:  -2.9em 0 0 0    !important;
+ z-index: 99999;
+ height: 2em !important; width: 110px !important;
+ overflow: hidden !important;
+ z-index: 789 !important;
+ opacity: .6 !important;
+ border: 1px solid #444 !important;border-radius: 0 0px 16px 8px  !important;
+ border-width: .1px 1px 1px 0 !important;margin-right: 0px !important;
+ padding: 0 !important;
+ background: rgba(255, 247, 207, .95)!important;
+}
+#gsr div#tvcap:empty{ display:none !important; }
+#gsr #tads {margin-bottom: 0 !important; padding-bottom: 4px !important;}
+
+
+#gsr .vk_c {
+margin-left: 0 !important; margin-right: 0 !important;
+padding-left: 8px !important;
+padding-right: 6px !important;
+}
+/* 2013-07-30 o_0 */
+#gsr #top_nav {min-width: 0 !important;}
+/* 2014-02-06 0_o */
+.ads-label, .ads-container, #center_col [class^="_"]
+,.rgsep /* 2014-03-13 o_0 */
+{ margin-right: 0 !important;}
+/* */
+/* 2014-03-27 :-O */
+#gsr #center_col #bottomads{
+margin-top: 1.2em !important;
+}
+#gsr #center_col .vk_ftr {/* 2014-07-20 */
+    margin-right:0 !important;
+}
+
+/* 2014-07-22 */
+#gsr li.g { 
+background-image: linear-gradient(to top, rgba(255,255,255, .5), 
+ rgba(224,224,255, .5) ) ;
+border-radius: 8px 16px  0 0 ;
+}
+#gsr #fbar {
+ padding: 0 0 1px 0!important; line-height: 1.2 !important; 
+ background: transparent !important;}
+#gsr #fbar > div { 
+ display: inline !important; position: relative !important; }
+#gsr #fbar span._pi {margin-left: 2em !important;}
+#gsr #fbar #swml {margin-left: 2em !important;}
+#gsr #hdtbSum {
+    height: 32px !important;
+    line-height: 33px !important;
+}
+#gsr #resultStats {
+    line-height: 33px !important;
+}
+#gsr #hdtb_msb .hdtb_mitem.hdtb_msel_pre {
+    height: 33px;
+}
+#gsr #hdtbMenus {padding:0 !important;}
+#gsr #extabar div:empty {display:none !important;}
+#gsr #resultStats {
+    top: -2px !important;
+}
+#gsr #hdtbMenus .hdtb-mn-cont {top: 2px !important;}
+#gsr #hdtbMenus.hdtb-td-o {
+    top: 33px;
+}
+body.vasq #hdtb_msb .hdtb_mitem.hdtb_msel, body.vasq #hdtb_msb .hdtb_mitem.hdtb_msel_pre {
+    height: 33px !important;
+}
+/* 150111 */
+.kp-blk, .kp-blk .mod
+,.kno-ftr
+{
+ padding: 0 !important; margin: 0 !important;
+ box-shadow: none;
+}
+/* 150220 */
+#gsr #botabar { 
+position: absolute; top: 110%; left: 0;  }
+#gsr ul.klcar { margin-left: 2em; }
+/* 150225 */ 
+body#gsr {overflow-y: auto !important;}
+/*  @-moz-document */ 
+}
+
