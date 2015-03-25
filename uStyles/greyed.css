@@ -1,0 +1,22 @@
+﻿@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+/* luckymouse' style */
+#main-window[stylish-url*="about:"] #browser,
+#main-window[stylish-url*="chrome:"] #browser,
+#main-window[stylish-url*="http:"] #browser,
+#main-window[stylish-url*="https:"] #browser,
+#main-window[stylish-url*="file:"] #browser,
+#main-window[stylish-url*="ftp:"] #browser
+
+{background-color: #000 !important;}
+
+#main-window[stylish-url*="about:"] #content,
+#main-window[stylish-url*="chrome:"] #content,
+#main-window[stylish-url*="http:"] #content,
+#main-window[stylish-url*="https:"] #content,
+#main-window[stylish-url*="ftp:"] #content,
+#main-window[stylish-url*="file:"] #content 
+
+{opacity: 0.85 !important;}
+
+@-moz-document url-prefix(about:),url-prefix(chrome:),url-prefix(http:),url-prefix(https:),url-prefix(ftp:),url-prefix(file:){}
+

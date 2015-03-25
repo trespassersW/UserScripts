@@ -20,11 +20,17 @@
 | **userstyle-uncover-meta.css** | [![src](stylish.png)](userstyle-uncover-meta.css) | - shows hidden stylish data  |
 | **Wiki-ToC-Icon.css** | [![src](stylish.png)](Wiki-ToC-Icon.css) | Hides the "Contents" section of a wiki page into a small icon at the bottom-right corner. Table of contents pops up when you hover over that icon. -- Прячет раздел "Содержание" вики-страниц в иконку в нижнем правом углу окна. Оглавление всплывает при наведении курсора на эту иконку.  |
 | **Yandex-two-columns.css** | [![src](stylish.png)](Yandex-two-columns.css) | Yandex.ru - две колонки результатов поиска - и ничего лишнего  |
+| **BmIcon.css** | [src](BmIcon.css) | firefox chrome fixes |
+| **greyed.css** | [src](greyed.css) | dimmed FF  |
+| **highlight-visited.css** | [src](highlight-visited.css) | various patches  |
 
 ------------
 
-my styles on [userstyles.org](https://userstyles.org/users/95149)
+my styles on userstyles.org:
+[![userstyles.org](2015-03-25_trespassersW-userstyles-org.png)](https://userstyles.org/users/95149)
 
+greyed.css
+highlight-visited.css
 
 
 
