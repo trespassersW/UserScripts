@@ -26,11 +26,6 @@
 
 ------------
 
-my styles on userstyles.org:
+my styles on userstyles.org:<br>
 [![userstyles.org](2015-03-25_trespassersW-userstyles-org.png)](https://userstyles.org/users/95149)
-
-greyed.css
-highlight-visited.css
-
-
 
