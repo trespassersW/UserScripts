@@ -1,8 +1,8 @@
 | title | src    | desc|
 | ----- | :---:  | :--------- |
 | **code-onhover-wrapper.css** | [![src](stylish.png)](code-onhover-wrapper.css) | reveals code on mouse hover |
-| **daylight-surfing-global.css** | [![src](stylish.png)](daylight-surfing-global.css) | reveals code on mouse hover |
-| **global-striped-grey-background.css** | [![src](stylish.png)](global-striped-grey-background.css) | reveals code on mouse hover | Displaces webpage's background by grey gradient strips |
+| **daylight-surfing-global.css** | [![src](stylish.png)](daylight-surfing-global.css) | This is a `negative` clone of the great *Midnight Surfing - Global Dark Style*; intended for using from dawn till dusk  |
+| **global-striped-grey-background.css** | [![src](stylish.png)](global-striped-grey-background.css) | Displaces webpage's background by grey gradient strips |
 | **Google-columnizer.css** | [![src](stylish.png)](Google-columnizer.css) | Two columns of Google search results / yet another attempt to columnize Google with Stylish  |
 | **GreasyFork-wide-scriptlist.css** | [![src](stylish.png)](GreasyFork-wide-scriptlist.css) | wide list of scripts on GreasyFork.org  |
 | **lib-ru-reader.css** | [![src](stylish.png)](lib-ru-reader.css) | чтение книжек на Lib.ru, Samlib.ru, Lib.rus.ec, Flibusta.net  |
