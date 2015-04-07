@@ -5,24 +5,23 @@
 // @include        http://*
 // @include        https://*
 // @include        file://*
-// @exclude http*://www.google.com/reader/*
-// @version 14.06.30
-// @license  CC0 1.0 Universal (CC0 1.0)
-// @updated  2014-06-30
+// ** about:config -> greasemonkey.fileIsGreaseable <- true
+// @version 15.04.07
+// @license  MIT
+// @updated  2015.04.07
 // @released 2013-12-11
 // @run-at document-end
-// @grant GM_log
+// @grant unsafeWindow
 // ==/UserScript==
-/* 14-06-30 a fix for:  https://bugzilla.mozilla.org/show_bug.cgi?id=876341
+/* 15.04.07 localStorage in unsafeWindow
  * 13-12-12 click on msg removes all marks
  * 1.1 don't run in editable fields
- *
 */
 (function(){ "use strict";
 if(top!=self || !document || !document.body ) return;
-var W =  window; // unsafeWindow??
+var W = unsafeWindow || window; // localStorage doesn't live in sandbox
 /* key kombinations to invoke the skript */
-var kShift = 1,  kCtrl = 2, kAlt = 4, kWin = 8;
+var kShift = 1,  kCtrl = 2, kAlt = 4, kWin = 8; 
 var kJump = kAlt; 
 var kMark = kAlt+kShift;
 
@@ -173,10 +172,12 @@ function mk(p, t, id, s) {
 };
 
 /* RIP status bar replacement */
-var sb = mk(
+var sb;
+function _css(){ 
+if(!sb) sb = mk(
 //D.body, 
 D.documentElement, // 2014-06-30 ???!!1 
-'div', "Y-marker-userjs-inf",
+'section', "Y-marker-userjs-inf",
 "position: fixed!important;\
 z-index: 214748!important;\
 top: 0px; right: 1px; bottom: auto; left: auto;\
@@ -191,7 +192,14 @@ text-shadow: #373 2px 2px 4px, #7F7 -2px -2px 4px;\
 cursor:no-drop;\
 "
 );
-
+/* click removes all  */
+if(tipShowtime>0){
+ sb.addEventListener("click",function (e) {
+  locStor.removeItem(Ym);
+  ldYm(); noTout();
+ },false);
+};
+}
 
 
 var tO;
@@ -204,6 +212,7 @@ function noTout(){
 
 function statSay(t) {
  if(statMsg){
+ _css();
    if(tipShowtime) 
      W.status=statMsg;
    if(tipShowtime>0){
@@ -228,15 +237,8 @@ for(var k=1; k<2; k++){ /* pz.length */
   break; 
  }
 };
-/* click removes all  */
-if(tipShowtime>0){
- sb.addEventListener("click",function (e) {
-  locStor.removeItem(Ym);
-  ldYm(); noTout();
- },false);
-};
 
-if(noCoo)  msg(noCoo),   statSay(7);
+if(noCoo)  msg(noCoo),   statSay(5);
 
 W.addEventListener("keydown",onKeydown,false);
 W.addEventListener("keyup",klear,false);
