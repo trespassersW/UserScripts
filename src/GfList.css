@@ -3,6 +3,7 @@
  GreasyFork wide scriptlist
    forked from greasy-fork-compact [https://userstyles.org/styles/104650]
    by wOxxOm [https://userstyles.org/users/67605]
+• 015-04-07 !important fix for Chrome
 • 015-01-15 fix for greasyfork.org-langfilter.user.js
 • 015-01-15 fixes for GF.o translations
 • 015-01-18 name+description in single line
@@ -19,8 +20,8 @@
 @-moz-document regexp("https://greasyfork\\.org/(.*?/)?(scripts(|/|[/?]\\D.*)|users/.*)$") {
 
 .width-constraint {
-    margin: 0px .5ex;
-    max-width: 100%;
+    margin: 0 .5ex  0 1ex !important;
+    max-width: 100% !important;
 }
 
 #main-header {
@@ -133,7 +134,7 @@ content: " Name / Description"; padding-left: 3em;
 .script-list dd {
 /*    float: left;*/
     white-space: normal;
-    word-wrap: break-word;;
+    word-wrap: break-word;
     -moz-hyphens: none;
    line-height: 1 !important;
    padding-top: .2em;

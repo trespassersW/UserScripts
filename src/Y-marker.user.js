@@ -23,8 +23,8 @@ if(top!=self || !document || !document.body ) return;
 var W =  window; // unsafeWindow??
 /* key kombinations to invoke the skript */
 var kShift = 1,  kCtrl = 2, kAlt = 4, kWin = 8;
-var kJump = 0//kAlt; 
-var kMark = kAlt//kAlt+kShift;
+var kJump = kAlt; 
+var kMark = kAlt+kShift;
 
 /* sec; 0 to disable; -1 status bar only */
 var tipShowtime = 2.2;  
@@ -176,7 +176,7 @@ function mk(p, t, id, s) {
 var sb = mk(
 //D.body, 
 D.documentElement, // 2014-06-30 ???!!1 
-'section', "Y-marker-userjs-inf",
+'div', "Y-marker-userjs-inf",
 "position: fixed!important;\
 z-index: 214748!important;\
 top: 0px; right: 1px; bottom: auto; left: auto;\
