@@ -8,8 +8,9 @@
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://userscripts.org/scripts/show/130613
 // @updateURL https://userscripts.org/scripts/source/130613.meta.js
-// @version 3.3.0
+// @version 3.4.0
 /* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 3.4   2015-04-08 - https://; error reporting
 // 3.3   2013-10-20 - GT changes
 // 3.2.2 2013-09-18 - pretty tooltips for history items
 // 3.2.1 2013-08-14 - fixes (empty [] in G JSON)
@@ -75,7 +76,7 @@
 */
 // @grant GM_addStyle
 // @grant GM_getValue
-// @grant GM_log
+// #grant GM_log
 // @grant GM_openInTab
 // @grant GM_setValue
 // @grant GM_xmlhttpRequest
@@ -84,8 +85,8 @@
 // ==/UserScript==
 var   GTsuffix=".com";
 
-var   GTurl=    "http://translate.google"+GTsuffix+"/?text="; 
-const dictURL = "http://translate.google.com/translate_a/t?client=t&text=";
+var   GTurl=    "https://translate.google"+GTsuffix+"/?text="; 
+const dictURL = "https://translate.google.com/translate_a/t?client=t&text=";
 const version = 3200;
 
 const HREF_NO = 'javascript:void(0)';
@@ -99,7 +100,7 @@ var defaulsForChrome = {
 ,'sourceBH': 4 /* src box height */
 ,'showTrans': false /* dictionatry */
 }
-
+var URL='*';
 var GT_tl='auto';
 var body;
 
@@ -108,8 +109,9 @@ var senojflags = [
 ];
 //
 function _log(t){
- if(dbg) GM_log(t);
+ if(dbg) console.log(t);
 }
+function GM_log(t){console.log(t);}
 
 const res_dict='gt-res-dict' //'gt_res_dict';
 var  languagesGoogle, isInited=false;
@@ -382,7 +384,7 @@ function gtRequest(txt,s,t){
 }
 
 function Request(url,cb){
-  _log('R: '+url)
+  URL=url; _log('R: '+URL);
   GM_xmlhttpRequest({
 			method: 'GET',
 			url: url,
@@ -452,13 +454,14 @@ function badResponce(html,e){
   var html2=html.match(/\<title\>(.*)\<\/title\>/);
   if(html2 && html2[1]){
    html2='Google response: ' + html2[1];
-   var etxt = html.split('\n').join(' ').match(/\<p\>(.*)$/);
-   if(etxt && etxt[1]) 
-   html2+= '<br><br>' + etxt[1];
+   var etxt = html.split('\n').join(' ').match(/(\<p|div\>)(.*)$/);
+   if(etxt && etxt[2]) 
+   html2+= '<br>' + etxt[1]+etxt[2];
   }else {
    html2=  '???<br>'+ (e?e:"unknown error !!11");
   }
- getId('divResult').innerHTML = html2;
+  URL.substr(0,128)+'<br>'
+ getId('divResult').innerHTML = URL.substr(0,128)+'<hr>'+html2;
  return;
 }
 var ex_sl , ex_gl;
