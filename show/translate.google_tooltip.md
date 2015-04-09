@@ -7,8 +7,7 @@ Almost instantly you will see a tooltip with the translation.
 
 =====
 
-![screenshot](../res/tg1.gif)<br>
-![screenshot1](../res/tg2.gif)<br>
+![screenshot](../res/gimble.png)<br>
 ***Please look more closely at the picture below:***<br>
 ![screenshot2](../res/tg3.gif)
 
