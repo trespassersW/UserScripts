@@ -1,13 +1,15 @@
 // ==UserScript==
 // @name           translate.google tooltip
 // @namespace      trespassersW
+// @author      trespassersW
+// @copyright   trespassersW
+// @license     MIT
 // @description    Translates selected text into a `tooltip' via Google translate 
 // @include        http://*
 // @include        https://*
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
-// @homepageURL https://userscripts.org/scripts/show/130613
-// @updateURL https://userscripts.org/scripts/source/130613.meta.js
+// @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
 // @version 3.4.1
 /* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
 // 3.4.1 2015-04-09 * GT changes: GET prohibited - use POST
