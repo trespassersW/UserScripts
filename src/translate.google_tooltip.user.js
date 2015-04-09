@@ -8,9 +8,9 @@
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://userscripts.org/scripts/show/130613
 // @updateURL https://userscripts.org/scripts/source/130613.meta.js
-// @version 3.4.0
+// @version 3.4.1
 /* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.4   2015-04-08 - https://; error reporting
+// 3.4.1 2015-04-09 * GT changes: GET prohibited - use POST
 // 3.3   2013-10-20 - GT changes
 // 3.2.2 2013-09-18 - pretty tooltips for history items
 // 3.2.1 2013-08-14 - fixes (empty [] in G JSON)
@@ -83,14 +83,18 @@
 // @icon  data:image/jpg;base64, R0lGODlhIAARALP/AAAAAP///xMYfAqf////Zv/qDuCeH8VmB8DAwAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAgALAAAAAAgABEAQASdEMlJgb00awkMKQZYjB8RBsE4AtLQvtt0sXHcEcT1pbxK0hsXRmYIGUUgA3DiQjQtssInRAjglMsa4ibtlqSGgECQymmaAwDYUhSFfKoQDQ3LdA6Hoh6qbW4sJHpFWTUAOEA3Vj1WZjF+HQU9X18oPxl0Wx4kXoFiZF1zMEJgbW8qJnAHoU4takocpW5IIISYGh1HRlh9hRZ4eIRaEQA7
 //
 // ==/UserScript==
-var   GTsuffix=".com";
+var   GTsuffix=".com"; // ".fr" ".de" ".ru" ".com"
 
-var   GTurl=    "https://translate.google"+GTsuffix+"/?text="; 
-const dictURL = "https://translate.google.com/translate_a/t?client=t&text=";
+var   GTurl=    "https://translate.google"+GTsuffix+"/?"; 
+const dictURL = "https://translate.google"+GTsuffix+"/translate_a/t?client=t";
 const version = 3200;
 
 const HREF_NO = 'javascript:void(0)';
-const dbg = 0;
+function _log(t){/* * /
+ console.log(t);
+*/
+}
+
 function main(){
 /* just for Chrome: I haven't yet found a way to keep parameters for all websites. maybe tomorrow */
 var defaulsForChrome = {
@@ -108,10 +112,7 @@ var senojflags = [
 "http://www.senojflags.com/?gootttp#"
 ];
 //
-function _log(t){
- if(dbg) console.log(t);
-}
-function GM_log(t){console.log(t);}
+//function GM_log(е){console.log(t);}
 
 const res_dict='gt-res-dict' //'gt_res_dict';
 var  languagesGoogle, isInited=false;
@@ -185,7 +186,7 @@ function backLookup(){
 function forwLookup(){
     killId('divUse');
     gtRequest(txtSel,gt_sl,gt_tl);
-   	currentURL = GTurl + escAp(txtSel) + "&langpair=" + gt_sl + "|" + gt_tl;
+   	currentURL = GTurl +  "langpair=" + gt_sl + "|" + gt_tl + "&text=" + escAp(txtSel);
 }
 
 function showLookupIcon(evt){
@@ -252,7 +253,7 @@ function showLookupIcon(evt){
 //    tp=(evt.clientY+window.pageYOffset+30)+'px';
 //    lf=(evt.clientX+window.pageXOffset+30)+'px';
     body.appendChild(divUse);
-    }catch(e){GM_log('use hist\n'+e)}
+    }catch(e){console.log('use hist\n'+e)}
     return;
   }
   // inside page
@@ -370,8 +371,8 @@ function lookup(evt){
 
 function gtRequest(txt,s,t){
   var etxt = escAp(txt);
-  currentURL = GTurl + etxt + "&langpair="	+ s + "|" + t;
-  etxt=GTurl + etxt.split(' ').slice(0,9).join(' ') + "&langpair="	+ s + "|" + t;
+  currentURL = GTurl + "langpair="	+ s + "|" + t + "&text="+etxt ;
+  etxt=GTurl + "langpair="	+ s + "|" + t + "&text=" + etxt.split(' ').slice(0,9).join(' ');
   if( !((s==last_sl && t==last_tl) || (s==last_tl && t==last_sl)) || (divExtract=='')){
     var c=':';
     //_log(s+c+last_sl+ '  '+t+c+last_tl + '  '+ divExtract );
@@ -385,13 +386,15 @@ function gtRequest(txt,s,t){
 
 function Request(url,cb){
   URL=url; _log('R: '+URL);
+  var meth=cb? 'POST': 'GET';
   GM_xmlhttpRequest({
-			method: 'GET',
+			method: meth,
 			url: url,
       headers: {	    
-        "User-Agent": "Mozilla/5.0"
+        "User-Agent": navigator.userAgent 
        ,"Accept":  "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
        ,"Accept-Encoding":  "gzip, deflate"
+       //,"Host": "www.google.com"
       },
 			onload: function(resp) {
 				try{
@@ -439,7 +442,7 @@ function histLookup(e){
   txtSel = txt; 
 	getId('divResult').innerHTML = 'Loading...'
   gtRequest(txtSel,gt_sl,gt_tl);
-  } catch(e){GM_log('broken history\n'+e)}
+  } catch(e){console.log('broken history\n'+e)}
 }
 
 function fastSwap(){
@@ -450,18 +453,22 @@ function fastSwap(){
 }
 
 function badResponce(html,e){
-  _log(html);
   var html2=html.match(/\<title\>(.*)\<\/title\>/);
   if(html2 && html2[1]){
+  _log(html2[1]);
    html2='Google response: ' + html2[1];
-   var etxt = html.split('\n').join(' ').match(/(\<p|div\>)(.*)$/);
-   if(etxt && etxt[2]) 
+   var etxt = html.split('\n').join(' ').match(/(\<div\>)(.*)$/);
+  console.log(etxt);
+   if(etxt && etxt[2]) {
    html2+= '<br>' + etxt[1]+etxt[2];
+   _log('bljad\n'+etxt[2])
+   }
   }else {
    html2=  '???<br>'+ (e?e:"unknown error !!11");
   }
-  URL.substr(0,128)+'<br>'
- getId('divResult').innerHTML = URL.substr(0,128)+'<hr>'+html2;
+  var ur=URL.substr(0,128);
+  ur=''+ur+"<br>";
+ getId('divResult').innerHTML = ur+'<hr>'+html2;
  return;
 }
 var ex_sl , ex_gl;
@@ -507,7 +514,7 @@ function extractResult(html){
   addEl(oL,'a',{id:'optionsTo','class':'gootranslink ' + (getId('divOpt') ? 'gtlActive':'gtlPassive')},  
   ['click', options],  gt_tl_gms );
   getId('divBottom').appendChild(oL);
-  }catch(e){ GM_log('gather\n'+e); }
+  }catch(e){ console.log('gather\n'+e); }
   
 //	var translation = getXId("result_box").textContent;
 // first run: resolve tl = auto
@@ -516,7 +523,7 @@ function extractResult(html){
   	if(GT_tl) GM_setValue('to', GT_tl);
     else GT_tl='en';
     gt_tl=GT_tl;
-  }catch(e){GM_log('auto?\n'+e)}
+  }catch(e){console.log('auto?\n'+e)}
 
 
 	//parse info 
@@ -587,7 +594,7 @@ function options(evt){
 		addEl(dO,'span', null, null,' From: ');
     var gt_slist = getXId("gt-sl");
     gt_slist= gt_slist ? gt_slist.innerHTML+'' : languagesGoogle; 
-/* GM_log(gt_slist) /* !!! */
+/* console.log(gt_slist) /* !!! */
 
     var oF =dO.appendChild(buildEl('select', {id:'optSelLangFrom'}, null, gt_slist));
 		oF.value =  GM_getValue('from', "auto");
@@ -673,7 +680,7 @@ try{
  }
  getId('gtp_transOnOff').innerHTML = hOs?"&laquo;&laquo;":"&raquo;&raquo;";
  GM_setValue('showTrans',hOs)
-} catch(e){GM_log('showTrans\n'+e)}
+} catch(e){console.log('showTrans\n'+e)}
 }
 
 function detectedLang(da){
@@ -724,7 +731,7 @@ try{
        for(var j=0,jl=da[i][2].length; j<jl; j++){
         tr=addEl(dB,'tr');
         addEl(tr,'td',{'class': 'gtp-word'}, null, da[i][2][j][0]);
-//        GM_log(JSON.stringify(da[i][2][j]))
+//        console.log(JSON.stringify(da[i][2][j]))
         da[i][2][j][1]&&
         addEl(tr,'td',{'class': showT}, null, da[i][2][j][1].join(', '));
        }
@@ -747,16 +754,17 @@ try{
      options(); // show options
      
 } catch(e){
-   _log('exDict: '+txt);
+   _log('errexDict: '+e+'\n'+txt);
    badResponce(txt,e);
 }
 }
 
 function onTimerDict(){
- var q = dictURL + escAp(txtSel) + 
+ var q = dictURL + 
  "&hl="+ GM_getValue('to','auto') + 
- "&sl=" + gt_sl + "&tl=" + gt_tl //+'&multires=1&ssel=0&tsel=0&sc=1';
- //GM_log('dict:'+ dictURL);
+ "&sl=" + gt_sl + "&tl=" + gt_tl + //+'&multires=1&ssel=0&tsel=0&sc=1';
+ "&text="+ escAp(txtSel);
+ //console.log('dict:'+ dictURL);
  _log('?dict')
  Request(q, extractDict);
 }
@@ -773,7 +781,7 @@ function saveSource(){
   try{
   sT = getId('divSourcetext').value;
   GM_setValue('sourceText',JSON.stringify(sT));
-  }catch(e){GM_log('saveSource\n'+e)}
+  }catch(e){console.log('saveSource\n'+e)}
 }
 
 function source(){
@@ -814,7 +822,7 @@ function source(){
  sL.className= 'gootransbutt gootranslink gtlActive';
  sL.title = 'Hide source';
  
- }catch(e){GM_log('Sourceshow\n'+e)};
+ }catch(e){console.log('Sourceshow\n'+e)};
  insAfter(divSource,getId('divResult'));
 }
 // ht: [from, to, langpair, hitCount]
@@ -851,7 +859,7 @@ function history(){
 //  hl.textContent = 'X';
   hL.title= 'Hide history';
   hL.innerHTML = 'History'; hL.className = 'gootransbutt gootranslink gtlActive';
-  }catch(e){GM_log('hist problem\n'+e)}
+  }catch(e){console.log('hist problem\n'+e)}
 }
 
 function saveOptions(evt){
@@ -889,7 +897,7 @@ function saveOptions(evt){
 	getId('divDic').removeChild(getId('divOpt'));
 	getId('optionsLink').title='Settings';
   return;
-  }catch(e){GM_log('saveOpnions\n'+e);}
+  }catch(e){console.log('saveOpnions\n'+e);}
 }
 
 function addHistory(src,trt){
@@ -904,7 +912,7 @@ function addHistory(src,trt){
  var st=trim(src+''); var tt = trim(trt+'');
  var wc = (st.split(' ')).length;
  if(wc>maxWC) return;
- var lang=currentURL.match(/\&langpair=(.+)/)[1];
+ var lang=currentURL.match(/langpair=(.+)/)[1];
  var ix=-1;  // find word in hist
  for(var i=0, l=ht.length; i<l; i++)
     if(st==ht[i][0]){ ix=i; break; }
@@ -930,7 +938,7 @@ function addHistory(src,trt){
  }
  ht.unshift([st,tt,lang,hits]);
  GM_setValue('hist',JSON.stringify(ht));
- } catch(e){GM_log('addHist\n'+e);}
+ } catch(e){console.log('addHist\n'+e);}
 }
 var senFlag = '';
 function selFlag(e){
@@ -1021,21 +1029,21 @@ function flagRequest(f){
   binary: true,
   overrideMimeType: "text/plain; charset=x-user-defined",
   headers: {	    
-    "User-Agent": "Mozilla/5.0 (Windows NT 5.1; rv:18.0) Gecko/20100101 Firefox/18.0"
+    "User-Agent": navigator.userAgent
    ,"Accept":  "image/png,image/*;q=0.8,*/*;q=0.5"
    ,"Accept-Encoding":  "gzip, deflate"
   },
 	onload: function(resp) {
 		try{
        flagStore(resp.responseText,f);
-		}catch(e){GM_log('FlagRqst\n'+e);}
+		}catch(e){console.log('FlagRqst\n'+e);}
 	}
  });	
 }
 function flagStore(r,url){
  if(r.indexOf("<head")>=0)
   {
-   GM_log("Banned!\n"+url);
+   console.log("Banned!\n"+url);
    GM_setValue(flagLang,url);
   }
  else
@@ -1068,7 +1076,7 @@ function buildEl(type, attrArray, eL, html)
 		node.setAttribute(attr, attrArray[attr]);
 	}
 	if(eL){
-  //GM_log('buildEl\n'+type+'\n'+JSON.stringify(attrArray)+'\n'+eL[0])
+  //console.log('buildEl\n'+type+'\n'+JSON.stringify(attrArray)+'\n'+eL[0])
 		node.addEventListener(eL[0], eL[1], eL[2]?true:false);
 	} 
 	if(html) 
@@ -1376,6 +1384,7 @@ languagesGoogle = '<option value="auto">Detect language</option>'+
 /*
  * main()
  */
+/* * /
 if ( typeof GM_getValue == "undefined" ){
 // alert('gm_getvalue HET')
  function GM_getValue ( key, defaultValue ) {
@@ -1390,7 +1399,7 @@ if ( typeof GM_getValue == "undefined" ){
     window.localStorage.setItem( key, value );
   }
 }
-
+/* */
 try{
 //body = window;
 //while(body.parent && body.parent != body) body=body.parent;
@@ -1414,7 +1423,7 @@ sT=GM_getValue('sourceText');
 if (sT){ 
  try{
   sT=JSON.parse(sT);
- }catch(e){GM_log('broken source\n'+e)} ;
+ }catch(e){console.log('broken source\n'+e)} ;
 } else sT='';
 
 
@@ -1433,9 +1442,9 @@ if(  location.href == senojflags[0]
   align:'left'},null,'&nbsp;&nbsp;<u>Click on a country flag icon then choose the language</u>'),
   getId('flags16').childNodes[0]);
   getId('flags16').addEventListener('click',flagClick,false)
- }catch(e){GM_log('senojflags\n'+e)}
+ }catch(e){console.log('senojflags\n'+e)}
 }
-}catch(e){GM_log('nobody\n'+e); }
+}catch(e){console.log('nobody\n'+e); }
 }
 
 if(document.body){
