@@ -10,39 +10,15 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.4.1
+// @version 3.5.0
 /* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 3.5.0 2015-04-14  + TTS: 
+//  - alt-select text inside tooltip and shift-click language icon below
 // 3.4.1 2015-04-09 * GT changes: GET prohibited - use POST
-// 3.3   2013-10-20 - GT changes
-// 3.2.2 2013-09-18 - pretty tooltips for history items
-// 3.2.1 2013-08-14 - fixes (empty [] in G JSON)
-// 3.2.0 2013-02-10 - runs faster!
-// 3.1.3g - patched problem with flag icons downloading
-// 3.1.3 - correct icons position in some cases
-// 3.1.2 - handles error 414 -- too many letters in request to Google
-// 3.1.1 - bugfixes
-// 3.0.9 - works fine in gmail editor 
-// 3.0.8 - now works in translate.google.com ;)
-// 3.0.7 - works (a little crookedly) in gmail editor; 
-//       - script is invoked with Alt-select by default 
-// 3.0.6 - fixed translation in pop-ups
-// 3.0.5z - autoupdate?!
-// 3.0.5 - flags are saved in local storage - senojflags.com is a good site but it inhibits
-// 3.0.4 - show/hide GT translation dictionary right column
-// 3.0.3 - updated according to latest changes in GT
-//       A few hours of work - and all is as it was before!
-// 3.0.1 - options dialogue on the first run 
 // 3.0.0 
 //  - national flags icons -- from www.senojflags.com
-//  - a bunch of small fixes
-// 2.3.4 - 'history' now works faster (the event listener has been moved to a parent node)
-// 2.3.3 - autoupdate?
-// 2.3.2 - added icon for backward translation 
-// 2.3.1
-//   - translated text is being added to the original in the source box
 // 2.3
 //  - new editable 'source text' field
-//  - always visible `swap' langages icon 
 // 2.2.2 
 //  - backward translation - select text inside tooltip and click the icon under your selection.
 // 2.2.1
@@ -52,25 +28,17 @@
 //    which one is checked in your settings - then click on the icon below the selection.
 // 2.2 
 //  - history of translations 
-// 2.1.4
-//  - enabled selection inside tooltip - by using ctrl/alt/shift 
-// 2.1.3
-//  - Now works in textarea!
 // 2.1.2
 //  - Selected text is fetched in the moment when you hover over the icon.
 //    So, you can select a few letters, then adjust your selection using shift + arrows. 
-// 2.1.1
-//  lang tag in result <div>
-//  detecting target language on the first run
-// 2.1
-// - fixed problem with right-to-left languages
-// - 'swap languages' icon stolen from GT
 // 2.0.0d
 // - native GT languages list
 // 2.0.0c 
 // Alt key option added
 // If something goes wrong:
-// about:config -> greasemonkey.scriptvals.trespassersW/translate.google tooltip.alt/ctrl <- false
+// Tools->SQLite manager-> Database-> Connect_database->
+//  %YourBrowserProfile%\gm_scripts\translate.google_tooltip.db ->
+//  scriptvals->  alt/ctrl <- false
 // 2.0.0b 
 // - exit by ESC
 // - 1k letters limit -- don't strain your Google
@@ -85,27 +53,26 @@
 // @icon  data:image/jpg;base64, R0lGODlhIAARALP/AAAAAP///xMYfAqf////Zv/qDuCeH8VmB8DAwAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAgALAAAAAAgABEAQASdEMlJgb00awkMKQZYjB8RBsE4AtLQvtt0sXHcEcT1pbxK0hsXRmYIGUUgA3DiQjQtssInRAjglMsa4ibtlqSGgECQymmaAwDYUhSFfKoQDQ3LdA6Hoh6qbW4sJHpFWTUAOEA3Vj1WZjF+HQU9X18oPxl0Wx4kXoFiZF1zMEJgbW8qJnAHoU4takocpW5IIISYGh1HRlh9hRZ4eIRaEQA7
 //
 // ==/UserScript==
+if(document.body){
+//var fnctn= (function(){
 var   GTsuffix=".com"; // ".fr" ".de" ".ru" ".com"
 
 var   GTurl=    "https://translate.google"+GTsuffix+"/?"; 
-const dictURL = "https://translate.google"+GTsuffix+"/translate_a/t?client=t";
-const version = 3200;
+var dictURL = "https://translate.google"+GTsuffix+"/translate_a/t?client=t";
+var ttsURL =  "https://translate.google.com/translate_tts?client=t";
+var version = 3500;
 
-const HREF_NO = 'javascript:void(0)';
-function _log(t){/* * /
- console.log(t);
-*/
+var HREF_NO = 'javascript:void(0)';
+
+var llii=0, _log = function(){ /* * /
+ for (var s=++llii +':', li=arguments.length, i = 0; i<li; i++) 
+  s+=' ' + arguments[i];
+ console.log(s)
+/* */
 }
 
 function main(){
-/* just for Chrome: I haven't yet found a way to keep parameters for all websites. maybe tomorrow */
-var defaulsForChrome = {
- 'from': 'en', 'to': 'ru'
-,'alt': true, 'ctrl': false
-,'sourceShow': true
-,'sourceBH': 4 /* src box height */
-,'showTrans': false /* dictionatry */
-}
+
 var URL='*';
 var GT_tl='auto';
 var body;
@@ -114,7 +81,7 @@ var senojflags = [
 "http://www.senojflags.com/?gootttp#"
 ];
 //
-//function GM_log(е){console.log(t);}
+//function GM_log(t){console.log(t);}
 
 const res_dict='gt-res-dict' //'gt_res_dict';
 var  languagesGoogle, isInited=false;
@@ -130,16 +97,24 @@ var currentURL;
 var gt_sl_gms, gt_tl_gms, gt_sl, gt_tl;
 
 var sT;
+var noMup=0;
 
 function mousedownCleaning(evt){
 	var divDic = getId('divDic');
 	var divLookup = getId('divLookup');
   var dU = getId('divUse');
+  var t=evt.target;
+  noMup=0; // patch :/
 	if(divDic)	{
 		if(!clickedInsideID(evt.target,'divDic')){
-      if(dU && clickedInsideID(evt.target,'divUse')){
-        if(clickedInsideID(evt.target,'imgUse')) useClick(evt);
-      }  
+      evt.preventDefault(),evt.stopPropagation(); 
+      if(dU && clickedInsideID(t,'divUse')){
+        if(clickedInsideID(t,'divGetback')) forwLookup(evt); else
+        if(clickedInsideID(t,'divGetforw')) backLookup(evt); else
+        if(clickedInsideID(t,'imgUse')) useClick(evt); else 
+        _log('x3 click');
+        return;
+      } 
       else 
        cleanUp('MC');
 	  }	else killId(dU);
@@ -168,7 +143,6 @@ function cleanUp(s){
 }
 
 function useClick(e){
-  e.preventDefault();
   killId('divUse');
   if(e.shiftKey)  ht[0][1] += ' '+txtSel;
   else  ht[0][1] = txtSel;
@@ -179,20 +153,33 @@ function useClick(e){
   }
 }
 var last_tl, last_sl;
-function backLookup(){
-    killId('divUse');
-    var t=gt_tl; gt_tl=gt_sl; gt_sl=t;
-    gtRequest(txtSel,gt_sl,gt_tl);
-}
-//http://translate.google.com/translate_a/t?client=t&text=Whiskey%20In%20The%20Jar&hl=en&sl=en&tl=ru&multires=1&ssel=0&tsel=0&sc=1
-function forwLookup(){
+function backLookup(e){
+    if(e.shiftKey) { 
+    noMup=1;
+    ttsRequest(txtSel,gt_tl);
+    return;
+    }
     killId('divUse');
     gtRequest(txtSel,gt_sl,gt_tl);
    	currentURL = GTurl +  "langpair=" + gt_sl + "|" + gt_tl + "&text=" + escAp(txtSel);
 }
-
+//GET https://translate.google.com/?langpair=en|ru&text=Varnish
+//POST https://translate.google.com/translate_a/t?client=t&hl=ru&sl=en&tl=ru&text=Varnish
+function forwLookup(e){
+    if(e.shiftKey)  { 
+    noMup=1;
+    ttsRequest(txtSel,gt_sl);
+    return;
+    }
+    killId('divUse');
+    var t=gt_tl; gt_tl=gt_sl; gt_sl=t;
+    gtRequest(txtSel,gt_sl,gt_tl);
+   	currentURL = GTurl +  "langpair=" + gt_sl + "|" + gt_tl + "&text=" + escAp(txtSel);
+}
+ var Gctrl, Galt;
+ var sayTip="\n[shift] listen (";
 function showLookupIcon(evt){
-  var Gctrl=GM_getValue('ctrl',false), Galt=GM_getValue('alt',true);
+  Gctrl=GM_getValue('ctrl',false), Galt=GM_getValue('alt',true);
 	if((!evt.ctrlKey && Gctrl)
 	 ||(!evt.altKey && Galt)
 //  to avoid collision
@@ -200,6 +187,7 @@ function showLookupIcon(evt){
 	 ||(evt.altKey && !Galt)
    ) return;
   evt.preventDefault(),evt.stopPropagation(); 
+
 	var divDic = getId('divDic');
 	var divLookup = getId('divLookup');
 	txtSel = getSelection(evt.target)+'';
@@ -237,19 +225,23 @@ function showLookupIcon(evt){
     },  null, null );
 
     var iTo = getFlagSrc(gt_tl,'to');
-    var divForw=buildEl('a', {id:'divGetforw', 'class': 'gootranslink', href: HREF_NO,
-    title: gt_sl_gms + '\u2192 '+gt_tl_gms},
-   	['click', forwLookup], imgH+iTo+imgT); 
+    var divForw=buildEl('span', {id:'divGetforw', // 'class': 'gootranslink', href: HREF_NO,
+    //border: 0, src: iTo,
+    title: gt_sl_gms + '\u2192 '+gt_tl_gms +sayTip+gt_tl+')'},
+    null, imgH+iTo+imgT);
+//   	['mousedown', forwLookup], imgH+iTo+imgT); 
     divUse.appendChild(divForw);
     
     var iFrom = getFlagSrc(gt_sl,'from');
-    var divBack=buildEl('a', {id:'divGetback', 'class': 'gootranslink', href: HREF_NO,
-    title: gt_tl_gms + '\u2192 '+gt_sl_gms},
-   	['click', backLookup], imgH+iFrom+imgT);
+    var divBack=buildEl('span', {id:'divGetback', //'class': 'gootranslink',  href: HREF_NO,
+    //border: 0, src: iFrom,
+    title: gt_tl_gms + '\u2192 '+gt_sl_gms +sayTip+gt_sl+')'},
+    null, imgH+iFrom+imgT);
+//   	['mousedown', backLookup], imgH+iFrom+imgT);
     gt_sl !='auto' && divUse.appendChild(divBack); 
 
     addEl(divUse,'img',{id: 'imgUse', border: 0, 
-    title: 'use in history/[shift]add to history', src: imgUse}, 
+    title: 'use in history\n[shift] add to history', src: imgUse}, 
     null,null);
 
 //    tp=(evt.clientY+window.pageYOffset+30)+'px';
@@ -369,6 +361,14 @@ function lookup(evt){
     }
 //"http://www.google.com/translate_t?text=" + txtSel + "&langpair=" + lang;
     gtRequest(txtSel,gt_sl,gt_tl);
+}
+
+function ttsRequest(txt,t){
+  var etxt = escAp(txt);
+  etxt=ttsURL + "&tl="	+ t + "&ie=utf-8&q=" + etxt.split(' ').slice(0,19).join(' ');
+  _log('tts> '+etxt);
+  GM_openInTab(etxt);
+  // sorry, firefox' decodeAudioData() does NOT support mp3
 }
 
 function gtRequest(txt,s,t){
@@ -688,6 +688,7 @@ try{
 function detectedLang(da){
  if(!da) return '';
  var gt_slist = getXId("gt-sl");
+ //console.log(gt_slist.innerHTML)
  gt_slist= gt_slist ? gt_slist.innerHTML+'' : languagesGoogle;
  var re= new RegExp('ion value="'+da+'">(.*?)<\/opt');
  var ma= gt_slist.match(re);
@@ -696,6 +697,7 @@ function detectedLang(da){
 
 function extractDict(txt){
 _log('!dict')
+
 try{
  if(!txt) return;
  txt=txt.replace(/,(?=,)/g,',""');
@@ -1060,7 +1062,7 @@ function killId(nod){
  if(!nod) return;
  var n = nod;
  if(typeof n == 'string'){
-  n= getId(nod);
+  n= getId(nod); 
  }
  if(!n) return;
  if(n.parentNode) n.parentNode.removeChild(n);
@@ -1254,7 +1256,7 @@ GM_addStyle(
 '#divSourcetext{ width:100%; height: 3em; line-height: .85em; overflow: auto !important;}' + 
 '.gtlPassive:before{ content:"\u2193";}'+
 '.gtlActive:before{ content:"\u2191" !important;}'+
-'#imgUse, #divGetback, #divGetforw {margin-left: 5px !important;}'+
+'#imgUse, #divGetback, #divGetforw {margin-left: 5px !important; cursor: pointer;}'+
 '#divSourcetext {background: #EEE !important; color: black !important;}'+
 '.gootransbutt {background-color: #DDA;'+
 'border-radius: 3px; margin-top: 5px; }'+
@@ -1342,65 +1344,104 @@ imgFlags= {
 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAADkSURBVHjapJM5TgNBEEVfzeZlQIOE5ARxClLOxC04CzFX4ArERAhZsoTEyDDurqa7SGxsIYJZKqnov9p+iZkxJQSogLN9HhIKfBZAY2abUdVFVhlQT5igzoB8AiDPAGKMg5UHTQFwc/fI6rKh/VLsz4b/u9FFXbF5b4+AnXe8rIW2C72qN8uSwtwJoHMwm5NSP0+EbyP4E8DD0z3XZUnqdr0A2XLBawjcHgBOPZYXINILYMlw6o8deFVsvoCq7AewhFf9BWg047n9GOMDFaABroDzgeIt8CZ7J1YjHBkBlanv/DMAwHdYum9dlZQAAAAASUVORK5CYII='
 ,'zh-CN': imgD+
 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFbSURBVHjapJO/SgNBEIe/vduLCSaKFhb6DCnFzs4XsMgjWlj4AD6BFhYKFqKgTSzSaBLN7f+xuJM7RSHRHywLy8w3Oz9mlIjwHymgA/TrexU54E0Dm+Pj0QSACGRADt39gLnQTZkftHd2uqOBdYmR3uGQYjfhnzPSXJHeYTCK2Lu8AquGJYC9vgFY10AupUdvTekdTYgnGvdYVQ5P0nTa+kW+vYV4D5BrgGAt9nZOmCzwDxlxkqG60D0ImCsN/msbKs+J1gKgAXww+Kcp5nKBKgQ0rA09i/Oi8iR880HAGdMATFnSuX8kzWZ8vvqHJvi7idnGBibPGkBZlvSzDJFURfj6FC1ISyl4SpcagDUWVRRISi2ngPTL8PiArUysW3AW0RqUWmqCRATjWiZaa6HbQxXFcjOYUpVTA1wU4eb15S+r4BSwCewBgxWT58BY1XZ16nsVRcCp/67zxwDGd5ld8bkQAQAAAABJRU5ErkJggg=='
-
-,"af":"Afghanistan","sq":"Albania"
-,"ar":"United-Arab-Emirates","hy":"Armenia","az":"Azerbaijan"
-,"eu":"Spain","be":"Belarus","bn":"Bangladesh"
-,"bg":"Bulgaria","ca":"Spain"/* ,"zh-CN":"Chinese"*/
-,"hr":"Croatia","cs":"Czech-Republic"
-,"da":"Denmark","nl":"Netherlands"
-/*, "en":"English"*/,"eo":"United-Nations"
-,"et":"Estonia","tl":"Philippines"
-,"fi":"Finland","fr":"France"
-,"gl":"Ukraine","ka":"Georgia"
-,"de":"Germany","el":"Greece"
-,"gu":"India","ht":"Haiti"
-,"iw":"Israel","hi":"India"
-,"hu":"Hungary","is":"Iceland"
-,"id":"Indonezia","ga":"Ireland"
-,"it":"Italy","ja":"Japan"
-,"kn":"India","ko":"North-Korea"
-,"la":"Vatican-City","lv":"Latvia"
-,"lt":"Lithuania","mk":"Macedonia"
-,"ms":"Malaysia","mt":"Malta"
-,"no":"Norway","fa":"Iran"
-,"pl":"Poland","pt":"Brazil"
-,"ro":"Romania" /*, "ru":"Russian"*/
-,"sr":"Serbia","sk":"Slovakia"
-,"sl":"Slovenia","es":"Spain"
-,"sw":"Mozambique","sv":"Sweden"
-,"ta":"India","te":"India"
-,"th":"Thailand","tr":"Turkey"
-,"uk":"Ukraine","ur":"Pakistan"
-,"vi":"Viet-Nam","cy":"Wales"
-,"yi":"Israel"
+,"af":"Namibia" //
+,"sq":"Albania"
+,"ar":"United-Arab-Emirates"
+,"hy":"Armenia"
+,"az":"Azerbaijan"
+,"eu":"Spain"
+,"be":"Belarus"
+,"bn":"Bangladesh"
+,"bs":"Bosnian"
+,"bg":"Bulgaria"
+,"ca":"Spain"
+,"ceb":"Philippines"
+,"ny":"Mozambique"
+/* ,"zh-CN":"Chinese"*/
+,"hr":"Croatia"
+,"cs":"Czech-Republic"
+,"da":"Denmark"
+,"nl":"Netherlands"
+/*, "en":"English"*/
+,"eo":"United-Nations"
+,"et":"Estonia"
+,"tl":"Philippines"
+,"fi":"Finland"
+,"fr":"France"
+,"gl":"Ukraine"
+,"ka":"Georgia"
+,"de":"Germany"
+,"el":"Greece"
+,"gu":"India"
+,"ht":"Haiti"
+,"ha":"Nigeria"
+,"iw":"Israel"
+,"hi":"India"
+,"hmn":"Laos"
+,"hu":"Hungary"
+,"is":"Iceland"
+,"ig":"Nigeria"
+,"id":"Indonezia"
+,"ga":"Ireland"
+,"it":"Italy"
+,"ja":"Japan"
+,"jw":"Japan"
+,"kn":"India"
+,"kk":"Kazakhstan"
+,"km":"Cambodia"
+,"ko":"North-Korea"
+,"lo":"Laos"
+,"la":"Vatican-City"
+,"lv":"Latvia"
+,"lt":"Lithuania"
+,"mk":"Macedonia"
+,"mg":"Madagascar"
+,"ms":"Malaysia"
+,"ml":"India"
+,"mt":"Malta"
+,"mi":"New-Zealand"
+,"mr":"India"
+,"mn":"Mongolia"
+,"my":"Burma" //absent
+,"ne":"Nepal"
+,"no":"Norway"
+,"fa":"Iran"
+,"pl":"Poland"
+,"pt":"Brazil"
+,"pa":"Pakistan"
+,"ro":"Romania" 
+/*, "ru":"Russia"*/
+,"sr":"Serbia"
+,"st":"Lesotho"
+,"si":"Sri-Lanka"
+,"sk":"Slovakia"
+,"sl":"Slovenia"
+,"so":"Somalia"
+,"es":"Spain"
+,"su":"Sudan"
+,"sw":"Mozambique"
+,"sv":"Sweden"
+,"tg":"Tajikistan"
+,"ta":"India"
 ,"te":"India"
+,"th":"Thailand"
+,"tr":"Turkey"
+,"uk":"Ukraine"
+,"ur":"Pakistan"
+,"uz":"Uzbekistan"
+,"vi":"Viet-Nam"
+,"cy":"Wales"
+,"yi":"Israel"
+,"yo":"Nigeria"
+,"zu":"South-Africa"
 };
 imgFlags['zh-TW'] = imgFlags['zh-CN'];
 imgFlags['to'] = imgForwSrc; imgFlags['from'] = imgBackSrc;
 
-languagesGoogle = '<option value="auto">Detect language</option>'+
-'<option value="af">Afrikaans</option><option value="sq">Albanian</option><option value="ar">Arabic</option><option value="hy">Armenian</option><option value="az">Azerbaijani</option><option value="eu">Basque</option><option value="be">Belarusian</option><option value="bn">Bengali</option><option value="bs">Bosnian</option><option value="bg">Bulgarian</option><option value="ca">Catalan</option><option value="ceb">Cebuano</option><option value="zh-CN">Chinese</option><option value="hr">Croatian</option><option value="cs">Czech</option><option value="da">Danish</option><option value="nl">Dutch</option><option value="en">English</option><option value="eo">Esperanto</option><option value="et">Estonian</option><option value="tl">Filipino</option><option value="fi">Finnish</option><option value="fr">French</option><option value="gl">Galician</option><option value="ka">Georgian</option><option value="de">German</option><option value="el">Greek</option><option value="gu">Gujarati</option><option value="ht">Haitian Creole</option><option value="iw">Hebrew</option><option value="hi">Hindi</option><option value="hmn">Hmong</option><option value="hu">Hungarian</option><option value="is">Icelandic</option><option value="id">Indonesian</option><option value="ga">Irish</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="jw">Javanese</option><option value="kn">Kannada</option><option value="km">Khmer</option><option value="ko">Korean</option><option value="lo">Lao</option><option value="la">Latin</option><option value="lv">Latvian</option><option value="lt">Lithuanian</option><option value="mk">Macedonian</option><option value="ms">Malay</option><option value="mt">Maltese</option><option value="mr">Marathi</option><option value="no">Norwegian</option><option value="fa">Persian</option><option value="pl">Polish</option><option value="pt">Portuguese</option><option value="ro">Romanian</option><option value="ru">Russian</option><option value="sr">Serbian</option><option value="sk">Slovak</option><option value="sl">Slovenian</option><option selected="" value="es">Spanish</option><option value="sw">Swahili</option><option value="sv">Swedish</option><option value="ta">Tamil</option><option value="te">Telugu</option><option value="th">Thai</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="ur">Urdu</option><option value="vi">Vietnamese</option><option value="cy">Welsh</option><option value="yi">Yiddish</option>\
+languagesGoogle = '<option value="auto">Detect language</option>\
+</option><option value="af">Afrikaans</option><option value="sq">Albanian</option><option value="ar">Arabic</option><option value="hy">Armenian</option><option value="az">Azerbaijani</option><option value="eu">Basque</option><option value="be">Belarusian</option><option value="bn">Bengali</option><option value="bs">Bosnian</option><option value="bg">Bulgarian</option><option value="ca">Catalan</option><option value="ceb">Cebuano</option><option value="ny">Chichewa</option><option value="zh-CN">Chinese</option><option value="hr">Croatian</option><option value="cs">Czech</option><option value="da">Danish</option><option value="nl">Dutch</option><option value="en">English</option><option value="eo">Esperanto</option><option value="et">Estonian</option><option value="tl">Filipino</option><option value="fi">Finnish</option><option value="fr">French</option><option value="gl">Galician</option><option value="ka">Georgian</option><option value="de">German</option><option value="el">Greek</option><option value="gu">Gujarati</option><option value="ht">Haitian Creole</option><option value="ha">Hausa</option><option value="iw">Hebrew</option><option value="hi">Hindi</option><option value="hmn">Hmong</option><option value="hu">Hungarian</option><option value="is">Icelandic</option><option value="ig">Igbo</option><option value="id">Indonesian</option><option value="ga">Irish</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="jw">Javanese</option><option value="kn">Kannada</option><option value="kk">Kazakh</option><option value="km">Khmer</option><option value="ko">Korean</option><option value="lo">Lao</option><option value="la">Latin</option><option value="lv">Latvian</option><option value="lt">Lithuanian</option><option value="mk">Macedonian</option><option value="mg">Malagasy</option><option value="ms">Malay</option><option value="ml">Malayalam</option><option value="mt">Maltese</option><option value="mi">Maori</option><option value="mr">Marathi</option><option value="mn">Mongolian</option><option value="my">Myanmar (Burmese)</option><option value="ne">Nepali</option><option value="no">Norwegian</option><option value="fa">Persian</option><option value="pl">Polish</option><option value="pt">Portuguese</option><option value="pa">Punjabi</option><option value="ro">Romanian</option><option value="ru">Russian</option><option value="sr">Serbian</option><option value="st">Sesotho</option><option value="si">Sinhala</option><option value="sk">Slovak</option><option value="sl">Slovenian</option><option value="so">Somali</option><option value="es">Spanish</option><option value="su">Sundanese</option><option value="sw">Swahili</option><option value="sv">Swedish</option><option value="tg">Tajik</option><option value="ta">Tamil</option><option value="te">Telugu</option><option value="th">Thai</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="ur">Urdu</option><option value="uz">Uzbek</option><option value="vi">Vietnamese</option><option value="cy">Welsh</option><option value="yi">Yiddish</option><option value="yo">Yoruba</option><option value="zu">Zulu</option>\
 ';
 
-/*
- * main()
- */
-/* * /
-if ( typeof GM_getValue == "undefined" ){
-// alert('gm_getvalue HET')
- function GM_getValue ( key, defaultValue ) {
-  var value = window.localStorage.getItem(key);
-  if( value == null )
-   value = defaulsForChrome[key] ? defaulsForChrome[key] : defaultValue;
-  else if(value=='true') value = true;
-  else if(value=='false') value = false;
-  return value;
-  }
-  function GM_setValue( key, value ) {
-    window.localStorage.setItem( key, value );
-  }
-}
 /* */
 try{
 //body = window;
@@ -1449,7 +1490,6 @@ if(  location.href == senojflags[0]
 }catch(e){console.log('nobody\n'+e); }
 }
 
-if(document.body){
 // gmail spoils my timeout -- workaround
 // borrowed from dbaron.org/log/20100309-faster-timeouts :
 // Only add setZeroTimeout to the window object, and hide everything
@@ -1478,3 +1518,4 @@ if(document.body){
 
 main();
 }
+//)()}
