@@ -12,7 +12,8 @@ Almost instantly you will see a tooltip with the translation.
 ![screenshot2](../res/tg3.gif)
 
 =====
-
  This is a distant descendant of lazyttrick's Google Translator Tooltip
+ <hr>
+ • 3.5.0 2015-04-14  + TTS: - alt-select text inside tooltip and shift-click language icon below
 
 ----
