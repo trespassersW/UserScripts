@@ -10,10 +10,11 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.5.0
-/* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.5.0 2015-04-14  + TTS: 
-//  - alt-select text inside tooltip and shift-click language icon below
+// @version 3.5.1
+//* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 3.5.1 2015-04-15
+//  + TTS: alt-select text inside tooltip and shift-click language icon below
+//  * From<->To buttons fix; * err handler
 // 3.4.1 2015-04-09 * GT changes: GET prohibited - use POST
 // 3.0.0 
 //  - national flags icons -- from www.senojflags.com
@@ -43,7 +44,7 @@
 // - exit by ESC
 // - 1k letters limit -- don't strain your Google
 //
-*/
+//*/
 // @grant GM_addStyle
 // @grant GM_getValue
 // #grant GM_log
@@ -53,14 +54,14 @@
 // @icon  data:image/jpg;base64, R0lGODlhIAARALP/AAAAAP///xMYfAqf////Zv/qDuCeH8VmB8DAwAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAgALAAAAAAgABEAQASdEMlJgb00awkMKQZYjB8RBsE4AtLQvtt0sXHcEcT1pbxK0hsXRmYIGUUgA3DiQjQtssInRAjglMsa4ibtlqSGgECQymmaAwDYUhSFfKoQDQ3LdA6Hoh6qbW4sJHpFWTUAOEA3Vj1WZjF+HQU9X18oPxl0Wx4kXoFiZF1zMEJgbW8qJnAHoU4takocpW5IIISYGh1HRlh9hRZ4eIRaEQA7
 //
 // ==/UserScript==
-if(document.body){
-//var fnctn= (function(){
+if(document.body){ 
+//var fnctn= (function(){ "use strict";
 var   GTsuffix=".com"; // ".fr" ".de" ".ru" ".com"
 
-var   GTurl=    "https://translate.google"+GTsuffix+"/?"; 
-var dictURL = "https://translate.google"+GTsuffix+"/translate_a/t?client=t";
-var ttsURL =  "https://translate.google.com/translate_tts?client=t";
-var version = 3500;
+var   GTurl= "https://translate.google"+GTsuffix+"/?"; 
+var dictURL= "https://translate.google"+GTsuffix+"/translate_a/t?client=t";
+var  ttsURL= "https://translate.google.com/translate_tts?client=t";
+var version= 3500;
 
 var HREF_NO = 'javascript:void(0)';
 
@@ -93,7 +94,7 @@ var ht=null;  // history table,
 
 var imgForw,imgBack,imgSwap,imgUse,imgSave,imgFlags,imgForwSrc,imgBackSrc;
 var txtSel; // text selected
-var currentURL;
+var currentURL, Qtxt='***';
 var gt_sl_gms, gt_tl_gms, gt_sl, gt_tl;
 
 var sT;
@@ -122,6 +123,9 @@ function mousedownCleaning(evt){
 	killId(divLookup);
 		
 }
+
+var documentcontentEditable=false;
+var documentdesignMode  = '';
 var divExtract;
 function cleanUp(s){
  _log(s);
@@ -320,13 +324,11 @@ function lookup(evt){
 	divDic.addEventListener('mousedown', dragHandler, false);
   document.addEventListener('keydown', escCleanup, false); 
 	body.appendChild(divDic);
-  documentcontentEditable=false;
   // patch gmail
-  documentcontentEditable=false;
+
   if(document.contentEditable)
     documentcontentEditable = document.contentEditable,
     document.contentEditable = false;
-  documentdesignMode  = '';
   if(document.designMode == 'on')
     documentdesignMode='on',
     document.designMode='off';
@@ -337,7 +339,7 @@ function lookup(evt){
 	divDic.appendChild(divResult);		
 /**/ 
   // history
-  divBottom = buildEl('div',{id:'divBottom', align: 'bottom'},null,null);
+  var divBottom = buildEl('div',{id:'divBottom', align: 'bottom'},null,null);
 	addEl(divBottom,'a', 
   {'class':"gootransbutt gootranslink gtlPassive", id:'historyLink', title: 'Translation history',  
    align: 'left', href:HREF_NO}, 
@@ -406,7 +408,9 @@ function Request(url,cb){
 					 extractResult(resp.responseText);
 				}catch(e){
          if(getId('divResult'))
-          getId('divResult').innerHTML = 'error processing response text:<br>'+e;
+          getId('divResult').innerHTML = 
+        '<a id="gttpErrRef" href="#">error processing response text:</a><br>'+e;
+          getId('gttpErrRef').href=URL.subsr(0,99);
         }
 			}
 		});	
@@ -455,25 +459,21 @@ function fastSwap(){
 }
 
 function badResponce(html,e){
-  var html2=html.match(/\<title\>(.*)\<\/title\>/);
-  if(html2 && html2[1]){
-  _log(html2[1]);
-   html2='Google response: ' + html2[1];
-   var etxt = html.split('\n').join(' ').match(/(\<div\>)(.*)$/);
-  console.log(etxt);
-   if(etxt && etxt[2]) {
-   html2+= '<br>' + etxt[1]+etxt[2];
-   _log('bljad\n'+etxt[2])
-   }
-  }else {
-   html2=  '???<br>'+ (e?e:"unknown error !!11");
-  }
-  var ur=URL.substr(0,128);
-  ur=''+ur+"<br>";
- getId('divResult').innerHTML = ur+'<hr>'+html2;
+ var dr=getId('divResult')
+ dr.innerHTML = '';
+ var br=addEl(dr,'a',{'class':'gootranslink'},null,'Bad Google response');
+ br.href=URL.substr(0,100);
+ var m=html.match(/\<title\>(.*?)\<\/title\>/);
+ if(m && m[1])
+  addEl(dr,'p',{},null,m[1]);
+ //id="captcha"
+ m=html.match(/(<img\s.*?\>)/);
+ if(m && m[1])
+  addEl(dr,'p',{},null,m[1]);
+ _log(html);
  return;
 }
-var ex_sl , ex_gl;
+var ex_sl , ex_tl;
 function extractResult(html){
  if(html){
 	var html2 = html.match(/\<body[^\>]*\>([\s\S]+)\<\/body\>/);//[1];//select body content
@@ -502,15 +502,17 @@ function extractResult(html){
 //  var _tl = getXId("gt-tl-gms").textContent; 
 //  _sl = _sl.replace(/^.*?\:\s*/,''); 
 //  _tl = _tl.replace(/^.*?\:\s*/,'');
-
-  if(ex_sl == gt_sl ) gt_sl_gms = _sl, gt_tl_gms =_tl; 
-  else gt_sl_gms = _tl, gt_tl_gms = _sl; 
+/* ?!11 150415 */ _log('**',_sl+'>'+_tl)
+    if( 1 || ex_sl !== gt_sl ) 
+      gt_sl_gms = _sl, gt_tl_gms =_tl; 
+    else 
+      gt_sl_gms = _tl, gt_tl_gms = _sl; /* ?!11 */
   
   getId('divBottom').removeChild(getId('optionsLink'));
   var oL= buildEl('div', {id:'optionsLink', title: 'Settings', 'class':'gootransbutt'},
   null, null);
   addEl(oL,'a',{id:'optionsFrom','class':'gootranslink'},  
-  ['click', options],  gt_sl_gms +' ');
+  ['click', options],  gt_sl_gms +' '); 
   addEl(oL,'a',{id:'optionsFast','class':'gootranslink', 
   title: 'swap languages'}, ['click', fastSwap], imgSwap);
   addEl(oL,'a',{id:'optionsTo','class':'gootranslink ' + (getId('divOpt') ? 'gtlActive':'gtlPassive')},  
@@ -700,6 +702,8 @@ _log('!dict')
 
 try{
  if(!txt) return;
+ if(txt.substr(0,1) !== '[')
+   throw 'Bad Google responce';
  txt=txt.replace(/,(?=,)/g,',""');
  txt=txt.replace(/\[(?=,)/g,'["asshole"');
  var dA=JSON.parse(txt);
@@ -758,7 +762,7 @@ try{
      options(); // show options
      
 } catch(e){
-   _log('errexDict: '+e+'\n'+txt);
+   _log('errexDict: '+e+'\n'+txt.substr(0,100));
    badResponce(txt,e);
 }
 }
