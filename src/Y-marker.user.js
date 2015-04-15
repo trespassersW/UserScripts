@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name        Y-marker
 // @namespace   trespassersW
 // @description Sets up keyboard shortcuts for placing bookmarks and navigation inside webpage.
@@ -6,20 +6,21 @@
 // @include        https://*
 // @include        file://*
 // ** about:config -> greasemonkey.fileIsGreaseable <- true
-// @version 15.04.07
+// @version 15.04.15
 // @license  MIT
-// @updated  2015.04.07
+// @updated  2015.04.15
 // @released 2013-12-11
 // @run-at document-end
 // @grant unsafeWindow
 // ==/UserScript==
-/* 15.04.07 localStorage in unsafeWindow
+/* 15.04.15 localStorage + unsafeWindow + ff37 + GM3.1 problems
  * 13-12-12 click on msg removes all marks
  * 1.1 don't run in editable fields
 */
+
 (function(){ "use strict";
 if(top!=self || !document || !document.body ) return;
-var W = unsafeWindow || window; // localStorage doesn't live in sandbox
+var W = unsafeWindow || window; // localStorage doesn't live in sandbox?
 /* key kombinations to invoke the skript */
 var kShift = 1,  kCtrl = 2, kAlt = 4, kWin = 8; 
 var kJump = kAlt; 
@@ -38,7 +39,7 @@ var minus1="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1";
 
 function kNob(k){ return kNobs.charAt(k); }
 
-var U=undefined, D=W.document;
+var U=undefined, D=window.document;
 function _L(s) { 0 && console.log(s) };
 
 var statMsg;
@@ -135,6 +136,7 @@ function klear(e) {
 }
 
 function onKeydown(e) {
+ try{
  var rc=0, k= e.keyCode; 
  if(!k) return;
  // Don't run in input, select, textarea etc.
@@ -162,6 +164,7 @@ function onKeydown(e) {
  }
  statSay();
  if(rc) e.preventDefault(),e.stopPropagation();
+ }catch(e){console.log('smth wromg\n'+e)};
 }
  
 function mk(p, t, id, s) {
@@ -240,7 +243,7 @@ for(var k=1; k<2; k++){ /* pz.length */
 
 if(noCoo)  msg(noCoo),   statSay(5);
 
-W.addEventListener("keydown",onKeydown,false);
-W.addEventListener("keyup",klear,false);
+addEventListener("keydown",onKeydown,false);
+addEventListener("keyup",klear,false);
  
 })();
