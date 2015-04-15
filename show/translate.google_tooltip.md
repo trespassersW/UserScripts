@@ -2,7 +2,7 @@
 | :----: | :---- | ---------------------- |
 ##### *Script summary:*  Translates selected text into a ‘tooltip’ via Google translate 
 
-Select word or phrase with **Alt** key pressed - then hover over an icon below the selection. 
+Select word or phrase with <u><i><b>Alt</b></i></u> key pressed - then hover over an icon below the selection. 
 Almost instantly you will see a tooltip with the translation. 
 
 =====
