@@ -10,8 +10,11 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.5.1
+// @version 3.6.0
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 3.6.0 2015-04-17
+//  + selectable background color
+//  * bugfix
 // 3.5.1 2015-04-15
 //  + TTS: alt-select text inside tooltip and shift-click language icon below
 //  * From<->To buttons fix; * err handler
@@ -45,7 +48,7 @@
 // - 1k letters limit -- don't strain your Google
 //
 //*/
-// @grant GM_addStyle
+// /grant GM_addStyle
 // @grant GM_getValue
 // #grant GM_log
 // @grant GM_openInTab
@@ -55,13 +58,13 @@
 //
 // ==/UserScript==
 if(document.body){ 
-//var fnctn= (function(){ "use strict";
+main = function (){// "use strict";
 var   GTsuffix=".com"; // ".fr" ".de" ".ru" ".com"
 
 var   GTurl= "https://translate.google"+GTsuffix+"/?"; 
 var dictURL= "https://translate.google"+GTsuffix+"/translate_a/t?client=t";
 var  ttsURL= "https://translate.google.com/translate_tts?client=t";
-var version= 3500;
+var version= 3600;
 
 var HREF_NO = 'javascript:void(0)';
 
@@ -71,8 +74,6 @@ var llii=0, _log = function(){ /* * /
  console.log(s)
 /* */
 }
-
-function main(){
 
 var URL='*';
 var GT_tl='auto';
@@ -84,7 +85,7 @@ var senojflags = [
 //
 //function GM_log(t){console.log(t);}
 
-const res_dict='gt-res-dict' //'gt_res_dict';
+const res_dict='gt-res-dict'; //'gt_res_dict';
 var  languagesGoogle, isInited=false;
 var rtl_langs="ar fa iw ur";
 var inTextArea= null;
@@ -99,6 +100,12 @@ var gt_sl_gms, gt_tl_gms, gt_sl, gt_tl;
 
 var sT;
 var noMup=0;
+
+//------------ yellow -- grey ---- blue --- green
+var BG_COLOR=['#FFFFE1','#D1D1D1','#D3ECED','#C4FFC4'];
+var BT_COLOR=['#DDDDAA','#A0A097','#8CCCCE','#6BEF69'];
+var BH_COLOR=['#F9E78F','#C1C1B7','#BCD1D1','#AAEEAA'];
+var BG_tit="choose BG color";
 
 function mousedownCleaning(evt){
 	var divDic = getId('divDic');
@@ -199,7 +206,7 @@ function showLookupIcon(evt){
    return;  
   }
 	//exit if no text is selected
-	if(!txtSel || txtSel==""){
+	if(!txtSel || txtSel===""){
     _log('S:notext ')
 		if(divDic)		{
 			if(!clickedInsideID(evt.target,'divDic'))
@@ -215,14 +222,14 @@ function showLookupIcon(evt){
 		if(!clickedInsideID(evt.target,'divDic'))
 			{cleanUp('!divdic');		return; }
   // inside divDic:
-    var dU=getId('divUse')
+    var dU=getId('divUse');
     if(dU){
       if(!clickedInsideId('divUse')){
         killId(dU);
       } return;        
 	  }
     try{
-    var p= belowCursor(evt,10,10,'r')
+    var p= belowCursor(evt,10,10,'r');
     var divUse= buildEl('div', {id:'divUse',
     style:'z-index:11000; border: none'+
     ';top:'  + p.t  +';left:' + p.l  +';right:' + p.r +';bottom: auto;'
@@ -260,17 +267,17 @@ function showLookupIcon(evt){
 	if(divLookup)
 		killId(divLookup);
 	//div container
-  var p = belowCursor(evt,10,10);
+  p = belowCursor(evt,10,10);
 	divLookup = buildEl('div', {id:'divLookup', style: 'z-index:10000'+
    ';border: none;' +
    ';top:'  + p.t  +';left:' + p.l  +';right:' + p.r  +';bottom: auto'
   }, null, null);
 
-  var iTo = getFlagSrc(GM_getValue('to'),'to');
+  iTo = getFlagSrc(GM_getValue('to'),'to');
   var iForw=buildEl('img', {'border':0, id:"imgLookForw", style: 'padding-left: 5px',
   src: iTo},  ['mouseover', lookup],null);
   var sl=GM_getValue('from','auto');
-  var iFrom = getFlagSrc(sl,'from');
+  iFrom = getFlagSrc(sl,'from');
   var iBack=buildEl('img', {'border':0, id:"imgLookBack",  style: 'padding-left: 5px',
   src: iFrom},
   ['mouseover', lookup], null); 
@@ -286,7 +293,7 @@ function showLookupIcon(evt){
 }
 function escCleanup(e){
 	if(!e.shiftKey && !e.ctrlKey && !e.altKey && e.keyCode==27 )
-   cleanUp('esc')
+   cleanUp('esc');
 }
 
 function lookup(evt){
@@ -443,7 +450,7 @@ function histLookup(e){
     history();
     return;
   }
-  var lang = ht[ix][2].match(/(.*)\|(.*)/);
+  var lang = ht[ix][2].match(/([a-zA-Z-]+)\|([a-zA-Z-]+)/);
   gt_sl=lang[1]; gt_tl=lang[2];
   txtSel = txt; 
 	getId('divResult').innerHTML = 'Loading...'
@@ -656,6 +663,17 @@ function options(evt){
 		d=addEl(dO,'input', {id:'checkNoflags', type:'checkbox',
     title: "don't show country flag icons"});
     d.checked = GM_getValue('noFlags');
+// colours
+		addEl(dO,'span',{'class':'gtBGColor', title:'Yellow',style: 'background-color:'+ BG_COLOR[0]+'!important;'+
+     'margin-left: 6px;'},
+      ['click',function(){css(1)}],'&nbsp;');
+		addEl(dO,'span',{'class':'gtBGColor', title:'Gray',style: 'background-color:'+ BG_COLOR[1]+'!important;' },
+      ['click',function(){css(2)}],'&nbsp;');
+		addEl(dO,'span',{'class':'gtBGColor', title:'Blue',style: 'background-color:'+ BG_COLOR[2]+'!important;' },
+      ['click',function(){css(3)}],'&nbsp;');
+		addEl(dO,'span',{'class':'gtBGColor', title:'Green',style: 'background-color:'+ BG_COLOR[3]+'!important;' },
+      ['click',function(){css(4)}],'&nbsp;');
+
 		//save
 		addEl(dO,'span',null,null,' &nbsp; ');
     var oS=
@@ -920,8 +938,8 @@ function addHistory(src,trt){
  var st=trim(src+''); var tt = trim(trt+'');
  var wc = (st.split(' ')).length;
  if(wc>maxWC) return;
- var lang=currentURL.match(/langpair=(.+)/)[1];
- var ix=-1;  // find word in hist
+ var lang=currentURL.match(/langpair=([a-zA-Z-\|]+)/)[1];
+  var ix=-1;  // find word in hist
  for(var i=0, l=ht.length; i<l; i++)
     if(st==ht[i][0]){ ix=i; break; }
  //if(ix==0) return; // nothing to do
@@ -1218,12 +1236,27 @@ function escAp(s){
  return ttrans( s, tabUrlEsc );
 }
 
-function css(){
-GM_addStyle(
+function stickStyle(css){
+ var s=document.createElement("style"); s.type="text/css";
+ s.appendChild(document.createTextNode(css));
+ return (document.head||document.documentElement).appendChild(s);
+}
+
+function css(n){
+  var i;
+  if(!n) try{ 
+    i= +(GM_getValue('backG',3)); 
+  } catch(e) {i=0};
+  try{
+  if(window.gttpCSS) window.gttpCSS.parentNode.removeChild(window.gttpCSS);
+  }catch(e){console.log('css:\n'+e)};
+  if( n ) GM_setValue('backG', i=n-1);
+  window.gttpCSS=
+stickStyle((
 '#divResult {overflow: auto; padding:3px; margin-bottom: 3px; max-height: 480px !important;}'+
 '#divResult table *{ line-height: .85em !important}'+
 '#divDic, #divDic *, #divSelflag, divSelflag * {font: small normal Tahoma,Verdana,Arial sans-serif !important; }'+
-'#divDic,#divSelflag {position: absolute; background-color:#FFFFE1 !important; color:#000000 !important; opacity: .95'+
+'#divDic,#divSelflag {position: absolute; background-color:BG_COLOR !important; color:#000000 !important; opacity: .95'+
 ';padding:5px ;z-index:10000; border-radius:3px; border: solid thin grey'+
 ';text-align: left !important;}'+
 '#divDic{/*min-width: 340px !important; min-height:50px;*/ max-width:50%; padding: 3px; margin: 0;}'+
@@ -1234,12 +1267,12 @@ GM_addStyle(
 'a.gootranslink:visited {color:  #047 !important; text-decoration: none !important;}'+ 
 'a.gootranslink:hover {color:  #047 !important; text-decoration: underline !important;}'  +
 'a.gootranslink:active {color:  #047 !important; text-decoration: underline !important;}' +
-'#gtp_dict td {font-size:14px; line-height:.8em; margin-left:5px; border:0px; background-color:#FFFFE1; color:black;}'+
-'a.goohistlink {background-color: #F9E78F;}'+
+'#gtp_dict td {font-size:14px; line-height:.8em; margin-left:5px; border:0px; background-color:BG_COLOR; color:black;}'+
+'a.goohistlink {background-color: BH_COLOR;}'+
 '#gtp_dict {margin: 0; position: relative;}'+
 '#gtp_dict ol {padding: 0 .5em 0 0; margin-left: 0.2em;}'+
 '#gtp_dict li {list-style: square inside; display: list-item;}'+
-'#gtp_dict td {padding-left: .25em; vertical-align:top; border:0px; color:black; background-color:#FFFFE1;}'+
+'#gtp_dict td {padding-left: .25em; vertical-align:top; border:0px; color:black; background-color:BG_COLOR;}'+
 '#optSelLangFrom,#optSelLangTo {max-width: 150px; text-align: left !important; }'+
 '#divExtract{word-spacing: normal !important;}'+
 '#divBottom {position: relative; width: 100%; font-size: smaller; text-decoration:none; }'+    
@@ -1250,19 +1283,19 @@ GM_addStyle(
 '#divOpt {position: relative; padding: 5px;'+
 'border-top: thin solid grey;}'+ 
 '#divLookup, #divOpt, #divBottom,#divSourcetext,#divHist,#divuse {direction: ltr !important;}'+
-'#divHist {background-color:#FFFFE1; position:relative; padding:5px; text-align:left !important;'+
+'#divHist {background-color:BG_COLOR; position:relative; padding:5px; text-align:left !important;'+
 'border-top: thin solid grey;}'+ 
-'#gtp_dict {background-color:#FFFFE1; color:#000000; opacity: .95; padding:1px; border-radius:3px;'+
+'#gtp_dict {background-color:BG_COLOR; color:#000000; opacity: .95; padding:1px; border-radius:3px;'+
 'margin-bottom: .1em; overflow-y:auto; overflow-x:hidden; font-size:small;}'+
-'#divOpt {background-color:#FFFFE1; position:relative; padding:5px; text-align:left !important;}'+
+'#divOpt {background-color:BG_COLOR; position:relative; padding:5px; text-align:left !important;}'+
 '#divLookup, #divUse {background-color:transparent; color:#000000; position:absolute; padding: 3px;}'+
-'#divSourceshow {border:0;}'+
+'#divSourceshow {border:0;padding: 0 0 2px 0; margin: 0;}'+
 '#divSourcetext{ width:100%; height: 3em; line-height: .85em; overflow: auto !important;}' + 
 '.gtlPassive:before{ content:"\u2193";}'+
 '.gtlActive:before{ content:"\u2191" !important;}'+
 '#imgUse, #divGetback, #divGetforw {margin-left: 5px !important; cursor: pointer;}'+
 '#divSourcetext {background: #EEE !important; color: black !important;}'+
-'.gootransbutt {background-color: #DDA;'+
+'.gootransbutt {background-color: BT_COLOR;'+
 'border-radius: 3px; margin-top: 5px; }'+
 '.goounsaved {background-color: #EF9024;'+
 'border-radius: 3px; margin-top: 5px; }'+
@@ -1275,10 +1308,14 @@ GM_addStyle(
 'td.gtp-pos, td.gtp-word, td.gtp-trans {padding-top: 1px !important; padding-bottom: 0 !important;}'+
 '.gtp-hide {display: none}'+
 '.gtp-block {display: block}'+
-
-''
+'').
+ replace(/BG_COLOR/g,BG_COLOR[i]).
+ replace(/BH_COLOR/g,BH_COLOR[i]).
+ replace(/BT_COLOR/g,BT_COLOR[i])
 );
-GM_addStyle('\
+stickStyle('\
+.gtBGColor{border:thin solid blue !important; cursor: pointer;\
+padding-right:6px;margin-right: 2px;}\
 .gootranslink[titel]{position: relative;}\
 .gootranslink[titel]:after {\
 color: #050;\
@@ -1473,27 +1510,6 @@ if (sT){
  }catch(e){console.log('broken source\n'+e)} ;
 } else sT='';
 
-
-document.addEventListener('mouseup', showLookupIcon, false);
-document.addEventListener('mousedown', mousedownCleaning, false);
-// http://www.senojflags.com/#flags16
-if(  location.href == senojflags[0]
-   //|location.href == senojflags[1]
-){try{
-  if(!fCSS)  fCSS=
-  'div#flags16 img {cursor: pointer !important}'+
-  'div#flags48,div#flags32 {display:none; visibility: hidden}'
-  GM_addStyle(fCSS);
-  _log('inside\n' + location.href);
-  insBefore(buildEl('p',{style:'font: bold italic 90% sans-serif; color:red;',
-  align:'left'},null,'&nbsp;&nbsp;<u>Click on a country flag icon then choose the language</u>'),
-  getId('flags16').childNodes[0]);
-  getId('flags16').addEventListener('click',flagClick,false)
- }catch(e){console.log('senojflags\n'+e)}
-}
-}catch(e){console.log('nobody\n'+e); }
-}
-
 // gmail spoils my timeout -- workaround
 // borrowed from dbaron.org/log/20100309-faster-timeouts :
 // Only add setZeroTimeout to the window object, and hide everything
@@ -1520,6 +1536,25 @@ if(  location.href == senojflags[0]
       window.setZeroTimeout = setZeroTimeout;
   })();
 
+document.addEventListener('mouseup', showLookupIcon, false);
+document.addEventListener('mousedown', mousedownCleaning, false);
+// http://www.senojflags.com/#flags16
+if(  location.href == senojflags[0]
+   //|location.href == senojflags[1]
+){try{
+  if(!fCSS)  fCSS=
+  'div#flags16 img {cursor: pointer !important}'+
+  'div#flags48,div#flags32 {display:none; visibility: hidden}'
+  stickStyle(fCSS);
+  _log('inside\n' + location.href);
+  insBefore(buildEl('p',{style:'font: bold italic 90% sans-serif; color:red;',
+  align:'left'},null,'&nbsp;&nbsp;<u>Click on a country flag icon then choose the language</u>'),
+  getId('flags16').childNodes[0]);
+  getId('flags16').addEventListener('click',flagClick,false)
+ }catch(e){console.log('senojflags\n'+e)}
+}
+}catch(e){console.log('nobody\n'+e); }
+}
 main();
 }
-//)()}
+//
