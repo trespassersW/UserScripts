@@ -7,7 +7,8 @@ Almost instantly you will see a tooltip with the translation.
 
 =====
 
-3.5.1 2015-04-15 + TTS: alt-select text inside tooltip and shift-click language icon below <hr>
+3.5.1 2015-04-15 + TTS: alt-select text inside tooltip and shift-click language icon below <br>3.6.0 2015-04-17
+ + selectable background color<hr>
 
 ![screenshot](../res/gimble.png)<br><hr>
 ***Please look more closely at the picture below:***<br><hr>
