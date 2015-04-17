@@ -12,9 +12,9 @@
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
 // @version 3.6.0
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.6.0 2015-04-17
+//  3.6.1 2015-04-17
 //  + selectable background color
-//  * bugfix
+//  * bugfixes
 // 3.5.1 2015-04-15
 //  + TTS: alt-select text inside tooltip and shift-click language icon below
 //  * From<->To buttons fix; * err handler
@@ -100,12 +100,14 @@ var gt_sl_gms, gt_tl_gms, gt_sl, gt_tl;
 
 var sT;
 var noMup=0;
-
-//------------ yellow -- grey ---- blue --- green
-var BG_COLOR=['#FFFFE1','#D1D1D1','#D3ECED','#C4FFC4'];
-var BT_COLOR=['#DDDDAA','#A0A097','#8CCCCE','#6BEF69'];
-var BH_COLOR=['#F9E78F','#C1C1B7','#BCD1D1','#AAEEAA'];
-var BG_tit="choose BG color";
+var BG={
+t:  ["yellow" ,"grey"   ,"blue"   ,"green"  ,"pink"    ],
+C:  ['#FFFFE1','#D1D1D1','#D3ECED','#C4FFC4','#FFE6E6' ],
+T:  ['#DDDDAA','#A0A097','#8CCCCE','#6BEF69','#FFC6C8' ],
+H:  ['#F9E78F','#C1C1B7','#BCD1D1','#AAEEAA','#E8D0D0' ],
+f:  [function(){css(0)}, function(){css(1)},function(){css(2)},
+     function(){css(3)}, function(){css(4)}]
+}
 
 function mousedownCleaning(evt){
 	var divDic = getId('divDic');
@@ -262,7 +264,7 @@ function showLookupIcon(evt){
     return;
   }
   // inside page
-  if(!isInited) {css(); isInited=true; }
+  if(!isInited) {css(-1); isInited=true; }
 	//remove div if exists
 	if(divLookup)
 		killId(divLookup);
@@ -664,16 +666,13 @@ function options(evt){
     title: "don't show country flag icons"});
     d.checked = GM_getValue('noFlags');
 // colours
-		addEl(dO,'span',{'class':'gtBGColor', title:'Yellow',style: 'background-color:'+ BG_COLOR[0]+'!important;'+
-     'margin-left: 6px;'},
-      ['click',function(){css(1)}],'&nbsp;');
-		addEl(dO,'span',{'class':'gtBGColor', title:'Gray',style: 'background-color:'+ BG_COLOR[1]+'!important;' },
-      ['click',function(){css(2)}],'&nbsp;');
-		addEl(dO,'span',{'class':'gtBGColor', title:'Blue',style: 'background-color:'+ BG_COLOR[2]+'!important;' },
-      ['click',function(){css(3)}],'&nbsp;');
-		addEl(dO,'span',{'class':'gtBGColor', title:'Green',style: 'background-color:'+ BG_COLOR[3]+'!important;' },
-      ['click',function(){css(4)}],'&nbsp;');
-
+    for(var b,li=BG.C.length,ii=0;ii<li;ii++){
+		 b=addEl(dO,'span',{'class':'gtBGColor', title:BG.t[ii],
+     style: 'background-color:'+ BG.C[ii]+'!important;' +
+     (ii==0?'margin-left:6px' :'')
+     }, null,'&nbsp;');
+     b.addEventListener('click',BG.f[ii]); 
+    }
 		//save
 		addEl(dO,'span',null,null,' &nbsp; ');
     var oS=
@@ -968,7 +967,7 @@ function addHistory(src,trt){
 }
 var senFlag = '';
 function selFlag(e){
- if(!isInited) {css(); isInited=true; }
+ if(!isInited) {css(-1); isInited=true; }
  killId('divSelflag');
  document.addEventListener('keydown', escCleanup, false); 
  var p = belowCursor(e,10,10);
@@ -1243,14 +1242,17 @@ function stickStyle(css){
 }
 
 function css(n){
-  var i;
-  if(!n) try{ 
-    i= +(GM_getValue('backG',0)); 
-  } catch(e) {i=0};
+  var k,i=0;
+  _log('cssN:',n);
+  if(-1 === n){ try{ 
+    k= +(GM_getValue('backG',0)); 
+    if(0<=k && k< BG.C.length) i=k;
+  } catch(e){};}
+  else GM_setValue('backG', +(i=+n) );
   try{
-  if(window.gttpCSS) window.gttpCSS.parentNode.removeChild(window.gttpCSS);
-  }catch(e){console.log('css:\n'+e)};
-  if( n ) GM_setValue('backG', i=n-1);
+    if(window.gttpCSS) window.gttpCSS.parentNode.removeChild(window.gttpCSS);
+  }catch(e){console.log('cssX:\n'+e)};
+  _log('cssS:'+i,BG.C[i]);
   window.gttpCSS=
 stickStyle((
 '#divResult {overflow: auto; padding:3px; margin-bottom: 3px; max-height: 480px !important;}'+
@@ -1309,13 +1311,14 @@ stickStyle((
 '.gtp-hide {display: none}'+
 '.gtp-block {display: block}'+
 '').
- replace(/BG_COLOR/g,BG_COLOR[i]).
- replace(/BH_COLOR/g,BH_COLOR[i]).
- replace(/BT_COLOR/g,BT_COLOR[i])
+ replace(/BG_COLOR/g,BG.C[i]).
+ replace(/BH_COLOR/g,BG.H[i]).
+ replace(/BT_COLOR/g,BG.T[i])
 );
+if(-1 !== n) return;
 stickStyle('\
 .gtBGColor{border:thin solid blue !important; cursor: pointer;\
-padding-right:6px;margin-right: 2px;}\
+padding-right:6px; margin-right: 2px;}\
 .gootranslink[titel]{position: relative;}\
 .gootranslink[titel]:after {\
 color: #050;\
