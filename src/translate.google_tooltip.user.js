@@ -1245,7 +1245,7 @@ function stickStyle(css){
 function css(n){
   var i;
   if(!n) try{ 
-    i= +(GM_getValue('backG',3)); 
+    i= +(GM_getValue('backG',0)); 
   } catch(e) {i=0};
   try{
   if(window.gttpCSS) window.gttpCSS.parentNode.removeChild(window.gttpCSS);
