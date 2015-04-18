@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.6.2
+// @version 3.6.2.1
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-//  3.6.2 2015-04-18 + gray gradient background 
+//  3.6.2.1 2015-04-18 * gray gradient background 
 //  3.6.1 2015-04-17
 //  + selectable background color
 //  * bugfixes
@@ -1259,11 +1259,11 @@ function css(n){
   _log('cssS:'+i,BG.C[i]);
   window.gttpCSS=
 stickStyle((
-'#divResult {overflow: auto; padding:3px; margin-bottom: 3px; max-height: 480px !important;}'+
+'#divResult {overflow: auto !important; padding:3px !important; margin: 0 0 3px 0 !important; max-height: 480px !important;}'+
 '#divResult table *{ line-height: .85em !important}'+
 '#divDic, #divDic *, #divSelflag, divSelflag * {font: small normal Tahoma,Verdana,Arial sans-serif !important; }'+
 '#divDic,#divSelflag {position: absolute; background:BG_COLOR !important; color:#000000 !important; opacity: .95'+
-';padding:5px ;z-index:10000; border-radius:3px; border: solid thin grey'+
+';padding:5px !important; margin:0; z-index:10000; border-radius:3px; border: solid thin grey'+
 ';text-align: left !important;}'+
 '#divDic{/*min-width: 340px !important; min-height:50px;*/ max-width:50%; padding: 3px; margin: 0;}'+
 '#divSelflag{ max-width: 180px; }'+
@@ -1273,12 +1273,12 @@ stickStyle((
 'a.gootranslink:visited {color:  #047 !important; text-decoration: none !important;}'+ 
 'a.gootranslink:hover {color:  #047 !important; text-decoration: underline !important;}'  +
 'a.gootranslink:active {color:  #047 !important; text-decoration: underline !important;}' +
-'#gtp_dict td {font-size:14px; line-height:.8em; margin-left:5px; border:0px; background:BG_COLOR; color:black;}'+
+'#gtp_dict tr {font-size:14px; line-height:.8em; margin-left:5px; margin-bottom:1px; border:0; background:BG_COLOR; color:black; }'+
 'a.goohistlink {background: BH_COLOR;}'+
 '#gtp_dict {margin: 0; position: relative;}'+
 '#gtp_dict ol {padding: 0 .5em 0 0; margin-left: 0.2em;}'+
 '#gtp_dict li {list-style: square inside; display: list-item;}'+
-'#gtp_dict td {padding-left: .25em; vertical-align:top; border:0px; color:black; background:BG_COLOR;}'+
+'#gtp_dict td {padding-left: .25em; vertical-align:top; border:0px; color:black; }'+
 '#optSelLangFrom,#optSelLangTo {max-width: 150px; text-align: left !important; }'+
 '#divExtract{word-spacing: normal !important;}'+
 '#divBottom {position: relative; width: 100%; font-size: smaller; text-decoration:none; }'+    
