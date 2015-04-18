@@ -10,8 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.6.0
+// @version 3.6.2
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+//  3.6.2 2015-04-18 + gray gradient background 
 //  3.6.1 2015-04-17
 //  + selectable background color
 //  * bugfixes
@@ -101,12 +102,15 @@ var gt_sl_gms, gt_tl_gms, gt_sl, gt_tl;
 var sT;
 var noMup=0;
 var BG={
-t:  ["yellow" ,"grey"   ,"blue"   ,"green"  ,"pink"    ],
-C:  ['#FFFFE1','#D1D1D1','#D3ECED','#C4FFC4','#FFE6E6' ],
-T:  ['#DDDDAA','#A0A097','#8CCCCE','#6BEF69','#FFC6C8' ],
-H:  ['#F9E78F','#C1C1B7','#BCD1D1','#AAEEAA','#E8D0D0' ],
-f:  [function(){css(0)}, function(){css(1)},function(){css(2)},
-     function(){css(3)}, function(){css(4)}]
+t:  ["yellow" ,"grey"   ,"blue"   ,"green"  ,"pink"   , "striped"],
+C:  ['#FFFFE1','#D1D1D1','#D3ECED','#C4FFC4','#FFE6E6',
+    '-moz-linear-gradient(-45deg, #DDD, #AAA )'],
+T:  ['#DDDDAA','#A0A097','#8CCCCE','#6BEF69','#FFC6C8',
+    '-moz-linear-gradient(to right, #CCC, #888)'],
+H:  ['#F9E78F','#C1C1B7','#BCD1D1','#AAEEAA','#E8D0D0',
+    'rgba(160,160,160,.3)'],
+f:  [function(){css(0)}, function(){css(1)}, function(){css(2)},
+     function(){css(3)}, function(){css(4)}, function(){css(5)}]
 }
 
 function mousedownCleaning(evt){
@@ -668,7 +672,7 @@ function options(evt){
 // colours
     for(var b,li=BG.C.length,ii=0;ii<li;ii++){
 		 b=addEl(dO,'span',{'class':'gtBGColor', title:BG.t[ii],
-     style: 'background-color:'+ BG.C[ii]+'!important;' +
+     style: 'background:'+ BG.C[ii]+'!important;' +
      (ii==0?'margin-left:6px' :'')
      }, null,'&nbsp;');
      b.addEventListener('click',BG.f[ii]); 
@@ -1258,7 +1262,7 @@ stickStyle((
 '#divResult {overflow: auto; padding:3px; margin-bottom: 3px; max-height: 480px !important;}'+
 '#divResult table *{ line-height: .85em !important}'+
 '#divDic, #divDic *, #divSelflag, divSelflag * {font: small normal Tahoma,Verdana,Arial sans-serif !important; }'+
-'#divDic,#divSelflag {position: absolute; background-color:BG_COLOR !important; color:#000000 !important; opacity: .95'+
+'#divDic,#divSelflag {position: absolute; background:BG_COLOR !important; color:#000000 !important; opacity: .95'+
 ';padding:5px ;z-index:10000; border-radius:3px; border: solid thin grey'+
 ';text-align: left !important;}'+
 '#divDic{/*min-width: 340px !important; min-height:50px;*/ max-width:50%; padding: 3px; margin: 0;}'+
@@ -1269,27 +1273,27 @@ stickStyle((
 'a.gootranslink:visited {color:  #047 !important; text-decoration: none !important;}'+ 
 'a.gootranslink:hover {color:  #047 !important; text-decoration: underline !important;}'  +
 'a.gootranslink:active {color:  #047 !important; text-decoration: underline !important;}' +
-'#gtp_dict td {font-size:14px; line-height:.8em; margin-left:5px; border:0px; background-color:BG_COLOR; color:black;}'+
-'a.goohistlink {background-color: BH_COLOR;}'+
+'#gtp_dict td {font-size:14px; line-height:.8em; margin-left:5px; border:0px; background:BG_COLOR; color:black;}'+
+'a.goohistlink {background: BH_COLOR;}'+
 '#gtp_dict {margin: 0; position: relative;}'+
 '#gtp_dict ol {padding: 0 .5em 0 0; margin-left: 0.2em;}'+
 '#gtp_dict li {list-style: square inside; display: list-item;}'+
-'#gtp_dict td {padding-left: .25em; vertical-align:top; border:0px; color:black; background-color:BG_COLOR;}'+
+'#gtp_dict td {padding-left: .25em; vertical-align:top; border:0px; color:black; background:BG_COLOR;}'+
 '#optSelLangFrom,#optSelLangTo {max-width: 150px; text-align: left !important; }'+
 '#divExtract{word-spacing: normal !important;}'+
 '#divBottom {position: relative; width: 100%; font-size: smaller; text-decoration:none; }'+    
 '#historyLink {display: inline; position: relative; font-size:smaller; text-decoration:none;}'+
 '#sourceLink {display: inline; position: relative; margin-left: 2em;  font-size:smaller; text-decoration:none;}'+
 '#imgSourcesave {display: inline; position: relative; margin-left:2px;}'+
-'#optionsLink {display: inline; position: relative; margin-left: 2em; font-size:smaller !important; text-decoration:none !important;}'+    
+'#optionsLink {display: inline; position: relative; padding-left: 1em; margin-left: 1em; font-size:smaller !important; text-decoration:none !important;}'+    
 '#divOpt {position: relative; padding: 5px;'+
 'border-top: thin solid grey;}'+ 
 '#divLookup, #divOpt, #divBottom,#divSourcetext,#divHist,#divuse {direction: ltr !important;}'+
-'#divHist {background-color:BG_COLOR; position:relative; padding:5px; text-align:left !important;'+
+'#divHist {background:BG_COLOR; position:relative; padding:5px; text-align:left !important;'+
 'border-top: thin solid grey;}'+ 
-'#gtp_dict {background-color:BG_COLOR; color:#000000; opacity: .95; padding:1px; border-radius:3px;'+
+'#gtp_dict {background:BG_COLOR; color:#000000; opacity: .95; padding:1px; border-radius:3px;'+
 'margin-bottom: .1em; overflow-y:auto; overflow-x:hidden; font-size:small;}'+
-'#divOpt {background-color:BG_COLOR; position:relative; padding:5px; text-align:left !important;}'+
+'#divOpt {background:BG_COLOR; position:relative; padding:5px; text-align:left !important;}'+
 '#divLookup, #divUse {background-color:transparent; color:#000000; position:absolute; padding: 3px;}'+
 '#divSourceshow {border:0;padding: 0 0 2px 0; margin: 0;}'+
 '#divSourcetext{ width:100%; height: 3em; line-height: .85em; overflow: auto !important;}' + 
@@ -1297,7 +1301,7 @@ stickStyle((
 '.gtlActive:before{ content:"\u2191" !important;}'+
 '#imgUse, #divGetback, #divGetforw {margin-left: 5px !important; cursor: pointer;}'+
 '#divSourcetext {background: #EEE !important; color: black !important;}'+
-'.gootransbutt {background-color: BT_COLOR;'+
+'.gootransbutt {background: BT_COLOR;'+
 'border-radius: 3px; margin-top: 5px; }'+
 '.goounsaved {background-color: #EF9024;'+
 'border-radius: 3px; margin-top: 5px; }'+
@@ -1317,6 +1321,8 @@ stickStyle((
 );
 if(-1 !== n) return;
 stickStyle('\
+#divBottom{padding-top: 3px;}\
+.gootransbutt#optionsLink{margin-top:0; padding-top: 3px; padding-bottom: 1px;}\
 .gtBGColor{border:thin solid blue !important; cursor: pointer;\
 padding-right:6px; margin-right: 2px;}\
 .gootranslink[titel]{position: relative;}\
