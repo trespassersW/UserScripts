@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name           translate.google tooltip
 // @namespace      trespassersW
 // @author      trespassersW
@@ -10,8 +10,10 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.6.2.2
+// @version 3.7.0
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 3.7.0   2015-04-19 * TTS: alt-select text inside tooltip and shift-click language icon below
+//   * tts window in IFRAME
 // 3.6.2.2 2015-04-19 * gray gradient background 
 // 3.6.1 2015-04-17   + selectable background color
 // 3.5.1 2015-04-15
@@ -157,6 +159,8 @@ function cleanUp(s){
  killId('divUse'); 
  killId('divBack'); 
  killId('divSelflag'); 
+ killId('divTtsIfr');
+
  //divExtract='';
  if(documentcontentEditable)
     documentcontent.Editable=documentcontentEditable,
@@ -384,12 +388,32 @@ function lookup(evt){
 //"http://www.google.com/translate_t?text=" + txtSel + "&langpair=" + lang;
     gtRequest(txtSel,gt_sl,gt_tl);
 }
+var IFR;
+function openInFrame(url){
+  killId('divTtsIfr');
+  var dD=getId('divDic');
+  var IFR=buildEl('div',{id:'divTtsIfr',style: 'position: relative;padding:0!important;margin:3px 0 0 0!important;'},null,null);
+  addEl(IFR, 'span',{'class':"gootransbutt gootranslink",style: 'color:red!important;'},
+  ['click', function(e){killId('divTtsIfr')}],'&#x2716;');
+  addEl(IFR, 'span',{style: 'color:#777 !important;'},null,'&nbsp;playback&nbsp;');
+  addEl(IFR, 'br');
+  addEl(IFR, 'iframe',{
+  width: "99%", height: "36", frameborder: "0",scrolling:"no", marginheight:"0", marginwidth:"0",
+  src: url
+  },
+  null,null);
+  console.log(5)
+  insAfter(IFR,getId('divBottom'));
+/*
+*/
+}
 
 function ttsRequest(txt,t){
   var etxt = escAp(txt);
   etxt=ttsURL + "&tl="	+ t + "&ie=utf-8&q=" + etxt.split(' ').slice(0,19).join(' ');
   _log('tts> '+etxt);
-  GM_openInTab(etxt);
+  openInFrame(etxt);
+  //GM_openInTab(etxt);
   // sorry, firefox' decodeAudioData() does NOT support mp3
 }
 
@@ -407,7 +431,6 @@ function gtRequest(txt,s,t){
   }
   last_sl = s; last_tl = t;
 }
-
 function Request(url,cb){
   URL=url; _log('R: '+URL);
   var meth=cb? 'POST': 'GET';
