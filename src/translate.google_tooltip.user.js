@@ -1,4 +1,4 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name           translate.google tooltip
 // @namespace      trespassersW
 // @author      trespassersW
@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.0
+// @version 3.7.1
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.7.0   2015-04-19 * TTS: alt-select text inside tooltip and shift-click language icon below
+// 3.7.1   2015-04-19 * TTS: alt-select text inside tooltip and shift-click language icon below
 //   * tts window in IFRAME
 // 3.6.2.2 2015-04-19 * gray gradient background 
 // 3.6.1 2015-04-17   + selectable background color
@@ -392,10 +392,10 @@ var IFR;
 function openInFrame(url){
   killId('divTtsIfr');
   var dD=getId('divDic');
-  var IFR=buildEl('div',{id:'divTtsIfr',style: 'position: relative;padding:0!important;margin:3px 0 0 0!important;'},null,null);
+  var IFR=buildEl('div',{id:'divTtsIfr',style: 'position: relative;padding: 0 !important;margin:6px 0 0 0!important;'},null,null);
   addEl(IFR, 'span',{'class':"gootransbutt gootranslink",style: 'color:red!important;'},
   ['click', function(e){killId('divTtsIfr')}],'&#x2716;');
-  addEl(IFR, 'span',{style: 'color:#777 !important;'},null,'&nbsp;playback&nbsp;');
+  addEl(IFR, 'a',{'class':"gootransbutt gootranslink", style: 'margin-left:1em;color:#777 !important;', href: url, target:"_blank"}, null,'&nbsp;playback&nbsp;');
   addEl(IFR, 'br');
   addEl(IFR, 'iframe',{
   width: "99%", height: "36", frameborder: "0",scrolling:"no", marginheight:"0", marginwidth:"0",
