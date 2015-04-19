@@ -10,12 +10,10 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.6.2.1
+// @version 3.6.2.2
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-//  3.6.2.1 2015-04-18 * gray gradient background 
-//  3.6.1 2015-04-17
-//  + selectable background color
-//  * bugfixes
+// 3.6.2.2 2015-04-19 * gray gradient background 
+// 3.6.1 2015-04-17   + selectable background color
 // 3.5.1 2015-04-15
 //  + TTS: alt-select text inside tooltip and shift-click language icon below
 //  * From<->To buttons fix; * err handler
@@ -58,8 +56,11 @@
 // @icon  data:image/jpg;base64, R0lGODlhIAARALP/AAAAAP///xMYfAqf////Zv/qDuCeH8VmB8DAwAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAgALAAAAAAgABEAQASdEMlJgb00awkMKQZYjB8RBsE4AtLQvtt0sXHcEcT1pbxK0hsXRmYIGUUgA3DiQjQtssInRAjglMsa4ibtlqSGgECQymmaAwDYUhSFfKoQDQ3LdA6Hoh6qbW4sJHpFWTUAOEA3Vj1WZjF+HQU9X18oPxl0Wx4kXoFiZF1zMEJgbW8qJnAHoU4takocpW5IIISYGh1HRlh9hRZ4eIRaEQA7
 //
 // ==/UserScript==
+
 if(document.body){ 
-main = function (){// "use strict";
+
+main = function (){ "use strict";
+
 var   GTsuffix=".com"; // ".fr" ".de" ".ru" ".com"
 
 var   GTurl= "https://translate.google"+GTsuffix+"/?"; 
@@ -101,14 +102,20 @@ var gt_sl_gms, gt_tl_gms, gt_sl, gt_tl;
 
 var sT;
 var noMup=0;
+var _G = "-moz-linear-gradient",_T='transparent';
+var G_ ='rgba(0,0,0,.1)';
 var BG={
 t:  ["yellow" ,"grey"   ,"blue"   ,"green"  ,"pink"   , "striped"],
 C:  ['#FFFFE1','#D1D1D1','#D3ECED','#C4FFC4','#FFE6E6',
-    '-moz-linear-gradient(-45deg, #DDD, #AAA )'],
-T:  ['#DDDDAA','#A0A097','#8CCCCE','#6BEF69','#FFC6C8',
-    '-moz-linear-gradient(to right, #CCC, #888)'],
-H:  ['#F9E78F','#C1C1B7','#BCD1D1','#AAEEAA','#E8D0D0',
-    'rgba(160,160,160,.3)'],
+    _G+'(-45deg, #DDD, #AAA )'],
+//T:  ['#DDDDAA','#A0A097','#8CCCCE','#6BEF69','#FFC6C8',
+//    '-moz-linear-gradient(to right, #CCC, #888)'],
+T:  [_G+"(to right,#FFFFE1,#DDDDAA)", _G+"(to right,#D1D1D1,#A0A097)",
+     _G+"(to right,#D3ECED,#8CCCCE)", _G+"(to right,#C4FFC4,#6BEF69)",
+     _G+"(to right,#FFE6E6,#FFC6C8)", _G+"(to right,#CCC, #888)"],
+//'#F9E78F','#C1C1B7','#BCD1D1','#AAEEAA','#E8D0D0','rgba(0,0,0,.1)'     
+H:  [_T,_T,_T,_T,_T,_G+'(to bottom right,rgba(127,127,127,0),rgba(127,127,127,.15))'
+    ],
 f:  [function(){css(0)}, function(){css(1)}, function(){css(2)},
      function(){css(3)}, function(){css(4)}, function(){css(5)}]
 }
@@ -1262,8 +1269,8 @@ stickStyle((
 '#divResult {overflow: auto !important; padding:3px !important; margin: 0 0 3px 0 !important; max-height: 480px !important;}'+
 '#divResult table *{ line-height: .85em !important}'+
 '#divDic, #divDic *, #divSelflag, divSelflag * {font: small normal Tahoma,Verdana,Arial sans-serif !important; }'+
-'#divDic,#divSelflag {position: absolute; background:BG_COLOR !important; color:#000000 !important; opacity: .95'+
-';padding:5px !important; margin:0; z-index:10000; border-radius:3px; border: solid thin grey'+
+'#divDic,#divSelflag {position: absolute; background: BG_COLOR !important; color:#000000 !important; opacity: .95'+
+';padding:5px !important; margin:0; z-index:10000; border-radius:3px; border: solid thin gray'+
 ';text-align: left !important;}'+
 '#divDic{/*min-width: 340px !important; min-height:50px;*/ max-width:50%; padding: 3px; margin: 0;}'+
 '#divSelflag{ max-width: 180px; }'+
@@ -1273,8 +1280,10 @@ stickStyle((
 'a.gootranslink:visited {color:  #047 !important; text-decoration: none !important;}'+ 
 'a.gootranslink:hover {color:  #047 !important; text-decoration: underline !important;}'  +
 'a.gootranslink:active {color:  #047 !important; text-decoration: underline !important;}' +
-'#gtp_dict tr {font-size:14px; line-height:.8em; margin-left:5px; margin-bottom:1px; border:0; background:BG_COLOR; color:black; }'+
-'a.goohistlink {background: BH_COLOR;}'+
+'#gtp_dict tr {font-size:14px !important; line-height:.9em!important;color:black;'+
+'background:BH_COLOR;'+
+'}'+
+'a.goohistlink {background:'+G_ +';}'+
 '#gtp_dict {margin: 0; position: relative;}'+
 '#gtp_dict ol {padding: 0 .5em 0 0; margin-left: 0.2em;}'+
 '#gtp_dict li {list-style: square inside; display: list-item;}'+
@@ -1311,7 +1320,7 @@ stickStyle((
 'vertical-align: top; white-space: normal;}'+
 'td.gtp-trans {/*overflow-x: hidden;*/ vertical-align: top; white-space: normal;'+
 ' width: 100%; color: #404040 !important}'+
-'td.gtp-pos, td.gtp-word, td.gtp-trans {padding-top: 1px !important; padding-bottom: 0 !important;}'+
+'td.gtp-pos, td.gtp-word, td.gtp-trans {padding-bottom: 0px !important; padding-bottom: 1px !important;}'+
 '.gtp-hide {display: none}'+
 '.gtp-block {display: block}'+
 '').
@@ -1319,6 +1328,7 @@ stickStyle((
  replace(/BH_COLOR/g,BG.H[i]).
  replace(/BT_COLOR/g,BG.T[i])
 );
+ _log('BH['+i+']='+BG.H[i]);
 if(-1 !== n) return;
 stickStyle('\
 #divBottom{padding-top: 3px;}\
