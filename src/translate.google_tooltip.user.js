@@ -10,10 +10,11 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.1
+// @version 3.7.2
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.7.1   2015-04-19 * TTS: alt-select text inside tooltip and shift-click language icon below
-//   * tts window in IFRAME
+// 3.7.2   2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
+//   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
+//   * [ctrl] tts window in new tab
 // 3.6.2.2 2015-04-19 * gray gradient background 
 // 3.6.1 2015-04-17   + selectable background color
 // 3.5.1 2015-04-15
@@ -79,7 +80,7 @@ var llii=0, _log = function(){ /* * /
 /* */
 }
 
-var URL='*';
+var URL='*'; var tURL;
 var GT_tl='auto';
 var body;
 
@@ -182,9 +183,9 @@ function useClick(e){
 }
 var last_tl, last_sl;
 function backLookup(e){
-    if(e.shiftKey) { 
+    if(e.shiftKey || e.ctrlKey) { 
     noMup=1;
-    ttsRequest(txtSel,gt_tl);
+    ttsRequest(txtSel,gt_tl, e.ctrlKey!=0);
     return;
     }
     killId('divUse');
@@ -194,9 +195,9 @@ function backLookup(e){
 //GET https://translate.google.com/?langpair=en|ru&text=Varnish
 //POST https://translate.google.com/translate_a/t?client=t&hl=ru&sl=en&tl=ru&text=Varnish
 function forwLookup(e){
-    if(e.shiftKey)  { 
+    if(e.shiftKey || e.ctrlKey)  { 
     noMup=1;
-    ttsRequest(txtSel,gt_sl);
+    ttsRequest(txtSel,gt_sl, e.ctrlKey!=0);
     return;
     }
     killId('divUse');
@@ -205,7 +206,7 @@ function forwLookup(e){
    	currentURL = GTurl +  "langpair=" + gt_sl + "|" + gt_tl + "&text=" + escAp(txtSel);
 }
  var Gctrl, Galt;
- var sayTip="\n[shift] listen (";
+ var sayTip="\n[shift / ctrl] listen (";
 function showLookupIcon(evt){
   Gctrl=GM_getValue('ctrl',false), Galt=GM_getValue('alt',true);
 	if((!evt.ctrlKey && Gctrl)
@@ -395,24 +396,29 @@ function openInFrame(url){
   var IFR=buildEl('div',{id:'divTtsIfr',style: 'position: relative;padding: 0 !important;margin:6px 0 0 0!important;'},null,null);
   addEl(IFR, 'span',{'class':"gootransbutt gootranslink",style: 'color:red!important;'},
   ['click', function(e){killId('divTtsIfr')}],'&#x2716;');
-  addEl(IFR, 'a',{'class':"gootransbutt gootranslink", style: 'margin-left:1em;color:#777 !important;', href: url, target:"_blank"}, null,'&nbsp;playback&nbsp;');
+  addEl(IFR, 'a',{'class':"gootransbutt gootranslink", style: 'margin-left:1em;color:#555 !important;', href: url, target:"_blank"},
+  ['mousedown',function(e){e.preventDefault(),e.stopPropagation();GM_openInTab(e.target.href)}],
+  '&nbsp;playback&nbsp;');
   addEl(IFR, 'br');
   addEl(IFR, 'iframe',{
   width: "99%", height: "36", frameborder: "0",scrolling:"no", marginheight:"0", marginwidth:"0",
   src: url
   },
   null,null);
-  console.log(5)
+
   insAfter(IFR,getId('divBottom'));
 /*
 */
 }
 
-function ttsRequest(txt,t){
+function ttsRequest(txt,t,e){
   var etxt = escAp(txt);
   etxt=ttsURL + "&tl="	+ t + "&ie=utf-8&q=" + etxt.split(' ').slice(0,19).join(' ');
   _log('tts> '+etxt);
-  openInFrame(etxt);
+  if(e)
+    GM_openInTab(etxt);
+  else
+    openInFrame(etxt);
   //GM_openInTab(etxt);
   // sorry, firefox' decodeAudioData() does NOT support mp3
 }
