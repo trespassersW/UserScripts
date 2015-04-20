@@ -10,8 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.2
+// @version 3.7.3
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 3.7.3 2015-04-20 * tiny fixes; cosmetics
 // 3.7.2   2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
 //   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
 //   * [ctrl] tts window in new tab
@@ -393,15 +394,17 @@ var IFR;
 function openInFrame(url){
   killId('divTtsIfr');
   var dD=getId('divDic');
-  var IFR=buildEl('div',{id:'divTtsIfr',style: 'position: relative;padding: 0 !important;margin:6px 0 0 0!important;'},null,null);
+  var IFR=buildEl('div',{id:'divTtsIfr',style: 'position: relative;padding: 0 !important;margin:3px 0 0 0!important;'},null,null);
   addEl(IFR, 'span',{'class':"gootransbutt gootranslink",style: 'color:red!important;'},
   ['click', function(e){killId('divTtsIfr')}],'&#x2716;');
-  addEl(IFR, 'a',{'class':"gootransbutt gootranslink", style: 'margin-left:1em;color:#555 !important;', href: url, target:"_blank"},
-  ['mousedown',function(e){e.preventDefault(),e.stopPropagation();GM_openInTab(e.target.href)}],
-  '&nbsp;playback&nbsp;');
+  addEl(IFR, 'a',{'class':"gootransbutt gootranslink", style: 'margin-left:1em;padding:3px .5emx;color:#555 !important;', 
+  href: url, target:"_blank", title: deURI(url)},
+  ['click',function(e){e.preventDefault(),e.stopPropagation();GM_openInTab(e.target.href)}],
+  'playback');
   addEl(IFR, 'br');
   addEl(IFR, 'iframe',{
-  width: "99%", height: "36", frameborder: "0",scrolling:"no", marginheight:"0", marginwidth:"0",
+  width: "99%", height: "48", frameborder: "0",scrolling:"auto", marginheight:"0", marginwidth:"0",
+  style:'padding-top:3px;overflow-x:hidden;',
   src: url
   },
   null,null);
@@ -1602,6 +1605,16 @@ if(  location.href == senojflags[0]
  }catch(e){console.log('senojflags\n'+e)}
 }
 }catch(e){console.log('nobody\n'+e); }
+
+function deURI(u){
+  var x = u.indexOf("&q=");
+  if(x>=0) u=u.substr(x+3);
+  return decodeURIComponent(u).split(' ').slice(0,9).join(' ');
+}
+ var uq=location.href.match(/^https:\/\/translate\.google\.[a-z]{2,3}\/translate_tts\?client\=t\&.+?\&q\=(.+)/);
+ if(uq && uq[1]) 
+  window.document.title=deURI(uq[1]);
+
 }
 main();
 }
