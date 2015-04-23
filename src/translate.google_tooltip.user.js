@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.5
+// @version 3.7.6
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.7.5 2015-04-23 * tiny fixes; cosmetics
+// 3.7.6 2015-04-23 * maquillage
 // 3.7.2   2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
 //   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
 //   * [ctrl] tts window in new tab
@@ -391,20 +391,27 @@ function lookup(evt){
 //"http://www.google.com/translate_t?text=" + txtSel + "&langpair=" + lang;
     gtRequest(txtSel,gt_sl,gt_tl);
 }
+
 var IFR;
+function eStop(e){e.preventDefault(),e.stopPropagation()}
 function openInFrame(url){
   killId('divTtsIfr');
   var dD=getId('divDic');
   var IFR=buildEl('div',{id:'divTtsIfr',style: 'position: relative;padding: 0 !important;margin:3px 0 0 0!important;'},null,null);
-  addEl(IFR, 'span',{'class':"gootransbutt gootranslink",style: 'color:red!important;'},
+  var IFH=addEl(IFR,'div',{id:'divTtsIfh'},null,null);
+  addEl(IFH, 'span',{'class':"gootransbutt gootranslink",style: 'color:red!important;'},
   ['click', function(e){killId('divTtsIfr')}],'&#x2716;');
-  addEl(IFR, 'a',{'class':"gootransbutt gootranslink", style: 'margin-left:1em;padding:3px .5emx;color:#555 !important;', 
-  href: url, target:"_blank", title: deURI(url)},
-  ['click',function(e){e.preventDefault(),e.stopPropagation();GM_openInTab(e.target.href)}],
-  'playback');
-  addEl(IFR, 'br');
+  addEl(IFH, 'a',{'class':"gootransbutt gootranslink", id: 'divTtsLnk',
+  href: url, target:"_blank", title: 'play in tab'},
+  ['click',
+     function(e)
+       {eStop(e);GM_openInTab(e.target.href)}
+  ],
+  '');
+  addEl(IFH, 'span', {style: 'margin-left:.5em;' },[],deURI(url));
+//  addEl(IFR, 'br');
   addEl(IFR, 'iframe',{
-  width: "99%", height: "48", frameborder: "0",scrolling:"auto", marginheight:"0", marginwidth:"0",
+  width: "100%", height: "48", frameborder: "0",scrolling:"auto", marginheight:"0", marginwidth:"0",
   style:'padding-top:3px;overflow-x:hidden;',
   src: url
   },
@@ -920,7 +927,7 @@ function history(){
     if(i < l-1)
     divHist.appendChild(document.createTextNode(' '));
   }
-	addEl(divHist,'span',null,null,'<br>&nbsp;');
+	//addEl(divHist,'span',null,null,'<br>&nbsp;');
   if(getId('divSourceshow'))
    insAfter(divHist,getId('divSourceshow'));
   else
@@ -1303,7 +1310,7 @@ stickStyle((
 '#divResult {overflow: auto !important; padding:3px !important; margin: 0 0 3px 0 !important; max-height: 480px !important;}'+
 '#divResult table *{ line-height: .85em !important}'+
 '#divDic, #divDic *, #divSelflag, divSelflag * {font: small normal Tahoma,Verdana,Arial sans-serif !important; }'+
-'#divDic,#divSelflag {position: absolute; background: BG_COLOR !important; color:#000000 !important; opacity: .95'+
+'#divDic,#divSelflag {position: absolute; background: BG_COLOR !important; color:#000000 !important; opacity: 1'+
 ';padding:5px !important; margin:0; z-index:10000; border-radius:3px; border: solid thin gray'+
 ';text-align: left !important;}'+
 '#divDic{/*min-width: 340px !important; min-height:50px;*/ max-width:50%; padding: 3px; margin: 0;}'+
@@ -1322,8 +1329,10 @@ stickStyle((
 '#gtp_dict ol {padding: 0 .5em 0 0; margin-left: 0.2em;}'+
 '#gtp_dict li {list-style: square inside; display: list-item;}'+
 '#gtp_dict td {padding-left: .25em; vertical-align:top; border:0px; color:black; }'+
-'#optSelLangFrom,#optSelLangTo {max-width: 150px; text-align: left !important;}'+
-'#optSelLangFrom,#optSelLangTo,#divDic input[type="textbox"]{background: BE_COLOR !important;}'+
+'#optSelLangFrom,#optSelLangTo {max-width: 150px; text-align: left !important; height: 1.5em;\
+}'+
+'#optSelLangFrom,#optSelLangTo,#divDic input[type="textbox"]{background: BE_COLOR !important;\
+padding-bottom: 3px !important; margin-bottom: 4px!important;}'+
 '#divExtract{word-spacing: normal !important;}'+
 '#divBottom {position: relative; width: 100%; font-size: smaller; text-decoration:none; }'+    
 '#historyLink {display: inline; position: relative; font-size:smaller; text-decoration:none;}'+
@@ -1335,12 +1344,12 @@ stickStyle((
 '#divLookup, #divOpt, #divBottom,#divSourcetext,#divHist,#divuse {direction: ltr !important;}'+
 '#divHist {background:BG_COLOR; position:relative; padding:5px; text-align:left !important;'+
 'border-top: thin solid grey;}'+ 
-'#gtp_dict {background:BG_COLOR; color:#000000; opacity: .95; padding:1px; border-radius:3px;'+
+'#gtp_dict {background:BG_COLOR; color:#000000; padding:1px; border-radius:3px;'+
 'margin-bottom: .1em; overflow-y:auto; overflow-x:hidden; font-size:small;}'+
 '#divOpt {background:BG_COLOR; position:relative; padding:5px; text-align:left !important;}'+
 '#divLookup, #divUse {background-color:transparent; color:#000000; position:absolute; padding: 3px;}'+
 '#divSourceshow {border:0;padding: 0 0 2px 0; margin: 0;}'+
-'#divSourcetext{ width:100%; height: 3em; line-height: .85em; overflow: auto !important;}' + 
+'#divSourcetext{ width:97%; height: 3em; line-height: .85em; overflow: auto !important;}' + 
 '.gtlPassive:before{ content:"\u2193";}'+
 '.gtlActive:before{ content:"\u2191" !important;}'+
 '#imgUse, #divGetback, #divGetforw {margin-left: 5px !important; cursor: pointer;}'+
@@ -1367,6 +1376,16 @@ stickStyle((
  _log('BH['+i+']='+BG.H[i]);
 if(-1 !== n) return;
 stickStyle('\
+#divTtsLnk:after{ content:url('+imgPlay+') }\
+#divTtsLnk {padding: 0 3px; margin: 0 4px 0 0;}\
+#divTtsIfh {width: 100%;overflow-x:hidden;\
+background-color: rgba(127,127,127,.25); padding: 3px 0;\
+}\
+#divResult div, #divResult table, #divResult tr, #divResult tr td,\
+#divOpt select, #divOpt input\
+{ padding:0 0 0 0; margin: 0 0 0 0; background: none repeat scroll 0 0 transparent;\
+  border:medium none; line-height: 0.95; }\
+#divOpt {line-height: 2.3 !important;}\
 #divBottom{padding-top: 3px;}\
 .gootransbutt#optionsLink{margin-top:0; padding-top: 3px; padding-bottom: 1px;}\
 .gtBGColor{border:thin solid blue !important; cursor: pointer;\
@@ -1413,6 +1432,9 @@ function insBefore(n,e){
    e.parentNode.insertBefore(n,e);
 }
 var imgH='<img border=0  src="' , imgD='data:image/png;base64,',imgT='">';
+var imgPlay=imgD+
+'iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAI1JREFUeNpj+H9h4v//D7YRh4FqGf6vsvuPF4PAnnQ4n+H/At3/WDEIgOjTvQg2EDP8ny7/HwWDAIy+sxnBvr0RzGb43y/0H45hAMR+fAQrm+F/B/t/DAASe3gQK5vhfwsDpgaQ2IP9WNkQDTBMsgaYJhgNcgqMfWUZDg3oGveUINh4NSBrnGdGggY0DAAAy70TuBaoTgAAAABJRU5ErkJggg=='
+;
 
 //http://www.senojflags.com/images/national-flag-icons/Portugal-Flag.png
 imgForwSrc= imgD+
