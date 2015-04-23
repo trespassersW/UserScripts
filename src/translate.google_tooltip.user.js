@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.3
+// @version 3.7.4
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.7.3 2015-04-20 * tiny fixes; cosmetics
+// 3.7.4 2015-04-23 * tiny fixes; cosmetics
 // 3.7.2   2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
 //   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
 //   * [ctrl] tts window in new tab
@@ -91,7 +91,7 @@ var senojflags = [
 //
 //function GM_log(t){console.log(t);}
 
-const res_dict='gt-res-dict'; //'gt_res_dict';
+var res_dict='gt-res-dict'; //'gt_res_dict';
 var  languagesGoogle, isInited=false;
 var rtl_langs="ar fa iw ur";
 var inTextArea= null;
@@ -110,7 +110,7 @@ var _G = "-moz-linear-gradient",_T='transparent';
 var G_ ='rgba(0,0,0,.1)';
 var BG={
 t:  ["yellow" ,"grey"   ,"blue"   ,"green"  ,"pink"   , "striped"],
-C:  ['#FFFFE1','#D1D1D1','#D3ECED','#C4FFC4','#FFE6E6',
+C:  ['#FFFFE1','#D1D1D1','#D3ECEC','#C4FFC4','#FFE6E6',
     _G+'(-45deg, #DDD, #AAA )'],
 //T:  ['#DDDDAA','#A0A097','#8CCCCE','#6BEF69','#FFC6C8',
 //    '-moz-linear-gradient(to right, #CCC, #888)'],
@@ -120,6 +120,7 @@ T:  [_G+"(to right,#FFFFE1,#DDDDAA)", _G+"(to right,#D1D1D1,#A0A097)",
 //'#F9E78F','#C1C1B7','#BCD1D1','#AAEEAA','#E8D0D0','rgba(0,0,0,.1)'     
 H:  [_T,_T,_T,_T,_T,_G+'(to bottom right,rgba(127,127,127,0),rgba(127,127,127,.15))'
     ],
+E:  ['#F4F4E8','#EEEEEE','#E8E8F4','#E8F4E8','#F4E8E8','#DDDDDD'],
 f:  [function(){css(0)}, function(){css(1)}, function(){css(2)},
      function(){css(3)}, function(){css(4)}, function(){css(5)}]
 }
@@ -587,6 +588,7 @@ function extractResult(html){
 	dR.innerHTML = '<a class="gootranslink" href="#'+
   '" target="_blank">' + 'translating..' /*translation*/ + '</a>'; // +'<br>&nbsp;';
   dR.childNodes[0].setAttribute('href',currentURL); //<a href
+  dR.childNodes[0].setAttribute('title',deURI(currentURL,"&text="));
   dR.style.textAlign = rtl_langs.indexOf(GT_tl) < 0? 'left':'right';
   dR.style.direction = rtl_langs.indexOf(GT_tl) < 0? 'ltr' :  'rtl';
   dR.lang=GT_tl;
@@ -1237,12 +1239,12 @@ function dragHandler(e){
 }
 function clickedInsideID(target, id) {
 	if (target.getAttribute('id')==id)
-		return getId(id);
+		return target;
 	if (target.parentNode) {
 		while (target = target.parentNode) {
 			try{
 				if (target.getAttribute('id')==id)
-					return getId(id);
+					return target;
 			}catch(e){}
 		}
 	}
@@ -1251,7 +1253,7 @@ function clickedInsideID(target, id) {
 //end drag code
 function b2b64(inp) { // binary data --> base64
   var output = [], c1, c2, c3, e1, e2, e3, e4, i = 0;
-  const k="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+  var k="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
   var len = inp.length;
   while( i < len ){
     c1 = inp.charCodeAt(i++); c2 = inp.charCodeAt(i++); c3 = inp.charCodeAt(i++);
@@ -1271,7 +1273,7 @@ function ttrans( s, ttab ){
     t += (c=ttab[cc=s.charAt(i)]) ? c : cc;
   return t;
 }
-const tabUrlEsc = {
+var tabUrlEsc = {
  '#':'%23', '%':'%25', '&':'%26', '.':'%2e', '/':'%2f', '?':'%3f'
  };
 function escAp(s){
@@ -1341,7 +1343,7 @@ stickStyle((
 '.gtlPassive:before{ content:"\u2193";}'+
 '.gtlActive:before{ content:"\u2191" !important;}'+
 '#imgUse, #divGetback, #divGetforw {margin-left: 5px !important; cursor: pointer;}'+
-'#divSourcetext {background: #EEE !important; color: black !important;}'+
+'#divSourcetext {background: BE_COLOR; color: black !important;}'+
 '.gootransbutt {background: BT_COLOR;'+
 'border-radius: 3px; margin-top: 5px; }'+
 '.goounsaved {background-color: #EF9024;'+
@@ -1358,7 +1360,8 @@ stickStyle((
 '').
  replace(/BG_COLOR/g,BG.C[i]).
  replace(/BH_COLOR/g,BG.H[i]).
- replace(/BT_COLOR/g,BG.T[i])
+ replace(/BT_COLOR/g,BG.T[i]).
+ replace(/BE_COLOR/g,BG.E[i])
 );
  _log('BH['+i+']='+BG.H[i]);
 if(-1 !== n) return;
@@ -1606,12 +1609,13 @@ if(  location.href == senojflags[0]
 }
 }catch(e){console.log('nobody\n'+e); }
 
-function deURI(u){
-  var x = u.indexOf("&q=");
-  if(x>=0) u=u.substr(x+3);
+function deURI(u,m){
+  if(!m) m= "&q=";
+  var x = u.indexOf(m);
+  if(x>=0) u=u.substr(x + m.length);
   return decodeURIComponent(u).split(' ').slice(0,9).join(' ');
 }
- var uq=location.href.match(/^https:\/\/translate\.google\.[a-z]{2,3}\/translate_tts\?client\=t\&.+?\&q\=(.+)/);
+ var uq=location.href.match(/^https:\/\/translate\.google\.[a-z]{2,3}\/translate_tts\?client\=t\&.+?(\&q\=.+)/);
  if(uq && uq[1]) 
   window.document.title=deURI(uq[1]);
 
