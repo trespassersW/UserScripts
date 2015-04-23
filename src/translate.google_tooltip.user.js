@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.4
+// @version 3.7.5
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.7.4 2015-04-23 * tiny fixes; cosmetics
+// 3.7.5 2015-04-23 * tiny fixes; cosmetics
 // 3.7.2   2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
 //   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
 //   * [ctrl] tts window in new tab
@@ -1322,7 +1322,8 @@ stickStyle((
 '#gtp_dict ol {padding: 0 .5em 0 0; margin-left: 0.2em;}'+
 '#gtp_dict li {list-style: square inside; display: list-item;}'+
 '#gtp_dict td {padding-left: .25em; vertical-align:top; border:0px; color:black; }'+
-'#optSelLangFrom,#optSelLangTo {max-width: 150px; text-align: left !important; }'+
+'#optSelLangFrom,#optSelLangTo {max-width: 150px; text-align: left !important;}'+
+'#optSelLangFrom,#optSelLangTo,#divDic input[type="textbox"]{background: BE_COLOR !important;}'+
 '#divExtract{word-spacing: normal !important;}'+
 '#divBottom {position: relative; width: 100%; font-size: smaller; text-decoration:none; }'+    
 '#historyLink {display: inline; position: relative; font-size:smaller; text-decoration:none;}'+
