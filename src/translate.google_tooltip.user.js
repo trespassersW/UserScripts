@@ -10,7 +10,7 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.7
+// @version 3.7.72
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
 // 3.7.7 2015-04-24 * exterior
 // 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
@@ -1328,7 +1328,7 @@ font-weight: normal!important;}'+
 'a.gootranslink:visited {color:  #047 !important; text-decoration: none !important;}'+ 
 'a.gootranslink:hover {color:  #047 !important; text-decoration: underline !important;}'  +
 'a.gootranslink:active {color:  #047 !important; text-decoration: underline !important;}' +
-'#gtp_dict tr {font-size:14px !important; line-height:.9em!important;color:black;'+
+'#gtp_dict tbody> tr {font-size:14px !important; line-height:.9em!important;color:black;'+
 'background:BH_COLOR;'+
 '}'+
 'a.goohistlink {background:'+G_ +';}'+
