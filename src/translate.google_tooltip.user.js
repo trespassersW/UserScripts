@@ -10,7 +10,7 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.6
+// @version 3.7.7
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
 // 3.7.7 2015-04-24 * exterior
 // 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
