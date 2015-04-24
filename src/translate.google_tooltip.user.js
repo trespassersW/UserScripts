@@ -1335,7 +1335,7 @@ font-weight: normal!important;}'+
 '#gtp_dict {margin: 0; position: relative;}'+
 '#gtp_dict ol {padding: 0 .5em 0 0; margin-left: 0.2em;}'+
 '#gtp_dict li {list-style: square inside; display: list-item;}'+
-'#gtp_dict td {padding-left: .25em; vertical-align:top; border:0px; color:black; }'+
+'div#gtp_dict tr>td {padding-left: .25em; vertical-align:top; border:0px; color:black; }'+
 '#optSelLangFrom,#optSelLangTo {max-width: 150px; text-align: left !important; height: 1.5em;\
 }'+
 '#optSelLangFrom,#optSelLangTo,#divDic input[type="textbox"]{background: BE_COLOR !important;\
