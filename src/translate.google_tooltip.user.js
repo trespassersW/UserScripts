@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.72
+// @version 3.7.73
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.7.7 2015-04-24 * exterior
+// 3.7.7 2015-04-24 ** exterior
 // 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
 //   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
 //   * [ctrl] tts window in new tab
@@ -80,14 +80,21 @@ var llii=0, _log = function(){ /* * /
  console.log(s)
 /* */
 }
-
+_log("tgtt..");
 var URL='*'; var tURL;
 var GT_tl='auto';
 var body;
 
-var senojflags = [ 
-"http://www.senojflags.com/?gootttp#"
-];
+//{[ hacks
+var UA = navigator.userAgent;
+0 && (UA="Mozilla/5.0 (Windows NT 5.1; rv:37.0) Gecko/20100101 Firefox/37.0");
+var ano="";
+0 && (ano= "http://anonymouse.org/cgi-bin/anon-www.cgi/");
+//}]
+var senoj="http://www.senojflags.com/",
+senojflags = [ano+senoj+"?gtrantoltip#" ],
+seno=ano+senoj,
+senoimg=seno+'images/national-flag-icons/';
 //
 //function GM_log(t){console.log(t);}
 
@@ -455,7 +462,7 @@ function Request(url,cb){
 			method: meth,
 			url: url,
       headers: {	    
-        "User-Agent": navigator.userAgent 
+        "User-Agent": UA 
        ,"Accept":  "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
        ,"Accept-Encoding":  "gzip, deflate"
        //,"Host": "www.google.com"
@@ -652,7 +659,7 @@ function options(evt){
    }
 		//from
     addEl(dO,'a',{'class':'gootransbutt gootranslink',
-    target:'_blank', href:'http://www.senojflags.com/', title: 'choose country flag icon'},
+    target:'_blank', href:seno, title: 'choose country flag icon'},
     ['click',function(e){
      e.preventDefault(); GM_openInTab(senojflags[0]); cleanUp(); return false;}], 
     imgH+imgFlags['AN']+imgT);
@@ -1097,7 +1104,8 @@ function getFlagSrc(lng, where){
    ||flag.indexOf('data:') ==0)
    return flag;
   flagLang=fl;
-  flag= 'http://www.senojflags.com/images/national-flag-icons/'+flag+'-Flag.png';
+//  flag= 'http://www.senojflags.com/images/national-flag-icons/'+flag+'-Flag.png';
+  flag=  senoimg+flag+'-Flag.png';
   flagRequest(flag);
   return flag;
 }
@@ -1109,7 +1117,7 @@ function flagRequest(f){
   binary: true,
   overrideMimeType: "text/plain; charset=x-user-defined",
   headers: {	    
-    "User-Agent": navigator.userAgent
+    "User-Agent": UA
    ,"Accept":  "image/png,image/*;q=0.8,*/*;q=0.5"
    ,"Accept-Encoding":  "gzip, deflate"
   },
@@ -1473,9 +1481,10 @@ imgFlags= {
 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAADkSURBVHjapJM5TgNBEEVfzeZlQIOE5ARxClLOxC04CzFX4ArERAhZsoTEyDDurqa7SGxsIYJZKqnov9p+iZkxJQSogLN9HhIKfBZAY2abUdVFVhlQT5igzoB8AiDPAGKMg5UHTQFwc/fI6rKh/VLsz4b/u9FFXbF5b4+AnXe8rIW2C72qN8uSwtwJoHMwm5NSP0+EbyP4E8DD0z3XZUnqdr0A2XLBawjcHgBOPZYXINILYMlw6o8deFVsvoCq7AewhFf9BWg047n9GOMDFaABroDzgeIt8CZ7J1YjHBkBlanv/DMAwHdYum9dlZQAAAAASUVORK5CYII='
 ,'zh-CN': imgD+
 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFbSURBVHjapJO/SgNBEIe/vduLCSaKFhb6DCnFzs4XsMgjWlj4AD6BFhYKFqKgTSzSaBLN7f+xuJM7RSHRHywLy8w3Oz9mlIjwHymgA/TrexU54E0Dm+Pj0QSACGRADt39gLnQTZkftHd2uqOBdYmR3uGQYjfhnzPSXJHeYTCK2Lu8AquGJYC9vgFY10AupUdvTekdTYgnGvdYVQ5P0nTa+kW+vYV4D5BrgGAt9nZOmCzwDxlxkqG60D0ImCsN/msbKs+J1gKgAXww+Kcp5nKBKgQ0rA09i/Oi8iR880HAGdMATFnSuX8kzWZ8vvqHJvi7idnGBibPGkBZlvSzDJFURfj6FC1ISyl4SpcagDUWVRRISi2ngPTL8PiArUysW3AW0RqUWmqCRATjWiZaa6HbQxXFcjOYUpVTA1wU4eb15S+r4BSwCewBgxWT58BY1XZ16nsVRcCp/67zxwDGd5ld8bkQAQAAAABJRU5ErkJggg=='
+,'ar': imgD+'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAIvSURBVHjapJPNSxRxHMY/M/Ob3bXddV3DBTUh8yJdCiHwIIV0DXqB7nWLDv0NBt06Rt3q0E0PGaFBmGSGUCZKQR6ENV8wddfVfZ35zW/mN9NByd4u4nP5Hr7wgYfneYwoijiODCAGpA7uUaSAugAyN0aHCn9//TAg0BoAYZrYlv0P4cX1oZwAkjrUnMv1ABBFEX6oaU+1cibbARGsVbZZrxWxTRPDMAH4UsgDJAVg+WFATTmUZBWtNVd7L3Ktux9ZaxBvShDriTO2/InhxSlMA042NeOHAYAlADzfpyIbFBplLp/u42bnBRzHYWVjHa01bdlWrnT0sV4t8mppBmFYeL4PgAkgPUnJq9LQHpdyvbizn9koFgl8n3gsxlZ5D39+gcFsDwrNjqwiPXkIcKVHvrxJwa3SIgOcmRkCIUil0+yUSkTxOLsfpmltKHaVQ778A1d6vwMcwlBTk3W2kzaJ5VWyc/Ns1euYmWbK468xZ+cpZBJU3CphqHGls58QgJQSO2njKo+RlY8M3L3Dzq3bdHSdoimdRn9bpO3xEx5tLrDn1MidaMGX8hCgpIeIkqTsBCMLb+gebOfe2Cjm+ASh72M+uM9T1ng28ZKUnSCKQtSBhf0UlCJBREzY2Jbg4fvnTHadpX/gPKZpMLc0zOzqV2xLYBkmIRGeUr8AKtIh5fzmHy2b/v6Oyam3YIDAIi5s5H/qbAAZoBNIH3ELNWDDAKyDIVlHBGhAGced888BANVaBfgg0AbGAAAAAElFTkSuQmCC'
 ,"af":"Namibia" //
 ,"sq":"Albania"
-,"ar":"United-Arab-Emirates"
+//,"ar":"United-Arab-Emirates"
 ,"hy":"Armenia"
 ,"az":"Azerbaijan"
 ,"eu":"Spain"
@@ -1627,7 +1636,7 @@ if (sT){
 document.addEventListener('mouseup', showLookupIcon, false);
 document.addEventListener('mousedown', mousedownCleaning, false);
 // http://www.senojflags.com/#flags16
-if(  location.href == senojflags[0]
+if(  location.href.indexOf(senojflags[0])>-1
    //|location.href == senojflags[1]
 ){try{
   if(!fCSS)  fCSS=
