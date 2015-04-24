@@ -12,8 +12,8 @@
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
 // @version 3.7.6
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.7.6 2015-04-23 * maquillage
-// 3.7.2   2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
+// 3.7.7 2015-04-24 * exterior
+// 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
 //   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
 //   * [ctrl] tts window in new tab
 // 3.6.2.2 2015-04-19 * gray gradient background 
@@ -875,7 +875,7 @@ function source(){
    return;
  }
  GM_setValue('sourceShow',true);
- divSource= buildEl('form', {id:'divSourceshow', style: 'border: 0'}, null, null);
+ divSource= buildEl('form', {id:'divSourceshow'}, null, null);
 
  if(sT){
   var sTa= sT.split('\n'); 
@@ -891,8 +891,11 @@ function source(){
   style: 'margin-bottom: -3px;'},  
   ['click', saveSource], null)
   ,getId('sourceLink'),getId('sourceLink'));
- addEl(divSource,'textarea', {id:'divSourcetext', rows: sourceDP, 
- style: "font-family: sans-serif !important; height:"+(sourceBH+1)+"em;"}, null, sT),
+ addEl(divSource,'textarea', 
+ { id:'divSourcetext', rows: sourceDP, 
+  style: "font-family: Tahoma,sans-serif !important; height:"
+         +(sourceBH+1)+"em;"
+ }, null, sT),
  getId('divBottom');
  var sL=getId('sourceLink');
  sL.innerHTML = 'Source';
@@ -1268,7 +1271,7 @@ function b2b64(inp) { // binary data --> base64
     e2 = ((c1 & 3) << 4) | ((c2&255) >> 4);
     e3 = ((c2 & 15) << 2) | ((c3&255) >> 6);  
     e4 = c3 & 63;
-    if( isNaN(c3)) e4 = 64;
+    if( isNaN(c3)) e4 = 64; else
     if( isNaN(c2)) e3 = 64;
     output.push( k.charAt(e1) + k.charAt(e2) + k.charAt(e3) + k.charAt(e4));
   }  return output.join("");
@@ -1309,7 +1312,11 @@ function css(n){
 stickStyle((
 '#divResult {overflow: auto !important; padding:3px !important; margin: 0 0 3px 0 !important; max-height: 480px !important;}'+
 '#divResult table *{ line-height: .85em !important}'+
-'#divDic, #divDic *, #divSelflag, divSelflag * {font: small normal Tahoma,Verdana,Arial sans-serif !important; }'+
+'#divDic, #divDic *, #divSelflag, #divSelflag * {\
+font-family: Tahoma, sans-serif!important;\
+font-size: small!important;\
+font-style: normal!important;\
+font-weight: normal!important;}'+
 '#divDic,#divSelflag {position: absolute; background: BG_COLOR !important; color:#000000 !important; opacity: 1'+
 ';padding:5px !important; margin:0; z-index:10000; border-radius:3px; border: solid thin gray'+
 ';text-align: left !important;}'+
@@ -1344,12 +1351,14 @@ padding-bottom: 3px !important; margin-bottom: 4px!important;}'+
 '#divLookup, #divOpt, #divBottom,#divSourcetext,#divHist,#divuse {direction: ltr !important;}'+
 '#divHist {background:BG_COLOR; position:relative; padding:5px; text-align:left !important;'+
 'border-top: thin solid grey;}'+ 
-'#gtp_dict {background:BG_COLOR; color:#000000; padding:1px; border-radius:3px;'+
-'margin-bottom: .1em; overflow-y:auto; overflow-x:hidden; font-size:small;}'+
+'div#divResult #gtp_dict {background:BG_COLOR; color:#000000; padding:1px!important; border-radius:3px;'+
+'margin-bottom: .1em!important; overflow-y:auto !important; overflow-x:hidden; font-size:small;}'+
 '#divOpt {background:BG_COLOR; position:relative; padding:5px; text-align:left !important;}'+
 '#divLookup, #divUse {background-color:transparent; color:#000000; position:absolute; padding: 3px;}'+
-'#divSourceshow {border:0;padding: 0 0 2px 0; margin: 0;}'+
-'#divSourcetext{ width:97%; height: 3em; line-height: .85em; overflow: auto !important;}' + 
+'div#divDic>#divSourceshow {\
+border: none; padding: 0 0 4px 0; margin: 0;}'+
+'#divSourceshow>#divSourcetext{ width:97%; height: 3em; line-height: 1.2em; overflow: auto !important;\
+padding: 0 0 0 4px; margin: 0; border: 0; border-top: 1px solid #AAA}' + 
 '.gtlPassive:before{ content:"\u2193";}'+
 '.gtlActive:before{ content:"\u2191" !important;}'+
 '#imgUse, #divGetback, #divGetforw {margin-left: 5px !important; cursor: pointer;}'+
@@ -1376,17 +1385,19 @@ padding-bottom: 3px !important; margin-bottom: 4px!important;}'+
  _log('BH['+i+']='+BG.H[i]);
 if(-1 !== n) return;
 stickStyle('\
-#divTtsLnk:after{ content:url('+imgPlay+') }\
-#divTtsLnk {padding: 0 3px; margin: 0 4px 0 0;}\
-#divTtsIfh {width: 100%;overflow-x:hidden;\
+#divUse img, #divDic img, #divLookup img {width: auto; height: auto; }'+ // rt.com :/
+'#divTtsLnk:after{ content:url('+imgPlay+') }'+
+'#divTtsLnk {padding: 0 3px; margin: 0 4px 0 0;}'+
+'#divTtsIfh {width: 100%;overflow-x:hidden;\
 background-color: rgba(127,127,127,.25); padding: 3px 0;\
-}\
-#divResult div, #divResult table, #divResult tr, #divResult tr td,\
+}'+
+'#divResult, #divResult div, #divResult table, #divResult tr, #divResult tr td,\
+#divResult a, #divBottom, \
 #divOpt select, #divOpt input\
 { padding:0 0 0 0; margin: 0 0 0 0; background: none repeat scroll 0 0 transparent;\
-  border:medium none; line-height: 0.95; }\
-#divOpt {line-height: 2.3 !important;}\
-#divBottom{padding-top: 3px;}\
+  border:medium none; line-height: 0.95; }'+
+'#divOpt {line-height: 2.3 !important;}\
+div#divBottom{padding-top: 3px;}\
 .gootransbutt#optionsLink{margin-top:0; padding-top: 3px; padding-bottom: 1px;}\
 .gtBGColor{border:thin solid blue !important; cursor: pointer;\
 padding-right:6px; margin-right: 2px;}\
