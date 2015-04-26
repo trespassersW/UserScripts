@@ -3,7 +3,8 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 15.03.15
+// @version 15.04.26
+// 15.04.26 fixed width of content column :(
 // 15.03.15 css fixes: variable  width of content column;
 // 14.11.19.13 fixes for latest github changes
 //  .12 new age format; fix for chrome
@@ -175,7 +176,7 @@ overflow:visible!important;\n\
 }\n\
 table.files td.message {overflow: visible !important;}\n\
 /*.file-wrap .include-fragment-error { display: table-row !important;}*/\n\
-/* 150315 wide filelist */\n\
+/* 150315 wide filelist *150426 better not touch this* /\n\
 div.wrapper div.container{\n\
 min-width: 980px!important;\n\
 width:90%!important;}\n\
