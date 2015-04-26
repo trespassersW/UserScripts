@@ -12,7 +12,7 @@
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
 // @version 3.7.8
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.7.8 2015-04-26 + new county flags host
+// 3.7.8 2015-04-26 + new country flags host
 // 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
 //   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
 //   * [ctrl] tts window in new tab
