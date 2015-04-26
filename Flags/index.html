@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<LINK REL="SHORTCUT ICON"  HREF="Antarctica.png">
+<meta name="Description" content="Flags of all countries listed in alphabetical order">
+<title>National Flags - Flags of all Countries </title>
+<style>
+body { margin: 10px 0 0 10px; font-family: Tahoma,sans-serif; font-size: 12px; 
+       background-color: rgb(225, 225, 225); }
+.h2,.sn a { color: #CB7229; font-weight: bold;}
+.h2 {  font-size: 24px; }
+.sn {  margin-left: 2em; color: #777;}
+.u3 {position:relative; display: inline-block;  bottom: 3px;}
+[id^="flags"] ul { margin: 0px; padding: 10px 0 10px; 10px; 
+ -moz-column-count:5;-moz-column-gap: 4px; 
+ -webkit-column-count:5;-webkit-column-gap: 4px; 
+ column-count:5;column-gap: 4px; 
+ }
+[id^="flags"] ul li { display: block; padding: 0px 0px; list-style-type: none; }
+[id^="flags"] img { margin-right: 4px; vertical-align: middle;}
+#flag-16 img {width:16px; height:16px;}
+</style>
+</head>
+<!-- style="position:relative" -->
+<body>
+<div><span class=h2>National Flag Icons &#x2014;
+16<span style="font-weight:normal;font-size:16px;" class=u3>&#x2715;</span>16</span>
+<span class="sn u3">  &#x2015;  
+<a href="http://www.senojflags.com">Country flag</a> images from <a href="http://www.senojflags.com">Flags of all Countries</a></span> 
+</div>
+<!-- -- >
+div style="font: italic bold 90% Tahoma,sans-serif; color: red;" align="left">
+&nbsp;&nbsp;<u>Click on a country flag icon then choose the language</u>
+</div>
+<!-- -->
+<div id="flags16"><div>
+<script>
+var CN=[
+"Afghanistan","African Union","Albania","Algeria","American Samoa","Andorra","Angola","Anguilla",
+"Antarctica","Antigua and Barbuda","Arab League","Argentina","Armenia","Aruba","Asean","Australia",
+"Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize",
+"Benin","Bermuda","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria",
+"Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Caricom","Cayman Islands",
+"Central African Republic","Chad","Chile","China","Cis","Colombia","Commonwealth of Nations","Comoros",
+"Congo Brazzaville","Congo Kinshasa","Cook Islands","Costa Rica","Cote D'Ivoire","Croatia","Cuba",
+"Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","East Timor","Ecuador",
+"Egypt","El Salvador","England","Equatorial Guinea","Eritrea","Estonia","Ethiopia","European Union",
+"Faroes","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece",
+"Grenada","Guam","Guatemala","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary",
+"Iceland","India","Indonezia","Iran","Iraq","Ireland","Islamic Conference","Israel","Italy","Jamaica",
+"Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kuwait","Kyrgyzstan","Laos","Latvia",
+"Lebanon","Lesotho","Liberia","Libya","Liechtenshein","Lithuania","Luxembourg","Macau","Macedonia",
+"Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius",
+"Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique",
+"Myanmar","Namibia","NATO","Nauru","Nepal","Netherlands Antilles","Netherlands","New Zealand","Nicaragua",
+"Niger","Nigeria","North Korea","Northern Cyprus","Northern Ireland","Norway","Olimpic Movement","Oman",
+"OPEC","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland",
+"Portugal","Puerto Rico","Qatar","Red Cross","Romania","Russian Federation","Rwanda","Saint Lucia","Samoa",
+"San Marino","Sao Tome and Principe","Saudi Arabia","Scotland","Senegal","Serbia","Seychelles",
+"Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","Somaliland","South Africa",
+"South Korea","Spain","Sri Lanka","St Kitts and Nevis","St Vincent and the Grenadines","Sudan",
+"Suriname","Swaziland","Sweden","Switzerland","Syria","Tahiti","Taiwan","Tajikistan","Tanzania",
+"Thailand","Timor Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan",
+"Turks and Caicos Islands","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom",
+"United Nations","United States of America","Uruguay","Uzbekistan","Vanutau","Vatican City","Venezuela",
+"Viet Nam","Virgin Islands British","Virgin Islands US","Wales","Western Sahara","Yemen","Zambia",
+"Zimbabwe"
+];
+var s='<ul>'
+for(var il=CN.length,i=0; i<il; i++)
+ s+='<li><img src="'+CN[i].replace(/\s/g,'-').replace(/\'/g,"")+'.png" alt="?!"><span> </span>'+CN[i]+'</li>';
+s+='</ul>';
+document.getElementById("flags16").innerHTML=s;
+</script>
+<!-- -->
+</body></html>
