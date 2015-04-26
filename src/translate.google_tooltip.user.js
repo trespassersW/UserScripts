@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.73
+// @version 3.7.8
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.7.7 2015-04-24 ** exterior
+// 3.7.8 2015-04-26 + new county flags host
 // 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
 //   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
 //   * [ctrl] tts window in new tab
@@ -70,7 +70,7 @@ var   GTsuffix=".com"; // ".fr" ".de" ".ru" ".com"
 var   GTurl= "https://translate.google"+GTsuffix+"/?"; 
 var dictURL= "https://translate.google"+GTsuffix+"/translate_a/t?client=t";
 var  ttsURL= "https://translate.google.com/translate_tts?client=t";
-var version= 3600;
+var version= 3800;
 
 var HREF_NO = 'javascript:void(0)';
 
@@ -91,10 +91,12 @@ var UA = navigator.userAgent;
 var ano="";
 0 && (ano= "http://anonymouse.org/cgi-bin/anon-www.cgi/");
 //}]
-var senoj="http://www.senojflags.com/",
-senojflags = [ano+senoj+"?gtrantoltip#" ],
-seno=ano+senoj,
-senoimg=seno+'images/national-flag-icons/';
+var senoj="https://cdn.rawgit.com/trespassersW/UserScripts/master/Flags/",
+//"http://www.senojflags.com/",
+senojflags = [senoj+"index.html?gtrantoltip#", "http://lh/Flags/" 
+],seno=senoj, senoimg=seno //+'images/national-flag-icons/'
+, senoext=".png";
+;
 //
 //function GM_log(t){console.log(t);}
 
@@ -1046,9 +1048,9 @@ function selFlag(e){
  'class':'gootransbutt gootranslink'},  
  ['click', function(){saveFlag(false)}], 
  '<b>&nbsp; cancel &nbsp; </b>');
- //http://www.senojflags.com/images/national-flag-icons/Bermuda-Flag.png
+ //
   senFlag = e.target.src+'';
-  var sm = senFlag.match(/.+\/(.+)\-Flag\.png/);
+  var sm = senFlag.match(/.+\/(.+)\.png/);
   if(sm && sm[1]) senFlag= sm[1];
   _log(senFlag);
 	if(senFlag) body.appendChild(dsf);
@@ -1105,7 +1107,7 @@ function getFlagSrc(lng, where){
    return flag;
   flagLang=fl;
 //  flag= 'http://www.senojflags.com/images/national-flag-icons/'+flag+'-Flag.png';
-  flag=  senoimg+flag+'-Flag.png';
+  flag=  senoimg+flag+senoext;//'-Flag.png';
   flagRequest(flag);
   return flag;
 }
@@ -1637,14 +1639,14 @@ document.addEventListener('mouseup', showLookupIcon, false);
 document.addEventListener('mousedown', mousedownCleaning, false);
 // http://www.senojflags.com/#flags16
 if(  location.href.indexOf(senojflags[0])>-1
-   //|location.href == senojflags[1]
+   ||location.href.indexOf(senojflags[1])>-1
 ){try{
   if(!fCSS)  fCSS=
   'div#flags16 img {cursor: pointer !important}'+
   'div#flags48,div#flags32 {display:none; visibility: hidden}'
   stickStyle(fCSS);
   _log('inside\n' + location.href);
-  insBefore(buildEl('p',{style:'font: bold italic 90% sans-serif; color:red;',
+  insBefore(buildEl('div',{style:'font: bold italic 90% sans-serif; color:red;',
   align:'left'},null,'&nbsp;&nbsp;<u>Click on a country flag icon then choose the language</u>'),
   getId('flags16').childNodes[0]);
   getId('flags16').addEventListener('click',flagClick,false)
