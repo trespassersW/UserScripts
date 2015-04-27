@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.8
+// @version 3.7.81
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.7.8 2015-04-26 + new country flags host
+// 3.7.8.1 2015-04-26 + new country flags host; * fixes
 // 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
 //   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
 //   * [ctrl] tts window in new tab
@@ -98,7 +98,6 @@ senojflags = [senoj+"index.html?gtrantoltip#", "http://lh/Flags/"
 , senoext=".png";
 ;
 //
-//function GM_log(t){console.log(t);}
 
 var res_dict='gt-res-dict'; //'gt_res_dict';
 var  languagesGoogle, isInited=false;
@@ -161,6 +160,13 @@ function mousedownCleaning(evt){
 var documentcontentEditable=false;
 var documentdesignMode  = '';
 var divExtract;
+
+var escHnd;
+function setEscHnd(){
+  if(!escHnd) escHnd=
+   document.addEventListener('keydown', escCleanup, false); 
+}
+
 function cleanUp(s){
  _log(s);
  var d=getId('divSourcetext');
@@ -321,8 +327,11 @@ function showLookupIcon(evt){
 	body.appendChild(divLookup);
 }
 function escCleanup(e){
-	if(!e.shiftKey && !e.ctrlKey && !e.altKey && e.keyCode==27 )
-   cleanUp('esc');
+	if(!e.shiftKey && !e.ctrlKey && !e.altKey && e.keyCode==27 ){
+   cleanUp('esc'); 
+   document.removeEventListener('keydown', escCleanup,false);
+   escHnd=null;
+  }
 }
 
 function lookup(evt){
@@ -358,7 +367,7 @@ function lookup(evt){
   {id:'divDic', style: 'top:'+top+';left:'+left+';right:'+rite
   });
 	divDic.addEventListener('mousedown', dragHandler, false);
-  document.addEventListener('keydown', escCleanup, false); 
+  setEscHnd();
 	body.appendChild(divDic);
   // patch gmail
 
@@ -539,7 +548,7 @@ function badResponce(html,e){
  m=html.match(/(<img\s.*?\>)/);
  if(m && m[1])
   addEl(dr,'p',{},null,m[1]);
- _log(html);
+ //_log(html);
  return;
 }
 var ex_sl , ex_tl;
@@ -899,7 +908,7 @@ function source(){
   buildEl('img',{id: 'imgSourcesave', title: 'save source', src: imgSave,
   style: 'margin-bottom: -3px;'},  
   ['click', saveSource], null)
-  ,getId('sourceLink'),getId('sourceLink'));
+  ,getId('sourceLink'));
  addEl(divSource,'textarea', 
  { id:'divSourcetext', rows: sourceDP, 
   style: "font-family: Tahoma,sans-serif !important; height:"
@@ -1033,13 +1042,13 @@ var senFlag = '';
 function selFlag(e){
  if(!isInited) {css(-1); isInited=true; }
  killId('divSelflag');
- document.addEventListener('keydown', escCleanup, false); 
+ setEscHnd();
  var p = belowCursor(e,10,10);
  var dsf = buildEl('div',{id:'divSelflag', style:
   ';top:'+p.t+';left:'+p.l+';right:'+p.r  +';bottom: auto'});
  var sel=addEl(dsf,'select',{id: 'optSelFlag'},
  null,languagesGoogle);
- sel.value = GM_getValue('to')? GM_getValue('to'): 'en';
+ sel.value = GM_getValue('to',' en');
  addEl(dsf,'span',null,null,'<br><br>');
  addEl(dsf,'a', {href:HREF_NO, 
  'class':'gootransbutt gootranslink', title: "use icon"},
@@ -1281,7 +1290,7 @@ function b2b64(inp) { // binary data --> base64
     e2 = ((c1 & 3) << 4) | ((c2&255) >> 4);
     e3 = ((c2 & 15) << 2) | ((c3&255) >> 6);  
     e4 = c3 & 63;
-    if( isNaN(c3)) e4 = 64; else
+    if( isNaN(c3)) e4 = 64;
     if( isNaN(c2)) e3 = 64;
     output.push( k.charAt(e1) + k.charAt(e2) + k.charAt(e3) + k.charAt(e4));
   }  return output.join("");
@@ -1326,7 +1335,8 @@ stickStyle((
 font-family: Tahoma, sans-serif!important;\
 font-size: small!important;\
 font-style: normal!important;\
-font-weight: normal!important;}'+
+font-weight: normal!important;\
+line-height: 1.1;}'+
 '#divDic,#divSelflag {position: absolute; background: BG_COLOR !important; color:#000000 !important; opacity: 1'+
 ';padding:5px !important; margin:0; z-index:10000; border-radius:3px; border: solid thin gray'+
 ';text-align: left !important;}'+
@@ -1392,7 +1402,7 @@ padding: 0 0 0 4px; margin: 0; border: 0; border-top: 1px solid #AAA}' +
  replace(/BT_COLOR/g,BG.T[i]).
  replace(/BE_COLOR/g,BG.E[i])
 );
- _log('BH['+i+']='+BG.H[i]);
+
 if(-1 !== n) return;
 stickStyle('\
 #divUse img, #divDic img, #divLookup img {width: auto; height: auto; }'+ // rt.com :/
@@ -1405,7 +1415,7 @@ background-color: rgba(127,127,127,.25); padding: 3px 0;\
 #divResult a, #divBottom, \
 #divOpt select, #divOpt input\
 { padding:0 0 0 0; margin: 0 0 0 0; background: none repeat scroll 0 0 transparent;\
-  border:medium none; line-height: 0.95; }'+
+  border:medium none; line-height: 0.95; float: none}'+
 '#divOpt {line-height: 2.3 !important;}\
 div#divBottom{padding-top: 3px;}\
 .gootransbutt#optionsLink{margin-top:0; padding-top: 3px; padding-bottom: 1px;}\
@@ -1479,6 +1489,8 @@ imgFlags= {
 'iVBORw0KGgoAAAANSUhEUgAAABgAAAAQCAYAAAAMJL+VAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAABANJREFUOMutlEtsVHUUh797//c10955F2hKM7QUEUgNoRAqSUGJESO6ACSyIKgJwSXGGFJ2mhijG2JE3WgiiSaCAQlVeagIhAYID4GIgKU4lGdbhs5MZ+bemft0UXGBukF/y7M4X07OOR/8T9n84eebNm3ZuvPBuvJgYcvOg8r573a0zF62uqP/zM/JUdvX8T1f1fRqV+vkQu74gXsqoaUaRlSbt2zaxby1UJs2e929WR1tSzqSdH/15RMnThw7fL+ftP7tj41hueG5eDK12GzJLp3a0vxoImaKCyNlLuWrnBvKU8oXWZoKKVoOZ4suoSyBAIQGWpSIEaFnWoLH2zOkhs9d2Lh8aed9gBh7ZuOVk+acDeVU68JEzJwUNxQ5Kgc4rk/ZsqnYNWJBnZ+eb+bZVp3V0xvoTAvSIkTyXUZqPh4SrqSQ1AQzOmdNsq/8Ovr7wOXTALJ3sX8/jkXZsig7PlU3oFGRWTA5QlRT8YRKBQULQdEDTYKeKRF6uzJ8s7yZBSkBnsvtksXVgs1vt0qse++Dd2a2t6UARFs2Gx/p6FkVeh7pRp2kJpBkyJoqm+el6Zli0Ds3jl338fwAz/MJQvDCEMsL6Z6kkxtzGbICbARJTZBpyhiPTElmDu/t6xNJr3LN6V652XJdYoZOKqKS0AS2H7B9sMqqbBQ5CHA9nyCcAIRB8OcGwdRkNnQm2X/D5nrFQ1NVTEWma1H3vKuH9v0g8oWC0/TYoqfHjUSrUASZBp2ELohrMhU/ZElLFE1iAuD7BEGA7/oTABlCwPF9xj2J4yMOViBIGAIzFiXmFg0B0JROTy1ku54kDCYAhoqpyUQViU8vV2iOSnTEBL7nI4UBvj8xRQhIEmgyHLxR5XzJpx4CqkG6fu/uZ6+99LICYFZG9ymq9pZVsynaDhUnQs0LSRgyqajgzXPjtGs+cxs87oxZxHGYGQlpMWUCwJBlTt2pQKACUaxisbC994W1lmUNCIDh3MDtzOIVr1cCWddVhUxUJxZRiGkybgDjTsipuzbbLxU5ervKj9fKhI7DyvZGnCBkz1CFHTkL3TRpvXn6THHrq2uK+ZF+IPzrk7XBk31M71lbsuqUa3UsR8cxQkxFolETxKMGRmMES5ZBM9hVrPP93hKBW8coj461DJ057p7e/8X1awPfBlD5myoy1uiRm0JdW7FrlGp1qnWXWqBiGhpNTREKnkz5yvnB6i/HLgS3ruYoDef0ejnnDudy+bHSTQfKQPCvLiod2bXbnP/iJ2XbpWg5WEInlPAv9W070r/n692DJ48esF33hqmKetn1w4cyYnPvtrO8ezSc8f6h4vxVr2yNRiJz/kmID53ZK9a/MfWpNR9FFJGduPL/nj8ActPaP8mCkKMAAAAASUVORK5CYII='
 ,'en': imgD+
 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAJJSURBVHjapJNdSJNRGMd/Z3u3OTXXhx8xjRLDFWIk0jAk6WYYfaAZSUWGZkFdRNRFYAYFXhkI2gpKqISC1IsIUiKIchUEUQiuj4uiMT8m0wbNr+n2vu/p4l2K3Yn/m3Pg8Pye8/wf/kJKyWokACuQnjxXojgwowCOwPW2iS37y3k0bOfJwwHmYzFePK5n7Oxl0FRyH9zicGM3CZOFBhccypMox2tJdWZnK0Bay/AGmr+McmJvKUXbaul79hmTzYJ9x3bQdEw2C2V7XOzLUdmVZ2PWvZvm1lcAaQpg/vY9xL2NRdRMvqHUlYmzoRw9oREPjICqoic0qtIiFGVmECp20+kd4IPPD2AWQMFMcOSnxWZDavqyIcfOXARVJ7fLu9w4s4nEwgLpmzdtVQB+HW0kNcOBFo3Cv6VICWYTSEmw6hSYBOjGo7LOwdz0lHEHiMVimCciaNEpRLIWqSMUxWCpKgiBEAIJqI4M5tLtS4Cs++3kZGUlK5cUcFciEwkKBl//t3xBeHIS3KWYAEo87biruxiKWkh568N/447RWZdI3fAlMG8l5Z2PT00deOq6KfHcBjAA+YVO+p6eo8zXy/P+r9R9tCcbCQQCgIMHOuh3llFx2kNn/jjFhWuXAN6rFay/66XtZZjG9zrh0KjxVasCNgsAs9N/OHnkJq0/HLjOH+NadmjRg7jW00tnWOPKQGRxzEH/EOM7XUhNI+of4nckCEDThRaCl2qor66E/p64ABxALrBmhVmYBsYEYE4GybxCgAbExWrj/HcACIPUyGtYcDcAAAAASUVORK5CYII='
+,'fr': imgD+
+'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFESURBVHjapJM7TsNAEIa/9RqjKECEkGgoKOgoaHKCdByBc3APDsIRaHID01ASRTxEgxI5zsvetb1DkcSJCUaKMtJqZzSrb2f/nVEiwj6mgAA4Wu67mAWmPtDqdB6+f2e73ftK3L+92yJcPT2e+0CzKBzt9uW/1zVurpc1KxBh/vwC0PQBbW3BeJwyHE5rAebto/T9s1MkywC0D2CMJYpmRNG8FuBG49IvPE1u0wUMIEkMg8GMOJ5T9yn5KC59AWxiNgEJvV5GHCf1kvffS1+3Tkh9bw1I0wSRBs65ehU3cpJlpJnbBBi0PsS5+qaSFUBAihyTWwC8hYgG50ApVa6tjlvlPAVOSIxdV2CtJQiEIPDrnxAcVKoxdi2iFSmYTD4r58MwrMSvcfSntgpoARfA8Y6zMAG+FKCXg6R3BBSAVfuO888AocKXohfLXWQAAAAASUVORK5CYII='
 ,'ru': imgD+
 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAADkSURBVHjapJM5TgNBEEVfzeZlQIOE5ARxClLOxC04CzFX4ArERAhZsoTEyDDurqa7SGxsIYJZKqnov9p+iZkxJQSogLN9HhIKfBZAY2abUdVFVhlQT5igzoB8AiDPAGKMg5UHTQFwc/fI6rKh/VLsz4b/u9FFXbF5b4+AnXe8rIW2C72qN8uSwtwJoHMwm5NSP0+EbyP4E8DD0z3XZUnqdr0A2XLBawjcHgBOPZYXINILYMlw6o8deFVsvoCq7AewhFf9BWg047n9GOMDFaABroDzgeIt8CZ7J1YjHBkBlanv/DMAwHdYum9dlZQAAAAASUVORK5CYII='
 ,'zh-CN': imgD+
@@ -1507,7 +1519,7 @@ imgFlags= {
 ,"et":"Estonia"
 ,"tl":"Philippines"
 ,"fi":"Finland"
-,"fr":"France"
+/* ,"fr":"France"*/
 ,"gl":"Ukraine"
 ,"ka":"Georgia"
 ,"de":"Germany"
