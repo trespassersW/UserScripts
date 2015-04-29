@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.90
+// @version 3.7.91
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.7.90 2015-04-28 + dark colouring
+// 3.7.91 2015-04-29 + dark colouring; * fixes
 // 3.7.8.2 2015-04-26 + new country flags host; * fixes; gothic colouring
 // 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
 //   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
@@ -67,11 +67,15 @@ if(document.body){
 main = function (){ "use strict";
 
 var   GTsuffix=".com"; // ".fr" ".de" ".ru" ".com"
+//{[ hacks
+var UA = navigator.userAgent;
+0 && (UA="Mozilla/5.0 (Windows NT 5.1; rv:37.0) Gecko/20100101 Firefox/37.0");
+//]}
 
 var   GTurl= "https://translate.google"+GTsuffix+"/?"; 
 var dictURL= "https://translate.google"+GTsuffix+"/translate_a/t?client=t";
 var  ttsURL= "https://translate.google.com/translate_tts?client=t";
-var version= 3800;
+var version= 3790;
 
 var HREF_NO = 'javascript:void(0)';
 
@@ -86,17 +90,13 @@ var URL='*'; var tURL;
 var GT_tl='auto';
 var body;
 
-//{[ hacks
-var UA = navigator.userAgent;
-0 && (UA="Mozilla/5.0 (Windows NT 5.1; rv:37.0) Gecko/20100101 Firefox/37.0");
-var ano="";
-0 && (ano= "http://anonymouse.org/cgi-bin/anon-www.cgi/");
-//}]
-var senoj="https://cdn.rawgit.com/trespassersW/UserScripts/master/Flags/",
-//"http://www.senojflags.com/",
-senojflags = [senoj+"index.html?gtrantoltip#", "http://lh/Flags/" 
-],seno=senoj, senoimg=seno //+'images/national-flag-icons/'
-, senoext=".png";
+// http://www.senojflags.com/
+var senop="https://cdn.rawgit.com",
+ seno="/trespassersW/UserScripts/master/Flags/",
+ senox="index.html?gtrantoltip#",
+ senoj=senop+seno+senox,
+ senojflags = [seno, "http://lh/Flags/" ],
+ senoext=".png";
 ;
 //
 
@@ -676,9 +676,9 @@ function options(evt){
    }
 		//from
     addEl(dO,'a',{'class':'gootransbutt gootranslink',
-    target:'_blank', href:seno, title: 'choose country flag icon'},
+    target:'_blank', href:senoj, title: 'choose country flag icon'},
     ['click',function(e){
-     e.preventDefault(); GM_openInTab(senojflags[0]); cleanUp(); return false;}], 
+     e.preventDefault(); GM_openInTab(senoj); cleanUp(); return false;}], 
     imgH+imgFlags['AN']+imgT);
 		addEl(dO,'span', null, null,' From: ');
     var gt_slist = getXId("gt-sl");
@@ -937,7 +937,7 @@ function history(){
  if(divHist){
    killId(divHist);
    var hL = getId('historyLink');
-   hL.innerHTML = 'History'; hL.className= 'gootransbutt gootranslink gtlActive';
+   hL.innerHTML = 'History'; hL.className= 'gootransbutt gootranslink gtlPassive';
    hL.title = 'Translation history';
    GM_setValue('histShow',false);
    return;
@@ -1056,13 +1056,13 @@ function selFlag(e){
  null,languagesGoogle);
  sel.value = GM_getValue('to',' en');
  addEl(dsf,'span',null,null,'<br><br>');
- addEl(dsf,'a', {href:HREF_NO, 
+ addEl(dsf,'a', {href:HREF_NO, style:'padding: 3px 12px; margin-right: 2em;',
  'class':'gootransbutt gootranslink', title: "use icon"},
- ['click',  function(){saveFlag(true)}], '<b>&nbsp; OK &nbsp;</b>');
- addEl(dsf,'a', {href:HREF_NO, 
+ ['click',  function(){saveFlag(true)}], '<b>OK</b>');
+ addEl(dsf,'a', {href:HREF_NO,  style:'padding: 3px 4px;',
  'class':'gootransbutt gootranslink'},  
  ['click', function(){saveFlag(false)}], 
- '<b>&nbsp; cancel &nbsp; </b>');
+ '<b>Cancel</b>');
  //
   senFlag = e.target.src+'';
   var sm = senFlag.match(/.+\/(.+)\.png/);
@@ -1121,8 +1121,8 @@ function getFlagSrc(lng, where){
    ||flag.indexOf('data:') ==0)
    return flag;
   flagLang=fl;
-//  flag= 'http://www.senojflags.com/images/national-flag-icons/'+flag+'-Flag.png';
-  flag=  senoimg+flag+senoext;//'-Flag.png';
+//  flag= 'http .. /Flags/Panama.png;'
+  flag=  senop+seno+flag+senoext;
   flagRequest(flag);
   return flag;
 }
@@ -1342,10 +1342,12 @@ font-family: Tahoma, sans-serif!important;\
 font-size: small!important;\
 font-style: normal!important;\
 font-weight: normal!important;\
+font-stretch: normal!important;\
+letter-spacing: normal!important;\
 line-height: 1.1;}'+
 '#divDic,#divSelflag {position: absolute; background:'+BG.C[i]+'!important; color:'+FG.t[i]+
 '!important; opacity: 1'+
-';padding:5px !important; margin:0; z-index:10000; border-radius:3px; border: solid thin gray'+
+';padding:5px !important; margin:0; z-index:10000; border-radius:5px; border: solid thin gray'+
 ';text-align: left !important;}'+
 '#divDic{/*min-width: 340px !important; min-height:50px;*/ max-width:50%; padding: 3px; margin: 0;}'+
 '#divSelflag{ max-width: 180px; }'+
@@ -1372,14 +1374,16 @@ padding-bottom: 3px !important; margin-bottom: 4px!important;}'+
 '#divBottom {position: relative; width: 100%; font-size: smaller; text-decoration:none; }'+    
 '#historyLink {display: inline; position: relative; font-size:smaller; text-decoration:none;}'+
 '#sourceLink {display: inline; position: relative; margin-left: 2em;  font-size:smaller; text-decoration:none;}'+
-'#imgSourcesave {display: inline; position: relative; margin-left:2px;}'+
+'#imgSourcesave {display: inline; position: relative; margin-left:2px;\
+cursor:pointer;}'+
 '#optionsLink {display: inline; position: relative; padding-left: 1em; margin-left: 1em; font-size:smaller !important; text-decoration:none !important;}'+    
 '#divOpt {position: relative; padding: 5px;'+
 'border-top: thin solid grey;}'+ 
 '#divLookup, #divOpt, #divBottom,#divSourcetext,#divHist,#divuse {direction: ltr !important;}'+
 '#divHist {background:'+BG.C[i]+'; position:relative; padding:5px; text-align:left !important;'+
 'border-top: thin solid grey; color:'+FG.t[i]+';}'+ 
-'div#divResult #gtp_dict {background:'+BG.C[i]+'; color:'+FG.t[i]+'; padding:1px!important; border-radius:3px;'+
+'div#divResult #gtp_dict {background:'+BG.C[i]+'; color:'+FG.t[i]+';\
+ padding:3px!important; border-radius:3px;'+
 'margin-bottom: .1em!important; overflow-y:auto !important; overflow-x:hidden; font-size:small;}'+
 '#divOpt {background:'+BG.C[i]+'; position:relative; padding:5px; text-align:left !important;}'+
 '#divLookup, #divUse {background-color:transparent; color:'+FG.t[i]+'; position:absolute; padding: 3px;}'+
@@ -1391,9 +1395,9 @@ padding: 0 0 0 4px; margin: 0; border: 0; border-top: 1px solid #AAA}' +
 '.gtlActive:before{ content:"\u2191" !important;}'+
 '#imgUse, #divGetback, #divGetforw {margin-left: 5px !important; cursor: pointer;}'+
 '#divSourcetext {background:'+BG.E[i]+'; color:'+FG.t[i]+'!important;}'+
-'#divDic .gootransbutt {background:'+BG.T[i]+';'+
+'#divSelflag .gootransbutt, #divDic .gootransbutt {background:'+BG.T[i]+';'+
 'border-radius: 3px; margin-top: 5px; }'+
-'.goounsaved {background-color: #EF9024;'+
+'#divDic .goounsaved {background-color: #EF9024;'+
 'border-radius: 3px; margin-top: 5px; }'+
 'td.gtp-pos { color:'+FG.t[i]+'!important; font-weight: bold !important;  text-align: left; }'+
 'td.gtp-pos:before{ content:"\u2666 ";}'+
@@ -1658,15 +1662,18 @@ document.addEventListener('mousedown', mousedownCleaning, false);
 if(  location.href.indexOf(senojflags[0])>-1
    ||location.href.indexOf(senojflags[1])>-1
 ){try{
-  if(!fCSS)  fCSS=
-  'div#flags16 img {cursor: pointer !important}'+
-  'div#flags48,div#flags32 {display:none; visibility: hidden}'
-  stickStyle(fCSS);
-  _log('inside\n' + location.href);
-  insBefore(buildEl('div',{style:'font: bold italic 90% sans-serif; color:red;',
-  align:'left'},null,'&nbsp;&nbsp;<u>Click on a country flag icon then choose the language</u>'),
-  getId('flags16').childNodes[0]);
-  getId('flags16').addEventListener('click',flagClick,false)
+  var f16=getId('flags16');
+  if(f16){
+   if(!fCSS)  fCSS=
+   'div#flags16 img {cursor: pointer !important}'+
+   'div#flags48,div#flags32 {display:none; visibility: hidden}';
+   stickStyle(fCSS);
+   _log('inside\n' + location.href);
+   insBefore(buildEl('div',{style:'font: bold italic 100% sans-serif; color:red;',
+   align:'left'},null,'&nbsp;&nbsp;<u>Click on a country flag icon then choose the language</u>'),
+   f16);
+   f16.addEventListener('click',flagClick,false);
+  }
  }catch(e){console.log('senojflags\n'+e)}
 }
 }catch(e){console.log('nobody\n'+e); }
