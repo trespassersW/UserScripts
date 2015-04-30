@@ -8,7 +8,7 @@ Almost instantly you will see a tooltip with the translation. <hr>
 ***Please look more closely at the picture below:***<br><hr>
 ![screenshot2](../res/tg3.gif) 
 <hr>
-Script uses <a href="http://www.senojflags.com">Country flag</a> <a href=https://rawgit.com/trespassersW/UserScripts/master/Flags/index.html?gtrantoltip#>images</a> from <a href="http://www.senojflags.com">Flags of all Countries</a>
+Script uses <a href="http://www.senojflags.com">Country flag</a> &nbsp; <a href=https://rawgit.com/trespassersW/UserScripts/master/Flags/index.html?gtrantoltip#><em><strong>images</strong></em></a> &nbsp; from <a href="http://www.senojflags.com">Flags of all Countries</a>
 <hr> 
 * 3.7.2 2015-04-20 `*` TTS: <em>`alt`-select</em> text inside tooltip and <em>`[shift/ctrl]`-click</em> language icon below. <br>  [tts tips](./translate_tts_tips.md) 
 * 3.7.90 2015-04-28 + dark colouring
