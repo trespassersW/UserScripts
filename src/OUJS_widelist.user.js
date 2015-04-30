@@ -4,9 +4,11 @@
 // @description extends list of scripts shown by OUJS to 100% width
 // @include     /^https?:\/\/openuserjs\.org(\/.*)?$/
 // @license MIT
+// @copyright   trespassersW
 // @downloadURL https://openuserjs.org/install/trespassersW/OUJS_widelist.user.js
 // @updateURL   https://openuserjs.org/install/trespassersW/OUJS_widelist.user.js
-// @version 2014.1128
+// @version 2015.0430
+//  2015.0430 sorting Discussions by category
 //  .1128   hidden Announcements on Discuss page
 //  .1106.10  sort by author; http://; a fix; 
 //  .1007.8  right panel in script title page -- width: 25%
@@ -18,9 +20,25 @@
 // @grant GM_none
 // @icon  data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAADAFBMVEX///8AAABVhZgUWHcHT3DB0s+sxMaatrwzb4iMrrVumaYmZYBEfJCxx8jL2tZ7oqxlk6EMUXIdYX0ybobR3dm6zs2fu8BNgpU7dYyQsbeFqbIRVnUsaoMbXXpynKhbi5u70M1Ado7O3NjY495ShZdIfpIWW3lqlqObuL2nwMQiYn4qZ4Gvxsi0yso1cId4n6pij55ymqZEeo8JT3DE1dI+eY+Ts7mivcA1cIi+0dBWiJoAdQBzAGoAXwBjAGkAbwBwAC4AbgAAAGcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8AAAAEvYAAAAAmAAIfJEBc8wS98gAIQB4fJEAFRORAD0AAHwNAAB8kP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAigAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADLAAAAADES9RgAAAC8ABUAEviQ6QBCmHz/fJH///+RQo/QnHxFAAEAAAAS9wwAgAC8wBAAEviQ6QAAQHz/fJH///8AAAD/DQBAfJAAEviBCe8At3ygAAABoXMK//9zoAFwS0q0AAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAALiMAAC4jAXilP3YAAAFWSURBVHjaVVJte4IgFOVZG8106E0ZTEmXvWgarQXD6v//sEHa2/kC3MO593IuCA1INK5NJwl6RonDMxf+e1CN9WOc5vEIejTL+q7qVmtQkIl9C3YVP1dRx+1xdow+FrjwM7v97RkauGv5NkEJImM2A9Wkl7r5SAE3OsEmxLj8iKYAR2wJHAOILy1Dnr0KHkpZjFQ2sfIwU7OcvFUiLibFMa4o5lYi0YkBxBh54mA00YaJlNiraw85Pkr00k9LV9ATK3riKstRLWDdLeR8Li8tnthug1IFhSPAQ5IHPaHP7ZhEjnCploSyuHPxBQ043jQuVV+chO2eOkHevMjqUnxoFx+awnR11cRmaLd/oCnrlWh3wsbp8MDekj9DtmnBlvmnvFmC6OpiItYW1NxNvNl+9lAaPNp+HRRkPjwP6jpapSw7ZTV5/gyM256C6PkzOJBvKaVOrsd/ZTMxqn69OqgAAAAASUVORK5CYII=
 // ==/UserScript==
+function stickStyle(css){
+ var s=document.createElement("style"); s.type="text/css";
+ s.appendChild(document.createTextNode(css));
+ return (document.head||document.documentElement).appendChild(s);
+}
+stickStyle("\
+.reminders {\
+position: absolute !important; top: 2.4em !important; width:100% !important;\
+z-index: 9999!important;   opacity: 0.9 !important;\
+padding: 0!important;\
+}\
+.reminders .alert {\
+padding: 2px 1px 1px 1px !important;\
+}\
+.alert-dismissable .close, .alert-dismissible .close\
+{ right: 12px !important;}\
+");
 window.addEventListener('DOMContentLoaded',
 function(evnt) {"use strict";
-
 // shrink right panel
 if(!document.querySelector(".tr-link")){  
 stickStyle("\
@@ -29,6 +47,9 @@ div.container-fluid  div.row  div.container-fluid.col-sm-8\
 div.container-fluid  div.row  div.container-fluid.col-sm-4\
 {width:25%}\
 .col-sm-4 .nav > li > a {padding: 10px 1px !important;'}\
+/* -03-12 */\
+.alert-dismissable .close, .alert-dismissible .close\
+{ right: 12px !important;}\
 "); 
  return; // no tables - do nothing more
 }
@@ -138,15 +159,13 @@ th a{display: inline!important;}\
    -webkit-transition-delay: .05s !important;\
    transition-delay: .3s !important;\
  }\
-.col-lg-9 {width:100%!important;}\/* */\
+.col-lg-9 {width:100%!important;}\
+/* 150114 */\
+div.col-lg-offset-3  {\
+   margin-left: 0 !important;\
 }\
 ");
 //
-function stickStyle(css){
- var s=document.createElement("style"); s.type="text/css";
- s.appendChild(document.createTextNode(css));
- return (document.head||document.documentElement).appendChild(s);
-}
 //
 function toObj(s) {
  var r = {}, c = s.split('&'), t;
@@ -175,7 +194,7 @@ var defaultOrder = {
  size: 1, rating: 1, installs: 1, comments: 1 
 };
 
-var a, ah,lh, o,i,il;
+var a, ah,lh, o,i,il,tc;
 
 lh = hp(location.href);
 
@@ -192,6 +211,21 @@ lh = hp(location.href);
   o.href=o.href.replace("orderBy=name","orderBy=author");
   o.id="oujsort-author";
   insAfter(o,i);
+ }
+// turn category into anchor
+ a=document.querySelectorAll('th');
+ for( il=a.length, i=0; i<il; i++ ){
+   tc=  a[i].textContent;
+   if(tc.indexOf('ategory')>0 &&
+      !a[i].querySelector('a')) {
+     o=document.querySelector('th a[href*="orderBy"]')
+     o=o.cloneNode(false);
+     o.textContent=tc;
+     o.href=o.href.replace(/orderBy\=[\w]+/,"orderBy=category");
+     o.id="oujsort-category";
+     a[i].innerHTML="";
+     a[i].appendChild(o);
+   }
  }
 // put in order table header
  a=document.querySelectorAll('th >a[href*="orderBy"]');
@@ -224,3 +258,4 @@ a = document.querySelectorAll("div.col-sm-4 > div.panel");
   insAfter(o,a[0]);
  }
 },false);
+
