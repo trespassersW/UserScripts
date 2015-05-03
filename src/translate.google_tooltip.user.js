@@ -10,10 +10,10 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.94
+// @version 3.7.95
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.7.93 2015-04-30 + dark colouring; * TTS in ff37; * fixes;
-// 3.7.8.2 2015-04-26 + new country flags host; * fixes; gothic colouring
+// 3.7.95 2015-05-03 + dark colouring; * TTS in ff37; * DOMparser instead of IFRAME;
+// 3.7.8.2 2015-04-26 + new country flags host
 // 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
 //   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
 //   * [ctrl] tts window in new tab
@@ -432,7 +432,7 @@ function openInFrame(url){
        {eStop(e);GM_openInTab(e.target.href)}
   ],
   '');
-  addEl(IFH, 'span', {style: 'margin-left:.5em;' },[],deURI(url));
+  addEl(IFH, 'span', {},[],deURI(url));
 //  addEl(IFR, 'br');
   var BFR=
   addEl(IFR, 'iframe',{
@@ -566,27 +566,15 @@ function extractResult(html){
     badResponce(html);   return;
   }
 	  html2 = html2[1].replace(/\<script[^\<]+\<\/script\>/ig, '');//remove script tags...
-	//html2 = html.replace(/\<iframe[^\<]+\<\/iframe\>/ig, '');
-	//cleanup
 	  killId('divExtract');
-	//  killId(res_dict);
-	//append translated page as hidden frame
-	  var iframe = addEl(document.body,'iframe', 
-     {style:'visibility:hidden;'});	
-	  var dX = addEl(iframe.contentWindow.document.body,'div', 
-     {id:'divExtract'}, null, html2);
-	  divExtract = document.importNode(dX, true);
-	  iframe.parentNode.removeChild(iframe);
+    divExtract = (new DOMParser()).parseFromString(html2, "text/html");
+
     ex_sl= gt_sl, ex_tl=gt_tl;
   }
   try{ 	//gather info
 // 2013-10-20
 	var _sl = detectedLang(gt_sl);
 	var _tl = detectedLang(gt_tl);
-//  var _sl = getXId("gt-sl-gms").textContent; 
-//  var _tl = getXId("gt-tl-gms").textContent; 
-//  _sl = _sl.replace(/^.*?\:\s*/,''); 
-//  _tl = _tl.replace(/^.*?\:\s*/,'');
 /* ?!11 150415 */ _log('**',_sl+'>'+_tl)
     if( 1 || ex_sl !== gt_sl ) 
       gt_sl_gms = _sl, gt_tl_gms =_tl; 
@@ -1195,22 +1183,24 @@ function getId(id, parent){
 	return parent.getElementById(id);	
 }
 
+/* */
 function getXId(id){
-   var r=Xel('.//*[@id="'+id+'"]',divExtract);
+   var r=Xel('.//*[@id="'+id+'"]',divExtract,divExtract);
    if(r) return r;
-   throw "Xel bug " + id;
+   throw "Xel bug " + id; 
 }
 
-function Xel(XPath, contextNode){
-    var a = document.evaluate(XPath, (contextNode || document), 
+function Xel(XPath, Node, Doc){
+    var a = Doc.evaluate(XPath, Node,
     null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
     return (a.snapshotLength ? a.snapshotItem(0) : null);
 }
+/* */
 
 /** /
-function Xels(XPath, contextNode){
+function Xels(XPath, Node, Doc){
     var ret=[], i=0;
-    var a = document.evaluate(XPath, (contextNode || document), 
+    var a = Doc.evaluate(XPath, Node, 
     null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
     while(a.snapshotItem(i))
       ret.push(a.snapshotItem(i++));
@@ -1336,7 +1326,7 @@ function css(n){
   window.gttpCSS=
 stickStyle((
 '#divResult {overflow: auto !important; padding:3px !important; margin: 0 0 3px 0 !important; max-height: 480px !important;}'+
-'#divResult table *{ line-height: .9 !important}'+
+'#divResult table *{ line-height: 0.9 !important}'+
 '#divDic, #divDic div,#divLookup, #divUse  {padding: 0; margin:0; \
 width: auto;height: auto; border: none; border-radius: 0;}'+
 '#divDic, #divDic *, #divSelflag, #divSelflag *{\
@@ -1372,6 +1362,7 @@ font: small normal Tahoma,sans-serif !important;'+
 '#gtp_dict li {list-style: square inside; display: list-item;}'+
 'div#gtp_dict tr>td {padding-left: .25em; vertical-align:top; border: none; color:'+FG.t[i]+'; }'+
 '#optSelLangFrom,#optSelLangTo {max-width: 150px; text-align: left !important; height: 1.5em;\
+vertical-align: baseline !important;\
 }'+
 '#divResult a.gootranslink.gootransgoo{font-size: 1em !important; line-height: 1;}'+
 '#divOpt span {color:'+FG.t[i]+'!important;}'+
@@ -1398,7 +1389,7 @@ cursor:pointer;}'+
  padding: 3px; margin: 0;}'+
 'div#divDic>#divSourceshow {\
 border: none; padding: 0 0 4px 0; margin: 0;}'+
-'#divSourceshow>#divSourcetext{ width:97%; height: 3em; line-height: 1.2em; overflow: auto !important;\
+'#divSourceshow>#divSourcetext{ width:97%; height: 3em; line-height: 1.2; overflow: auto !important;\
 padding: 0 0 0 4px; margin: 0; border: none; border-top: 1px solid #AAA}' + 
 '.gtlPassive:before{ content:"\u2193";}'+
 '.gtlActive:before{ content:"\u2191" !important;}'+
@@ -1427,7 +1418,7 @@ stickStyle('\
 #divDic *::-moz-selection {background: #047 !important; color: #FC8 !important; }'+
 '#divUse img, #divDic img, #divLookup img {width: auto; height: auto; }'+ // rt.com :/
 '#divTtsLnk:after{ content:url('+imgPlay+') }'+
-'#divTtsLnk {padding: 0 3px; margin: 0 4px 0 0;}'+
+'#divTtsLnk {padding: 0 2px; margin: 0 3px 0 5px;}'+
 '#divTtsIfh {width: 100%;overflow-x:hidden;\
 background-color: rgba(127,127,127,.25); padding: 3px 0;\
 }'+
@@ -1459,7 +1450,7 @@ border: 1px #aaa solid;\
 border-radius: 6px;\
 background-color: #dfd;\
 padding: 1px 4px;\
-font-size: small; line-height:0.9\
+font-size: small; line-height:0.9;\
 -webkit-transition: all .2s linear .2s;\
 transition: all .2s linear .2s;\
 z-index: 2147483647;\
@@ -1616,10 +1607,7 @@ languagesGoogle = '<option value="auto">Detect language</option>\
 
 /* */
 try{
-//body = window;
-//while(body.parent && body.parent != body) body=body.parent;
-//body = body.document.body;
-body=//document.documentElement.appendChild(document.createElement('section'));
+body=
  window.document.body;
 
 maxHT=GM_getValue('histSize'); 
