@@ -26,6 +26,6 @@
 
 ------------
 
-my styles on userstyles.org:<br>
-[![userstyles.org](2015-03-25_trespassersW-userstyles-org.png)](https://userstyles.org/users/95149)
+
+[my styles on userstyles.org](http://userscripts.org:8080/users/318398/scripts)
 
