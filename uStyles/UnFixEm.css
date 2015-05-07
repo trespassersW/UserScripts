@@ -1,0 +1,19 @@
+/* position:fixed -> position:absolute;
+ based on https://bugzilla.mozilla.org/show_bug.cgi?id=876341
+ alas, fixed in latest firefoxes
+*/
+@-moz-document url-prefix(http),url-prefix(https) {
+.x2233322#x3322233{color:red}
+}
+@-moz-document
+ domain(habrahabr.ru)
+,domain(mozilla.org)
+,domain(computerra.ru)
+,domain(kp.ru)
+{
+ body{
+ backface-visibility:hidden!important;
+ -moz-backface-visibility:hidden!important;
+}
+}
+
