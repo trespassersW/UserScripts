@@ -3,9 +3,8 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 15.04.26
-// 15.04.26 fixed width of content column :(
-// 15.03.15 css fixes: variable  width of content column;
+// @version 15.05.07
+// 15.05.07  sorting is now faster
 // 14.11.19.13 fixes for latest github changes
 //  .12 new age format; fix for chrome
 //  .11 patch for the very first page;
@@ -20,7 +19,7 @@
 // @icon https://i.imgur.com/8buFLcs.png
 // (C) Icon: Aaron Nichols CC Attribution 3.0 Unported
 // @run-at document-end
-// @grant GM_none
+// @grant unsafeWindow
 // ==/UserScript==
 
 if(document.body && document.querySelector('#js-repo-pjax-container')){
@@ -42,7 +41,7 @@ var oa=[],ca=[],clock,ext,dtStyle;
 var D=document, TB;
 var catcher,locStor;
 var prefs={dtStyle:0, ext: 0};
-
+var W= unsafeWindow || window;
 function stickStyle(css){
  var s=document.createElement("style"); s.type="text/css";
  s.appendChild(document.createTextNode(css));
@@ -344,7 +343,7 @@ function doSort(t){
   extclassName();
   C[n].d^=C[n].s; // don't toggle dir on ext.click
  }
- var tb=[],ix=[], i, tl;
+ var tb=[],ix=[], i, tl,ti,tx;
  _l('n:'+n);
  tl=TB.rows.length;
  ASC=C[n].d^=C[n].s;
@@ -353,11 +352,13 @@ function doSort(t){
  oClr();
  sort_p(n);
  ix.sort(sort_fn);
- for( i=0; i<tl; i++)
-  tb.push(TB.rows[ix[i]].innerHTML);
- for( i=0; i<tl; i++)
-  TB.rows[i].innerHTML=tb[i];
- setC(n);
+ for( i=0; i<tl; i++) 
+   tb.push(TB.rows[ix[i]]);
+ for( i=tl-1; i>=0; i--)
+   TB.removeChild(TB.rows[i]);
+ for( i=0; i<tl; i++) 
+   TB.appendChild(tb[i]);
+  setC(n);
  gitDir1(0);
 }
 
@@ -418,7 +419,7 @@ if(e.target.nodeName && e.target.nodeName=='SPAN' &&
 _l('startup()');
 
 try {
-  locStor = window.localStorage;
+  locStor = W.localStorage;
   tt=locStor.getItem("GHSFL");
 } catch(e){ locStor =null}
 
