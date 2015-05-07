@@ -27,5 +27,5 @@
 ------------
 
 
-[my styles on userstyles.org](http://userscripts.org:8080/users/318398/scripts)
+[my styles on userstyles.org](https://userstyles.org/users/95149?as=1&sort=updated_date&)
 
