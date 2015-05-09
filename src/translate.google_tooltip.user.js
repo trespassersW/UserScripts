@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.95
+// @version 3.7.96
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.7.95 2015-05-03 + dark colouring; * TTS in ff37; * DOMparser instead of IFRAME;
+// 3.7.96 2015-05-09  * TTS in ff37; * DOMparser instead of IFRAME; * minor fixes
 // 3.7.8.2 2015-04-26 + new country flags host
 // 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
 //   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
@@ -118,26 +118,26 @@ var noMup=0;
 var _G = "-moz-linear-gradient",_T='transparent';
 var G_ ='rgba(0,0,0,.1)',W_='rgba(255,255,255,.1)';
 var FG={
-t:  ['#000'   ,'#000'    ,'#000'   ,'#000'   ,'#eec'   ,'#000'   ],
-l:  ['#047'   ,'#047'    ,'#047'   ,'#047'   ,'#7CF'   ,'#047'   ],
-g:  ['#404040','#404040' ,'#404040','#404040','#ccb'   ,'#404040']
+t:  ['#000'   ,'#000'    ,'#000'   ,'#000'   ,'#eec'   ,'#000'   ,'#000'   ], // text 
+l:  ['#047'   ,'#047'    ,'#047'   ,'#052'   ,'#7CF'   ,'#047'   ,'#670000'], // links
+g:  ['#404040','#404040' ,'#404040','#404040','#ccb'   ,'#404040','#404040']  // greyed txt
 };
 var BG={
-t:  ["yellow" ,"grey"   ,"blue"   ,"green"   ,"dark"   ,"striped"],
-C:  ['#FFFFE1','#D1D1D1','#D3ECEC','#C4FFC4' ,'#333'     ,
-    _G+'(-45deg, #DDD, #AAA )'],
-T:  [_G+"(to right,#FFFFE1,#DDDDAA)", _G+"(to right,#D1D1D1,#A0A097)",
+t:  ["yellow" ,"grey"    ,"blue"   ,"green"  ,"dark"   ,"striped", "pink"  ], // titles
+C:  ['#FFFFE1','#D1D1D1','#D3ECEC','#C4FFC4'  ,'#333'  , // bg Color
+    _G+'(-45deg, #DDD, #AAA )'    ,'#FFE6E6'],
+T:  [_G+"(to right,#FFFFE1,#DDDDAA)", _G+"(to right,#D1D1D1,#A0A097)", // buttons
      _G+"(to right,#D3ECED,#8CCCCE)", _G+"(to right,#C4FFC4,#6BEF69)",
-     _G+"(to right,#777,#373737)", _G+"(to right,#CCC, #888)"],
-//'#F9E78F','#C1C1B7','#BCD1D1','#AAEEAA','#E8D0D0','rgba(0,0,0,.1)'     
-H:  [_T,_T,_T,_T,_T,_G+'(to bottom ,rgba(127,127,127,.0),rgba(127,127,127,.15))'
-    ],
-F:  [G_,G_,G_,G_,W_,G_],
-E:  ['#F4F4E8','#EEEEEE','#E8E8F4','#E8F4E8','#777'    ,'#DDDDDD'],
+     _G+"(to right,#777,#373737)"   , _G+"(to right,#CCC, #888)",
+     _G+"(to right,#FFE6E6,#FFC6C8)"  ],
+H:  [_T,_T,_T,_T,_T, // dictionary items
+     _G+'(to bottom ,rgba(127,127,127,.0),rgba(127,127,127,.15))', _T],
+F:  [G_,G_,G_,G_,W_,G_,G_], // historic phrases
+E:  ['#F4F4E8','#EEEEEE','#E8E8F4','#E8F4E8','#777777','#DDDDDD','#FFF2F2'], // Edit box
 f:  [function(){css(0)}, function(){css(1)}, function(){css(2)},
-     function(){css(3)}, function(){css(4)}, function(){css(5)}]
+     function(){css(3)}, function(){css(4)}, function(){css(5)},
+     function(){css(6)}]
 }
-
 
 function mousedownCleaning(evt){
 	var divDic = getId('divDic');
@@ -582,13 +582,13 @@ function extractResult(html){
       gt_sl_gms = _tl, gt_tl_gms = _sl; /* ?!11 */
   
   getId('divBottom').removeChild(getId('optionsLink'));
-  var oL= buildEl('div', {id:'optionsLink', title: 'Settings', 'class':'gootransbutt'},
+  var oL= buildEl('div', {id:'optionsLink', title: 'Settings', 'class':''},
   null, null);
-  addEl(oL,'a',{id:'optionsFrom','class':'gootranslink'},  
+  addEl(oL,'a',{id:'optionsFrom','class':'gootransbutt gootranslink'},  
   ['click', options],  gt_sl_gms +' '); 
-  addEl(oL,'a',{id:'optionsFast','class':'gootranslink', 
+  addEl(oL,'a',{id:'optionsFast','class':'gootransbutt gootranslink', 
   title: 'swap languages'}, ['click', fastSwap], imgSwap);
-  addEl(oL,'a',{id:'optionsTo','class':'gootranslink ' + (getId('divOpt') ? 'gtlActive':'gtlPassive')},  
+  addEl(oL,'a',{id:'optionsTo','class':'gootransbutt gootranslink ' + (getId('divOpt') ? 'gtlActive':'gtlPassive')},  
   ['click', options],  gt_tl_gms );
   getId('divBottom').appendChild(oL);
   }catch(e){ console.log('gather\n'+e); }
@@ -738,7 +738,6 @@ function options(evt){
      b.addEventListener('click',BG.f[ii]); 
     }
 		//save
-		addEl(dO,'span',null,null,' &nbsp; ');
     var oS=
 		addEl(dO,'a', {href:HREF_NO, id:'gtp-save', 'class':'gootranslink gootransbutt',
     title: "save changes"}, 
@@ -1185,28 +1184,10 @@ function getId(id, parent){
 
 /* */
 function getXId(id){
-   var r=Xel('.//*[@id="'+id+'"]',divExtract,divExtract);
+   var r=divExtract.getElementById(id);
    if(r) return r;
    throw "Xel bug " + id; 
 }
-
-function Xel(XPath, Node, Doc){
-    var a = Doc.evaluate(XPath, Node,
-    null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-    return (a.snapshotLength ? a.snapshotItem(0) : null);
-}
-/* */
-
-/** /
-function Xels(XPath, Node, Doc){
-    var ret=[], i=0;
-    var a = Doc.evaluate(XPath, Node, 
-    null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-    while(a.snapshotItem(i))
-      ret.push(a.snapshotItem(i++));
-    return ret;
-}/**/
-//
 
 function getTag(name, parent){
 	if(!parent)
@@ -1328,7 +1309,7 @@ stickStyle((
 '#divResult {overflow: auto !important; padding:3px !important; margin: 0 0 3px 0 !important; max-height: 480px !important;}'+
 '#divResult table *{ line-height: 0.9 !important}'+
 '#divDic, #divDic div,#divLookup, #divUse  {padding: 0; margin:0; \
-width: auto;height: auto; border: none; border-radius: 0;}'+
+width: auto;height: auto; border: none; border-radius: 0; background: none;}'+
 '#divDic, #divDic *, #divSelflag, #divSelflag *{\
 font-family: Tahoma, sans-serif!important;\
 font-size: small!important;\
@@ -1336,7 +1317,8 @@ font-style: normal!important;\
 font-weight: normal!important;\
 font-stretch: normal!important;\
 letter-spacing: normal!important;\
-line-height: 1.1;}'+
+line-height: 1.1;\
+}'+
 '#divDic,#divSelflag {position: absolute; background:'+BG.C[i]+'!important; color:'+FG.t[i]+
 '!important; opacity: 1'+
 ';padding:5px !important; margin:0; z-index:10000; border-radius:5px; border: thin solid  gray'+
@@ -1362,8 +1344,9 @@ font: small normal Tahoma,sans-serif !important;'+
 '#gtp_dict li {list-style: square inside; display: list-item;}'+
 'div#gtp_dict tr>td {padding-left: .25em; vertical-align:top; border: none; color:'+FG.t[i]+'; }'+
 '#optSelLangFrom,#optSelLangTo {max-width: 150px; text-align: left !important; height: 1.5em;\
-vertical-align: baseline !important;\
 }'+
+'#divDic input{vertical-align: baseline !important;}'+
+'#divDic input[type="checkbox"]{vertical-align: text-bottom !important;}'+
 '#divResult a.gootranslink.gootransgoo{font-size: 1em !important; line-height: 1;}'+
 '#divOpt span {color:'+FG.t[i]+'!important;}'+
 '#optSelLangFrom,#optSelLangTo,#divDic input[type="textbox"]{background:'+BG.E[i]+'!important;\
@@ -1375,7 +1358,8 @@ padding-bottom: 3px !important; margin-bottom: 4px!important;}'+
 '#sourceLink {display: inline; position: relative; margin-left: 1em;  font-size:smaller; text-decoration:none;}'+
 '#imgSourcesave {display: inline; position: relative; margin-left:2px;\
 cursor:pointer;}'+
-'div#optionsLink {display: inline; position: relative; padding-left: 1em; margin-left: 1em; font-size:smaller !important; text-decoration:none !important;}'+    
+'div#optionsLink {display: inline; position: relative; margin-left: 1.5em; font-size:smaller !important; text-decoration:none !important;}'+
+'#divDic #optionsLink [id^="options"] {margin-right: 2px; padding-left: 2px;}'+
 '#divOpt {position: relative; padding: 5px;'+
 'border-top: thin solid grey!important;}'+ 
 '#divLookup, #divOpt, #divBottom,#divSourcetext,#divHist,#divuse {direction: ltr !important;}'+
@@ -1414,8 +1398,9 @@ background:'+ BG.C[i] +'!important;}'+
 );
 
 if(-1 !== n) return;
-stickStyle('\
-#divDic *::-moz-selection {background: #047 !important; color: #FC8 !important; }'+
+stickStyle(
+'#divDic, #divDic textarea, #divDic iframe {resize: both !important; }'+
+'#divDic *::-moz-selection {background: #047 !important; color: #FC8 !important; }'+
 '#divUse img, #divDic img, #divLookup img {width: auto; height: auto; }'+ // rt.com :/
 '#divTtsLnk:after{ content:url('+imgPlay+') }'+
 '#divTtsLnk {padding: 0 2px; margin: 0 3px 0 5px;}'+
@@ -1460,6 +1445,10 @@ visibility: visible;\
 opacity: 1;\
 -webkit-transition: all .5s linear .7s;\
 transition: all .5s linear .7s;\
+}\
+#divOpt #gtp-save{\
+position: absolute; right: 2px;; bottom: -1.25em;\
+font-weight: bold\
 }\
 ');
 }
