@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.96
+// @version 3.7.97
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.7.96 2015-05-09  * TTS in ff37; * DOMparser instead of IFRAME; * minor fixes
+// 3.7.96 2015-05-10  * TTS in ff37; * DOMparser instead of IFRAME; * bugfixes
 // 3.7.8.2 2015-04-26 + new country flags host
 // 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
 //   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
@@ -739,9 +739,9 @@ function options(evt){
     }
 		//save
     var oS=
-		addEl(dO,'a', {href:HREF_NO, id:'gtp-save', 'class':'gootranslink gootransbutt',
+		addEl(dO,'div', {id:'gtp-save', 'class':'gootranslink gootransbutt',
     title: "save changes"}, 
-    ['click', saveOptions], '<b>save</b>');
+    ['click', saveOptions], 'save');
     if(!GM_getValue('from'))
       saveIt();
     getId('optionsTo').className='gootransbutt gootranslink gtlActive';
@@ -1447,8 +1447,8 @@ opacity: 1;\
 transition: all .5s linear .7s;\
 }\
 #divOpt #gtp-save{\
-position: absolute; right: 2px;; bottom: -1.25em;\
-font-weight: bold\
+position: absolute; right: 2px;; bottom: -1.3em;\
+font-weight: bold; cursor: pointer; z-index: 999999;\
 }\
 ');
 }
