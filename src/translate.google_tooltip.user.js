@@ -10,15 +10,15 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.97
+// @version 3.7.98
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 3.7.98 2015-05-30 css fix
 // 3.7.96 2015-05-10  * TTS in ff37; * DOMparser instead of IFRAME; * bugfixes
 // 3.7.8.2 2015-04-26 + new country flags host
 // 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
 //   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
 //   * [ctrl] tts window in new tab
 // 3.6.2.2 2015-04-19 * gray gradient background 
-// 3.6.1 2015-04-17   + selectable background color
 // 3.5.1 2015-04-15
 //  + TTS: alt-select text inside tooltip and shift-click language icon below
 //  * From<->To buttons fix; * err handler
@@ -85,6 +85,7 @@ var llii=0, _log = function(){ /* * /
  console.log(s)
 /* */
 }
+//_log=console.log.bind(console);
 _log("tgtt..");
 var URL='*'; var tURL;
 var GT_tl='auto';
@@ -133,10 +134,11 @@ T:  [_G+"(to right,#FFFFE1,#DDDDAA)", _G+"(to right,#D1D1D1,#A0A097)", // button
 H:  [_T,_T,_T,_T,_T, // dictionary items
      _G+'(to bottom ,rgba(127,127,127,.0),rgba(127,127,127,.15))', _T],
 F:  [G_,G_,G_,G_,W_,G_,G_], // historic phrases
-E:  ['#F4F4E8','#EEEEEE','#E8E8F4','#E8F4E8','#777777','#DDDDDD','#FFF2F2'], // Edit box
-f:  [function(){css(0)}, function(){css(1)}, function(){css(2)},
-     function(){css(3)}, function(){css(4)}, function(){css(5)},
-     function(){css(6)}]
+E:  ['#F4F4E8','#EEEEEE','#E8E8F4','#E8F4E8','#777777','#DDDDDD','#FFF2F2'] // Edit box
+}
+
+function bgClick(e){
+  css(e.target.paletteN);
 }
 
 function mousedownCleaning(evt){
@@ -735,7 +737,8 @@ function options(evt){
      style: 'background:'+ BG.C[ii]+'!important;' +
      (ii==0?'margin-left:6px' :'')
      }, null,'&nbsp;');
-     b.addEventListener('click',BG.f[ii]); 
+     b.paletteN=ii;
+     b.addEventListener('click',bgClick,false);; 
     }
 		//save
     var oS=
@@ -1291,7 +1294,6 @@ function stickStyle(css){
  s.appendChild(document.createTextNode(css));
  return (document.head||document.documentElement).appendChild(s);
 }
-
 function css(n){
   var k,i=0;
   _log('cssN:',n);
@@ -1401,7 +1403,7 @@ if(-1 !== n) return;
 stickStyle(
 '#divDic, #divDic textarea, #divDic iframe {resize: both !important; }'+
 '#divDic *::-moz-selection {background: #047 !important; color: #FC8 !important; }'+
-'#divUse img, #divDic img, #divLookup img {width: auto; height: auto; }'+ // rt.com :/
+'#divUse img, #divDic img, #divLookup img {display: inline; width: auto; height: auto; }'+ 
 '#divTtsLnk:after{ content:url('+imgPlay+') }'+
 '#divTtsLnk {padding: 0 2px; margin: 0 3px 0 5px;}'+
 '#divTtsIfh {width: 100%;overflow-x:hidden;\
