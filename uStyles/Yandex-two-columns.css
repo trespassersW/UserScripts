@@ -1,6 +1,6 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
 /* 
-   2015-03-24 * заплата
+   2015-06-03 * PDF icon
    2015-02-22 * maps width: 100%; * audio-track
    2015-02-16 * Смотрите также
    2014-07-22 * задний фон
@@ -283,5 +283,22 @@ width: 100% !important;
 .z-news__title a.b-link{
 max-width: 42vw !important;
 }
+/* 2015-06-03 */
+.serp-item__extra_type_right { 
+margin-left: 1px !important;
+}
+.serp-item__extra_type_right .serp-item__mime {
+display: inline-block !important; position: relative !important;
+}
+.serp-item__extra_type_right .serp-item__mime-size{
+ display: block !important;
+ position: absolute !important;
+ line-height: 12px !important;
+ bottom: -.3em !important; right: 1px !important;
+ background: rgba(227,227,227,.4) !important;
+ border-radius: 10px;
+ font-size: x-small !important;
+}
 /* */
 }
+
