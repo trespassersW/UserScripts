@@ -67,4 +67,3 @@ YCC=GM_getValue(PYD,YCC);
 col_cnt(YCC,true)
 
 })();
-
