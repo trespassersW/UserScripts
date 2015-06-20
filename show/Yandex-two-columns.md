@@ -1,4 +1,4 @@
-| ![ya2ay](/res/ya.jpg) | ***Yandex-two-columns*** |  **[[`JS`]](../src/Yandex-two-columns.user.js)**     **[[`Install`]](/../../raw/master/src/Yandex-two-columns.user.js)**
+| ![ya2ay](../res/yaya.png | ***Yandex-two-columns*** |  **[[`JS`]](../src/Yandex-two-columns.user.js)**     **[[`Install`]](/../../raw/master/src/Yandex-two-columns.user.js)**
 | :----: | :---- | ----- |
 #### **Script summary:** две колонки результатов Яндекса - и ничего лишнего 
 
@@ -20,9 +20,9 @@
 
 <hr>
 
-2015-01-05 ** Смотрите также<br>
-2014-06-15 новый дизайн йандекса<br>
+2015-06-20 * правая панель<br>
 2014-07-22 * задний фон
+2014-06-15 новый дизайн йандекса<br>
 
 <hr>
 [![C](http://i.creativecommons.org/l/by/3.0/80x15.png "copyleft")] (http://creativecommons.org/licenses/by/3.0/) © **Yandex-two-columns** by *trespassersW*
