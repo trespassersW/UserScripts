@@ -1,8 +1,8 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
 /* 
+   2015-06-20 * right panel
    2015-06-03 * PDF icon
    2015-02-22 * maps width: 100%; * audio-track
-   2015-02-16 * Смотрите также
    2014-07-22 * задний фон
    2014-06-05 новый дизайн йандекса 
 */
@@ -204,8 +204,6 @@ transition: all 0s linear 0.2s !important;
 .footer__col {
     padding-bottom: 0 !important;
 }
-/* */ 
-/* dbg * /html *{border:thin solid red!important;}/* */
 div.main {background-color: #FEFDFC;}
 /* 2014-07-20 */
 .serp-item__extra-wrap .serp-item__data {
@@ -299,6 +297,19 @@ display: inline-block !important; position: relative !important;
  border-radius: 10px;
  font-size: x-small !important;
 }
-/* */
+/* 2015-06-20 */
+.layout_type_serp .layout__col_size_5 {
+ width: 45% !important;
+ padding-left: 10px !important;
 }
-
+.layout_type_serp .layout__col_size_5 >div {
+ max-width: 97% !important;
+}
+h2.serp-item__title >a{
+max-width: 505px !important;
+max-width: 47vw !important;
+overflow: hidden !important;
+}
+/* */
+/* dbg * / html *{border:thin solid red!important;}/* */
+}
