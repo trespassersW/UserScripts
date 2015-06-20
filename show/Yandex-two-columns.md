@@ -12,7 +12,7 @@
 
 =====
 
-![screenshot](../res/yanTwoShot.png)
+[![screenshot](../res/yanTwoShot.png)](https://raw.githubusercontent.com/trespassersW/UserScripts/master/res/yanTwoShot.png)
 
 =====
 
