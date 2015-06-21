@@ -33,6 +33,7 @@ if(!d) return;
 {
  GM_addStyle(
   'div,p,li,td, dd{ -moz-hyphens: auto !important}'
+ +'h1,h2,h3,h4,th,'
  +'[class*="button"],[class*="menu"],[id*="button"],[id*="menu"]'
  +',[class*="button"] *,[class*="menu"] *,[id*="button"] *,[id*="menu"] *'
 +',[class^="b-head__layout-column"] * ' //yandex
