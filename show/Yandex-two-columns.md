@@ -12,7 +12,7 @@
 
 =====
 
-[![screenshot](../res/ya2Col.jpg)](https://raw.githubusercontent.com/trespassersW/UserScripts/master/res/ya2Col.jpg)
+[![screenshot](../res/ya2col.jpg)](https://raw.githubusercontent.com/trespassersW/UserScripts/master/res/ya2col.jpg)
 
 =====
 
