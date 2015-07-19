@@ -1,6 +1,6 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
 /* 
-   2015-06-20 * right panel
+   2015-07-20 * боковые панели; интервалы между статьями
    2015-06-03 * PDF icon
    2015-02-22 * maps width: 100%; * audio-track
    2014-07-22 * задний фон
@@ -33,9 +33,10 @@ div.content__left  {
 .main__left:before{
 position: absolute !important;
 visibility: visible !important;
+/* */
 top: 0  !important;
-left: 0 !important;
-right: auto !important; bottom: auto !important;
+left: 0 !important; /* */
+right: auto !important; bottom: auto !important; /* */
 z-index: 247 !important;
 background-color: rgba(255, 240, 220, .7) !important;
 opacity: .9 !important;
@@ -48,9 +49,10 @@ border-radius: 16px 0px 16px 0px !important;
 }
 .main__left{
 position: absolute !important;
-top: 0  !important;
-left: 0 !important;
-right: auto !important; bottom: auto !important;
+/* */
+top: 192px !important;
+left: 0 !important; /* */
+right: auto !important; bottom: auto !important; /* */
 z-index: 2147483647 !important;
 background-color: rgba(255, 240, 220, .9) !important;
 opacity:  1 !important;
@@ -59,9 +61,9 @@ border: 1px solid grey  !important;
 border-radius: 16px 0px 16px 0px !important;
 margin: 0 !important;
 padding: 0 !important;
-top: 60px  !important;
 transition: all 0s linear 0.75s !important;
 -webkit-transition: all 0s linear 0.75s !important;
+
 }
 .main__left:hover {
 visibility: visible !important;
@@ -87,7 +89,7 @@ padding: 8px 0 0 12px !important;
 .content__right:before {
 position: absolute !important;
 visibility: visible !important;
-top:   0em !important;
+top:   0 !important;
 right: 0 !important;
 left: auto !important; bottom: auto !important;
 width: 64px !important;
@@ -103,7 +105,7 @@ content: "" !important;
 position: absolute !important;
 visibility: hidden !important;
 opacity: 1 !important;
-top:   60px !important;
+top:   192px !important;
 right: 0 !important; 
 left: auto !important;
 min-height: 1.2em !important;
@@ -228,10 +230,11 @@ body .serp-item__greenurl{
 }
 .serp-list ~ .intents {display:none !important; }
 
-div.serp-block div.serp-item >div{ /* 2014,07.22 */
+div.serp-block div.serp-item { /* 2015-07-20 */
  background-image: linear-gradient(to top, 
  rgba(255,255,255, .5), rgba(224,224,255, .5) ) ;
  border-radius: 8px 16px 0 0 ;
+ padding: 10px 2px 6px 2px !important;
 }
 .intents__container {
  margin-top: 4px !important;
@@ -251,7 +254,10 @@ div.serp-block div.serp-item >div{ /* 2014,07.22 */
 .z-related-list {
   margin-left:-4px !important;
 }
-.footer {line-height: 14px !important;}
+.footer {line-height: 14px !important;
+ margin-top:4px !important; padding:2px !important;
+}
+div.footer__line { display: inline-block !important; padding-left: 1em !important;}
 /* 150105 */
 .content__right > .z-related-list:before {
 display: block!important;
@@ -271,7 +277,7 @@ transition: all 0s linear 0.3s !important;
 .z-related-list {margin-top:0 !important;}
 /* 150227.17:00 */
 .main {
-    min-height: calc(100% - .1em) !important;
+    min-height: calc(100% - 0.1em) !important;
 }
 .ymaps-map, .map__dynamic-map {
 width: 100% !important;
@@ -310,6 +316,7 @@ max-width: 505px !important;
 max-width: 47vw !important;
 overflow: hidden !important;
 }
+.b-page_initial-scroll_yes{ overflow-y: auto !important;}
 /* */
 /* dbg * / html *{border:thin solid red!important;}/* */
 }
