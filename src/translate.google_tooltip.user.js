@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.7.98
+// @version 3.8.0
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.7.98 2015-05-30 css fix
+// 3.8.00 2015-07-25  * changed dictionary request string
 // 3.7.96 2015-05-10  * TTS in ff37; * DOMparser instead of IFRAME; * bugfixes
 // 3.7.8.2 2015-04-26 + new country flags host
 // 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
@@ -69,11 +69,12 @@ main = function (){ "use strict";
 var   GTsuffix=".com"; // ".fr" ".de" ".ru" ".com"
 //{[ hacks
 var UA = navigator.userAgent;
-0 && (UA="Mozilla/5.0 (Windows NT 5.1; rv:37.0) Gecko/20100101 Firefox/37.0");
+0 && (UA="Mozilla/5.0 (Windows NT 5.1; rv:39.0) Gecko/20100101 Firefox/39.0");
 //]}
 
 var   GTurl= "https://translate.google"+GTsuffix+"/?"; 
-var dictURL= "https://translate.google"+GTsuffix+"/translate_a/t?client=t";
+//var dictURL= "https://translate.google"+GTsuffix+"/translate_a/t?client=t";
+var dictURL= "https://translate.google"+GTsuffix+"/translate_a/single?client=t";
 var  ttsURL= "https://translate.google.com/translate_tts?client=t";
 var version= 3790;
 
@@ -198,7 +199,7 @@ function cleanUp(s){
 
 function useClick(e){
   killId('divUse');
-  if(e.shiftKey)  ht[0][1] += ' '+txtSel;
+  if(e.shiftKey)  ht[0][1] += '\n'+txtSel;
   else  ht[0][1] = txtSel;
   GM_setValue('hist',JSON.stringify(ht));
   if(getId('divHist')){
@@ -460,7 +461,7 @@ function ttsRequest(txt,t,e){
   //GM_openInTab(etxt);
   // sorry, firefox' decodeAudioData() does NOT support mp3
 }
-
+//single?client=t&sl=en&tl=ru&hl=ru&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&source=btn
 function gtRequest(txt,s,t){
   var etxt = escAp(txt);
   currentURL = GTurl + "langpair="	+ s + "|" + t + "&text="+etxt ;
@@ -477,7 +478,7 @@ function gtRequest(txt,s,t){
 }
 function Request(url,cb){
   URL=url; _log('R: '+URL);
-  var meth=cb? 'POST': 'GET';
+  var meth=(1 && cb)? 'POST': 'GET';
   GM_xmlhttpRequest({
 			method: meth,
 			url: url,
@@ -494,10 +495,10 @@ function Request(url,cb){
           else
 					 extractResult(resp.responseText);
 				}catch(e){
-         if(getId('divResult'))
+         if(getId('divResult')){
           getId('divResult').innerHTML = 
         '<a id="gttpErrRef" href="#">error processing response text:</a><br>'+e;
-          getId('gttpErrRef').href=URL.subsr(0,99);
+         getId('gttpErrRef').href=URL.subsr(0,99);}
         }
 			}
 		});	
@@ -781,7 +782,7 @@ function detectedLang(da){
 }
 
 function extractDict(txt){
-_log('!dict')
+//console.log('!dict\n'+txt)
 
 try{
  if(!txt) return;
@@ -854,9 +855,12 @@ function onTimerDict(){
  var q = dictURL + 
  "&hl="+ GM_getValue('to','auto') + 
  "&sl=" + gt_sl + "&tl=" + gt_tl + //+'&multires=1&ssel=0&tsel=0&sc=1';
- "&text="+ escAp(txtSel);
+ "&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&source=btn&ssel=0&tsel=0&kc=1"+
+ "&q="+ escAp(txtSel);
  //console.log('dict:'+ dictURL);
  _log('?dict')
+// q =
+//"https://translate.google.com/translate_a/single?client=t&sl=en&tl=ru&hl=ru&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&source=btn&ssel=0&tsel=0&kc=1&q=twenty%20three%20dozens";
  Request(q, extractDict);
 }
 
@@ -1430,7 +1434,7 @@ opacity: 0.25;\
 top: 32px;\
 min-width: 0px;\
 width: auto;\
-white-space: normal !important;\
+white-space: pre !important;\
 -moz-hyphens: none !important;\
 text-decoration: none !important;\
 border: 1px #aaa solid;\
