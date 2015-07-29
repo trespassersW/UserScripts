@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.8.0
+// @version 3.9.01
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.8.00 2015-07-25  * changed dictionary request string
+// 3.9.01 2015-07-29  * fix for Ff39; + now works in chrome
 // 3.7.96 2015-05-10  * TTS in ff37; * DOMparser instead of IFRAME; * bugfixes
 // 3.7.8.2 2015-04-26 + new country flags host
 // 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
@@ -71,6 +71,8 @@ var   GTsuffix=".com"; // ".fr" ".de" ".ru" ".com"
 var UA = navigator.userAgent;
 0 && (UA="Mozilla/5.0 (Windows NT 5.1; rv:39.0) Gecko/20100101 Firefox/39.0");
 //]}
+var isChrome= (navigator.userAgent.indexOf("AppleWebKit")>0);
+var moz=isChrome? "-webkit-": "-moz-";
 
 var   GTurl= "https://translate.google"+GTsuffix+"/?"; 
 //var dictURL= "https://translate.google"+GTsuffix+"/translate_a/t?client=t";
@@ -80,7 +82,7 @@ var version= 3790;
 
 var HREF_NO = 'javascript:void(0)';
 
-var llii=0, _log = function(){ /* * /
+var llii=0, _log = function(){ /* */
  for (var s=++llii +':', li=arguments.length, i = 0; i<li; i++) 
   s+=' ' + arguments[i];
  console.log(s)
@@ -117,7 +119,7 @@ var gt_sl_gms, gt_tl_gms, gt_sl, gt_tl;
 
 var sT;
 var noMup=0;
-var _G = "-moz-linear-gradient",_T='transparent';
+var _G = (isChrome?'':moz)+"linear-gradient",_T='transparent';
 var G_ ='rgba(0,0,0,.1)',W_='rgba(255,255,255,.1)';
 var FG={
 t:  ['#000'   ,'#000'    ,'#000'   ,'#000'   ,'#eec'   ,'#000'   ,'#000'   ], // text 
@@ -451,8 +453,9 @@ function openInFrame(url){
 }
 
 function ttsRequest(txt,t,e){
-  var etxt = escAp(txt);
-  etxt=ttsURL + "&tl="	+ t + "&ie=utf-8&q=" + etxt.split(' ').slice(0,19).join(' ');
+  txt=txt.split(' ').slice(0,19).join(' ');
+  var etxt = escAp(txt.split(' ').slice(0,19).join(' '));
+  etxt=ttsURL + "&tl="	+ t + "&ie=utf-8&q=" + etxt;
   _log('tts> '+etxt);
   if(e)
     GM_openInTab(etxt);
@@ -869,7 +872,7 @@ function dict(){
     killId('gtp_dict');
 //    var dD=buildEl('div',{id:"gtp_dict"},null,dict)
 //    dR.appendChild(dD);
-    window.setZeroTimeout(onTimerDict);
+    setZeroTimeout(onTimerDict);
 }
 
 function saveSource(){
@@ -1125,7 +1128,7 @@ function flagRequest(f){
  GM_xmlhttpRequest({
 	method: 'GET',
 	url: f,
-  binary: true,
+  //binary: true,
   overrideMimeType: "text/plain; charset=x-user-defined",
   headers: {	    
     "User-Agent": UA
@@ -1226,7 +1229,7 @@ function dragCleanup(e) {
 	didDrag=true;
 }
 function dragHandler(e){
-	var htype='-moz-grabbing';
+	var htype=moz+'grabbing';
 	if (e == null) return;//
 	var target = e.target;// != null ? e.target : e.srcElement;
 	orgCursor=target.style.cursor;
@@ -1286,11 +1289,10 @@ function ttrans( s, ttab ){
     t += (c=ttab[cc=s.charAt(i)]) ? c : cc;
   return t;
 }
-var tabUrlEsc = {
- '#':'%23', '%':'%25', '&':'%26', '.':'%2e', '/':'%2f', '?':'%3f'
- };
+//var tabUrlEsc = { '#':'%23', '%':'%25', '&':'%26', '.':'%2e', '/':'%2f', '?':'%3f' };
 function escAp(s){
- return ttrans( s, tabUrlEsc );
+ return encodeURI(s);
+ //return ttrans( s, tabUrlEsc );
 }
 
 function stickStyle(css){
@@ -1406,7 +1408,7 @@ background:'+ BG.C[i] +'!important;}'+
 if(-1 !== n) return;
 stickStyle(
 '#divDic, #divDic textarea, #divDic iframe {resize: both !important; }'+
-'#divDic *::-moz-selection {background: #047 !important; color: #FC8 !important; }'+
+'#divDic *::'+(isChrome?'':moz)+'selection {background: #047 !important; color: #FC8 !important; }'+
 '#divUse img, #divDic img, #divLookup img {display: inline; width: auto; height: auto; }'+ 
 '#divTtsLnk:after{ content:url('+imgPlay+') }'+
 '#divTtsLnk {padding: 0 2px; margin: 0 3px 0 5px;}'+
@@ -1628,27 +1630,36 @@ if (sT){
 // borrowed from dbaron.org/log/20100309-faster-timeouts :
 // Only add setZeroTimeout to the window object, and hide everything
 // else in a closure.
-  (function() {
-      var timeouts = [];
-      var messageName = "zero-timeout-130613";
-      // Like setTimeout, but only takes a function argument.  There's
-      // no time argument (always zero) and no arguments (you have to
-      // use a closure).
-      function setZeroTimeout(fn) {
+//  (function() {
+
+var setZeroTimeout,handleMessage,
+    timeouts = [],
+    messageName = "zero-timeout-150727";
+// Like setTimeout, but only takes a function argument.  There's
+// no time argument (always zero) and no arguments (you have to
+// use a closure).
+if(!isChrome){
+setZeroTimeout= function (fn) {
           timeouts.push(fn);
           window.postMessage(messageName, "*");
-      }
-      function handleMessage(event) {
+      },
+handleMessage= function(event) {
           if (event.source == window && event.data == messageName) {
               event.stopPropagation();
               if (timeouts.length > 0) {
                   var fn = timeouts.shift();
                   fn();
       }   }    }
-      window.addEventListener("message", handleMessage, true);
-      // Add the one thing we want added to the window object.
-      window.setZeroTimeout = setZeroTimeout;
-  })();
+} else {
+setZeroTimeout= function (fn) {
+  window.setTimeout(fn,1);
+}
+}
+
+window.addEventListener("message", handleMessage, true);
+// Add the one thing we want added to the window object.
+//window.setZeroTimeout = setZeroTimeout;
+//  })();
 
 document.addEventListener('mouseup', showLookupIcon, false);
 document.addEventListener('mousedown', mousedownCleaning, false);
@@ -1686,4 +1697,3 @@ function deURI(u,m){
 main();
 }
 //
-
