@@ -10,7 +10,7 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.9.01
+// @version 3.9.10
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
 // 3.9.01 2015-07-29 * fix for Ff39; + now works in chrome
 // 3.7.96 2015-05-10 * TTS in ff37; * DOMparser instead of IFRAME; * bugfixes
@@ -82,7 +82,7 @@ var version= 3790;
 
 var HREF_NO = 'javascript:void(0)';
 
-var llii=0, _log = function(){ /* */
+var llii=0, _log = function(){ /* * /
  for (var s=++llii +':', li=arguments.length, i = 0; i<li; i++) 
   s+=' ' + arguments[i];
  console.log(s)
