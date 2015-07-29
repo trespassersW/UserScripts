@@ -12,8 +12,8 @@
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
 // @version 3.9.01
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.9.01 2015-07-29  * fix for Ff39; + now works in chrome
-// 3.7.96 2015-05-10  * TTS in ff37; * DOMparser instead of IFRAME; * bugfixes
+// 3.9.01 2015-07-29 * fix for Ff39; + now works in chrome
+// 3.7.96 2015-05-10 * TTS in ff37; * DOMparser instead of IFRAME; * bugfixes
 // 3.7.8.2 2015-04-26 + new country flags host
 // 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
 //   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
@@ -1696,3 +1696,4 @@ function deURI(u,m){
 }
 main();
 }
+//
