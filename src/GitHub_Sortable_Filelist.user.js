@@ -3,7 +3,8 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 15.05.07
+// @version 15.08.07
+// 15.08.07  + case-insensitive sorting button
 // 15.05.07  sorting is now faster
 // 14.11.19.13 fixes for latest github changes
 //  .12 new age format; fix for chrome
@@ -11,7 +12,6 @@
 //  .10 datetime auto-updating fix; right-aligned datetime column; proper local time; .ext sorting fix; 
 //  .8 sorting by file extention
 //  .7 date/time display mode switching
-//  .4 now works on all github pages
 // @created 2014-11-10
 // @updated 2015-03-25
 // @author  trespassersW
@@ -30,6 +30,7 @@ var llii=0, _l= function(){/* * /
  console.log(s)
 /* */
 }
+//_l=console.log.bind(console);
 var fakejs = // avoid compiler warning
 (function(){ "use strict"; 
 
@@ -37,10 +38,10 @@ var ii=0,tt;
 var d0=[0,0,1];
 var C=[{c:1, d: 0, s: 0},{c:2, d: 0, s: 0},{c:3, d: 1, s: 0}];
 var ASC;
-var oa=[],ca=[],clock,ext,dtStyle;
+var oa=[],ca=[],clock,ext,dtStyle,upc;
 var D=document, TB;
 var catcher,locStor;
-var prefs={dtStyle:0, ext: 0};
+var prefs={dtStyle:0, ext: 0, upc: 0};
 var W= unsafeWindow || window;
 function stickStyle(css){
  var s=document.createElement("style"); s.type="text/css";
@@ -84,9 +85,9 @@ stickStyle('\
  border-color: transparent;\n\
  border-width: 0;\n\
  content: "";\n\
+ opacity: .2\n\
 }\n\
 .fsort-butt.fsort-asc:before,.fsort-butt.fsort-desc:before{\n\
- opacity:.2;\n\
  left:1.5em; top: -1em;\n\
 }\n\
 td.age.fsort-butt.fsort-asc:before,td.age.fsort-butt.fsort-desc:before{\n\
@@ -110,41 +111,42 @@ content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAMCAYAAABbayygA
 .fsort-asc.fsort-sel:hover:before{content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAMCAYAAABbayygAAAACXBIWXMAAAsTAAALEwEAmpwYAAAApUlEQVR42mNgQAKrVq1i+vfv3xYg3vXixQsuBlzg27dvUv+h4Pfv35Y4FX7//l0GSaHNYFH49u1bXqAvp//9+zcWXeGfP3+8gXJTP378KMgAVJAMkwQKLkBiLwXifyA2UE0Bw9evXyWA/If/cQCg3PufP39qwNwmCxS4ikXRo1+/fmmhuBXkDqDEESRFl4ARII3V18+ePeMEKtgIxPs+fPjAjywHANCcACRZ1c8XAAAAAElFTkSuQmCC);\n\
 }\n\
 \n\
-.fsort-sel:before,\n\
-.fsort-sel:before{\n\
+.fsort-butt.fsort-sel:before\n\
+{\n\
   background-color: #4183C4 !important;\n\
+  opacity:.6 !important;\n\
 }\n\
 \n\
-.fsort-butt.fsort-sel:before{ opacity: .6 }\n\
-.fsort-butt:hover:before{ opacity: 1 !important;}\n\
+span.fsort-butt:hover:before\n\
+,span.fsort-butt:hover span:before\n\
+{ opacity: 1 !important;}\n\
 \n\
 #fsort-clock:before{\n\
  left:5em; top: -15px; \n\
  text-align:center; vertical-align: top; top:-15px;\n\
  width: 16px; height: 16px;\
  border-radius: 16px;\n\
- opacity:1;\n\
- content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAlZJREFUeNqkU0tLG1EUvjORFJPMw6mhTUgxy75EUxiJj6CGLKQV0o2IQd3pxp2bbPs/3MVCIHSRgC3uXBhCSErjtLRkK7TcNCYhk4eGPHvO6AwjXXrgu/fOOff77plzz2VGoxF5iI3hEA6HCcuyxGKxEIZhOMBLcHsAwt0+FfAbDvsFaA4GAzIcDkkqlboVMNlzB8+vzgUCq3N+v+xyOl3opFdXNJfN5nPn52dNVT0DV/FeBjpZcjrfR/b3Dzwul0e02ciPiwsyPTtLptxur7C25n0xMzMfPzoSypQmdREWB0iLt3NcKLK3dzAhSR5+fFxT/JbPG+row9g2HABZhpBjCMA/vZYDgRVOFD02q5WwDKOROp2OIYA+jDlgz8Ly8gpyDIF+v++d9vlkXDdubshlpaKhWCwaawTGsHg+WZaRY9QAPiYEUXyinzY1OanNzWbTWGv7gPynViO4FzlmARavcWgivw2FSDAYJDubm4TjOA0Oh4O8WVwk80tLGscsoLZUtWwThGf6afFEgmxvbZGP8biRAbac2u2S60ajjByjBr1e7/JrJqOMQSNhmmiCJGlknHVAAckjuI1cOq0gx3wLyudkMt1ttejgTkAXMRsWkO106KdEIo0cQwAC9b+l0umHaPRYrVaphWX/63n0XasqjR4eHlNKT5FzrxPBoXxXFEtkY6Ozs7u78G59/dVTt/sxdkSJ0uqXk5OfsVgsU6lUUjzPKzqPwdfo8/lIF4pTr9dJu92WID0/tjZAv8MKti48tqzdbq+JUAsrNFWhULgVeIj9E2AAamUckFr2UCoAAAAASUVORK5CYII=\n\
+  content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAlZJREFUeNqkU0tLG1EUvjORFJPMw6mhTUgxy75EUxiJj6CGLKQV0o2IQd3pxp2bbPs/3MVCIHSRgC3uXBhCSErjtLRkK7TcNCYhk4eGPHvO6AwjXXrgu/fOOff77plzz2VGoxF5iI3hEA6HCcuyxGKxEIZhOMBLcHsAwt0+FfAbDvsFaA4GAzIcDkkqlboVMNlzB8+vzgUCq3N+v+xyOl3opFdXNJfN5nPn52dNVT0DV/FeBjpZcjrfR/b3Dzwul0e02ciPiwsyPTtLptxur7C25n0xMzMfPzoSypQmdREWB0iLt3NcKLK3dzAhSR5+fFxT/JbPG+row9g2HABZhpBjCMA/vZYDgRVOFD02q5WwDKOROp2OIYA+jDlgz8Ly8gpyDIF+v++d9vlkXDdubshlpaKhWCwaawTGsHg+WZaRY9QAPiYEUXyinzY1OanNzWbTWGv7gPynViO4FzlmARavcWgivw2FSDAYJDubm4TjOA0Oh4O8WVwk80tLGscsoLZUtWwThGf6afFEgmxvbZGP8biRAbac2u2S60ajjByjBr1e7/JrJqOMQSNhmmiCJGlknHVAAckjuI1cOq0gx3wLyudkMt1ttejgTkAXMRsWkO106KdEIo0cQwAC9b+l0umHaPRYrVaphWX/63n0XasqjR4eHlNKT5FzrxPBoXxXFEtkY6Ozs7u78G59/dVTt/sxdkSJ0uqXk5OfsVgsU6lUUjzPKzqPwdfo8/lIF4pTr9dJu92WID0/tjZAv8MKti48tqzdbq+JUAsrNFWhULgVeIj9E2AAamUckFr2UCoAAAAASUVORK5CYII=\n\
 );}\n\
-#fsort-clock:before{ background-color: #CCC  }\n\
-#fsort-clock.fsort-on:before{ background-color: #4183C4  }\n\
-\n\
+.fsort-on:before{ background-color: #4183C4 !important; } \n\\n\
 td.age .fsort-butt.fsort-asc:before,td.age .fsort-butt.fsort-desc:before{\n\
 left:3em !important;\n\
 }\
 #fsort-ext:before{\n\
  left:4em; top:-14px;\n\
- opacity:.6;\n\
  width:28px; height: 14px;\n\
  border-radius: 6px;\n\
 content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAANCAYAAAC3mX7tAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAABWUlEQVQ4y+2SP0sDQRDFT7BQTGtnITYSK8Emha1NCrXwC4gWYiUKiiB4jYKdWAmC4AewtxEExSqVjZ1/OEgwrEQwkLvbmd/aTCBI0IBYCD7YYmaYfW/mTRT9VWRZNq6qm79OBBwBrueGPM8ngWvgHbgXkQX7aC+EEFR1x+IDi7dUdQOQYACuviSp1+tDQA2oquoycAlInucT1Wp1EHgA3r3300AG3FUqlX4RKQOvQFNVV0Rk9ksiEZkzRbtJkgx476faqq1etnoK4L0vdazuqefVqepq6ALgKIqiKI7jPuDRcpVPHn1P5JwrxHHc1zHRofe+1H5pmo6akCWrv4QQgojMdxA9AI3vzPfAsXOuACRAXVW3VXUNOM2yrNhsNofNh1qapmPAG5A45wpGdGMiToD9bvdftKZ9I54ALoCGXd5tq9UaAc7Mr0Wbbr09vfk3Azybf+fRP36KDxJ2sN2uMATcAAAAAElFTkSuQmCC);\n\
 }\n\
 #fsort-ext:before{ background-color: #BBB}\n\
-#fsort-ext:hover:before{ opacity:1 !important;}\n\
-.fsort-butt:not([class*="fsort-sel"]) ~ .fsort-on#fsort-ext:not(:hover):before\n\
- {opacity:.2 !important;}\n\
-.fsort-on:before{ background-color: #4183C4 !important; opacity: .5 !important;}\n\
-.fsort-on:hover:before{ opacity: 1 !important; }\n\
+/* 150806 uppercase */\n\
+#fsort-upc:before{\n\
+ left:7em; top:-14px;\n\
+ width:16px; height: 16px;\n\
+ border-radius: 0 4px 0 4px;\n\
+content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAABcElEQVQ4y5WSsWoVQRSG/7kbyL1VCosgeQBBbFIYtBCsLYOx1QewiZgqr5HOF5ALRlALbcUigsK1TOUWooUaEbOL2d3z/TaTsOBduPeHYQ4zZ77555yRJEXEDnAE/AZ+As/qur6sBbSS50uS1iQ9lbSZUtoej8eWdHcRiKbT6eg8bprmqm0D37Souq7bBt4BP4AuA04XOtw0zTUggLOIeBgR95YBjIqi2EwpjSTNiqI4sP1dy6ht21v5xjPgCfAZaPoOImLfWRGx/x8EOAD+AF8j4gFw2AcAx8DfPI6XdXgzO3wNvLHttm1vXNRAkmzfGQIURXE/57ywfdhfu5Dt57av59i2b0tSWZarwC+Auq43qqpazx07KctytQ+4Yvuj7c52advnXzzbP+rV420u5s5cy30HwCsPCHgpSWno7VVVrU8mky8ppRXb73tbKaW0Zbur63pjsPoR8Sjf9GFO22f5GbuDAOBTTno8B76X4bN/RgN/lIzFNCAAAAAASUVORK5CYII=);\n\
+}\n\
+#fsort-upc:before{ background-color: #BBB}\n\
 \n\
 table.files td.age .css-truncate.css-truncate-target{\n\
  width: 99% !important; \n\
@@ -269,10 +271,13 @@ function getCell(r,c,s,p){
 var sDir,sCells,sExts;
  var fa=[
   function(a){
-   return getCell(a,1,'span.css-truncate-target a');
+   var r=getCell(a,1,'span.css-truncate-target a');
+   return prefs.upc? r.toUpperCase(): r;
   },
   function(a){
-   return getCell(a,2,'span.css-truncate');
+   var r= getCell(a,2,'span.css-truncate');
+   r=r.replace(/\s+/,' ').replace(/^\s|\s$/,'');
+   return prefs.upc? r.toUpperCase(): r;
   },
   function(a){
    var c = getCell(a,3,'span.css-truncate>time','datetime');
@@ -298,7 +303,9 @@ function sort_p(n){// prepare data for sorting
    x=pad9(m[2])+' '+m[1];
    sCells.push(x);
   }
- }else for( a=0; a<tl; a++) sCells.push(fa[n](a));
+ }else{
+   for( a=0; a<tl; a++) sCells.push(fa[n](a));
+ }
 }
 
 function sort_fn(a,b){ 
@@ -313,7 +320,7 @@ var CNn={content: 0, message: 1, age: 2}
 function oClr(){
  var o= catcher.querySelectorAll('.fsort-butt,.fsort-time')
  for(var ol=o.length,i=0;i<ol;i++)
-  o[i].parentNode.removeChild(o[i]);
+  o[i] && o[i].parentNode.removeChild(o[i]);
 }
 //
 function extclassName(){
@@ -322,11 +329,15 @@ function extclassName(){
 function clockclassName(){
   clock.className='fsort-butt'+ (prefs.dtStyle? '': ' fsort-on');
 }
+function upcclassName(){
+  upc.className='fsort-butt'+ (prefs.upc? ' fsort-on': '' );
+}
 //
 function doSort(t){
  TB=outerNode(t,'TBODY');
  if(!TB){  _l( "*GHSFL* TBODY not found"); return; }
- var n=CNn[t.parentNode.className];
+ var n = CNn[t.parentNode.className];
+ if(typeof n=="undefined") n= CNn[t.parentNode.parentNode.className];
  if(typeof n=="undefined"){  _l( "*GHSFL* undefined col"); return; }
  
  if(t.id=='fsort-clock'){
@@ -335,13 +346,19 @@ function doSort(t){
    clockclassName();
    return;
  }
- var xt = (t.id=='fsort-ext');
- if( xt ){
+ if (t.id=='fsort-ext'){
   if(C[n].s) prefs.ext ^= 1; 
   else prefs.ext= 1;
   savePrefs();
   extclassName();
   C[n].d^=C[n].s; // don't toggle dir on ext.click
+ }else 
+ if (t.id=='fsort-upc'){
+  if(C[n].s) prefs.upc ^= 1; 
+  else prefs.upc= 1;
+  savePrefs();
+  upcclassName();
+  C[n].d^=C[n].s; // don't toggle case on upc.click
  }
  var tb=[],ix=[], i, tl,ti,tx;
  _l('n:'+n);
@@ -392,14 +409,17 @@ function gitDir1(x){
   clock.id='fsort-clock'; clockclassName();
   ext=D.createElement('span');
   ext.id='fsort-ext'; extclassName();
+  upc=D.createElement('span');
+  upc.id='fsort-upc'; upcclassName();
   setDateTime(); 
   setC(-1);
  }
-  insBefore(oa[0],ca[0]);
-  insBefore(ext,ca[0]);
+  o=insBefore(oa[0],ca[0]);
+  o.appendChild(upc);
+  o.appendChild(ext);
   insBefore(oa[1],ca[1]);
-  insBefore(oa[2],ca[2]);
-  insBefore(clock,ca[2]);
+  o=insBefore(oa[2],ca[2]);
+  o.appendChild(clock);
 }
 
 function gitDir(){
@@ -424,7 +444,11 @@ try {
 } catch(e){ locStor =null}
 
 if(locStor && tt) try{
- prefs =JSON.parse(tt); 
+ var pa =JSON.parse(tt); 
+ for (var a in pa) if (pa.hasOwnProperty(pa)){
+		prefs.setAttribute(a, p[a]);
+	}
+ _l('prefs:'+JSON.stringify(prefs));
 }catch(e){ console.log(e+"\n*GHSFL* bad prefs") }
 
 css();
