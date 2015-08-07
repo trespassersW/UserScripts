@@ -3,7 +3,7 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 15.08.07
+// @version 15.08.07.1
 // 15.08.07  + case-insensitive sorting button
 // 15.05.07  sorting is now faster
 // 14.11.19.13 fixes for latest github changes
@@ -41,7 +41,7 @@ var ASC;
 var oa=[],ca=[],clock,ext,dtStyle,upc;
 var D=document, TB;
 var catcher,locStor;
-var prefs={dtStyle:0, ext: 0, upc: 0};
+var prefs={dtStyle:0, ext: 0, upc: 1};
 var W= unsafeWindow || window;
 function stickStyle(css){
  var s=document.createElement("style"); s.type="text/css";
@@ -445,9 +445,7 @@ try {
 
 if(locStor && tt) try{
  var pa =JSON.parse(tt); 
- for (var a in pa) if (pa.hasOwnProperty(pa)){
-		prefs.setAttribute(a, p[a]);
-	}
+ for (var a in pa) prefs[a]=pa[a];
  _l('prefs:'+JSON.stringify(prefs));
 }catch(e){ console.log(e+"\n*GHSFL* bad prefs") }
 
