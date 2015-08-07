@@ -8,4 +8,4 @@
 
 ===== 
 
-* <small>15.04.26 css fix</small>
+* <small>15.08.07  + case-insensitive sorting button</small>
