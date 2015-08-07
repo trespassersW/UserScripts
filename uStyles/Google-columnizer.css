@@ -1,6 +1,8 @@
 @namespace url(http://www.w3.org/1999/xhtml);
 /* 
  userstyles.org/styles/63771/google-columnizer
+ 2015-08-07 +  encrypted.google.com
+ 2015-05-25 ** bg color, intervals
  2015-05-08 ** exclude google images
  2015-04-21 ** any time any result
  2015-02-25 -- hidden unneeded scrollbar
@@ -9,14 +11,12 @@
  2015-01-11 -- define wd.
  2014-07-22 -- background for search results items 
  2014-07-20 -- graphs footer
- 2013-08-26 -- patch for chrome o_0
  2013-07-27 -- top-left ads
  2013-07-18 -- fixed result col width for google.ru >:O
  2013-05-31 -- fixes: utube & g+ images 
  2013-05-26 -- youtube items
  2013-02-11 -- affects www.google.* ; fixes for youTube paragraphs
  2013-02-06 -- right-panel content token <<<
- 2012/09/08 -- share links killed; google images in one column
  2012/09/05 -- Page footer lurks in arrow at bottom right corner
  2012/09/03 -- hidden right panel, ajusted for chrome
  2012/06/07 -- hidden left & foot blocks
@@ -25,7 +25,7 @@
 url-prefix("https://www.google.") {
  header.top#SEO {color: red;}
 }
-@-moz-document regexp("https?://www\\.google\\.(?!.*&tbm=isch&).*") 
+@-moz-document regexp("https?://(www|encrypted)\\.google\\.(?!.*&tbm=isch&).*") 
 {
 #gsr div.mw #res 
 {/* # of columns. Pay attention to the comments: */
@@ -277,10 +277,11 @@ margin-top: 1.2em !important;
 }
 
 /* 2014-07-22 */
-#gsr li.g { 
+#gsr .g { 
 background-image: linear-gradient(to top, rgba(255,255,255, .5), 
  rgba(224,224,255, .5) ) ;
 border-radius: 8px 16px  0 0 ;
+margin-bottom: 6px !important;
 }
 #gsr #fbar {
  padding: 0 0 1px 0!important; line-height: 1.2 !important; 
@@ -328,7 +329,7 @@ body#gsr {overflow-y: auto !important;}
 #gsr .hdtb-mn-hd {z-index: 22332 !important;}
 /* 150508 */ 
 #gsr #hdtb-msb .hdtb-mitem.hdtb-msel, #gsr #hdtb-msb .hdtb-mitem.hdtb-msel-pre {
-    height: 35px !important;
+    height: 33px !important;
 }
 /* * /body div {border-left: 1px dotted red !important;}/* */
 }
