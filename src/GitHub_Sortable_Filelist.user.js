@@ -3,12 +3,12 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 15.08.07.1
-// 15.08.07  + case-insensitive sorting button
+// @version 15.08.08
+// 15.08.08  * css fixes
+// 15.08.07  + case-insensitive sorting
 // 15.05.07  sorting is now faster
 // 14.11.19.13 fixes for latest github changes
 //  .12 new age format; fix for chrome
-//  .11 patch for the very first page;
 //  .10 datetime auto-updating fix; right-aligned datetime column; proper local time; .ext sorting fix; 
 //  .8 sorting by file extention
 //  .7 date/time display mode switching
@@ -90,8 +90,8 @@ stickStyle('\
 .fsort-butt.fsort-asc:before,.fsort-butt.fsort-desc:before{\n\
  left:1.5em; top: -1em;\n\
 }\n\
-td.age.fsort-butt.fsort-asc:before,td.age.fsort-butt.fsort-desc:before{\n\
- right:3em;\n\
+td.age .fsort-butt.fsort-asc:before, td.age .fsort-butt.fsort-desc:before{\n\
+ left: 4.5em; \n\
 }\n\
 .fsort-asc:before,.fsort-desc:before{\n\
  background-color: #48C;\n\
@@ -122,16 +122,13 @@ span.fsort-butt:hover:before\n\
 { opacity: 1 !important;}\n\
 \n\
 #fsort-clock:before{\n\
- left:5em; top: -15px; \n\
+ left:6.5em; top: -15px; \n\
  text-align:center; vertical-align: top; top:-15px;\n\
  width: 16px; height: 16px;\
  border-radius: 16px;\n\
   content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAlZJREFUeNqkU0tLG1EUvjORFJPMw6mhTUgxy75EUxiJj6CGLKQV0o2IQd3pxp2bbPs/3MVCIHSRgC3uXBhCSErjtLRkK7TcNCYhk4eGPHvO6AwjXXrgu/fOOff77plzz2VGoxF5iI3hEA6HCcuyxGKxEIZhOMBLcHsAwt0+FfAbDvsFaA4GAzIcDkkqlboVMNlzB8+vzgUCq3N+v+xyOl3opFdXNJfN5nPn52dNVT0DV/FeBjpZcjrfR/b3Dzwul0e02ciPiwsyPTtLptxur7C25n0xMzMfPzoSypQmdREWB0iLt3NcKLK3dzAhSR5+fFxT/JbPG+row9g2HABZhpBjCMA/vZYDgRVOFD02q5WwDKOROp2OIYA+jDlgz8Ly8gpyDIF+v++d9vlkXDdubshlpaKhWCwaawTGsHg+WZaRY9QAPiYEUXyinzY1OanNzWbTWGv7gPynViO4FzlmARavcWgivw2FSDAYJDubm4TjOA0Oh4O8WVwk80tLGscsoLZUtWwThGf6afFEgmxvbZGP8biRAbac2u2S60ajjByjBr1e7/JrJqOMQSNhmmiCJGlknHVAAckjuI1cOq0gx3wLyudkMt1ttejgTkAXMRsWkO106KdEIo0cQwAC9b+l0umHaPRYrVaphWX/63n0XasqjR4eHlNKT5FzrxPBoXxXFEtkY6Ozs7u78G59/dVTt/sxdkSJ0uqXk5OfsVgsU6lUUjzPKzqPwdfo8/lIF4pTr9dJu92WID0/tjZAv8MKti48tqzdbq+JUAsrNFWhULgVeIj9E2AAamUckFr2UCoAAAAASUVORK5CYII=\n\
 );}\n\
-.fsort-on:before{ background-color: #4183C4 !important; } \n\\n\
-td.age .fsort-butt.fsort-asc:before,td.age .fsort-butt.fsort-desc:before{\n\
-left:3em !important;\n\
-}\
+.fsort-on:before{ background-color: #4183C4 !important; } \n\
 #fsort-ext:before{\n\
  left:4em; top:-14px;\n\
  width:28px; height: 14px;\n\
@@ -158,18 +155,19 @@ table.files td.age .css-truncate.css-truncate-target{\n\
 .fsort-time {\n\
  visibility: hidden;\n\
  display: none;\n\
- padding-right: 14px;\n\
+ padding-right: 0px;\n\
 }\n\
 .fsort-time i {\n\
  display:inline-block;\
  color: #BBB;\
  font-style: normal !important;\n\
  transform:  scale(0.9);\n\
+ margin-left: 0px;\n\
 /* font-size: 12px;*/\n\
 }\n\
 \n\
 /* patches (--min-width:12em!important;) */\n\
-table.files td.age {text-align: right !important; padding-right: 10px !important;\n\
+table.files td.age {text-align: right !important; padding-right: 4px !important;\n\
 width:12em!important;\n\
 \n\
 max-width:none!important;\n\
@@ -214,7 +212,7 @@ function dd(s)
 function d2s(n){
  var hs=dd(n.getHours())+':'+dd(n.getMinutes());
  return {  
-   d: n.getFullYear()+'-'+dd(n.getMonth()+1)+'-'+dd(n.getDate())+' <i>'+ hs+'</i>',
+   d: n.getFullYear()+'-'+dd(n.getMonth()+1)+'-'+dd(n.getDate())+'<i>'+ hs+'</i>',
    t: hs+':'+dd(n.getSeconds())
  }
 }
