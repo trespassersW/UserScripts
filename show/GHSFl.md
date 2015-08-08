@@ -8,4 +8,5 @@
 
 ===== 
 
-* <small>15.08.07  + case-insensitive sorting button</small>
+* <small>15.08.07  + case-insensitive sorting </small>
+* <small> 15.08.08 * css fixes</small>
