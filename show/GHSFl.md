@@ -9,4 +9,4 @@
 ===== 
 
 * <small>15.08.07  + case-insensitive sorting </small>
-* <small> 15.08.08 * css fixes</small>
+* <small>15.08.10  + octicons for file extensions</small>
