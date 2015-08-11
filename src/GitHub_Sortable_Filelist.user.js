@@ -3,8 +3,8 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 15.08.10
-// 15.08.10  + octicons for file extensions
+// @version 15.08.11
+// 15.08.11 ++ octicons for file extensions
 // 15.08.07  + case-insensitive sorting
 // 15.05.07  sorting is now faster
 // 14.11.19.13 fixes for latest github changes
@@ -44,28 +44,31 @@ var catcher,locStor;
 var prefs={dtStyle:0, ext: 0, upc: 1};
 var W= unsafeWindow || window;
 
-// see: https://octicons.github.com/
+// see: https://octicons.github.com/ mark-github
 var extIcon=[
 //0...........1..............2..............3..............4.......
- "book"     ,"zap"        ,"list-unordered","paintcan"   ,"eye"
+ "octoface"  ,"zap"        ,"list-unordered","paintcan"   ,"eye"
 //5...........6..............7..............8..............9.......
-,"globe"    ,"file-binary" ,"file-zip"     ,"file-pdf"   ,"unmute"
+,"globe"    ,"file-binary" ,"file-zip"      ,"file-pdf"   ,"megaphone"
 //10..........11.............12.............13.............14......
-,"gear"     ,"code"
+,"gear"     ,"triangle-right","ruby"        ,"info"       ,"device-camera"     
 ]
 var extList={ 
 md:0,
-js:1,rb:1,py:1,sh:1,pl:1,jsm:1,
-json:2,xml:2,xul:2,rdf:2,
-css:3,
-png:4,jpg:4,jpeg:4,bmp:4,gif:4,cur:4,ico:4,svg:4,
+js:1,sh:1,pl:1,jsm:1,
+json:2,xml:2,xul:2,rdf:2,yml:2,
+css:3,scss:3,
+png:4,bmp:4,gif:4,cur:4,ico:4,svg:4,
 htm:5,html:5,php:5,
 bin:6,exe:6,
 zip:7,rar:7,arj:7,
 pdf:8,rtf:8,
 wav:9,mp3:9,ogg:9,
 cfg:10,ini:10,
-c:11,cpp:11,cc:11,h:11,hpp:11,asm:11
+c:11,cpp:11,cc:11,h:11,hpp:11,asm:11,
+rb:12,py:12,
+EmptyExt:13,
+jpg:14,jpeg:14
 }
 
 function stickStyle(css){
@@ -245,7 +248,7 @@ function d2s(n){
 var xmatch=/(.*)\.(.*)$/;
 function filext(x){
  var m= x.match(xmatch);
- if(!m || !m[2]) return "txt";
+ if(!m || !m[2]) return "EmptyExt";
  return m[2];
 }
 function setIcon(tr){
@@ -258,7 +261,7 @@ function setIcon(tr){
   xt=extList[xt];
   if(typeof xt === "undefined") return;
   ti.className='octicon octicon-'+ extIcon[xt];
-  _l('setIcon '+xt);
+  //_l('setIcon '+xt);
 }
 
 function setDateTime(x){
