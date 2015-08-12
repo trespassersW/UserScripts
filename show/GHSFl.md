@@ -9,4 +9,4 @@
 ===== 
 
 * <small>15.08.07  + case-insensitive sorting </small>
-* <small>15.08.11  ++ octicons for file extensions</small>
+* <small>15.08.12  ++ octicons for file extensions</small>

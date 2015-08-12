@@ -3,8 +3,8 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 15.08.11
-// 15.08.11 ++ octicons for file extensions
+// @version 15.08.12
+// 15.08.12 ++ octicons for file extensions
 // 15.08.07  + case-insensitive sorting
 // 15.05.07  sorting is now faster
 // 14.11.19.13 fixes for latest github changes
@@ -13,7 +13,7 @@
 //  .8 sorting by file extention
 //  .7 date/time display mode switching
 // @created 2014-11-10
-// @updated 2015-03-25
+// 
 // @author  trespassersW
 // @license MIT
 // @icon https://i.imgur.com/8buFLcs.png
@@ -44,18 +44,20 @@ var catcher,locStor;
 var prefs={dtStyle:0, ext: 0, upc: 1};
 var W= unsafeWindow || window;
 
-// see: https://octicons.github.com/ mark-github
+// see: https://octicons.github.com/ 
 var extIcon=[
 //0...........1..............2..............3..............4.......
  "octoface"  ,"zap"        ,"list-unordered","paintcan"   ,"eye"
 //5...........6..............7..............8..............9.......
 ,"globe"    ,"file-binary" ,"file-zip"      ,"file-pdf"   ,"megaphone"
 //10..........11.............12.............13.............14......
-,"gear"     ,"triangle-right","ruby"        ,"info"       ,"device-camera"     
+,"gear"     ,"triangle-right","ruby"        ,"info"       ,"device-camera"    
+//15..........16.............17.............18.............19......
+,"pencil"   ,"terminal"    
 ]
 var extList={ 
 md:0,
-js:1,sh:1,pl:1,jsm:1,
+js:1,jsm:1,
 json:2,xml:2,xul:2,rdf:2,yml:2,
 css:3,scss:3,
 png:4,bmp:4,gif:4,cur:4,ico:4,svg:4,
@@ -65,10 +67,12 @@ zip:7,rar:7,arj:7,
 pdf:8,rtf:8,
 wav:9,mp3:9,ogg:9,
 cfg:10,ini:10,
-c:11,cpp:11,cc:11,h:11,hpp:11,asm:11,
+c:11,cpp:11,cc:11,h:11,hpp:11,asm:11,m:11,
 rb:12,py:12,
 EmptyExt:13,
-jpg:14,jpeg:14
+jpg:14,jpeg:14,
+pl:15,java:15,jar:15,cs:15,
+sh:16,mak:16,cmd:16,bat:16
 }
 
 function stickStyle(css){
