@@ -3,11 +3,11 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 15.08.12
+// @version 15.08.19
+// 15.08.19 *  slight changes
 // 15.08.12 ++ octicons for file extensions
 // 15.08.07  + case-insensitive sorting
 // 15.05.07  sorting is now faster
-// 14.11.19.13 fixes for latest github changes
 //  .12 new age format; fix for chrome
 //  .10 datetime auto-updating fix; right-aligned datetime column; proper local time; .ext sorting fix; 
 //  .8 sorting by file extention
@@ -53,7 +53,7 @@ var extIcon=[
 //10..........11.............12.............13.............14......
 ,"gear"     ,"triangle-right","ruby"        ,"info"       ,"device-camera"    
 //15..........16.............17.............18.............19......
-,"pencil"   ,"terminal"    
+,"pencil"   ,"terminal"      ,"book"    
 ]
 var extList={ 
 md:0,
@@ -64,15 +64,16 @@ png:4,bmp:4,gif:4,cur:4,ico:4,svg:4,
 htm:5,html:5,php:5,
 bin:6,exe:6,dll:6,
 zip:7,rar:7,arj:7,
-pdf:8,rtf:8,
-wav:9,mp3:9,ogg:9,
+pdf:8,
+wav:9,mp3:9,ogg:9,mp4:9,aac:9,
 cfg:10,ini:10,
 c:11,cpp:11,cc:11,h:11,hpp:11,asm:11,m:11,
 rb:12,py:12,
 EmptyExt:13,
 jpg:14,jpeg:14,
 pl:15,java:15,jar:15,cs:15,
-sh:16,mak:16,cmd:16,bat:16
+sh:16,mak:16,cmd:16,bat:16,
+doc:17,rtf:17,djvu:17
 }
 
 function stickStyle(css){
@@ -253,12 +254,14 @@ var xmatch=/(.*)\.(.*)$/;
 function filext(x){
  var m= x.match(xmatch);
  if(!m || !m[2]) return "EmptyExt";
- return m[2];
+ return m[2].toLowerCase();
 }
 function setIcon(tr){
   var xt,tc,ti=tr.querySelector('td.icon > span.octicon-file-text');
   if(!ti) return;
-  tc=tr.querySelector('td.content > span.css-truncate').textContent;
+  tc=tr.querySelector('td.content > span.css-truncate');
+  if(!tc) return;
+  tc=tc.textContent;
   if(!tc) return;
   xt=filext(tc);
   if(!xt) return;
