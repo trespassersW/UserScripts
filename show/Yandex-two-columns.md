@@ -20,9 +20,9 @@
 
 <hr>
 
+2015-08-19 * исправления<br>
 2015-06-20 * правая панель<br>
 2014-07-22 * задний фон<br>
-2014-06-15 новый дизайн йандекса<br>
 
 <hr>
 [![C](http://i.creativecommons.org/l/by/3.0/80x15.png "copyleft")] (http://creativecommons.org/licenses/by/3.0/) © **Yandex-two-columns** by *trespassersW*

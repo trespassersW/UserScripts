@@ -1,7 +1,7 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
 /* 
+   2015-08-19 * исправления
    2015-07-20 * боковые панели; интервалы между статьями
-   2015-06-03 * PDF icon
    2015-02-22 * maps width: 100%; * audio-track
    2014-07-22 * задний фон
    2014-06-05 новый дизайн йандекса 
@@ -34,7 +34,7 @@ div.content__left  {
 position: absolute !important;
 visibility: visible !important;
 /* */
-top: 0  !important;
+top: 0px  !important;
 left: 0 !important; /* */
 right: auto !important; bottom: auto !important; /* */
 z-index: 247 !important;
@@ -50,7 +50,7 @@ border-radius: 16px 0px 16px 0px !important;
 .main__left{
 position: absolute !important;
 /* */
-top: 192px !important;
+top: 418px !important;
 left: 0 !important; /* */
 right: auto !important; bottom: auto !important; /* */
 z-index: 2147483647 !important;
@@ -89,8 +89,8 @@ padding: 8px 0 0 12px !important;
 .content__right:before {
 position: absolute !important;
 visibility: visible !important;
-top:   0 !important;
-right: 0 !important;
+top:  -1px !important;
+right: 0px !important;
 left: auto !important; bottom: auto !important;
 width: 64px !important;
 height: 1em !important;
@@ -105,9 +105,9 @@ content: "" !important;
 position: absolute !important;
 visibility: hidden !important;
 opacity: 1 !important;
-top:   192px !important;
+top:   414px !important;
 right: 0 !important; 
-left: auto !important;
+left: auto !important; bottom: auto !important;
 min-height: 1.2em !important;
 border: 1px solid #444 !important;
 border-radius: 16px 0 16px 0 !important;
@@ -262,7 +262,7 @@ div.footer__line { display: inline-block !important; padding-left: 1em !importan
 .content__right > .z-related-list:before {
 display: block!important;
 visibility: visible !important;
-position: absolute !important;top:1px!important; right:1px !important; 
+position: absolute !important;top:0px!important; right:1px !important; 
 z-index: 250 !important;
 /*content: "\21e9" */
 content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAOCAYAAAB6pd+uAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAABIUlEQVRIx+2WsUrDYBSFz0nFREgwoUueoFuRLllqCy6CCqKLoItrfQefwMlXcHNWRNGhTkbaoQVBAt0sgmRRG5A/4YfrUqQ4uAiBhJ71DodzOffjAiUXc/Qy2u3tCwCLcRzvRNHjVx6mC3mlC4J1n+QWAFSr1RUAYS5bza0q5KxXJbfalP0G5wHnFP1D9XrL8TzvREQesizrWpY1BgCtdYvksmEYm0mSHA8G3fdCUtR13T2SHZId0zTPfghTqRwB2CdJ27ZHAE4LWVGl1JWIvEwpejhD1AOSFJEPrfVNYW+w3797S9N0VUSef89EZKy1bobhdVT4T6bRWPMcx7kk2ZyGe1JKbfR6t6+ledVqtWDJ9/1zAM5kMtkdDu8/Mdf/9Q3ZjVsP7qiLvwAAAABJRU5ErkJggg==
@@ -315,8 +315,15 @@ h2.serp-item__title >a{
 max-width: 505px !important;
 max-width: 47vw !important;
 overflow: hidden !important;
-}
+} 
+/* 150819 */
 .b-page_initial-scroll_yes{ overflow-y: auto !important;}
+.content__left .intents {
+    padding: 5px 0px 0px 8px !important;
+}
+body .header_fixed_yes 
+{ min-height: 64px !important;}
+
 /* */
 /* dbg * / html *{border:thin solid red!important;}/* */
 }
