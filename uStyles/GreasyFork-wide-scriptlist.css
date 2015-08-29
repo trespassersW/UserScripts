@@ -17,7 +17,7 @@
   }
 }
 
-@-moz-document regexp("https://greasyfork\\.org/(.*?/)?(scripts(|/|[/?]\\D.*)|users/.*)$") {
+@-moz-document regexp("https://(greas|sleaz)yfork\\.org/(.*?/)?(scripts(|/|[/?]\\D.*)|users/.*)$") {
 .width-constraint {
     margin: 0 .5ex  0 1ex !important;
     max-width: 100% !important;
