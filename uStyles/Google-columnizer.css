@@ -1,6 +1,7 @@
 @namespace url(http://www.w3.org/1999/xhtml);
 /* 
  userstyles.org/styles/63771/google-columnizer
+ 2015-08-29 *  minor fixes
  2015-08-07 +  encrypted.google.com
  2015-05-25 ** bg color, intervals
  2015-05-08 ** exclude google images
@@ -13,7 +14,6 @@
  2014-07-20 -- graphs footer
  2013-07-27 -- top-left ads
  2013-07-18 -- fixed result col width for google.ru >:O
- 2013-05-31 -- fixes: utube & g+ images 
  2013-05-26 -- youtube items
  2013-02-11 -- affects www.google.* ; fixes for youTube paragraphs
  2013-02-06 -- right-panel content token <<<
@@ -116,7 +116,7 @@ text-indent: 0 !important;
 opacity: 0.95 !important;
 }
 #gsr #center_col, #gsr #foot {
-    margin-left: 14px !important;
+    margin-left: 6px !important;
 }/* */
 /* shift << leftnav items * /
 .mdm .msel .kls 
@@ -142,7 +142,7 @@ opacity: 0.95 !important;
 #gsr div#rhs_block >div:first-of-type:before
 ,#gsr div#rhs_block >ol:before { content:" <<< " !important; 
  right: 4px !important;  
- top: 30px !important; position: fixed !important;
+ top: 45px !important; position: fixed !important;
  z-index: 9999 !important; 
  color: #2254F4 !important; 
 }
@@ -156,7 +156,7 @@ background-color: rgb(239, 239, 255) !important;
 opacity: .5 !important; 
 display: block !important;
 position: fixed !important;
-top: 30px !important; right: 0 !important; left: auto !important; bottom: auto !important;
+top: 45px !important; right: 0 !important; left: auto !important; bottom: auto !important;
 min-width: 32px !important; width: 32px !important; 
 height: .7em !important; min-height: .7em !important;
 border: 1px solid #888 !important;
