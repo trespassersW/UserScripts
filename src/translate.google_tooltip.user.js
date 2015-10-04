@@ -10,9 +10,10 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.9.10
+// @version 3.9.0
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.9.01 2015-07-29 * fix for Ff39; + now works in chrome
+// 3.9.20 2015-10-04 * changes in translation request string
+// 3.9.10 2015-07-29 * fix for Ff39; + now works in chrome
 // 3.7.96 2015-05-10 * TTS in ff37; * DOMparser instead of IFRAME; * bugfixes
 // 3.7.8.2 2015-04-26 + new country flags host
 // 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
@@ -22,7 +23,6 @@
 // 3.5.1 2015-04-15
 //  + TTS: alt-select text inside tooltip and shift-click language icon below
 //  * From<->To buttons fix; * err handler
-// 3.4.1 2015-04-09 * GT changes: GET prohibited - use POST
 // 3.0.0 
 //  - national flags icons -- from www.senojflags.com
 // 2.3
