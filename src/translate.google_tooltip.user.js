@@ -115,6 +115,7 @@ var ht=null;  // history table,
 var imgForw,imgBack,imgSwap,imgUse,imgSave,imgFlags,imgForwSrc,imgBackSrc;
 var txtSel; // text selected
 var currentURL, Qtxt='***';
+var ampTK = Math.round(Math.random()*1e6)+"|"+Math.round(Math.random()*1e6);
 var gt_sl_gms, gt_tl_gms, gt_sl, gt_tl;
 
 var sT;
@@ -858,7 +859,8 @@ function onTimerDict(){
  var q = dictURL + 
  "&hl="+ GM_getValue('to','auto') + 
  "&sl=" + gt_sl + "&tl=" + gt_tl + //+'&multires=1&ssel=0&tsel=0&sc=1';
- "&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&source=btn&ssel=0&tsel=0&kc=1"+
+ "&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&source=btn&rom=1&ssel=0&tsel=0&kc=1"+
+ "&tk="+ampTK+
  "&q="+ escAp(txtSel);
  //console.log('dict:'+ dictURL);
  _log('?dict')
