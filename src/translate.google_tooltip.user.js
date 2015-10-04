@@ -10,7 +10,7 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.9.0
+// @version 3.9.20
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
 // 3.9.20 2015-10-04 * changes in translation request string
 // 3.9.10 2015-07-29 * fix for Ff39; + now works in chrome
