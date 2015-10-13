@@ -1,11 +1,9 @@
 @namespace url(http://www.w3.org/1999/xhtml);
 /* 
  userstyles.org/styles/63771/google-columnizer
- 2015-08-29 *  minor fixes
+ 2015-10-13 *  searches related to
  2015-08-07 +  encrypted.google.com
- 2015-05-25 ** bg color, intervals
  2015-05-08 ** exclude google images
- 2015-04-21 ** any time any result
  2015-02-25 -- hidden unneeded scrollbar
  2015-02-20 -- 'People also search for' bar at bottom of page
  2015-01-23 -- right col fixes
@@ -14,6 +12,7 @@
  2014-07-20 -- graphs footer
  2013-07-27 -- top-left ads
  2013-07-18 -- fixed result col width for google.ru >:O
+ 2013-05-31 -- fixes: utube & g+ images 
  2013-05-26 -- youtube items
  2013-02-11 -- affects www.google.* ; fixes for youTube paragraphs
  2013-02-06 -- right-panel content token <<<
@@ -330,6 +329,12 @@ body#gsr {overflow-y: auto !important;}
 /* 150508 */ 
 #gsr #hdtb-msb .hdtb-mitem.hdtb-msel, #gsr #hdtb-msb .hdtb-mitem.hdtb-msel-pre {
     height: 33px !important;
+}
+.brs_col  {
+-moz-column-count:2 !important;
+-webkit-column-count:  2 !important; 
+ column-count: 2 !important; 
+ line-height: 1.1 !important;
 }
 /* * /body div {border-left: 1px dotted red !important;}/* */
 }

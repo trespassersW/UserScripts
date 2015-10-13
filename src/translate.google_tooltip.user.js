@@ -10,7 +10,7 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.9.20
+// @version 3.9.30
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
 // 3.9.20 2015-10-04 * changes in translation request string
 // 3.9.10 2015-07-29 * fix for Ff39; + now works in chrome
@@ -452,11 +452,10 @@ function openInFrame(url){
 /*
 */
 }
-
 function ttsRequest(txt,t,e){
   txt=txt.split(' ').slice(0,19).join(' ');
   var etxt = escAp(txt.split(' ').slice(0,19).join(' '));
-  etxt=ttsURL + "&tl="	+ t + "&ie=utf-8&q=" + etxt;
+  etxt=ttsURL + "&ie=utf-8&tl="	+ t + "&tk="+ampTK+ "&q=" + etxt;
   _log('tts> '+etxt);
   if(e)
     GM_openInTab(etxt);
