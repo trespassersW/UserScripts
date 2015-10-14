@@ -3,7 +3,7 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 15.08.19
+// @version 15.10.14
 // 15.08.19 *  slight changes
 // 15.08.12 ++ octicons for file extensions
 // 15.08.07  + case-insensitive sorting
@@ -118,7 +118,8 @@ stickStyle('\
  border-color: transparent;\n\
  border-width: 0;\n\
  content: "";\n\
- opacity: .2\n\
+ opacity: .2;\n\
+ z-index: 99;\
 }\n\
 .fsort-butt.fsort-asc:before,.fsort-butt.fsort-desc:before{\n\
  left:1.5em; top: -1em;\n\
