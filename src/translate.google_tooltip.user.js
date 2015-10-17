@@ -10,7 +10,7 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.9.50
+// @version 3.9.51
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
 // 3.9.50 2015-10-17 + multi-sentence; GM_menu item
 // 3.9.10 2015-07-29 * fix for Ff39; + now works in chrome
@@ -480,7 +480,7 @@ function gtRequest(txt,s,t){
 }
 function Request(url,cb){
   URL=url; _log('R: '+URL);
-  var meth=(0 && cb)? 'POST': 'GET';
+  var meth=(1 && cb)? 'POST': 'GET';
   GM_xmlhttpRequest({
 			method: meth,
 			url: url,
