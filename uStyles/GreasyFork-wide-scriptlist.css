@@ -3,11 +3,12 @@
  GreasyFork wide scriptlist
    forked from greasy-fork-compact [https://userstyles.org/styles/104650]
    by wOxxOm [https://userstyles.org/users/67605]
+* 015-10-19 patch for Code page
+* 015-09-03 number of dayly installs exceeded one thousand
 * 015-04-07 !important fix for Chrome
 * 015-01-15 fix for greasyfork.org-langfilter.user.js
 * 015-01-15 fixes for GF.o translations
 * 015-01-18 name+description in single line
-* 015-01-16 better header layout
 * 015-01-21 new layout of sorting/showing options
 */
 @-moz-document domain("greasyfork.org") {
@@ -141,7 +142,7 @@ margin:0!important;
 }
 
 dd.script-list-author {width:9% !important;}
-dd.script-list-daily-installs {width:4ex !important; text-align:right!important;}
+dd.script-list-daily-installs {width:6ex !important; text-align:right!important;}
 dd.script-list-total-installs {width:8ex !important; text-align:right!important;}
 dd.script-list-ratings {width:13ex !important; word-wrap: normal !important;}
 span.good-rating-count {width:3ex !important; text-align:right!important;}
@@ -182,8 +183,6 @@ margin-top: 0 !important; margin-bottom: 0 !important;
 
 [id^="script-list-"] li { display: none }
 [id^="script-list-"] li.list-current { display: list-item !important;}
-#script-list-option-groups:hover
-[id^="script-list-"] li { display: list-item !important;}
 
 #script-list-option-groups:hover
 [id^="script-list-"] li { display: list-item !important;}
@@ -202,3 +201,8 @@ dd.script-list-author {display: none !important;}
 }
 /* */
 }
+/*  patch for code page */
+@-moz-document regexp("https://(greas|sleaz)yfork\\.org/.*/code$") {
+body {padding-bottom: 1em !important;}
+}
+/* */

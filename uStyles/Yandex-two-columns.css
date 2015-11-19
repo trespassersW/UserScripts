@@ -1,7 +1,6 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
 /* 
-   2015-08-29 * minor fixes
-   2015-08-28 * перемены в яндексе 
+   2015-11-19 * правая панель
    2015-07-20 * боковые панели; интервалы между статьями
    2014-07-22 * задний фон
    2014-06-05 новый дизайн йандекса 
@@ -54,7 +53,7 @@ position: absolute !important;
 top: 390px !important;
 left: 0 !important; /* */
 right: auto !important; bottom: auto !important; /* */
-z-index: 2147483647 !important;
+z-index: 247 !important;
 background-color: rgba(255, 240, 220, .9) !important;
 opacity:  1 !important;
 visibility: hidden !important;
@@ -99,7 +98,7 @@ border: 1px solid #444 !important;
 border-radius: 16px 0 16px 0 !important;
 background: rgba(236, 236, 254,.9) !important;
 opacity: .9 !important;
-z-index: 247 !important;
+z-index: 249 !important;
 content: "" !important; 
 }
 .content__right{ /* */
@@ -113,11 +112,13 @@ min-height: 1.2em !important;
 border: 1px solid #444 !important;
 border-radius: 16px 0 16px 0 !important;
 background: rgba(236, 236, 254, .9) !important;
-z-index: 2147483647 !important;
-margin: 0 !important; 
-/* 150104 */
-padding-left:12px !important;
-width: 45% !important;
+z-index: 249 !important;
+margin: 0 0 0 0 !important; 
+padding:12px !important;
+/* 151119 */
+width: auto !important; 
+min-width: 40px !important;
+/* */
 transition: all 0s linear 0.75s !important;
 -webkit-transition: all 0s linear 0.75s !important;
 }
@@ -144,7 +145,7 @@ margin-right: 0 !important;
  background: rgba(255, 219, 76, .5) !important;
  opacity: .8 !important;
  color: red !important;
- z-index: 247 !important;
+ z-index: 248 !important;
  right: 0 !important; left: auto !important;
  visibility: visible !important; 
  padding: 0 !important; margin: 0 4px 4px 0 !important;
@@ -262,18 +263,18 @@ div.serp-block div.serp-item { /* 2015-07-20 */
 }
 .content__left .region-change, .content__left .competitors
  { display: inline-block !important; padding-left: 2em !important;}
-/* 150105 */
-.content__right > .z-entity__content-right:before {
+/* 151119  .z-entity__content-right */
+.content__right  .serp-block_type_entity-search:before {
 display: block!important;
 visibility: visible !important;
 position: absolute !important;top:0px!important; right:1px !important; 
-z-index: 250 !important;
+z-index: 2147 !important;
 /*content: "\21e9" */
 content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAOCAYAAAB6pd+uAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAABIUlEQVRIx+2WsUrDYBSFz0nFREgwoUueoFuRLllqCy6CCqKLoItrfQefwMlXcHNWRNGhTkbaoQVBAt0sgmRRG5A/4YfrUqQ4uAiBhJ71DodzOffjAiUXc/Qy2u3tCwCLcRzvRNHjVx6mC3mlC4J1n+QWAFSr1RUAYS5bza0q5KxXJbfalP0G5wHnFP1D9XrL8TzvREQesizrWpY1BgCtdYvksmEYm0mSHA8G3fdCUtR13T2SHZId0zTPfghTqRwB2CdJ27ZHAE4LWVGl1JWIvEwpejhD1AOSFJEPrfVNYW+w3797S9N0VUSef89EZKy1bobhdVT4T6bRWPMcx7kk2ZyGe1JKbfR6t6+ledVqtWDJ9/1zAM5kMtkdDu8/Mdf/9Q3ZjVsP7qiLvwAAAABJRU5ErkJggg==
 )
 !important;
 }
-.content__right:hover > .z-entity__content-right:before{
+.content__right:hover  .serp-block_type_entity-search:before{
 visibility: hidden !important;
 transition: all 0s linear 0.3s !important;
 -webkit-transition: all 0s linear 0.3s !important;
@@ -307,14 +308,19 @@ display: inline-block !important; position: relative !important;
  border-radius: 10px;
  font-size: x-small !important;
 }
-/* 2015-06-20 */
-.layout_type_serp .layout__col_size_5 {
+/* 2015-11-19 
+.layout_type_serp .layout__col_size_5 
+.serp-block .serp-block_type_entity-search >div 
+* /
+.serp-block .serp-block_type_entity-search {
  width: 45% !important;
  padding-left: 10px !important;
-}
-.layout_type_serp .layout__col_size_5 >div {
- max-width: 97% !important;
-}
+} 
+.content__right .serp-block_type_entity-search,
+.content__right .serp-block_type_entity-search div,
+{
+ width: 97% !important;
+}/* */
 h2.serp-item__title >a{
 max-width: 505px !important;
 max-width: 47vw !important;
@@ -343,9 +349,14 @@ body .header_fixed_yes
 }
 .content__left .related { margin-bottom: 2px !important; }
 .footer .footer__line { display: inline-block !important; padding-left: 2em !important; }
-/* AdBlock rule: yandex.ru##[class^="distro"] * /
+/* AdBlock rule: yandex.ru##[class^="distro"] */
   .footer .distro { display: none !important; }
 /* */
+.footer__inner{padding:  0 !important;}
+.footer__line {line-height: 1em !important;}
+.main {padding-bottom: 0px !important;}
+.main__center{ min-height: calc(84vh - 1em) !important;}
 .serp-meta {white-space: normal !important;}
+.pager .pager__item {text-align: center !important;}
 /* dbg * / html *{border:thin solid red!important;}/* */
 }
