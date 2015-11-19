@@ -3,8 +3,8 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 15.10.14
-// 15.08.19 *  slight changes
+// @version 15.11.19
+// 15.11.19 *  fix
 // 15.08.12 ++ octicons for file extensions
 // 15.08.07  + case-insensitive sorting
 // 15.05.07  sorting is now faster
@@ -530,11 +530,11 @@ var  observer = new MO(function(mutations) {
          }
         
 // patch for the very first page
-      if( 0===__started && t.nodeName=='TIME' ) 
+      if( t.nodeName=='TIME' ) 
       {
+//_l('T'+mutI++,ml,' T:' +m.type,'N:'+t.nodeName ) ;
         if( t.parentNode.parentNode.className=="age" )
         {
-//_l('T'+mutI++,ml,' T:' +m.type,'N:'+t.nodeName, 'C:',"age" ) ;
             if(!catcher.querySelector('.fsort-butt'))
               gitDir(1); //chrome ?!11
             setDateTime(1); 
@@ -551,7 +551,7 @@ var  observer = new MO(function(mutations) {
          {
             if(!catcher.querySelector('.fsort-butt'))
               gitDir(1); //chrome ?!11
-//_l('C'+mutI++,ml,' T:' +m.type,'N:'+t.nodeName,'C:'+ t.className,t.querySelector('TIME').textContent) ;
+_l('C'+mutI++,ml,' T:' +m.type,'N:'+t.nodeName,'C:'+ t.className,t.querySelector('TIME').textContent) ;
           setDateTime(1);
           return;
          }
