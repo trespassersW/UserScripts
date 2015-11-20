@@ -54,7 +54,7 @@ function col_cnt(c, d){
  GM_setValue(PYD, c);
  stickStyle(PYD, css + column_count.replace(/YCC/g,c));
  _l(c+' колонки');
-//window.location.reload(true);
+// window.location.reload(true);
 };
 
 GM_registerMenuCommand("Яндекс: 2 колонки", function(){col_cnt(2)});
@@ -66,4 +66,3 @@ YCC=GM_getValue(PYD,YCC);
 col_cnt(YCC,true)
 
 })();
-
