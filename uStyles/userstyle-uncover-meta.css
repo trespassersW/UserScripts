@@ -1,5 +1,8 @@
 ﻿@-moz-document domain("userstyles.org") 
-/* */
+/* 151122
+ - shows author-id and total-install-count in styles list;  
+ - zooms screenshots on mouseover  
+*/
 {
 #hidden-meta {
  display: inline-block;
@@ -69,5 +72,40 @@ link[rel^="stylish-update-url"] {
 }
 link[rel^="stylish-example-url"]{visibility: visible!important;}
 link[rel^="stylish-update-url"]:after{ content: ": Source";}
+/* */
+article.style-brief{position: relative !important;
+border-bottom: thin solid gray !important;}
+article.style-brief:after{
+position: absolute;
+content: "Author Id: " attr(author-id); right:0px; top: 0.8em; left: auto; bottom: auto;
+/*background: #FFEC8B; color: blue; opacity: .75; border-radius: 8px;*/
+}
+article[class^="style-brief"]:before{
+position: absolute;
+content: "Installs Total: " attr(total-install-count); right: 0px; top:auto;  left:auto; bottom: 0;
+}
+/* */
+.listing-left-info {position: relative !important;
+width: 180px!important; padding-bottom:8px!important;
+min-height: 132px !important;}
+.style-brief-text {
+    margin-left: 192px !important;
+}
+.listing-left-info img.screenshot{
+overflow: hidden!important;position: absolute!important;
+right: 0; top:0;  
+width:auto !important; height:auto !important;
+max-width:176px !important;max-height:132px !important;
+}
+.listing-left-info:hover img.screenshot{
+width:auto !important;height:auto !important;
+max-width:none !important;max-height:none !important;
+ z-index:100500!important;
+ border: thin dotted gray !important;
+}
+article.style-brief {
+    margin-bottom: 1em !important;
+}
+.style-brief-text header ~ p {max-width:720px !important;}
 /* */
 }

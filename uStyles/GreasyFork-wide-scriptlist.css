@@ -3,7 +3,7 @@
  GreasyFork wide scriptlist
    forked from greasy-fork-compact [https://userstyles.org/styles/104650]
    by wOxxOm [https://userstyles.org/users/67605]
-* 015-10-19 patch for Code page
+* 015-11-22 'Control panel' in one line
 * 015-09-03 number of dayly installs exceeded one thousand
 * 015-04-07 !important fix for Chrome
 * 015-01-15 fix for greasyfork.org-langfilter.user.js
@@ -200,6 +200,8 @@ dd.script-list-author {display: none !important;}
     max-width: 32% !important;
 }
 /* */
+#user-control-panel >li { display: inline-block !important; padding-left: 40px !important;}
+#user-control-panel { -moz-padding-start: 0 !important; padding-left: 0 !important;}
 }
 /*  patch for code page */
 @-moz-document regexp("https://(greas|sleaz)yfork\\.org/.*/code$") {
