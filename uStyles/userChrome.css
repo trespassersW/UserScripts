@@ -78,7 +78,7 @@ list-style-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAY
 }
 
 /* */
-.toolbarbutton-1 .dropmarker-icon 
+.toolbarbutton-1 .dropmarker-icon ,
 .toolbarbutton-menubutton-dropmarker,
 #nav-bar, #tabbrowser-tabs
 {
