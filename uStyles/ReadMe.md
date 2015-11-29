@@ -16,6 +16,7 @@
 | **scrollbarrier.css** | [![src](stylish.png)](scrollbarrier.css) | narrow scrollbar with slider in oblique stripes  |
 | **Tahoma-16px.css** | [![src](stylish.png)](Tahoma-16px.css) | Sets up neat font and economic line spacing for webpage's text content.  |
 | **thin-wikky.css** | [![src](stylish.png)](thin-wikky.css) | Hopefully adds a bit of readability to a wiki page / повышаем читабельность вики  |
+| **userChrome.css** | [![src](stylish.png)](userChrome.css) | tidy bookmarks  |
 | **userscripts-org-darkgrey-source.css** | [![src](stylish.png)](userscripts-org-darkgrey-source.css) | dark grey syntax highlighting for USO `[Source Code]`  |
 | **Wiki-ToC-Icon.css** | [![src](stylish.png)](Wiki-ToC-Icon.css) | Hides the "Contents" section of a wiki page into a small icon at the bottom-right corner. Table of contents pops up when you hover over that icon. -- Прячет раздел "Содержание" вики-страниц в иконку в нижнем правом углу окна. Оглавление всплывает при наведении курсора на эту иконку.  |
 | **Yandex-two-columns.css** | [![src](stylish.png)](Yandex-two-columns.css) | Yandex.ru - две колонки результатов поиска - и ничего лишнего  |

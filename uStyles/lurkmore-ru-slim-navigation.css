@@ -1,10 +1,14 @@
-﻿@namespace url(http://www.w3.org/1999/xhtml);
-/* 
+﻿/* 
  lurkmore.ru  - less navigation, moar content
 */
+@namespace url(http://www.w3.org/1999/xhtml);
 /*http://userstyles.org/styles/45866/lurkmore-ru-slim-navigation*/
-
-@-moz-document domain("lurkmore.to")
+@-moz-document  
+ domain("lurkmore.to")
+,domain("lurkmore.co")
+,domain("lurkmo.re")
+,domain("lurkmore.net")
+,domain("lurkmore.ru")
 {
  #content 
 ,#p-cactions
@@ -27,8 +31,8 @@
 ,[src*="adv.jpg"]
 ,[class^="teaser"]
 ,#column-one IMG[src^="data"]
+,#column-one iframe
 { display: none !important;}
-
 
 /**/
 /* текст поуже, интервалы поменьше */
@@ -36,13 +40,19 @@
 {
  font-family: tahoma,sans-serif !important
 ;font-size: 16px !important
-;line-height: 120% !important 
+;line-height: 1.1 !important 
 ;max-width: 720px !important 
-;hyphens: auto !important
 /**/;-moz-hyphens: auto !important /* Ff8.0 */
 /**/;-webkit-hyphens: auto !important /*chrome13*/
 /**/; hyphens: auto !important /* */
 }
 table[class*="quote"]  {margin-left: 0 !important;}
-}
 
+#bodyContent sup.reference a
+{ display: inline  !important; 
+  top: 2px !important; 
+  line-height: 1px !important;
+  font-size: 50% !important;
+  opacity: .5 !important;
+}
+}
