@@ -5,16 +5,18 @@
 // @include        http://musicmp3.spb.ru/a*
 // @include        http://musicmp3spb.org/a*
 // @author         trespassersW
-// @source http://userscripts.org/scripts/show/112384
-// @version 1.3
+// @downloadurl https://github.com/trespassersW/UserScripts/raw/master/src/musicmp3_download_booster.user.js
+// @updateurl   https://github.com/trespassersW/UserScripts/raw/master/src/musicmp3_download_booster.user.js
+// @version 1.3.1 
+// @updated 2015-11-29
 // @created 2011-10-26
-// @updated 2014-03-26
+// @license MIT
 // @grant GM_log
 // @grant GM_xmlhttpRequest
 // @grant GM_addStyle
 //
 /* StartHistory
-  1.3 2014/03/29 works in FF28+ 
+  1.3.1 2015/11/29 исправление для FF42+ 
   1.2.2d 2011-10-26
   - ссылка для поиска обложки на discogs.org
 v 1.2.2 2011-09-27 
@@ -233,7 +235,7 @@ const dmicons={
 ,discogs:
 '.dmdogs:after{content:url(data:image/gif;base64,R0lGODlhEAAQAMZ7AAAAAAEBAQIBAQICAAgICAkJCQ0NDQ8PDxEREREREhISExMTFBQUFBUVFR0dHR8fHx8gKiEhIiEhIyAhLCIjJCcpMSsrLSorNC0tLS0tLy0uMC4vMC8vMDEyMzIyMzIzNTMzMzIzNjMzNDU1NTc3Nzs7Ozs7PTw8PDw9Pjw9Pz4/QD4/QT9AQkBBREFBQktGA0pHAkNDQ0RFR0RGSEdISkhJSklKTUlLTEpLTlNQA0lLWUtMTVZRA01OUFNTU1ZWVltbW11ea19fX2hkJ2ZnaXFrJWpqbG9vb3V1dXZ1dnZ2dnh4eHd4g3l5eXp6enx8fH5+fn5/f39/f4CBgoGBgYSEhJqQAoiIipySBYqKioyNjaGXBaWZA6SaBZCRm6WaC6abDKicBZiZmqChorKtaK2trbu3eNvLB9zMB9zNAt7PB8XGx+LTBOHTCOXWB9LS0/bkBfflBfjlB/jmB9na2vnnCPrnCNvb3ProCObm5/Lz8////////////////////yH+EUNyZWF0ZWQgd2l0aCBHSU1QACH5BAEKAH8ALAAAAAAQABAAAAe1gH+Cgk4kDRExTYOLf1QHAJAZMhYqWYxCkJkdNjNrZUCDVZmZIS1RelMST4IGo5AXOm9XKTcbf1KuMFtfZF4tNCgKSiejL211cWxFEwsCACMOo1h2amhzXKMN0ZlWcmpneGEDmQwlAAEIEENpcHhuPKMgTgkmNC1MZmBdOa5Ifxw4VhihE6SCKwAEBEGhQCSPGBYfDi4Z9GPMnR41RLjywUjLDg00PGQq4I+RoCQuHhjAcIRRIAA7)}'
 };
-var _log= console.log; //GM_log
+var _log= _log=console.log.bind(console); //GM_log
 const amazon= 'http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=';
 
 const dmchar ='&#9834;' //'&darr;'
