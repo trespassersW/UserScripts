@@ -1,7 +1,7 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
 /* 
+   2015-12-06 * горизонтальный скроллбар на некоторых страницах
    2015-11-19 * правая панель
-   2015-07-20 * боковые панели; интервалы между статьями
    2014-07-22 * задний фон
    2014-06-05 новый дизайн йандекса 
 */
@@ -252,7 +252,8 @@ div.serp-block div.serp-item { /* 2015-07-20 */
 .z-entity__right-list {margin-left: 0 !important;}
 /*141105 */
 .z-images.i-bem div.serp-url {
- margin-left: 2em !important; width:90% !important;
+ margin-left: 0.1em !important; max-width:49vw !important;
+ overflow-x: hidden !important;
 }
 /* 150104 */
 .z-related-list {
@@ -358,5 +359,16 @@ body .header_fixed_yes
 .main__center{ min-height: calc(84vh - 1em) !important;}
 .serp-meta {white-space: normal !important;}
 .pager .pager__item {text-align: center !important;}
+.serp-item{  max-width: 49vw !important; } /* 15-12-06 */
+.related .related__column {
+-moz-column-count: 2 ;
+-webkit-column-count: 2 ;
+column-count: 2 ;
+-moz-column-width: 23vw !important;
+-webkit-column-width: 23vw !important;
+column-width: 23vw !important;
+margin-left: 4px !important;
+}  
+
 /* dbg * / html *{border:thin solid red!important;}/* */
 }
