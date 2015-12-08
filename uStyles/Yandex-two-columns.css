@@ -1,6 +1,6 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
 /* 
-   2015-12-06 * горизонтальный скроллбар на некоторых страницах
+   2015-12-08 - горизонтальный скроллбар на некоторых страницах
    2015-11-19 * правая панель
    2014-07-22 * задний фон
    2014-06-05 новый дизайн йандекса 
@@ -288,7 +288,6 @@ transition: all 0s linear 0.3s !important;
 .ymaps-map, .map__dynamic-map {
 width: 100% !important;
 }
-.audio-track { margin-right: 0 !important;}
 /* 2015-03-24 */
 .z-news__title a.b-link{
 max-width: 42vw !important;
@@ -368,7 +367,10 @@ column-count: 2 ;
 -webkit-column-width: 23vw !important;
 column-width: 23vw !important;
 margin-left: 4px !important;
-}  
+}
+/* 15-12-08 */
+.audio-track, 
+.audio-playlist { margin-right: 0 !important; }
 
 /* dbg * / html *{border:thin solid red!important;}/* */
 }
