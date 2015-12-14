@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name           translate.google tooltip
 // @namespace      trespassersW
 // @author      trespassersW
@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.9.90
+// @version 3.9.91
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.9.90 2015-12-14 * softened restrictions on the length of translated text
+// 3.9.91 2015-12-14 * softened restrictions on the length of translated text
 // 3.9.50 2015-10-17 + multi-sentence; GM_menu item
 // 3.9.10 2015-07-29 * fix for Ff39; + now works in chrome
 // 3.7.96 2015-05-10 * TTS in ff37; * DOMparser instead of IFRAME; * bugfixes
@@ -249,6 +249,7 @@ function showLookupIcon(evt){
 	var divDic = getId('divDic');
 	var divLookup = getId('divLookup');
 	txtSel = getSelection(evt.target)+'';
+
   if(txtSel.length>1024){  
    return;  
   }
@@ -452,7 +453,7 @@ function openInFrame(url){
 */
 }
 function ttsRequest(txt,t,e){
-  txt=txt.split(' ').slice(0,19).join(' ');
+//
   var etxt = escAp(txt.split(' ').slice(0,19).join(' '));
   etxt=ttsURL + "&ie=utf-8&tl="	+ t + "&tk="+ampTK+ "&q=" + etxt;
   _log('tts> '+etxt);
@@ -466,9 +467,9 @@ function ttsRequest(txt,t,e){
 //
 function gtRequest(txt,s,t){
   var etxt = escAp(txt);
-  currentURL = GTurl + "langpair="	+ s + "|" + t + "&text="+etxt ;
   etxt=GTurl + "langpair="	+ s + "|" + t + "&text=" + etxt.split(/%20|\s|\.|;|,/).slice(0,9).join('%20');
-  if(etxt.length>512) etxt=etx.substr(0,512);
+  if(etxt.length>1024) etxt=etx.substr(0,1024);
+  currentURL = etxt ;
   if( !((s==last_sl && t==last_tl) || (s==last_tl && t==last_sl)) || (divExtract=='')){
     //_log(s+c+last_sl+ '  '+t+c+last_tl + '  '+ divExtract );
     divExtract = '';
