@@ -1,4 +1,4 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name           translate.google tooltip
 // @namespace      trespassersW
 // @author      trespassersW
@@ -10,8 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.9.51
+// @version 3.9.90
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 3.9.90 2015-12-14 * softened restrictions on the length of translated text
 // 3.9.50 2015-10-17 + multi-sentence; GM_menu item
 // 3.9.10 2015-07-29 * fix for Ff39; + now works in chrome
 // 3.7.96 2015-05-10 * TTS in ff37; * DOMparser instead of IFRAME; * bugfixes
@@ -23,8 +24,7 @@
 // 3.5.1 2015-04-15
 //  + TTS: alt-select text inside tooltip and shift-click language icon below
 //  * From<->To buttons fix; * err handler
-// 3.0.0 
-//  - national flags icons -- from www.senojflags.com
+// 3.0.0  - national flags icons -- from www.senojflags.com
 // 2.3
 //  - new editable 'source text' field
 // 2.2.2 
@@ -114,8 +114,8 @@ var ht=null;  // history table,
 
 var imgForw,imgBack,imgSwap,imgUse,imgSave,imgFlags,imgForwSrc,imgBackSrc;
 var txtSel; // text selected
-var currentURL, Qtxt='***';
-var ampTK = Math.round(Math.random()*1e6)+"|"+Math.round(Math.random()*1e6);
+var currentURL, Qtxt='***'; var e6 =999999;
+var ampTK = Math.round(Math.random()*e6)+"."+Math.round(Math.random()*e6);
 var gt_sl_gms, gt_tl_gms, gt_sl, gt_tl;
 
 var sT;
@@ -467,9 +467,9 @@ function ttsRequest(txt,t,e){
 function gtRequest(txt,s,t){
   var etxt = escAp(txt);
   currentURL = GTurl + "langpair="	+ s + "|" + t + "&text="+etxt ;
-  etxt=GTurl + "langpair="	+ s + "|" + t + "&text=" + etxt.split(' ').slice(0,9).join(' ');
+  etxt=GTurl + "langpair="	+ s + "|" + t + "&text=" + etxt.split(/%20|\s|\.|;|,/).slice(0,9).join('%20');
+  if(etxt.length>512) etxt=etx.substr(0,512);
   if( !((s==last_sl && t==last_tl) || (s==last_tl && t==last_sl)) || (divExtract=='')){
-    var c=':';
     //_log(s+c+last_sl+ '  '+t+c+last_tl + '  '+ divExtract );
     divExtract = '';
     Request(etxt);
@@ -479,17 +479,27 @@ function gtRequest(txt,s,t){
   last_sl = s; last_tl = t;
 }
 function Request(url,cb){
-  URL=url; _log('R: '+URL);
-  var meth=(1 && cb)? 'POST': 'GET';
-  GM_xmlhttpRequest({
-			method: meth,
-			url: url,
-      headers: {	    
+  var Url=url, meth=(1 && cb)? 'POST': 'GET';
+  var Data='';
+  var Hdr= {	    
         "User-Agent": UA 
        ,"Accept":  "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
        ,"Accept-Encoding":  "gzip, deflate"
        //,"Host": "www.google.com"
-      },
+      }
+  if(1 && cb){
+    var Q=url.split('&q=');
+    Url=Q[0];
+    Data='&q='+Q[1];
+    Hdr["Content-Length"]=Data.length+'';
+    Hdr["Content-Type"]="application/x-www-form-urlencoded; charset=UTF-8"
+  }
+  //console.log('R: '+Url+'\nD: "'+Data+'"');
+  GM_xmlhttpRequest({
+			method: meth,
+			url: Url,
+      data: Data,
+      headers: Hdr,
 			onload: function(resp) {
 				try{
           if(cb)
@@ -858,12 +868,13 @@ try{
    badResponce(txt,e);
 }
 }
-//https://translate.google.com/translate_a/single?client=t&sl=ru&tl=en&hl=en&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&source=btn&trs=1&inputm=1&ssel=0&tsel=0&kc=1&tk=797587|658323&q=xyz
+//https://translate.google.com/translate_a/single?client=t&sl=ru&tl=en&hl=ru&
+//dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&otf=2&trs=1&inputm=1&ssel=0&tsel=0&source=btn&kc=3&tk=899279.760886
 function onTimerDict(){
  var q = dictURL + 
  "&hl="+ GM_getValue('to','auto') + 
  "&sl=" + gt_sl + "&tl=" + gt_tl + 
-"&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&source=btn&trs=1&inputm=1&ssel=0&tsel=0&kc=1"+
+"&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&otf=2&trs=1&inputm=1&ssel=0&tsel=0&source=btn&kc=3"+
  "&tk="+ampTK+
  "&q="+ escAp(txtSel);
  //console.log('dict:'+ dictURL);
