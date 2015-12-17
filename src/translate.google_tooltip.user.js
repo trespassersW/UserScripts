@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.9.99
+// @version 4.1.01
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.9.99 2015-12-17 ? Googleplex, we have a problem
+// 4.1.01 2015-12-17 * changes in translate.google API
 // 3.9.50 2015-10-17 + multi-sentence; GM_menu item
 // 3.9.10 2015-07-29 * fix for Ff39; + now works in chrome
 // 3.7.96 2015-05-10 * TTS in ff37; * DOMparser instead of IFRAME; * bugfixes
@@ -115,7 +115,7 @@ var ht=null;  // history table,
 var imgForw,imgBack,imgSwap,imgUse,imgSave,imgFlags,imgForwSrc,imgBackSrc;
 var txtSel; // text selected
 var currentURL, Qtxt='***'; var e6 =999999;
-var ampTK = Math.round(Math.random()*e6)+"."+Math.round(Math.random()*e6);
+var ampTK;// = Math.round(Math.random()*e6)+"."+Math.round(Math.random()*e6);
 var gt_sl_gms, gt_tl_gms, gt_sl, gt_tl;
 
 var sT;
@@ -452,10 +452,14 @@ function openInFrame(url){
 /*
 */
 }
+var soundSL=null,dictSL=null;
 function ttsRequest(txt,t,e){
 //
-  var etxt = escAp(txt.split(' ').slice(0,19).join(' '));
-  etxt=ttsURL + "&ie=utf-8&tl="	+ t + "&tk="+ampTK+ "&q=" + etxt;
+  txt=txt.split(' ').slice(0,19).join(' ');
+  var tk=googleTK(txt,soundSL);
+  soundSL=tk.SL;
+  var etxt = escAp(txt);
+    etxt=ttsURL + "&ie=utf-8&tl="	+ t + "&tk="+tk.tk+ "&q=" + etxt;
   _log('tts> '+etxt);
   if(e)
     GM_openInTab(etxt);
@@ -468,11 +472,11 @@ function ttsRequest(txt,t,e){
 function gtRequest(txt,s,t){
   var etxt = escAp(txt);
   // !!! 015-12-17
-  //  etxt=GTurl + "langpair="	+ s + "|" + t + "&text=" + etxt.split(/%20|\s|\.|;|,/).slice(0,29).join('%20');
-  etxt=GTurl + "langpair="	+ s + "|" + t + "&text=" + etxt.split(/\s/).slice(0,29).join('%20');
+  //etxt=GTurl + "langpair="	+ s + "|" + t + "&text=" + etxt.split(/\s/).slice(0,29).join('%20');
+  etxt=GTurl + "langpair="	+ s + "|" + t + "&text=" + etxt.split(/%20|\s|\.|;|,/).slice(0,9).join('%20');
   if(etxt.length>1024) etxt=etxt.substr(0,1024);
   currentURL = etxt ;
-  if( 1 || !((s==last_sl && t==last_tl) || (s==last_tl && t==last_sl)) || (divExtract=='')){ // !!! 015-12-17
+  if( 0 || !((s==last_sl && t==last_tl) || (s==last_tl && t==last_sl)) || (divExtract=='')){ // !!! 015-12-17
     //_log(s+c+last_sl+ '  '+t+c+last_tl + '  '+ divExtract );
     divExtract = '';
     Request(etxt);
@@ -633,7 +637,7 @@ function extractResult(html){
   dR.style.textAlign = rtl_langs.indexOf(GT_tl) < 0? 'left':'right';
   dR.style.direction = rtl_langs.indexOf(GT_tl) < 0? 'ltr' :  'rtl';
   dR.lang=GT_tl;
-//  dict();
+  dict();
 
 }
 
@@ -875,14 +879,15 @@ try{
    badResponce(txt,e);
 }
 }
-//https://translate.google.com/translate_a/single?client=t&sl=ru&tl=en&hl=ru&
-//dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&otf=2&trs=1&inputm=1&ssel=0&tsel=0&source=btn&kc=3&tk=899279.760886
+//
 function onTimerDict(){
+ var tk=googleTK(txtSel,dictSL);
+ dictSL=tk.SL; 
  var q = dictURL + 
  "&hl="+ GM_getValue('to','auto') + 
  "&sl=" + gt_sl + "&tl=" + gt_tl + 
 "&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&otf=2&trs=1&inputm=1&ssel=0&tsel=0&source=btn&kc=3"+
- "&tk="+ampTK+
+ "&tk="+tk.tk+
  "&q="+ escAp(txtSel);
  //console.log('dict:'+ dictURL);
  _log('?dict')
@@ -1316,7 +1321,45 @@ function escAp(s){
  return encodeURI(s);
  //return ttrans( s, tabUrlEsc );
 }
+// &tk=[
+function googleTK(text, SL) {
+	// view-source:https://translate.google.hu/translate/releases/twsfe_w_20151214_RC03/r/js/desktop_module_main.js
+	var SL = (SL) ? SL : null;
+	var QL=function(a){return function(){return a}};
+	var cb="&";
+	var k="";
+	var mf="=";
+	var RL=function(a,b){for(var c=0;c<b.length-2;c+=3){var d=b.charAt(c+2),d=d>=t?d.charCodeAt(0)-87:Number(d),d=b.charAt(c+1)==Tb?a>>>d:a<<d;a=b.charAt(c)==Tb?a+d&4294967295:a^d}return a};
+	var Vb="+-a^+6";
+	var t="a";
+	var Tb="+";
+	var Ub="+-3^+b+-f";
+	var dd=".";
+	var TL=function(a){
+		var b;
+		if(null===SL){
+			SL = Math.floor(Math.random() * 1000000);
+		}
+		b=SL;
+		var d=QL(String.fromCharCode(116)),
+		c=QL(String.fromCharCode(107)),
+		d=[d(),d()];
+		d[1]=c();
+		for(var c=cb+d.join(k)+mf,d=[],e=0,f=0;f<a.length;f++){
+			var g=a.charCodeAt(f);
+			128>g?d[e++]=g:(2048>g?d[e++]=g>>6|192:(55296==(g&64512)&&f+1<a.length&&56320==(a.charCodeAt(f+1)&64512)?(g=65536+((g&1023)<<10)+(a.charCodeAt(++f)&1023),d[e++]=g>>18|240,d[e++]=g>>12&63|128):d[e++]=g>>12|224,d[e++]=g>>6&63|128),d[e++]=g&63|128)
+		}
+		a=b||0;
+		for(e=0;e<d.length;e++) { a+=d[e],a=RL(a,Vb); }
+		a=RL(a,Ub);
+		0>a&&(a=(a&2147483647)+2147483648);
+		a%=1E6;
 
+		return a.toString()+dd+(a^b);
+	}
+	return { 'tk' : TL(text), 'SL' : SL };
+}
+// ]&tk=
 function stickStyle(css){
  var s=document.createElement("style"); s.type="text/css";
  s.appendChild(document.createTextNode(css));
