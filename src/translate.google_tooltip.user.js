@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 3.9.92
+// @version 3.9.99
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 3.9.92 2015-12-14 * softened restrictions on the length of translated text
+// 3.9.99 2015-12-17 ? Googleplex, we have a problem
 // 3.9.50 2015-10-17 + multi-sentence; GM_menu item
 // 3.9.10 2015-07-29 * fix for Ff39; + now works in chrome
 // 3.7.96 2015-05-10 * TTS in ff37; * DOMparser instead of IFRAME; * bugfixes
@@ -467,10 +467,12 @@ function ttsRequest(txt,t,e){
 //
 function gtRequest(txt,s,t){
   var etxt = escAp(txt);
-  etxt=GTurl + "langpair="	+ s + "|" + t + "&text=" + etxt.split(/%20|\s|\.|;|,/).slice(0,9).join('%20');
+  // !!! 015-12-17
+  //  etxt=GTurl + "langpair="	+ s + "|" + t + "&text=" + etxt.split(/%20|\s|\.|;|,/).slice(0,29).join('%20');
+  etxt=GTurl + "langpair="	+ s + "|" + t + "&text=" + etxt.split(/\s/).slice(0,29).join('%20');
   if(etxt.length>1024) etxt=etxt.substr(0,1024);
   currentURL = etxt ;
-  if( !((s==last_sl && t==last_tl) || (s==last_tl && t==last_sl)) || (divExtract=='')){
+  if( 1 || !((s==last_sl && t==last_tl) || (s==last_tl && t==last_sl)) || (divExtract=='')){ // !!! 015-12-17
     //_log(s+c+last_sl+ '  '+t+c+last_tl + '  '+ divExtract );
     divExtract = '';
     Request(etxt);
@@ -480,7 +482,7 @@ function gtRequest(txt,s,t){
   last_sl = s; last_tl = t;
 }
 function Request(url,cb){
-  var Url=url, meth=(1 && cb)? 'POST': 'GET';
+  var Url=url, meth=(1 && cb)? 'POST': 'GET'; 
   var Data='';
   var Hdr= {	    
         "User-Agent": UA 
@@ -488,7 +490,7 @@ function Request(url,cb){
        ,"Accept-Encoding":  "gzip, deflate"
        //,"Host": "www.google.com"
       }
-  if(1 && cb){
+  if(1 && cb){ 
     var Q=url.split('&q=');
     Url=Q[0];
     Data='&q='+Q[1];
@@ -608,7 +610,6 @@ function extractResult(html){
   ['click', options],  gt_tl_gms );
   getId('divBottom').appendChild(oL);
   }catch(e){ console.log('gather\n'+e); }
-  
 //	var translation = getXId("result_box").textContent;
 // first run: resolve tl = auto
   if(GT_tl == 'auto')try{
@@ -620,14 +621,19 @@ function extractResult(html){
 
 	//parse info 
   var dR=getId('divResult');
+  var tx='translating..';
+  try{
+   tx=getXId("result_box").textContent
+   // console.log("result:\n"+tx);
+  }catch(e){console.log("result_box\n"+e)} 
 	dR.innerHTML = '<a class="gootranslink gootransgoo" href="#'+
-  '" target="_blank">' + 'translating..' /*translation*/ + '</a>'; // +'<br>&nbsp;';
+  '" target="_blank">' + tx + '</a>'; // +'<br>&nbsp;';
   dR.childNodes[0].setAttribute('href',currentURL); //<a href
   dR.childNodes[0].setAttribute('title',deURI(currentURL,"&text="));
   dR.style.textAlign = rtl_langs.indexOf(GT_tl) < 0? 'left':'right';
   dR.style.direction = rtl_langs.indexOf(GT_tl) < 0? 'ltr' :  'rtl';
   dR.lang=GT_tl;
-  dict();
+//  dict();
 
 }
 
