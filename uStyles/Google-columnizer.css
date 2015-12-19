@@ -1,9 +1,11 @@
 @namespace url(http://www.w3.org/1999/xhtml);
 /* 
  userstyles.org/styles/63771/google-columnizer
- 2015-11-24 -  don't make G my startpage
+ 2015-12-18 *  minor fixes
  2015-08-07 +  encrypted.google.com
+ 2015-05-25 ** bg color, intervals
  2015-05-08 ** exclude google images
+ 2015-04-21 ** any time any result
  2015-02-25 -- hidden unneeded scrollbar
  2015-02-20 -- 'People also search for' bar at bottom of page
  2015-01-23 -- right col fixes
@@ -12,7 +14,6 @@
  2014-07-20 -- graphs footer
  2013-07-27 -- top-left ads
  2013-07-18 -- fixed result col width for google.ru >:O
- 2013-05-31 -- fixes: utube & g+ images 
  2013-05-26 -- youtube items
  2013-02-11 -- affects www.google.* ; fixes for youTube paragraphs
  2013-02-06 -- right-panel content token <<<
@@ -31,6 +32,24 @@ url-prefix("https://www.google.") {
  -moz-column-count: /*[[column-count]]*/ 2 /* */ !important; 
  -webkit-column-count: /*[[column-count]]*/ 2 /* */ !important; 
  column-count: /*[[column-count]]*/ 2 /* */ !important; 
+}
+#gsr div.mw #res 
+,div#ires
+{
+ -moz-column-gap:6px!important; 
+ -webkit-column-gap:6px!important; 
+ column-gap:6px!important; 
+ -moz-column-rule:  thin dotted gray !important;
+ -webkit-column-rule:  thin dotted gray !important;
+ column-rule:  thin dotted gray !important;
+  padding: 0px !important; 
+  width: auto !important; 
+}
+#gsr div.mw #res 
+{/* # of columns. Pay attention to the comments: */
+ -moz-column-count: 2 /* 2 /* */ !important; 
+ -webkit-column-count: 2 /* 2 /* */ !important; 
+ column-count: 2 /* 2 /* */ !important; 
 }
 #gsr div.mw #res 
 ,div#ires
@@ -139,7 +158,7 @@ opacity: 0.95 !important;
 {  white-space: normal !important; }
 /* rigyt panel */
 #gsr div#rhs_block >div:first-of-type:before
-,#gsr div#rhs_block >ol:before { content:" <<< " !important; 
+,#gsr div#rhs_block >ol:before { content:" << " !important; 
  right: 4px !important;  
  top: 45px !important; position: fixed !important;
  z-index: 9999 !important; 
@@ -156,8 +175,8 @@ opacity: .5 !important;
 display: block !important;
 position: fixed !important;
 top: 45px !important; right: 0 !important; left: auto !important; bottom: auto !important;
-min-width: 32px !important; width: 32px !important; 
-height: .7em !important; min-height: .7em !important;
+min-width: 48px !important; width: 48px !important; 
+height: .5em !important; min-height: .5em !important;
 border: 1px solid #888 !important;
 /* */border-radius:  0 0 0 16px  !important;
 border-width: 0px 1px 1px 0px !important;/* */
@@ -242,7 +261,8 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAUCAYAAACXtf2DAAAACXBIWXMAAA
  position: absolute !important; 
  margin:  -2.9em 0 0 0    !important;
  z-index: 99999;
- height: 2em !important; width: 110px !important;
+ height: 1.1em !important; width: 80px !important;
+ min-height: 1.1em !important; min-width: 80px !important;
  overflow: hidden !important;
  z-index: 789 !important;
  opacity: .6 !important;
@@ -340,3 +360,5 @@ body#gsr {overflow-y: auto !important;}
 #searchform .gb_ga.gb_g {display: none !important; visibility: hidden !important; }
 /* * /body div {border-left: 1px dotted red !important;}/* */
 }
+
+
