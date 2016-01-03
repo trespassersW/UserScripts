@@ -8,6 +8,8 @@ Almost instantly you will see a tooltip with the translation. <hr>
 ***Please look more closely at the picture below:***<br><hr>
 ![screenshot2](../res/tg3.gif) 
 <hr>
+Also, you can run the script using Greasemonkey menu:<pre><i><b>Tools</b> → <b>Greasemonkey</b> → <b>User Script Commands</b></i>  → <b>translate.google tooltip</b></pre>
+<hr>
 Script uses <a href="http://www.senojflags.com">Country flag</a> &nbsp; <a href=https://rawgit.com/trespassersW/UserScripts/master/Flags/index.html?gtrantoltip#><em><strong>images</strong></em></a> &nbsp; from <a href="http://www.senojflags.com">Flags of all Countries</a>
 <hr> 
 * 3.7.2 2015-04-20 `*` TTS: <em>`alt`-select</em> text inside tooltip and <em>`[shift/ctrl]`-click</em> language icon below. <br>  :loudspeaker: [tts tips + 2015-10-31](./translate_tts_tips.md) 

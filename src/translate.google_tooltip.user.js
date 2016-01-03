@@ -10,8 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 4.1.01
+// @version 4.1.02
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 4.1.02 2016-01-03 * left-click only
 // 4.1.01 2015-12-17 * changes in translate.google API
 // 3.9.50 2015-10-17 + multi-sentence; GM_menu item
 // 3.9.10 2015-07-29 * fix for Ff39; + now works in chrome
@@ -243,6 +244,7 @@ function showLookupIcon(evt){
 //  to avoid collision
 	 ||(evt.ctrlKey && !Gctrl)
 	 ||(evt.altKey && !Galt)
+   ||(evt.button!==0) // * 2016-01-03
    ) return;
   evt.preventDefault(),evt.stopPropagation(); 
 
