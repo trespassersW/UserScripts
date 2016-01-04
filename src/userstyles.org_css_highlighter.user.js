@@ -1,11 +1,12 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name        userstyles.org css highlighter 
 // @namespace   trespassersW
 // @description     Formats and highlights CSS code shown after [Show CSS] clicking.
 // @include         http://userstyles.org/styles/*
 // @include         https://userstyles.org/styles/*
-// @include         file:///E:/userscripts.org/styles/*
-// @version         2.0.1c
+// /include         file:///E:/userscripts.org/styles/*
+// @version         2.1.0
+// 2.1.1 2016-01-04 + ctrl-clik copies CSS code to clipboard
 // 2.0.1 cut extra empty lines
 // 2.0 dark grey background;
 // 1.3 icons for toggle button; tiny optimization
@@ -14,8 +15,8 @@
 // @author          trespassersW
 // @license         MIT License
 // @released        2013-11-20
-// @updated         2014-03-12
-// @grant none
+// @updated         2016-01-04
+// @grant  GM_setClipboard
 // @run-at document-end
 // ==/UserScript==
 
@@ -156,6 +157,12 @@ function isBeauty(){
 function hiBeauty(e){
  if(e) e.preventDefault(),e.stopPropagation();
  sc=document.getElementById("stylish-code");
+ if(e.shiftKey || e.altKey) return;
+ if(e.ctrlKey) {  // 2016-01-04
+   GM_setClipboard(sc.textContent);
+   window.status = 'CSS copied to clipboard';
+   return;
+ }
  if(isBeauty()!=0) return;
  if(!( highlighted && tc && tc === sc.textContent )){
  tc =  sc.textContent;
@@ -185,25 +192,22 @@ function insAfter(n,e){
 function insBefore(n,e){
    return e.parentNode.insertBefore(n,e);
 }
-// create elmenent: 
-// cE( tag, {id:'iD', className:'cN',..}, {click: onClick,..}, 'html' } )
-function cE(t, atAr, evLs, html) {
+function cE(t, aA, eL, ht) {
  var n = document.createElement(t);
- if(atAr) for (var at in atAr) 
-   if(atAr.hasOwnProperty(at)) n.setAttribute(at, atAr[at]);
- if(evLs) for(var ev in evLs)
-   if(evLs.hasOwnProperty(ev)) n.addEventListener(ev, evLs[ev]);
- if(html) n.innerHTML = html;
+ for (var at in aA) 
+	  if(aA.hasOwnProperty(at)) n.setAttribute(at, aA[at]);
+ if(eL) n.addEventListener(eL[0], eL[1], eL[2]?true:false);
+ if(ht) n.innerHTML = ht;
  return n;
 }
 function sbclik(){
   if(!bt){
   vc = document.getElementById("stylish-code");
 	if(!vc) return;
-  var pz = cE('style',{type: "text/css"});
+  var pz = cE('style');
   pz.textContent = prismCSS;
   document.head.appendChild(pz);
-  bt=cE('div',{id: 'hiBeauty',title: 'Highlight'},{ click: hiBeauty },'');
+  bt=cE('div',{id: 'hiBeauty',title: 'Highlight'},['click', hiBeauty ],'');
   insBefore( bt, vc);
   vc = document.getElementById("view-code");
   }
