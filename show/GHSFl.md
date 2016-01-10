@@ -1,6 +1,6 @@
 ![pic](../res/github64.png) | **GitHub Sortable filelist** **[[`source`]](../src/GitHub_Sortable_Filelist.user.js)** **[[`Install`]](/../../raw/master/src/GitHub_Sortable_Filelist.user.js  "You must have GreaseMonkey installed")** 
 --- |-----  
-**description** | <li>appends sorting function to github directories <li>  reinstates conventional date/time format (switchable) <li> changes octicons for file extensions
+**description** | <i><li>appends sorting function to github directories <li>  reinstates conventional date/time format (switchable) <li> changes octicons for file extensions</i>
 
 =====
 
