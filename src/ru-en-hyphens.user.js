@@ -5,7 +5,7 @@
 // @license   MIT
 // @author    trespassersW
 // @source https://github.com/trespassersW/UserScripts/raw/master/src/ru-en-hyphens.user.js
-// @version 2015.01.11
+// @version 2016.01.11
 // @include        http://*
 // @include        https://*
 // @include        file://*
