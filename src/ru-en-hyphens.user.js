@@ -1,8 +1,11 @@
 ﻿// ==UserScript==
-// @name           ru-en-hyphens
+// @name      ru-en-hyphens
 // @namespace trespassersW
-// @author    trespassersW
 // @description пере-нос слов / hyphen-ation
+// @license   MIT
+// @author    trespassersW
+// @source https://github.com/trespassersW/UserScripts/raw/master/src/ru-en-hyphens.user.js
+// @version 2015.01.11
 // @include        http://*
 // @include        https://*
 // @include        file://*
@@ -10,8 +13,6 @@
 // @grant GM_registerMenuCommand
 // @grant GM_setValue
 // @grant GM_getValue
-// @source https://github.com/trespassersW/UserScripts/raw/master/src/ru-en-hyphens-global.user.js
-// @version 2015.01.11
 // @run-at document-start
 // ==/UserScript==
 /*================
@@ -23,10 +24,10 @@
 необходимый для включения модуля расстановки переносов.
 ==================*/
 
-"use strict";
+//"use strict";
 
 var defaultLanguage=''; //'ru' 'en'
-const ye='е'; //'\u0435';
+var ye='е'; //'\u0435';
 
 function stickStyle(css){
  var s=document.createElement("style"); s.type="text/css";
@@ -35,29 +36,25 @@ function stickStyle(css){
 }
 var Id='ruEnHyhpens';
 window[Id]=stickStyle(
-'div,p,li,td, dd\
-{\
--moz-hyphens: auto;\
--webkit-hyphens: auto;\
--hyphens: auto;\
-}'+
-'h1,h2,h3,h4,th,\
-[class*="button"],[class*="menu"],[id*="button"],[id*="menu"]\
-,[class*="button"] *,[class*="menu"] *,[id*="button"] *,[id*="menu"] *\
-,[class^="b-head__layout-column"] *'+ //yandex
-'{\
--moz-hyphens: none !important;\
--webkit-hyphens: none !important;\
--hyphens: none !important\
-}'
+'div,p,li,td, dd{-moz-hyphens: auto;-webkit-hyphens: auto;-hyphens: auto;}'+
+'h1,h2,h3,h4,th,'+
+'[class*="button"],[class*="menu"],[id*="button"],[id*="menu"]'+
+',[class*="button"] *,[class*="menu"] *,[id*="button"] *,[id*="menu"] *'+
+',[class^="b-head__layout-column"] *'+ //yandex
+'{'+
+'-moz-hyphens: none !important;'+
+'-webkit-hyphens: none !important;'+
+'-hyphens: none !important'+
+'}'
 );
 window[Id].disabled = !!GM_getValue(Id,false);
-//console.log('hyphens now '+(window[Id].disabled?'OFF':'ON'))
 GM_registerMenuCommand('hyphens '+
 ((window[Id].disabled = !!GM_getValue(Id,false))?'on/OFF':'off/ON'),
 function(){
   GM_setValue(Id,window[Id].disabled=!window[Id].disabled);
-  window.status='ru-en-hyphens '+(window[Id].disabled?'OFF':'ON');
+  var st='ru-en-hyphens '+(window[Id].disabled?'OFF':'ON');
+  console.log(st);
+  try{window.status=st}catch(e){}
 } );
 /**/
 // 
@@ -99,7 +96,7 @@ function _log(s)
   if( h.match(/\#\.[0-9A-F]{2}/) )
    h =h.replace(/\.([0-9A-F]{2})/g,'%$1');
   h=_utf8_decode(unescape(h));
-  console.log(h+'\n'+s) 
+  console.info('hyphens'+(window[Id].disabled?'OFF ':'ON ')+h+'\n'+s);
 }
 function _utf8_decode (ut) {
     var s = [], i = 0, c, len = ut.length;
@@ -117,20 +114,20 @@ function _utf8_decode (ut) {
 /**/}
 
 //https://developer.mozilla.org/en/Character_Sets_Supported_by_Gecko
-const charsetZoo={
- 'ibm-855':'ru'
-,'iso-8859-5':'ru'
-,'iso-ir-111':'ru'
-,'koi8-r':'ru'
-,'maccyrillic':'ru'
-,'windows-1251':'ru'
-,'cp-866':'ru'
-,'koi8-u':'ru'
-,'ibm-850':'en'
-,'iso-8859-1':'en'
-,'iso-8859-15':'en'
-,'macroman':'en'
-,'windows-1252':'en'
+var charsetZoo={
+'ibm-855':'ru',
+'iso-8859-5':'ru',
+'iso-ir-111':'ru',
+'koi8-r':'ru',
+'maccyrillic':'ru',
+'windows-1251':'ru',
+'cp-866':'ru',
+'koi8-u':'ru',
+'ibm-850':'en',
+'iso-8859-1':'en',
+'iso-8859-15':'en',
+'macroman':'en',
+'windows-1252':'en'
 };
 
 /**/
