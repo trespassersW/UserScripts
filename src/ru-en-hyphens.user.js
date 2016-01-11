@@ -5,7 +5,7 @@
 // @license   MIT
 // @author    trespassersW
 // @source https://github.com/trespassersW/UserScripts/raw/master/src/ru-en-hyphens.user.js
-// @version 2016.01.11
+// @version 2016.01.11-1
 // @include        http://*
 // @include        https://*
 // @include        file://*
@@ -36,15 +36,17 @@ function stickStyle(css){
 }
 var Id='ruEnHyhpens';
 window[Id]=stickStyle(
-'div,p,li,td, dd{-moz-hyphens: auto;-webkit-hyphens: auto;-hyphens: auto;}'+
-'h1,h2,h3,h4,th,'+
-'[class*="button"],[class*="menu"],[id*="button"],[id*="menu"]'+
-',[class*="button"] *,[class*="menu"] *,[id*="button"] *,[id*="menu"] *'+
-',[class^="b-head__layout-column"] *'+ //yandex
-'{'+
-'-moz-hyphens: none !important;'+
-'-webkit-hyphens: none !important;'+
-'-hyphens: none !important'+
+'div,p,li,td, dd {\n'+
+'-moz-hyphens: auto; -webkit-hyphens: auto; hyphens: auto;\n'+
+'}\n'+
+'h1,h2,h3,h4,th,\n'+
+'[class*="button"],[class*="menu"],[id*="button"],[id*="menu"]\n'+
+',[class*="button"] *,[class*="menu"] *,[id*="button"] *,[id*="menu"] *\n'+
+',[class^="b-head__layout-column"] *\n'+ //yandex
+'{\n'+
+'-moz-hyphens: none !important;\n'+
+'-webkit-hyphens: none !important;\n'+
+'-hyphens: none !important\n'+
 '}'
 );
 window[Id].disabled = !!GM_getValue(Id,false);
