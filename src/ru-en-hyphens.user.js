@@ -51,7 +51,7 @@ window[Id]=stickStyle(
 );
 window[Id].disabled = !!GM_getValue(Id,false);
 GM_registerMenuCommand('hyphens '+
-((window[Id].disabled = !!GM_getValue(Id,false))?'on/OFF':'off/ON'),
+(window[Id].disabled?'on/OFF':'off/ON'),
 function(){
   GM_setValue(Id,window[Id].disabled=!window[Id].disabled);
   var st='ru-en-hyphens '+(window[Id].disabled?'OFF':'ON');
