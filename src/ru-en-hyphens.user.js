@@ -1,16 +1,19 @@
-// ==UserScript==
-// @name           ru-en-hyphens-global
-// @namespace *
+﻿// ==UserScript==
+// @name           ru-en-hyphens
+// @namespace trespassersW
+// @author    trespassersW
 // @description пере-нос слов / hyphen-ation
 // @include        http://*
 // @include        https://*
 // @include        file://*
 /* about:config -> greasemonkey.fileIsGreaseable <- true */
-// @author         trespassersW
-// @grant GM_addStyle
-// @source http://userscripts.org/scripts/show/118907
+// @grant GM_registerMenuCommand
+// @grant GM_setValue
+// @grant GM_getValue
+// @source https://github.com/trespassersW/UserScripts/raw/master/src/ru-en-hyphens-global.user.js
+// @version 2015.01.11
+// @run-at document-start
 // ==/UserScript==
-(function(){
 /*================
 Смотрим на заголовок страницы и пытаемся понять,
 на каком языке написан документ. Если в заголовке нет
@@ -20,39 +23,54 @@
 необходимый для включения модуля расстановки переносов.
 ==================*/
 
+"use strict";
+
 var defaultLanguage=''; //'ru' 'en'
 const ye='е'; //'\u0435';
 
-var d=document.body;
-if(!d) return;
-/* я бы посоветовал установить в браузере стиль Stylish'a 
- http://userstyles.org/styles/57064/ru-en-hyphens-global
- а следующий оператор закомментировать,
- поставив пробел между звёздочкой и слешем */
-//if(!scanCss('-moz-hyphens')) // Fforbidden!
-{
- GM_addStyle(
-  'div,p,li,td, dd{\
--moz-hyphens: auto\
--webkit-hyphens:\
+function stickStyle(css){
+ var s=document.createElement("style"); s.type="text/css";
+ s.appendChild(document.createTextNode(css));
+ return (document.head||document.documentElement).appendChild(s);
+}
+var Id='ruEnHyhpens';
+window[Id]=stickStyle(
+'div,p,li,td, dd\
+{\
+-moz-hyphens: auto;\
+-webkit-hyphens: auto;\
 -hyphens: auto;\
-}'
- +'h1,h2,h3,h4,th,'
- +'[class*="button"],[class*="menu"],[id*="button"],[id*="menu"]'
- +',[class*="button"] *,[class*="menu"] *,[id*="button"] *,[id*="menu"] *'
-+',[class^="b-head__layout-column"] * ' //yandex
-+'{-moz-hyphens: none !important;\
+}'+
+'h1,h2,h3,h4,th,\
+[class*="button"],[class*="menu"],[id*="button"],[id*="menu"]\
+,[class*="button"] *,[class*="menu"] *,[id*="button"] *,[id*="menu"] *\
+,[class^="b-head__layout-column"] *'+ //yandex
+'{\
+-moz-hyphens: none !important;\
 -webkit-hyphens: none !important;\
-hyphens: none !important\
+-hyphens: none !important\
 }'
 );
-}
+window[Id].disabled = !!GM_getValue(Id,false);
+//console.log('hyphens now '+(window[Id].disabled?'OFF':'ON'))
+GM_registerMenuCommand('hyphens '+
+((window[Id].disabled = !!GM_getValue(Id,false))?'on/OFF':'off/ON'),
+function(){
+  GM_setValue(Id,window[Id].disabled=!window[Id].disabled);
+  window.status='ru-en-hyphens '+(window[Id].disabled?'OFF':'ON');
+} );
 /**/
 // 
+
+window.addEventListener('DOMContentLoaded',
+function(){
+var d=document.body;
+if(!d) return;
+
 function metaCharset(){
  var d=document.head;
  if(!d) {_log('headless'); return'x3'};
- meta=d.getElementsByTagName('meta');
+ var meta=d.getElementsByTagName('meta');
  var re=/charset\s*=\s*([a-zA-Z0-9\-]+)/i;
  for (var i=0; i< meta.length; i++){
   var cont=meta[i].content;
@@ -115,19 +133,6 @@ const charsetZoo={
 ,'windows-1252':'en'
 };
 
-function scanCss(txt){
- var  ds=document.styleSheets;
- if(!ds) return '';
- for(var i=0, li=ds.length; i<li; i++){
-    var dr=ds[i].cssRules;
-    if (!dr) continue;
-    for(var j=0, lj=dr.length; j<lj; j++){
-     if(dr[j].cssText.indexOf(txt)>=0)
-      return dr[j].cssText;
-    }
-  }  return null;
-}
-
 /**/
  d=d.parentNode; 
  var lg;
@@ -161,4 +166,4 @@ function scanCss(txt){
  _log('analyse='+lg);
  return;
 
-})();
+});

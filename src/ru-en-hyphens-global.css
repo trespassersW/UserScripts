@@ -6,11 +6,17 @@
 
 {
  div,p, li, td, dd
-{-moz-hyphens: auto  }
+{-moz-hyphens: auto;
+ -webkit-hyphens: auto;
+ -hyphens: auto;
+}
 /**/
  [class*="button"],[class*="menu"],[id*="button"],[id*="menu"] 
 ,[class*="button"] *,[class*="menu"] *,[id*="button"] *,[id*="menu"] *
 ,[class^="b-head__layout-column"] * 
-{-moz-hyphens: none !important}
+{-moz-hyphens: none !important;
+ -webkit-hyphens: none !important;
+ -hyphens: none !important 
+}
 }
 /**/
