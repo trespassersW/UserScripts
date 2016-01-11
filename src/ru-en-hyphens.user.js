@@ -46,7 +46,7 @@ window[Id]=stickStyle(
 '{\n'+
 '-moz-hyphens: none !important;\n'+
 '-webkit-hyphens: none !important;\n'+
-'-hyphens: none !important\n'+
+'hyphens: none !important\n'+
 '}'
 );
 window[Id].disabled = !!GM_getValue(Id,false);
