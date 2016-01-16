@@ -12,7 +12,7 @@
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
 // @version 16.01.16.1
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 16.01.16.0 + alternative translation
+// 16.01.16.1 + alternative translation
 // 4.1.02 2016-01-03 * left-click only
 // 4.1.01 2015-12-17 * changes in translate.google API
 // 3.9.50 2015-10-17 + multi-sentence; GM_menu item
