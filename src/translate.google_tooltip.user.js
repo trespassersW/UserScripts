@@ -10,8 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 16.01.16.1
+// @version 16.01.17
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 16.01.17   * tiny fixes
 // 16.01.16.1 + alternative translation
 // 4.1.02 2016-01-03 * left-click only
 // 4.1.01 2015-12-17 * changes in translate.google API
@@ -27,24 +28,17 @@
 //  + TTS: alt-select text inside tooltip and shift-click language icon below
 //  * From<->To buttons fix; * err handler
 // 3.0.0  - national flags icons -- from www.senojflags.com
-// 2.3
-//  - new editable 'source text' field
-// 2.2.2 
-//  - backward translation - select text inside tooltip and click the icon under your selection.
-// 2.2.1
-//  - Ctrl-Alt-click removes item from the history of translations
+// 2.3  - new editable 'source text' field
+// 2.2.2  - backward translation - select text inside tooltip and click the icon under your selection.
+// 2.2.1  - Ctrl-Alt-click removes item from the history of translations
 //  - Ability to change translation in the history -
 //    select desired translation in the tooltip window using ctrl or alt -
 //    which one is checked in your settings - then click on the icon below the selection.
-// 2.2 
-//  - history of translations 
-// 2.1.2
-//  - Selected text is fetched in the moment when you hover over the icon.
+// 2.2  - history of translations 
+// 2.1.2 - Selected text is fetched in the moment when you hover over the icon.
 //    So, you can select a few letters, then adjust your selection using shift + arrows. 
-// 2.0.0d
-// - native GT languages list
-// 2.0.0c 
-// Alt key option added
+// 2.0.0d - native GT languages list
+// 2.0.0c Alt key option added
 // If something goes wrong:
 // Tools->SQLite manager-> Database-> Connect_database->
 //  %YourBrowserProfile%\gm_scripts\translate.google_tooltip.db ->
@@ -92,7 +86,7 @@ var llii=0, _log = function(){ /* * /
 /* */
 },_i=function(){};
 //_log=console.log.bind(console);
-var _i=console.info.bind(console);
+_i=console.info.bind(console);
 _i("tgtt..");
 var URL='*'; var tURL;
 var GT_tl='auto';
@@ -105,7 +99,6 @@ var senop="https://cdn.rawgit.com",
  senoj=senop+seno+senox,
  senojflags = [seno, "http://lh/Flags/" ],
  senoext=".png";
-;
 //
 
 var res_dict='gt-res-dict'; //'gt_res_dict';
@@ -131,12 +124,13 @@ t:  ['#000'   ,'#000'    ,'#000'   ,'#000'   ,'#eec'   ,'#000'   ,'#000'   ], //
 l:  ['#047'   ,'#047'    ,'#047'   ,'#052'   ,'#7CF'   ,'#047'   ,'#670000'], // links
 g:  ['#404040','#404040' ,'#404040','#404040','#ccb'   ,'#404040','#404040']  // greyed txt
 };
+
 var BG={
 t:  ["yellow" ,"grey"    ,"blue"   ,"green"  ,"dark"   ,"striped", "pink"  ], // titles
 C:  ['#FFFFE1','#D1D1D1' ,'#D3ECEC','#C4FFC4','#333'  , // bg Color
-    _G+'(-45deg, #DDD, #AAA )'    ,'#FFE6E6'],
+    _G+'(-45deg, #DDD, #AAA )'    ,'#FFE6E6'], /* */
 A:  ['#DFDFAE','#BBB'    ,'#9ED4D5','#82f381'  ,'#666'  , // bg Color 4 alt tran
-     _G+'(45deg, #DDD, #AAA )'    ,'#FFCBCC'],
+     _G+'(45deg, #DDD, #AAA )'    ,'#FFCBCC'],/* */
 T:  [_G+"(to right,#FFFFE1,#DDDDAA)", _G+"(to right,#D1D1D1,#A0A097)", // buttons
      _G+"(to right,#D3ECED,#8CCCCE)", _G+"(to right,#C4FFC4,#6BEF69)",
      _G+"(to right,#777,#373737)"   , _G+"(to right,#CCC, #888)",
@@ -655,13 +649,14 @@ function extractResult(html){
   tx + '</div>';
  // dR.childNodes[0].setAttribute('href',currentURL); //<a href
  // dR.childNodes[0].setAttribute('title',deURI(currentURL,"&text="));
-  dR.style.textAlign = rtl_langs.indexOf(GT_tl) < 0? 'left':'right';
-  dR.style.direction = rtl_langs.indexOf(GT_tl) < 0? 'ltr' :  'rtl';
-  dR.lang=GT_tl;
+ setTxtDir(dR,GT_tl);
   dict();
-
 }
-
+function setTxtDir(dR,tl){
+  dR.style.textAlign = rtl_langs.indexOf(tl) < 0? 'left':'right';
+  dR.style.direction = rtl_langs.indexOf(tl) < 0? 'ltr' :  'rtl';
+  dR.lang=tl;
+}
 function getSelection(t){
 	var txt = '';
 	//get selected text
@@ -783,7 +778,7 @@ function options(evt){
      (ii==0?'margin-left:6px' :'')
      }, null,'&nbsp;');
      b.paletteN=ii;
-     b.addEventListener('click',bgClick,false);; 
+     b.addEventListener('click',bgClick,false); 
     }
 		//save
     var oS=
@@ -875,7 +870,7 @@ try{
      tr+='<li>'+ tx + '</li><li class=gtpcmmt>'+sx+'</l></ul></span> ';
      sp=' ';
     }
-  }catch(e){console.warn(e+'\nBAD RESP\n'+txr); throw 'BAD RESP!!1';break};
+  }catch(e){console.warn(e+'\nBAD RESP\n'+txr); throw 'BAD RESP!!1';};
  }
  
  if(!txr) {
@@ -887,15 +882,16 @@ try{
   txr=txr.replace(puRE,"$1"); 
   dR.childNodes[0].innerHTML=tr;
   dR.childNodes[0].addEventListener('click',altListClick,false);
-  dR.style.textAlign = rtl_langs.indexOf(GT_tl) < 0? 'left':'right';
-  dR.style.direction = rtl_langs.indexOf(GT_tl) < 0? 'ltr' :  'rtl';
+  var LtR=rtl_langs.indexOf(gt_tl)<0;
+  dR.style.textAlign = LtR? 'left':'right';
+  dR.style.direction = LtR? 'ltr' :  'rtl';
   dR.lang=GT_tl;
   addHistory(txtSel,txr);
   killId('gtptxtClip');
   addEl(getId('divDic'),'img',
   {id:'gtptxtClip',src: imgClip,style:
-  'position: absolute; right: 1px; top:0; cursor:pointer',
-  title: 'copy translation'
+  'position:absolute;right:1px;top:0;cursor:pointer',
+  title: 'copy translation','z-index':'100505'
   },
   ['click',txtClip],'');
   
@@ -912,8 +908,8 @@ try{
      var showT = 'gtp-trans gtp-hide',showI = "&raquo;&raquo;"
      if(GM_getValue('showTrans',false) === true)
       showT = 'gtp-trans gtp-block', showI = "&laquo;&laquo;"
-     for(var i=0,il=da.length; i<il; i++){
-       var tr=addEl(dB,'tr');
+     for( i=0,il=da.length; i<il; i++){
+       tr=addEl(dB,'tr');
        addEl(tr,'td',{'class': 'gtp-pos'}, null, da[i][0]);
        for(var j=0,jl=da[i][2].length; j<jl; j++){
         tr=addEl(dB,'tr');
@@ -1011,7 +1007,7 @@ function source(){
          +(sourceBH+1)+"em;"
  }, null, sT),
  getId('divBottom');
- var sL=getId('sourceLink');
+ sL=getId('sourceLink');
  sL.innerHTML = 'Source';
  sL.className= 'gootransbutt gootranslink gtlActive';
  sL.title = 'Hide source';
@@ -1049,7 +1045,7 @@ function history(){
    insAfter(divHist,getId('divSourceshow'));
   else
    insAfter(divHist,getId('divResult'));
-  var hL=getId('historyLink')
+  hL=getId('historyLink')
 //  hl.textContent = 'X';
   hL.title= 'Hide history';
   hL.innerHTML = 'History'; hL.className = 'gootransbutt gootranslink gtlActive';
@@ -1445,7 +1441,7 @@ function css(n){
   _log('cssS:'+i,BG.C[i]);
   window.gttpCSS=
 stickStyle(
-'#divResult {overflow: visible !important; padding:3px !important; margin: 0 0 3px 0 !important; '+
+'#divResult {overflow: visible !important; padding:3px !important; margin: 0 5px 3px 0 !important; '+
 'position: relative; z-index: auto !important;}'+
 '#gtp_dict {max-height: 480px !important; overflow: auto !important;}'+
 '#divResult table *{ line-height: 0.9 !important}'+
@@ -1475,6 +1471,7 @@ font: small normal Tahoma,sans-serif !important;'+
  #divDic a.gootranslink:active\
  {color:'+FG.l[i]+'!important; text-decoration: none !important;}' +
 '#gtp_dict table{background:'+BG.C[i]+'!important;}'+
+'#gtp_dict tbody {background: transparent !important;}'+
 '#gtp_dict tr {background:'+BG.H[i]+'!important;line-height:1;}'+
 '#gtp_dict tr>td{font-size:1em !important; line-height:1!important;\
  background:transparent!important;'+
@@ -1539,7 +1536,8 @@ background:'+ BG.C[i] +'!important;}'+
  z-index:100500 !important;\
  margin-right: auto; margin-left: auto;\
  overflow: visible!important;\
- display: block; text-align: left;\
+ display: block;\
+ color:'+FG.t[i]+'!important;\
 }\
 \
 #gdptrantxt  >span { \
@@ -1548,7 +1546,7 @@ background:'+ BG.C[i] +'!important;}'+
  display: inline-block;\
  cursor: default;\
 }\
-#gdptrantxt  >i {\
+#gdptrantxt  i {\
  font-style: normal !important;\
  padding-right: .5em\
 }\
@@ -1557,7 +1555,6 @@ background:'+ BG.C[i] +'!important;}'+
  visibility: hidden;\
  position: absolute;\
  z-index:100500 !important;\
- text-align: left;\
   color: '+FG.l[i]+'!important;\
  list-style: none none outside;\
  bottom: auto !important; top: 0 !important;\
@@ -1586,8 +1583,9 @@ background:'+ BG.C[i] +'!important;}'+
  left: 0 !important; right: auto !important;\
  border-radius: 0 5px 5px 5px !important;\
 }\
-#gdptrantxt >span  ul >li {\
+#gdptrantxt >span  ul li {\
  white-space: nowrap;\
+ color:'+FG.l[i]+'!important;\
 }\
 #gdptrantxt >span  ul li:hover {\
  background-color:'+BG.E[i]+'!important;\
