@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 16.01.17
+// @version 16.01.17-2
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 16.01.17   * tiny fixes
+// 16.01.17-2 *+ translation from input/textarea fields
 // 16.01.16.1 + alternative translation
 // 4.1.02 2016-01-03 * left-click only
 // 4.1.01 2015-12-17 * changes in translate.google API
@@ -210,7 +210,7 @@ function useClick(e){
    history();
   }
 }
-var last_tl, last_sl;
+var last_tl, last_sl,_l_="/";
 function backLookup(e){
     if(e.shiftKey || e.ctrlKey) { 
     noMup=1;
@@ -219,7 +219,7 @@ function backLookup(e){
     }
     killId('divUse');
     gtRequest(txtSel,gt_sl,gt_tl);
-   	currentURL = GTurl +  "langpair=" + gt_sl + "|" + gt_tl + "&text=" + escAp(txtSel);
+   	currentURL = GTurl +  "/" + gt_sl + _l_ + gt_tl + _l_ + escAp(txtSel);
 }
 //GET https://translate.google.com/?langpair=en|ru&text=Varnish
 //POST https://translate.google.com/translate_a/t?client=t&hl=ru&sl=en&tl=ru&text=Varnish
@@ -232,7 +232,7 @@ function forwLookup(e){
     killId('divUse');
     var t=gt_tl; gt_tl=gt_sl; gt_sl=t;
     gtRequest(txtSel,gt_sl,gt_tl);
-   	currentURL = GTurl +  "langpair=" + gt_sl + "|" + gt_tl + "&text=" + escAp(txtSel);
+   	currentURL = GTurl +  "#" + gt_sl + _l_ + gt_tl + _l_ + escAp(txtSel);
 }
  var Gctrl, Galt;
  var sayTip="\n[shift / ctrl] listen (";
@@ -479,7 +479,7 @@ function squashTxt(t,n){
 function gtRequest(txt,s,t){
   var etxt = squashTxt(txt);
   // !!! 015-12-17
-  etxt=GTurl + "langpair="	+ s + "|" + t + "&text=" + etxt;
+  etxt=GTurl + "#"	+ s + _l_ + t + _l_ + etxt;
   currentURL = etxt ;
   if( 0 || !((s==last_sl && t==last_tl) || (s==last_tl && t==last_sl)) || (divExtract=='')){ // !!! 015-12-17
     //_log(s+c+last_sl+ '  '+t+c+last_tl + '  '+ divExtract );
@@ -555,7 +555,7 @@ function histLookup(e){
     history();
     return;
   }
-  var lang = ht[ix][2].match(/([a-zA-Z-]+)\|([a-zA-Z-]+)/);
+  var lang = ht[ix][2].match(/([a-zA-Z-]+)[\|\/]([a-zA-Z-]+)/);
   gt_sl=lang[1]; gt_tl=lang[2];
   txtSel = txt; 
 	getId('divResult').innerHTML = 'Loading...'
@@ -587,7 +587,8 @@ function badResponce(html,e){
 }
 function goGoogle(e){
   e.preventDefault(), e.stopPropagation();
-  var q=GTurl + "langpair="	+ gt_sl + "|" + gt_tl + "&text=" + squashTxt(txtSel,12);
+//  var q=GTurl + "langpair="	+ last_sl + "|" + last_tl + "&text=" + squashTxt(txtSel,12);
+   var q=GTurl + "#"	+ last_sl + _l_ + last_tl + _l_ + squashTxt(txtSel,22);
  GM_openInTab(q);
 }
 var ex_sl , ex_tl;
@@ -597,7 +598,7 @@ function extractResult(html){
   if(!html2){ // too many lettters!!!11
     badResponce(html);   return;
   }
-	  html2 = html2[1].replace(/\<script[^\<]+\<\/script\>/ig, '');//remove script tags...
+	  html2 = html2[1].replace(/\<script[^\<]+\<\/script\>/g, '');//remove script tags...
 	  killId('divExtract');
     divExtract = (new DOMParser()).parseFromString(html2, "text/html");
 
@@ -659,18 +660,15 @@ function setTxtDir(dR,tl){
 }
 function getSelection(t){
 	var txt = '';
-	//get selected text
 	if (window.getSelection){
 		txt = window.getSelection();
-	}
-	else if (document.getSelection)	{
+	}else if (document.getSelection)	{
 		txt = document.getSelection();
-	}
-	else if (document.selection)	{
+	}else if (document.selection)	{
 		txt = document.selection.createRange().text;
-	}
-  inTextArea= ( t&& t.type=='textarea' ) ? t : null
-  if(inTextArea){
+	} 
+  inTextArea= ( t&& t.type&&  (/^(text|search)/i).test(t.type)) ? t : null;
+  if(inTextArea){ 
    txt=t.value.substr(t.selectionStart,t.selectionEnd-t.selectionStart);
   }
 	return ltAmp(trim(txt));
@@ -1102,7 +1100,8 @@ function addHistory(src,trt){
  var st=trim(src+''); var tt = trim(trt+'');
  var wc = (st.split(' ')).length;
  if(wc>maxWC) return;
- var lang=currentURL.match(/langpair=([a-zA-Z-\|]+)/)[1];
+ //var lang=currentURL.match(/langpair=([a-zA-Z-\|]+)/)[1];
+  var lang=currentURL.match(/\?\#([a-zA-Z-]+[\|\/][a-zA-Z-]+)/)[1];
   var ix=-1;  // find word in hist
  for(var i=0, l=ht.length; i<l; i++)
     if(st==ht[i][0]){ ix=i; break; }
@@ -1548,7 +1547,6 @@ background:'+ BG.C[i] +'!important;}'+
 }\
 #gdptrantxt  i {\
  font-style: normal !important;\
- padding-right: .5em\
 }\
 #gdptrantxt  >span >ul {\
  display: block; \
