@@ -3,8 +3,8 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 15.11.19
-// 15.11.19 *  fix
+// @version 16.01.18
+// 16.01.18 *  works again in Chrome
 // 15.08.12 ++ octicons for file extensions
 // 15.08.07  + case-insensitive sorting
 // 15.05.07  sorting is now faster
@@ -432,12 +432,12 @@ function doSort(t){
  for( i=0; i<tl; i++) 
    TB.appendChild(tb[i]);
   setC(n);
- gitDir1(0);
+ gitDir(0);
 }
 
 function onClik(e){doSort(e.target)}
 
-function gitDir1(x){
+function gitDir(x){
  if(x && document.querySelector('.fsort-butt')) {
   _l('gitDir'+x+ '- already'); return;
  }
@@ -478,9 +478,6 @@ function gitDir1(x){
   o.appendChild(clock);
 }
 
-function gitDir(){
- gitDir1(1);
-}
 
 catcher= D.querySelector('#js-repo-pjax-container');
 if(!catcher){  _l( "*GHSFL* err0r"); return; }
@@ -508,59 +505,27 @@ if(locStor && tt) try{
 css();
 dtStyle.disabled=(prefs.dtStyle===1);
 
-gitDir();
+gitDir(1);
 var target = catcher; //document.body; //D.querSelector('.file-wrap');
 var  MO = window.MutationObserver;
 if(!MO) MO= window.WebKitMutationObserver;
 if(!MO) return;
 var __started=0;
-var mutI=0;
+var mII=0,mI=0;;
 var  observer = new MO(function(mutations) {
-
- for(var m,t, ml=mutations.length, i=0; i<ml; i++) 
- {
-    m=mutations[i],t = m.target; 
-    if( m.type=="attributes")
-    {
-      if( t.nodeName == 'DIV' &&  
-          t.className == "file-wrap"
-        ){ 
-           gitDir(); 
-           return;
-         }
-        
-// patch for the very first page
-      if( t.nodeName=='TIME' ) 
-      {
-//_l('T'+mutI++,ml,' T:' +m.type,'N:'+t.nodeName ) ;
-        if( t.parentNode.parentNode.className=="age" )
-        {
-            if(!catcher.querySelector('.fsort-butt'))
-              gitDir(1); //chrome ?!11
-            setDateTime(1); 
-            __started=1;
-            return;
-        }
-        else continue;
-      }
-    }
-      
-    if( m.type=="childList" ) 
-    {
-       if( t.className=='age' ) 
-         {
-            if(!catcher.querySelector('.fsort-butt'))
-              gitDir(1); //chrome ?!11
-_l('C'+mutI++,ml,' T:' +m.type,'N:'+t.nodeName,'C:'+ t.className,t.querySelector('TIME').textContent) ;
-          setDateTime(1);
-          return;
-         }
-        else continue;
-     }
- }
+  var t=mutations[0].target;
+//mI++; _l('mut'+mI+'.'+mutations[0].target.nodeName);
+ var fc=document.getElementById('fsort-clock')
+ if(!fc){
+         gitDir(1);
+          __started=1;
+ return; }
+ if(!fc.parentNode.parentNode.querySelector('.fsort-time')){
+      setDateTime(1); 
+ return;}
 });
-
-observer.observe(D.body, { attributes: true, childList: true, subtree: true } );
+// D.body
+observer.observe(catcher, { attributes: true, childList: true, subtree: true } );
 /* attributes: true , childList: true, subtree: true,  
   characterData: true,  attributeOldValue:true,  characterDataOldValue:true
 */

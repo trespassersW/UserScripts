@@ -10,3 +10,4 @@
 
 * <small>15.08.07  + case-insensitive sorting </small>
 * <small>15.08.12  ++ octicons for file extensions</small>
+* <small>16.01.18  *  works again in Chrome
