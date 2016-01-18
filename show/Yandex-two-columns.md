@@ -14,15 +14,10 @@
 
 [![screenshot](../res/ya2col.jpg)](https://raw.githubusercontent.com/trespassersW/UserScripts/master/res/ya2col.jpg)
 
-=====
+-----
 
-При помощи пункта меню *Инструменты → Greasemonkey → Команды скриптов* можно изменить число колонок. <br>
-
+При помощи пункта меню *Инструменты → Greasemonkey* → **Команды скриптов** вы можете изменить число колонок. 
 <hr>
+• 2016-01-18 `*` абсоллютный заголовок <br> • 2015-11-19 `*` правая панель 
 
-2015-08-19 * исправления<br>
-2015-06-20 * правая панель<br>
-2014-07-22 * задний фон<br>
-
-<hr>
 [![C](http://i.creativecommons.org/l/by/3.0/80x15.png "copyleft")] (http://creativecommons.org/licenses/by/3.0/) © **Yandex-two-columns** by *trespassersW*
