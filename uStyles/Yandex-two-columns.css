@@ -1,6 +1,6 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
 /* 
-   2015-12-08 - горизонтальный скроллбар на некоторых страницах
+   2016-01-18 * абсоллютный заголовок
    2015-11-19 * правая панель
    2014-07-22 * задний фон
    2014-06-05 новый дизайн йандекса 
@@ -368,9 +368,8 @@ column-count: 2 ;
 column-width: 23vw !important;
 margin-left: 4px !important;
 }
-/* 15-12-08 */
-.audio-track, 
-.audio-playlist { margin-right: 0 !important; }
-
+.audio-track, .audio-playlist { margin-right: 0 !important; }
+/* 16-01-18 */
+.serp-header__wrapper{position:absolute!important;}
 /* dbg * / html *{border:thin solid red!important;}/* */
 }
