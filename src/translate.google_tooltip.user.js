@@ -10,7 +10,7 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 16.01.17-2
+// @version 16.01.18.0
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
 // 16.01.17-2 *+ translation from input/textarea fields
 // 16.01.16.1 + alternative translation
