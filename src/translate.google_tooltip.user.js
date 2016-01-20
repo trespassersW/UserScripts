@@ -10,9 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 16.01.20
+// @version 16.01.20.1
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 16.01.20   * a bunch of small hotfixes 
+// 16.01.20.0  * a bunch of small hotfixes 
 // 16.01.17-2 *+ translation from input/textarea fields
 // 16.01.16.1 + alternative translation
 // 4.1.02 2016-01-03 * left-click only
@@ -1095,7 +1095,7 @@ function addHistory(src,trt){
  var wc = (st.split(' ')).length;
  if(wc>maxWC) return;
  //var lang=currentURL.match(/langpair=([a-zA-Z-\|]+)/)[1];
-  var lang=currentURL.match(/\?\#([a-zA-Z-]+[\|\/][a-zA-Z-]+)/)[1];
+  var lang=last_sl+_l_+last_tl;
   var ix=-1;  // find word in hist
  for(var i=0, l=ht.length; i<l; i++)
     if(st==ht[i][0]){ ix=i; break; }
