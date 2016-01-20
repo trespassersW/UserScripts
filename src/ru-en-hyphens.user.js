@@ -4,8 +4,8 @@
 // @description пере-нос слов / hyphen-ation
 // @license   MIT
 // @author    trespassersW
-// @source https://github.com/trespassersW/UserScripts/raw/master/src/ru-en-hyphens.user.js
-// @version 2016.01.11-1
+// /source https://github.com/trespassersW/UserScripts/raw/master/src/ru-en-hyphens.user.js
+// @version 2016.01.20
 // @include        http://*
 // @include        https://*
 // @include        file://*
