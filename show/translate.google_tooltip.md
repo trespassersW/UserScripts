@@ -12,9 +12,10 @@ Also, you can run the script using Greasemonkey menu:<pre><i><b>Tools</b> → <b
 <hr>
 Script uses <a href="http://www.senojflags.com">Country flag</a> &nbsp; <a href=https://rawgit.com/trespassersW/UserScripts/master/Flags/index.html?gtrantoltip#><em><strong>images</strong></em></a> &nbsp; from <a href="http://www.senojflags.com">Flags of all Countries</a>
 <hr> 
-* v2016.01.16.1 `+` alternative translation
+* 16.01.20 * a bunch of small hotfixes
+* 16.01.16.1 `+` alternative translation
 * 3.7.2 2015-04-20 `*` TTS: <em>`alt`-select</em> text inside tooltip and <em>`[shift/ctrl]`-click</em> language icon below. <br>  :loudspeaker: [tts tips + 2015-10-31](./translate_tts_tips.md) 
-* 3.9.50 2015-10-17 + multi-sentence; GM_menu item
+
 <hr>
 
 <small>This is a distant descendant of lazyttrick's Google Translator Tooltip</small>

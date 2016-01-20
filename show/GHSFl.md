@@ -10,4 +10,4 @@
 
 * <small>15.08.07  + case-insensitive sorting </small>
 * <small>16.01.18  * works again in Chrome </small>
-* <small>16.01.20 * a bunch of small hotfixes </small>
+
