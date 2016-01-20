@@ -10,8 +10,9 @@
 // @include        file://*
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 16.01.18.0
+// @version 16.01.20
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 16.01.20   * a bunch of small hotfixes 
 // 16.01.17-2 *+ translation from input/textarea fields
 // 16.01.16.1 + alternative translation
 // 4.1.02 2016-01-03 * left-click only
@@ -55,6 +56,8 @@
 // @grant GM_xmlhttpRequest
 // @grant GM_registerMenuCommand
 // @grant GM_setClipboard
+// @connect-src translate.google.com
+// @connect-src cdn.rawgit.com
 // @icon  data:image/jpg;base64, R0lGODlhIAARALP/AAAAAP///xMYfAqf////Zv/qDuCeH8VmB8DAwAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAgALAAAAAAgABEAQASdEMlJgb00awkMKQZYjB8RBsE4AtLQvtt0sXHcEcT1pbxK0hsXRmYIGUUgA3DiQjQtssInRAjglMsa4ibtlqSGgECQymmaAwDYUhSFfKoQDQ3LdA6Hoh6qbW4sJHpFWTUAOEA3Vj1WZjF+HQU9X18oPxl0Wx4kXoFiZF1zMEJgbW8qJnAHoU4takocpW5IIISYGh1HRlh9hRZ4eIRaEQA7
 //
 // ==/UserScript==
@@ -481,8 +484,8 @@ function gtRequest(txt,s,t){
   // !!! 015-12-17
   etxt=GTurl + "#"	+ s + _l_ + t + _l_ + etxt;
   currentURL = etxt ;
-  if( 0 || !((s==last_sl && t==last_tl) || (s==last_tl && t==last_sl)) || (divExtract=='')){ // !!! 015-12-17
-    //_log(s+c+last_sl+ '  '+t+c+last_tl + '  '+ divExtract );
+ // if( 0 || !((s==last_sl && t==last_tl) || (s==last_tl && t==last_sl)) || (divExtract=='')){ // !!! 015-12-17
+  if(!divExtract){
     divExtract = '';
     Request(etxt);
   }else{
@@ -513,18 +516,11 @@ function Request(url,cb){
       data: Data,
       headers: Hdr,
 			onload: function(resp) {
-				try{
           if(cb)
            cb(resp.responseText)
           else
 					 extractResult(resp.responseText);
-				}catch(e){
-         if(getId('divResult')){
-          getId('divResult').innerHTML = 
-        '<a id="gttpErrRef" href="#">error processing response text:</a><br>'+e;
-         getId('gttpErrRef').href=URL.subsr(0,99);}
         }
-			}
 		});	
 }
 
@@ -574,8 +570,8 @@ function badResponce(html,e){
  var dr=getId('divResult')
  dr.innerHTML = '';
  var br=addEl(dr,'a',{'class':'gootranslink'},null,'Bad Google response- '+(e?e:'?!1'));
- br.href=URL.substr(0,100);
- var m=html.match(/\<title\>(.*?)\<\/title\>/);
+ br.href=currentURL.substr(0,100);
+ var m=html.match(/\<title\>[\s\S]*?\<\/title\>/);
  if(m && m[1])
   addEl(dr,'p',{},null,m[1]);
  //id="captcha"
@@ -751,6 +747,13 @@ function options(evt){
     style: "width:1em; ", title: "max # of words in phrase"});
 		addEl(dO,'span', null, null,' words');
 		d.value = maxWC;
+		//save
+    var oS=
+		addEl(dO,'span', {id:'gtp-save', 'class':'gootranslink gootransbutt',
+    title: "save changes"}, 
+    ['click', saveOptions], 'save');
+    if(!GM_getValue('from'))
+      saveIt();
 // source box params
 		addEl(dO,'br');
 		addEl(dO,'span', null, null,'Source box: &nbsp;');
@@ -778,13 +781,6 @@ function options(evt){
      b.paletteN=ii;
      b.addEventListener('click',bgClick,false); 
     }
-		//save
-    var oS=
-		addEl(dO,'div', {id:'gtp-save', 'class':'gootranslink gootransbutt',
-    title: "save changes"}, 
-    ['click', saveOptions], 'save');
-    if(!GM_getValue('from'))
-      saveIt();
     getId('optionsTo').className='gootransbutt gootranslink gtlActive';
 		//cancel
 	}
@@ -851,9 +847,11 @@ try{
  var punctRE=/^[\s\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]+$/;
 //translation
  var A= dA[5];
- if(A)
- for( sp='',sx='', tx='', txr="", tr="",j=0,jl=A.length; j<jl; j++){
-  try{
+ sp='',sx='', tx='', txr="", tr="";
+ try{ 
+ if(A) 
+ for( j=0,jl=A.length; j<jl; j++){
+    if( !(A[j][2] && A[j][2][0] )) continue;
     tx=A[j][2][0][0],sx=A[j][0];
     if((kl=A[j][2].length)<1) throw 'No Datta!!1';
 //    tx=ltAmp(tx);  sx=ltAmp(tx);
@@ -867,17 +865,16 @@ try{
      }
      tr+='<li>'+ tx + '</li><li class=gtpcmmt>'+sx+'</l></ul></span> ';
      sp=' ';
-    }
-  }catch(e){console.warn(e+'\nBAD RESP\n'+txr); throw 'BAD RESP!!1';};
- }
- 
- if(!txr) {
-  getId('divResult').innerHTML='Google returns nothing!'; return;
- }
-  var dR=getId('divResult');
+  }} //for
+  else // !A
+   tr=txr=dA[0][0][0];
+  }catch(e){console.warn(e+'\nBAD RESP\n'+txt); throw 'BAD RESP!!1';};
+  
   var puRE=/\s+([.,?!;:])/g;
   tr=tr.replace(puRE,"$1");
   txr=txr.replace(puRE,"$1"); 
+  if(!txr) { getId('divResult').innerHTML='Google returns nothing!'; return; }
+  var dR=getId('divResult');
   dR.childNodes[0].innerHTML=tr;
   dR.childNodes[0].addEventListener('click',altListClick,false);
   var LtR=rtl_langs.indexOf(gt_tl)<0;
@@ -934,10 +931,7 @@ try{
   if(!GM_getValue('histWc') && !getId('divOpt')) // no settings?
      options(); // show options
      
-} catch(e){
-   _log('errexDict: '+e+'\n'+txt.substr(0,100));
-   badResponce(txt,e);
-}
+} catch(e){   console.warn('errexDict: '+e+'\n'+txt);   badResponce(txt,e);}
 }
 //
 function onTimerDict(){
@@ -1454,6 +1448,7 @@ font-weight: normal!important;\
 font-stretch: normal!important;\
 letter-spacing: normal!important;\
 line-height: 1.1;\
+color:'+FG.t[i]+'\
 }'+
 '#divDic,#divSelflag {position: absolute; background:'+BG.C[i]+'!important; color:'+FG.t[i]+
 '!important; opacity: 1'+
@@ -1480,7 +1475,8 @@ font: small normal Tahoma,sans-serif !important;'+
 '#gtp_dict ol {padding: 0 .5em 0 0; margin-left: 0.2em;}'+
 '#gtp_dict li {list-style: square inside; display: list-item;}'+
 'div#gtp_dict tr>td {padding-left: .25em; vertical-align:top; border: none; color:'+FG.t[i]+'!important; }'+
-'#optSelLangFrom,#optSelLangTo {max-width: 150px; text-align: left !important; height: 1.5em;\
+'#optSelLangFrom,#optSelLangTo {max-width: 150px; text-align: left !important; \
+height:1.5em!important; min-height:1.5em!important;\
 }'+
 '#divDic input{vertical-align: baseline !important;}'+
 '#divDic input[type="checkbox"]{vertical-align: text-bottom !important;}'+
@@ -1529,14 +1525,13 @@ padding: 0 0 0 4px; margin: 0; border: none; border-top: 1px solid #AAA}' +
 '.gtp-hide {display: none}'+
 '.gtp-block {display: block}'+
 '#divTtsIfr{position: relative;padding: 0!important;margin:3px 0 0 0!important;\
-background:'+ BG.C[i] +'!important;}'+
+background:'+ BG.C[i] +'!important; color:'+FG.t[i]+'!important;}'+
 '#gdptrantxt {font-size: 1em !important; line-height: 1;\
  position: relative;\
  z-index:100500 !important;\
- margin-right: auto; margin-left: auto;\
+ margin: 0 auto 4px auto  !important;\
  overflow: visible!important;\
  display: block;\
- color:'+FG.t[i]+'!important;\
 }\
 \
 #gdptrantxt  >span { \
@@ -1646,8 +1641,9 @@ visibility: visible;\
 transition: visibility .5s linear .7s;\
 }\
 #divOpt #gtp-save{\
-position: absolute; right: 2px !important; bottom: -1.3em;\
-font-weight: bold; cursor: pointer; z-index: auto;\
+margin-left: 2.5em;\
+font-weight: bold; cursor: pointer;\
+display: inline-block;\
 z-index: 100511;\
 }\
 ');
