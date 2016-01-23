@@ -1,7 +1,7 @@
 @namespace url(http://www.w3.org/1999/xhtml);
 /* 
  userstyles.org/styles/63771/google-columnizer
- 2015-12-18 *  minor fixes
+ 2016-01-23 *  hotfix
  2015-08-07 +  encrypted.google.com
  2015-05-25 ** bg color, intervals
  2015-05-08 ** exclude google images
@@ -344,9 +344,8 @@ position: absolute; top: 110%; left: 0;  }
 #gsr ul.klcar { margin-left: 2em; }
 /* 150225 */ 
 body#gsr {overflow-y: auto !important;}
-/* 150421 */ 
+/* 160123 .gb_ga ,*/ 
 #gsr .hdtb-mn-hd {z-index: 22332 !important;}
-/* 150508 */ 
 #gsr #hdtb-msb .hdtb-mitem.hdtb-msel, #gsr #hdtb-msb .hdtb-mitem.hdtb-msel-pre {
     height: 33px !important;
 }
@@ -356,9 +355,7 @@ body#gsr {overflow-y: auto !important;}
  column-count: 2 !important; 
  line-height: 1.1 !important;
 }
-/* 151124 */ 
-#searchform .gb_ga.gb_g {display: none !important; visibility: hidden !important; }
+/* 151124 * / #searchform .gb_ga.gb_g {display: none !important; 
+/* */
 /* * /body div {border-left: 1px dotted red !important;}/* */
 }
-
-
