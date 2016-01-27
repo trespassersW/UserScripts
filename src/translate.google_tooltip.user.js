@@ -5,14 +5,12 @@
 // @copyright   trespassersW
 // @license     MIT
 // @description    Translates selected text into a `tooltip' via Google translate 
-// @include        http://*
-// @include        https://*
-// @include        file://*
+// @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 16.01.20.1
+// @version 16.01.27
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 16.01.20.0  * a bunch of small hotfixes 
+// 16.01.27   *  cosmetics
 // 16.01.17-2 *+ translation from input/textarea fields
 // 16.01.16.1 + alternative translation
 // 4.1.02 2016-01-03 * left-click only
@@ -884,7 +882,7 @@ try{
   addHistory(txtSel,txr);
   killId('gtptxtClip');
   addEl(getId('divDic'),'img',
-  {id:'gtptxtClip',src: imgClip,style:
+  {id:'gtptxtClip',src: imgClip,'class': 'gootransbutt', style:
   'position:absolute;right:1px;top:0;cursor:pointer',
   title: 'copy translation','z-index':'100505'
   },
@@ -979,14 +977,14 @@ function source(){
  GM_setValue('sourceShow',true);
  divSource= buildEl('form', {id:'divSourceshow'}, null, null);
 
+ var tS= txtSel + ' \u2192 ' + trim(txr);
  if(sT){
   var sTa= sT.split('\n'); 
-  var tS= txtSel + ' \u2192 ' + trim(txr);
   if(tS != sTa[0]){
    while(sTa.length >= sourceDP) sTa.pop(); 
    sT=  tS + '\n' + sTa.join('\n');
   }
- }else sT=txtSel;
+ }else sT=tS;
  if(!getId('imgSourcesave'))
  insAfter(
   buildEl('img',{id: 'imgSourcesave', title: 'save source', src: imgSave,
@@ -1434,12 +1432,12 @@ function css(n){
   _log('cssS:'+i,BG.C[i]);
   window.gttpCSS=
 stickStyle(
+'#divDic, #divDic div, #divDic span, #divDic a, #divDic img, #divLookup, #divUse  {padding: 0; margin:0; \
+width: auto;height: auto; border: none; border-radius: 0; background: none; box-shadow: none\}'+
 '#divResult {overflow: visible !important; padding:3px !important; margin: 0 5px 3px 0 !important; '+
 'position: relative; z-index: auto !important;}'+
 '#gtp_dict {max-height: 480px !important; overflow: auto !important;}'+
 '#divResult table *{ line-height: 0.9 !important}'+
-'#divDic, #divDic div,#divLookup, #divUse  {padding: 0; margin:0; \
-width: auto;height: auto; border: none; border-radius: 0; background: none;}'+
 '#divDic, #divDic *, #divSelflag, #divSelflag *{\
 font-family: Tahoma, sans-serif!important;\
 font-size: small!important;\
@@ -1492,18 +1490,18 @@ padding-bottom: 3px !important; margin-bottom: 4px!important;}'+
 cursor:pointer;}'+
 'div#optionsLink {display: inline; position: relative; margin-left: 1.5em; font-size:smaller !important; text-decoration:none !important;}'+
 '#divDic #optionsLink [id^="options"] {margin-right: 2px; padding-left: 2px;}'+
-'#divOpt {position: relative; padding: 5px;'+
+'#divDic #divOpt {position: relative; padding: 5px;'+
 'border-top: thin solid grey!important;}'+ 
 '#divLookup, #divOpt, #divBottom,#divSourcetext,#divHist,#divuse {direction: ltr !important;}'+
-'div#divDic #divHist {background:'+BG.C[i]+'!important;; position:relative; padding:5px; text-align:left !important;'+
+'#divDic #divHist {background:'+BG.C[i]+'!important;; position:relative; padding:5px; text-align:left !important;'+
 'border-top: thin solid grey!important; color:'+FG.t[i]+'!important;}'+ 
-'div#divResult #gtp_dict {background:'+BG.C[i]+'!important;color:'+FG.t[i]+'!important;\
+'#divResult #gtp_dict {background:'+BG.C[i]+'!important;color:'+FG.t[i]+'!important;\
  padding:3px!important; border-radius:3px;'+
 'margin-bottom: .1em!important; overflow-y:auto !important; overflow-x:hidden; font-size:small;}'+
-'#divOpt {background:'+BG.C[i]+'!important; position:relative; padding:5px; text-align:left !important;}'+
+'#divDic #divOpt {background:'+BG.C[i]+'!important; position:relative; padding:5px; text-align:left !important;}'+
 '#divLookup, #divUse {background-color:transparent !important; position:absolute;\
  padding: 3px; margin: 0;}'+
-'div#divDic>#divSourceshow {\
+'#divDic>#divSourceshow {\
 border: none; padding: 0 0 4px 0; margin: 0;}'+
 '#divSourceshow>#divSourcetext{ width:97%; height: 3em; line-height: 1.2; overflow: auto !important;\
 padding: 0 0 0 4px; margin: 0; border: none; border-top: 1px solid #AAA}' + 
@@ -1596,7 +1594,8 @@ if(-1 !== n) return;
 stickStyle(
 '#divDic, #divDic textarea, #divDic iframe {resize: both !important; }'+
 '#divDic *::'+(isChrome?'':moz)+'selection {background: #047 !important; color: #FC8 !important; }'+
-'#divUse img, #divDic img, #divLookup img {display: inline; width: auto; height: auto; }'+ 
+'#divUse img, #divDic img, #divLookup img {display: inline; width: auto; height: auto;\
+margin: 0; padding:0;}'+ 
 '#divTtsLnk:after{ content:url('+imgPlay+') }'+
 '#divTtsLnk {padding: 0 2px; margin: 0 3px 0 5px;}'+
 '#divTtsIfh {width: 100%;overflow-x:hidden;\
@@ -1604,7 +1603,8 @@ background-color: rgba(127,127,127,.25); padding: 3px 0;\
 }'+
 '#divResult, #divResult div, #divResult table, #divResult tr, #divResult tr td,\
 #divResult a, #divBottom, \
-#divOpt select, #divOpt input, .gootranslink\
+#divOpt select, #divOpt input, .gootranslink, \
+#divDic img, #divDic input, #divDic textarea\
 { padding:0 0 0 0; margin: 0 0 0 0; background: none repeat scroll 0 0 transparent;\
   border: none; line-height: 0.95; float: none}'+
 '#divOpt {line-height: 2.3 !important;}\
@@ -1645,6 +1645,11 @@ margin-left: 2.5em;\
 font-weight: bold; cursor: pointer;\
 display: inline-block;\
 z-index: 100511;\
+}\
+#divDic img:active {\
+-moz-transform: translateY(2px);\
+-webkit-transform: translateY(2px);\
+transform: translateY(2px);\
 }\
 ');
 }
