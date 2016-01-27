@@ -3,8 +3,8 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 16.01.27
-// 16.01.27 *  bugfix
+// @version 16.01.27.1
+// 16.01.27.1 * GH changes
 // 15.08.12 ++ octicons for file extensions
 // 15.08.07  + case-insensitive sorting
 // 15.05.07  sorting is now faster
@@ -258,7 +258,7 @@ function filext(x){
  return m[2].toLowerCase();
 }
 function setIcon(tr){
-  var xt,tc,ti=tr.querySelector('td.icon > span.octicon-file-text');
+  var xt,tc,ti=tr.querySelector('td.icon > .octicon-file-text');
   if(!ti) return;
   tc=tr.querySelector('td.content > span.css-truncate');
   if(!tc) return;
@@ -268,7 +268,10 @@ function setIcon(tr){
   if(!xt) return;
   xt=extList[xt];
   if(typeof xt === "undefined") return;
-  ti.className='octicon octicon-'+ extIcon[xt];
+  var tn= document.createElement('span');
+  tn.className='octicon octicon-'+ extIcon[xt];
+  ti.parentNode.replaceChild(tn, ti);
+  
   //_l('setIcon '+xt);
 }
 
@@ -309,11 +312,12 @@ function setDateTime(x){
 }
 
 function isDir(x){
- var c= TB.rows[x].cells[0].querySelector("span");
- if(c){
- if(c.className.indexOf("-directory")>0) return 0;
- if(c.className.indexOf("octicon-")>0) return -1;
- }
+ var c= TB.rows[x].cells[0].querySelector(".octicon"); //<svg> now!!!11
+ try{
+ c=c.getAttribute('class');
+ if(c.indexOf("-directory")>0) return 0;
+ if(c.indexOf("octicon-")>0) return -1;
+ } catch(e){ console.log(c,'n',e)};
  return 1;
 }
 function getCell(r,c,s,p){
