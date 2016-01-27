@@ -425,7 +425,7 @@ function doSort(t){
  for( i=0; i<tl; i++)
   ix.push(i);
  oClr();
-              var ms=new Date();
+              //var ms=new Date();
  sort_p(n);
  ix.sort(sort_fn);
  for( i=0; i<tl; i++) 
@@ -434,7 +434,7 @@ function doSort(t){
    TB.removeChild(TB.rows[i]);
  for( i=0; i<tl; i++) 
    TB.appendChild(tb[i]);
-              ms=(new Date())-ms;
+              //ms=(new Date())-ms;
               //console.info('sorted by '+ms+'ms');
   setC(n);
  gitDir(0);
