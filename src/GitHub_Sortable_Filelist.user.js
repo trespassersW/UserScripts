@@ -1,10 +1,10 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name        GitHub Sortable Filelist
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 16.01.18
-// 16.01.18 *  works again in Chrome
+// @version 16.01.27
+// 16.01.27 *  bugfix
 // 15.08.12 ++ octicons for file extensions
 // 15.08.07  + case-insensitive sorting
 // 15.05.07  sorting is now faster
@@ -310,8 +310,10 @@ function setDateTime(x){
 
 function isDir(x){
  var c= TB.rows[x].cells[0].querySelector("span");
+ if(c){
  if(c.className.indexOf("-directory")>0) return 0;
  if(c.className.indexOf("octicon-")>0) return -1;
+ }
  return 1;
 }
 function getCell(r,c,s,p){
@@ -423,6 +425,7 @@ function doSort(t){
  for( i=0; i<tl; i++)
   ix.push(i);
  oClr();
+              var ms=new Date();
  sort_p(n);
  ix.sort(sort_fn);
  for( i=0; i<tl; i++) 
@@ -431,6 +434,8 @@ function doSort(t){
    TB.removeChild(TB.rows[i]);
  for( i=0; i<tl; i++) 
    TB.appendChild(tb[i]);
+              ms=(new Date())-ms;
+              //console.info('sorted by '+ms+'ms');
   setC(n);
  gitDir(0);
 }
