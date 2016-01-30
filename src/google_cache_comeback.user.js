@@ -8,12 +8,12 @@
 // @include     https://webcache.googleusercontent.*
 // /homepageURL http://userscripts.org/scripts/show/156216
 // /updateURL https://userscripts.org/scripts/source/156216.meta.js
-// @version   2.014.0720
+// @version   2.016.0130
 // @grant GM_addStyle
 // @grant GM_log
 // @run-at document-start
+// 2016-01-30 * hotfix: li.g became div.g
 // 2014-07-20 run-at start + run-at end
-// 2013-06-14 2.2.4f cache link: fixed 'display' property  for logged-in user; share link hidden 
 // 2013-05-31 2.2.4 plain cache links; thanks to luckymouse[userstyles.org/styles/64844]
 // 2013-02-11 2.2.3 default: Esc shows gCache; cached/similar always visible. 
 // 2013-02-04 2.2.2 more  "run by ESC"  options
@@ -57,7 +57,7 @@ function rezultz(e){
  }
  if(e) e.preventDefault() , e.stopPropagation();
 try{
- var rez = Xels('//div[@id="search"]//li[@class="g"]');
+ var rez = Xels('//div[@id="search"]//div[@class="g"]');
  for(var i=0,li=rez.length; i< li; i++){
    var a=Xel('.//a',rez[i]);
    a.removeAttribute("onmousedown"); // it's not my funeral
