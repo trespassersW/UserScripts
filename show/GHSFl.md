@@ -9,5 +9,4 @@
 ===== 
 
 * <small>15.08.07  + case-insensitive sorting </small>
-* <small>16.01.18  * works again in Chrome </small>
-* <small>16.01.27.1 * GH changes</small>
+* <small>16.02.02 * GH changes -- embedded octicons font <br> you need to set <i>about:config → security.csp.enable</i> ← <b>false</b> </small>
