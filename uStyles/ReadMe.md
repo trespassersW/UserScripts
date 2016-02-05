@@ -24,7 +24,7 @@
 | **greyed.css** | [src](greyed.css) | dimmed FF  |
 | **highlight-visited.css** | [src](highlight-visited.css) | various patches  |
 | **userstyle-uncover-meta.css** | [src](userstyle-uncover-meta.css) | - shows hidden stylish data  |
-
+| **github_octicons.css** | [![src](stylish.png)](github_octicons.css) | - resurrects octicons font on github.com   |
 ------------
 
 
