@@ -1,5 +1,6 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
 /* 
+  2016-02-06 W3C Recommendation 10 February 2015
   2014 09-30 api.jquery.com
   2014 05 08 w3c selectors l4
   2014-03-29 kb.mozillazine.org
@@ -43,6 +44,7 @@ html body.ns-0 table tbody tr td#main div#globalWrapper div#bodyContent table#to
 ,div.wrapper > section >nav >ol.toc
 ,#bodyContent table#toc.toc
 ,[data-fill-with="table-of-contents"]
+,#respecContents
 { 
 position: fixed !important;
 display: block !important;
@@ -87,6 +89,7 @@ div#article-nav:hover
 ,div.wrapper > section >nav >ol.toc:hover
 ,#bodyContent table#toc.toc:hover
 ,[data-fill-with="table-of-contents"]:hover
+,#respecContents:hover
 {
 visibility: visible !important;
 right: 0 !important;
@@ -117,6 +120,7 @@ div#article-nav *
 ,div.wrapper > section >nav >ol.toc *
 ,#bodyContent table#toc.toc *
 ,[data-fill-with="table-of-contents"] .toc *
+,#respecContents
 {
 line-height: 100% !important;
 }/* */
@@ -137,6 +141,7 @@ body> ul.toc:first-of-type ul
 ,#bodyContent table#toc.toc ul
 ,#bodyContent table#toc.toc ol
 ,[data-fill-with="table-of-contents"] ul
+,#respecContents
 {
 padding: 2px  !important;
 display: block !important;
@@ -159,6 +164,7 @@ div#article-nav:hover:before
 ,div.wrapper > section >nav >ol.toc:hover:before 
 ,#bodyContent table#toc.toc:hover:before
 ,[data-fill-with="table-of-contents"]:hover:before
+,#respecContents:hover:before
 {  opacity: 0 !important }
 
 div#article-nav:hover 
@@ -177,6 +183,7 @@ body> ul.toc:first-of-type:hover
 ,h2[id$="contents"]+ol.toc:hover
 ,h2[id$="h2_toc"]+ul.toc:hover
 ,h2[id$="h2_toc"]+ol.toc:hover
+,#respecContents:hover
 {
 background-color: rgba(224,237,247,0.95)!important; 
 padding: 0.5em 1em !important; 
@@ -198,6 +205,7 @@ body h2[id$="contents"]:after
 ,body h2[id$="h2_toc"]:before
 ,nav > button#toc-toggle:after 
 ,nav > button#toc-toggle:before
+,#respecContents:before
 {
 content: "\a0 \21d8 \a0"
 }
@@ -216,6 +224,7 @@ div#article-nav:before
 ,div.wrapper > section >nav >ol.toc:before 
 ,#bodyContent table#toc.toc:before
 ,[data-fill-with="table-of-contents"]:before
+,#respecContents:before
 {
 position: fixed !important;
 background: transparent !important; 
