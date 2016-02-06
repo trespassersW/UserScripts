@@ -316,7 +316,7 @@ function setDateTime(x){
  var dt,dtm,dta,dtd,tc,m,now,t;
  var DT=D.querySelectorAll('td.age span.css-truncate time');
  _l('sDT',x?'refresh':'create');
- //dbg try{
+ try{
   now = new Date();
  for(var dl=DT.length, i=0; i<dl; i++){
   dta=DT[i].getAttribute('datetime');
@@ -344,8 +344,7 @@ function setDateTime(x){
   if(!x)
     setIcon(outerNode(DT[i],'TR'));
  }
- /* 150810 */
- // dbg // }catch(e){(console.log(e+'\n*GHSFL* wrong datetime'+x))}
+ }catch(e){(console.log(e+'\n*GHSFL* wrong datetime'+x))}
 }
 
 function isDir(x){
