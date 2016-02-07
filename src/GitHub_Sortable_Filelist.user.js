@@ -3,7 +3,8 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 16.02.06
+// @version 16.02.07
+// 16.02.07 * small changes
 // 16.02.06 * octicons as svg images
 // 15.08.12 ++ octicons for file extensions
 // 15.08.07  + case-insensitive sorting
@@ -13,7 +14,6 @@
 //  .8 sorting by file extention
 //  .7 date/time display mode switching
 // @created 2014-11-10
-// 
 // @author  trespassersW
 // @license MIT
 // @icon https://i.imgur.com/8buFLcs.png
@@ -54,7 +54,7 @@ var extIcon=[
 //10..........11.............12.............13.............14......
 ,"gear"     ,"triangle-right","ruby"        ,"info"       ,"device-camera"    
 //15..........16.............17.............18.............19......
-,"pencil"   ,"terminal"      ,"book"    
+,"pencil"   ,"terminal"      ,"book","device-camera-video","stop"
 ]
 var extList={ 
 md:0,
@@ -74,7 +74,9 @@ EmptyExt:13,
 jpg:14,jpeg:14,
 pl:15,java:15,jar:15,cs:15,
 sh:16,mak:16,cmd:16,bat:16,
-doc:17,rtf:17,djvu:17
+doc:17,rtf:17,djvu:17,
+avi:18,mkv:18,mpg:18,mpeg:18,vob:18,m2v:18,
+gitignore:19
 }
 
 /* 
@@ -98,8 +100,9 @@ info:'<svg class="octicon octicon-info" width="16" height="16"><path d="M6.3 5.6
 'device-camera':'<svg class="octicon octicon-device-camera" width="16" height="16"><path d="M15 3H7c0-0.55-0.45-1-1-1H2c-0.55 0-1 0.45-1 1-0.55 0-1 0.45-1 1v9c0 0.55 0.45 1 1 1h14c0.55 0 1-0.45 1-1V4c0-0.55-0.45-1-1-1zM6 5H2v-1h4v1z m4.5 7c-1.94 0-3.5-1.56-3.5-3.5s1.56-3.5 3.5-3.5 3.5 1.56 3.5 3.5-1.56 3.5-3.5 3.5z m2.5-3.5c0 1.38-1.13 2.5-2.5 2.5s-2.5-1.13-2.5-2.5 1.13-2.5 2.5-2.5 2.5 1.13 2.5 2.5z"/></svg>',
 pencil:'<svg class="octicon octicon-pencil" width="16" height="16"><path d="M0 12v3h3l8-8-3-3L0 12z m3 2H1V12h1v1h1v1z m10.3-9.3l-1.3 1.3-3-3 1.3-1.3c0.39-0.39 1.02-0.39 1.41 0l1.59 1.59c0.39 0.39 0.39 1.02 0 1.41z"/></svg>',
 terminal:'<svg class="octicon octicon-terminal" width="16" height="16"><path d="M7 10h4v1H7v-1z m-3 1l3-3-3-3-0.75 0.75 2.25 2.25-2.25 2.25 0.75 0.75z m10-8v10c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V3c0-0.55 0.45-1 1-1h12c0.55 0 1 0.45 1 1z m-1 0H1v10h12V3z"/></svg>',
-terminal:'<svg class="octicon octicon-terminal" width="16" height="16"><path d="M7 10h4v1H7v-1z m-3 1l3-3-3-3-0.75 0.75 2.25 2.25-2.25 2.25 0.75 0.75z m10-8v10c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V3c0-0.55 0.45-1 1-1h12c0.55 0 1 0.45 1 1z m-1 0H1v10h12V3z"/></svg>',
-book:'<svg class="octicon octicon-book" width="16" height="16"><path d="M2 5h4v1H2v-1z m0 3h4v-1H2v1z m0 2h4v-1H2v1z m11-5H9v1h4v-1z m0 2H9v1h4v-1z m0 2H9v1h4v-1z m2-6v9c0 0.55-0.45 1-1 1H8.5l-1 1-1-1H1c-0.55 0-1-0.45-1-1V3c0-0.55 0.45-1 1-1h5.5l1 1 1-1h5.5c0.55 0 1 0.45 1 1z m-8 0.5l-0.5-0.5H1v9h6V3.5z m7-0.5H8.5l-0.5 0.5v8.5h6V3z"/></svg>'
+book:'<svg class="octicon octicon-book" width="16" height="16"><path d="M2 5h4v1H2v-1z m0 3h4v-1H2v1z m0 2h4v-1H2v1z m11-5H9v1h4v-1z m0 2H9v1h4v-1z m0 2H9v1h4v-1z m2-6v9c0 0.55-0.45 1-1 1H8.5l-1 1-1-1H1c-0.55 0-1-0.45-1-1V3c0-0.55 0.45-1 1-1h5.5l1 1 1-1h5.5c0.55 0 1 0.45 1 1z m-8 0.5l-0.5-0.5H1v9h6V3.5z m7-0.5H8.5l-0.5 0.5v8.5h6V3z"/></svg>',
+'device-camera-video':'<svg class="octicon octicon-device-camera-video" width="16" height="16"><path d="M15.2 3.09L10 6.72V4c0-0.55-0.45-1-1-1H1c-0.55 0-1 0.45-1 1v9c0 0.55 0.45 1 1 1h8c0.55 0 1-0.45 1-1V10.28l5.2 3.63c0.33 0.23 0.8 0 0.8-0.41V3.5c0-0.41-0.47-0.64-0.8-0.41z"/></svg>',
+'stop':'<svg class="octicon octicon-stop" width="16" height="16"><path d="M10 1H4L0 5v6l4 4h6l4-4V5L10 1z m3 9.5L9.5 14H4.5L1 10.5V5.5l3.5-3.5h5l3.5 3.5v5zM6 4h2v5H6V4z m0 6h2v2H6V10z"/></svg>'
 }
 var svgUsed={};
 
