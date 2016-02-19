@@ -1,9 +1,7 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
 /* 
-   2016-01-18 * абсоллютный заголовок
-   2015-11-19 * правая панель
-   2014-07-22 * задний фон
-   2014-06-05 новый дизайн йандекса 
+   2016-02-19 * изменения в расположении боковых панелей 
+   2016-02-19 * абсоллютный заголовок
 */
 @-moz-document url-prefix("http://yandex.ru/yandsearch")
 ,regexp("https?://(www\\.)?yandex\\..+/(yand)?search.+")
@@ -50,7 +48,7 @@ border-radius: 16px 0px 16px 0px !important;
 position: absolute !important;
 /* */
 
-top: 390px !important;
+top: 169px !important;
 left: 0 !important; /* */
 right: auto !important; bottom: auto !important; /* */
 z-index: 247 !important;
@@ -105,7 +103,7 @@ content: "" !important;
 position: absolute !important;
 visibility: hidden !important;
 opacity: 1 !important;
-top:   390px !important;
+top:   169px !important;
 right: 0 !important; 
 left: auto !important; bottom: auto !important;
 min-height: 1.2em !important;
