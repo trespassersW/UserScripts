@@ -1,7 +1,7 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
 /* 
-   2016-02-19 * изменения в расположении боковых панелей 
-   2016-02-19 * абсоллютный заголовок
+   2016-02-21 * стрелочка на правой панели
+   2016-02-19 ? изменения в расположении боковых панелей 
 */
 @-moz-document url-prefix("http://yandex.ru/yandsearch")
 ,regexp("https?://(www\\.)?yandex\\..+/(yand)?search.+")
@@ -263,17 +263,17 @@ div.serp-block div.serp-item { /* 2015-07-20 */
 .content__left .region-change, .content__left .competitors
  { display: inline-block !important; padding-left: 2em !important;}
 /* 151119  .z-entity__content-right */
-.content__right  .serp-block_type_entity-search:before {
+.content__right  .z-entity-search:before {
 display: block!important;
 visibility: visible !important;
-position: absolute !important;top:0px!important; right:1px !important; 
-z-index: 2147 !important;
+position: absolute !important;top:1px!important; right:0 !important; 
+z-index: 214748 !important;
 /*content: "\21e9" */
 content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAOCAYAAAB6pd+uAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAABIUlEQVRIx+2WsUrDYBSFz0nFREgwoUueoFuRLllqCy6CCqKLoItrfQefwMlXcHNWRNGhTkbaoQVBAt0sgmRRG5A/4YfrUqQ4uAiBhJ71DodzOffjAiUXc/Qy2u3tCwCLcRzvRNHjVx6mC3mlC4J1n+QWAFSr1RUAYS5bza0q5KxXJbfalP0G5wHnFP1D9XrL8TzvREQesizrWpY1BgCtdYvksmEYm0mSHA8G3fdCUtR13T2SHZId0zTPfghTqRwB2CdJ27ZHAE4LWVGl1JWIvEwpejhD1AOSFJEPrfVNYW+w3797S9N0VUSef89EZKy1bobhdVT4T6bRWPMcx7kk2ZyGe1JKbfR6t6+ledVqtWDJ9/1zAM5kMtkdDu8/Mdf/9Q3ZjVsP7qiLvwAAAABJRU5ErkJggg==
 )
 !important;
 }
-.content__right:hover  .serp-block_type_entity-search:before{
+.content__right:hover  .z-entity-search:before{
 visibility: hidden !important;
 transition: all 0s linear 0.3s !important;
 -webkit-transition: all 0s linear 0.3s !important;
