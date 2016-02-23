@@ -6,18 +6,19 @@
 // @include        https://*
 // @include        file://*
 // ** about:config -> greasemonkey.fileIsGreaseable <- true
-// @version 15.04.15
+// @version 16.02.22
 // @license  MIT
-// @updated  2015.04.15
 // @released 2013-12-11
 // @run-at document-end
+// @grant GM_getValue
+// @grant GM_setValue
 // @grant unsafeWindow
 // ==/UserScript==
-/* 15.04.15 localStorage + unsafeWindow + ff37 + GM3.1 problems
+/* 
+ 16.02.22 [+] press Alt-Shift-0 twice to set starting Y-position for whole domain; [*] markers moved to GM_storage.
  * 13-12-12 click on msg removes all marks
  * 1.1 don't run in editable fields
 */
-
 (function(){ "use strict";
 if(top!=self || !document || !document.body ) return;
 var W = unsafeWindow || window; // localStorage doesn't live in sandbox?
@@ -36,11 +37,13 @@ var kKeys = {
  109: 0  /* opera */
 };
 var minus1="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1";
+var LH=location.hostname || "Ym", LHP=LH+location.pathname;
 
 function kNob(k){ return kNobs.charAt(k); }
 
 var U=undefined, D=window.document;
-function _L(s) { 0 && console.log(s) };
+var _L=  function() {};
+//_L=console.log.bind(console);
 
 var statMsg;
 function msg(t,k, y){
@@ -52,32 +55,15 @@ function msg(t,k, y){
  statMsg += t+ (noCoo ? "\u2262 ": "");
 }
 
-var locStor;
+var locStor,locStored;
 var noCoo;
 // see SQlite manager -> %FFpath%\webappstore.sqlite -> find -> key -> contains Ym#
 
-if(!locStor) try {
+try {
   locStor = W.localStorage;
-  locStor.getItem("Ym#");
-} catch(e){ locStor =null;  };
-
-if(!locStor) try {
-  noCoo="no cookies!!1";
-  locStor = W.sessionStorage;
-  locStor.getItem("Ym#");
-} catch(e){ locStor =null };
-
-if(!locStor && U===W.YmStorage){
-  noCoo= "cookies are disabled!!!11";
-  W.YmStorage= { 
-  setItem: function(k,v) {this.s[k]=v},
-  getItem: function(k) {return this.s[k]? this.s[k]: null},
-  removeItem: function(k) {this.s[k]=null},
-  s: {}
- };
- locStor=W.YmStorage;
-}
-
+  locStored=locStor.getItem("Ym#"+location.pathname);
+} catch(e){ locStor = locStored =null;  };
+  
 function pt(y) {
  try{
   y =Math.round(y*1000/(document.body.scrollHeight+1))/10;
@@ -89,14 +75,45 @@ var Ym;
 var pz;
 
 function ldYm(){
-  var s= locStor.getItem(Ym);
-  if(!s) s=minus1;
-  pz=s.split(",")
+  var s;
+  if(locStor && locStored){
+    pz=locStored.split(",");
+    svYm();
+    locStor.removeItem("Ym#"+location.pathname);
+    console.log('Ym: locS -> GM_S '+LHP);
+    locStor = locStored = null;
+  }
+  s=GM_getValue(Ym,null);
+  if(!s){ s=minus1;
+  }else try{
+    var y=JSON.parse(s);
+    s=y[LHP] || y[LH] || minus1;
+  }catch(e){console.log('ldYm: buggy data\n'+e)};
+  pz=s.split(",");
 }
 
-function svYm(){
- var s=pz.join(",");
- locStor.setItem(Ym,s)
+function svYm(d){
+ var y={},s=pz.join(",");
+ try{
+   y=JSON.parse(GM_getValue(Ym,'{}'));
+ }catch(e){console.log('svYm: buggy data\n'+e);}
+ if(!d) y[LHP]= s;
+ else{ //  marker for whole domain
+     y[LH]= s;
+ }
+ //_L((d?LH:LHP)+": saved "+s);
+ GM_setValue(Ym,JSON.stringify(y));
+}
+
+function rmYm(){
+ var y={};
+ try{
+   y=JSON.parse(GM_getValue(Ym,'{}'));
+ }catch(e){console.log('rmYm: buggy data\n'+e); y={}; }
+  if(y[LH]) delete y[LH],  _L("rmH: " +LH);
+  if(y[LHP]) delete y[LHP],  _L("rmHP: " +LHP);
+ GM_setValue(Ym,JSON.stringify(y));
+ pz=minus1.split(",");
 }
 
 function jumpY(k){
@@ -115,10 +132,12 @@ function jumpY(k){
 }
 
 function markY(k){
+ var d="";
+ if(k==1 && scrollY == pz[k] ) d="!";
  pz[k]=scrollY;
  if(k>=1)
-  svYm();
- msg("mark",k,pz[k]);
+  svYm(d);
+ msg("mark"+d,k,pz[k]);
  return 1;
 }
 
@@ -198,7 +217,7 @@ cursor:no-drop;\
 /* click removes all  */
 if(tipShowtime>0){
  sb.addEventListener("click",function (e) {
-  locStor.removeItem(Ym);
+  rmYm(); //locStor.removeItem(Ym);
   ldYm(); noTout();
  },false);
 };
@@ -228,8 +247,7 @@ function statSay(t) {
  statMsg="";
 }
 
-Ym="Ym#"+location.pathname;
-_L("load: "+location+"\n >> "+Ym);
+Ym="Ym#";//+location.pathname;
 
 ldYm();
 for(var k=1; k<2; k++){ /* pz.length */
