@@ -6,18 +6,25 @@
 // @include        https://*
 // @include        file://*
 // ** about:config -> greasemonkey.fileIsGreaseable <- true
-// @version 16.02.22
+// @version 16.02.26
 // @license  MIT
 // @released 2013-12-11
 // @run-at document-end
 // @grant GM_getValue
 // @grant GM_setValue
+// @grant GM_registerMenuCommand
 // @grant unsafeWindow
 // ==/UserScript==
 /* 
- 16.02.22 [+] press Alt-Shift-0 twice to set starting Y-position for whole domain; [*] markers moved to GM_storage.
- * 13-12-12 click on msg removes all marks
- * 1.1 don't run in editable fields
+ 16.02.26 
+  [+] hotkey configuration dialogue invoked from GM menu;
+  [+] Bookmarlets interface: 
+   javascript:postMessage('Y-marker0','*') - jump to bookmark # 0
+   javascript:postMessage('Y-marker0=','*') - set up bookmark #0
+ 16.02.22 
+  [+] press Alt-Shift-0 twice to set starting Y-position for whole domain; 
+* 13-12-12 click on msg removes all marks
+* 1.1 don't run in editable fields
 */
 (function(){ "use strict";
 if(top!=self || !document || !document.body ) return;
@@ -36,7 +43,8 @@ var kKeys = {
  189: 0, /* chrome, opera caps lock */
  109: 0  /* opera */
 };
-var minus1="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1";
+var minus1="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
+    min1=minus1.split(',');
 var LH=location.hostname || "Ym", LHP=LH+location.pathname;
 
 function kNob(k){ return kNobs.charAt(k); }
@@ -52,11 +60,11 @@ function msg(t,k, y){
   statMsg += "["+kNob(k)+"] ";
  if(U!==y)
   statMsg += ""+pt(y)+"% ";
- statMsg += t+ (noCoo ? "\u2262 ": "");
+ statMsg += t;
 }
 
 var locStor,locStored;
-var noCoo;
+
 // see SQlite manager -> %FFpath%\webappstore.sqlite -> find -> key -> contains Ym#
 
 try {
@@ -67,15 +75,17 @@ try {
 function pt(y) {
  try{
   y =Math.round(y*1000/(document.body.scrollHeight+1))/10;
+  if(y>111.1) y=111.1;
  }catch(e){console.log("math\n"+e); return -1}
  return y;
 }
 
 var Ym;
 var pz;
+var Hk;
 
 function ldYm(){
-  var s;
+  var s,t,y;
   if(locStor && locStored){
     pz=locStored.split(",");
     svYm();
@@ -85,11 +95,16 @@ function ldYm(){
   }
   s=GM_getValue(Ym,null);
   if(!s){ s=minus1;
-  }else try{
-    var y=JSON.parse(s);
-    s=y[LHP] || y[LH] || minus1;
-  }catch(e){console.log('ldYm: buggy data\n'+e)};
+  }else {
+   try{ y=JSON.parse(s);
+   }catch(e){console.log('ldYm: buggy data\n'+e)};
+   s=y[LHP] || y[LH] || minus1;
+  }
+
   pz=s.split(",");
+  if(y && (y=y['#HotKeys#'])){
+   kJump = +y[0], kMark = +y[1];
+  }
 }
 
 function svYm(d){
@@ -97,11 +112,12 @@ function svYm(d){
  try{
    y=JSON.parse(GM_getValue(Ym,'{}'));
  }catch(e){console.log('svYm: buggy data\n'+e);}
- if(!d) y[LHP]= s;
- else{ //  marker for whole domain
-     y[LH]= s;
+ if(!d) y[LHP]= s; 
+ else if(d==='#'){
+   y['#HotKeys#']=[kJump,kMark];
+ }else{ //  marker for whole domain
+   y[LH]= s;
  }
- //_L((d?LH:LHP)+": saved "+s);
  GM_setValue(Ym,JSON.stringify(y));
 }
 
@@ -113,7 +129,7 @@ function rmYm(){
   if(y[LH]) delete y[LH],  _L("rmH: " +LH);
   if(y[LHP]) delete y[LHP],  _L("rmHP: " +LHP);
  GM_setValue(Ym,JSON.stringify(y));
- pz=minus1.split(",");
+ pz=min1;
 }
 
 function jumpY(k){
@@ -203,11 +219,11 @@ D.documentElement, // 2014-06-30 ???!!1
 "position: fixed!important;\
 z-index: 214748!important;\
 top: 0px; right: 1px; bottom: auto; left: auto;\
-background: rgba(221,255,221,.75);\
+background: rgba(221,255,221,.75)!important;\
 padding: 2px 3px 2px 8px; margin:0;\
 border: none;\
-border-radius: 12px 3px 3px 12px; \
-color: #131;\
+border-radius: 12px 3px 3px 12px;\
+color: #131!important;\
 opacity: 1; display:none;\
 font: normal 12px/14px sans-serif !important;\
 text-shadow: #373 2px 2px 4px, #7F7 -2px -2px 4px;\
@@ -259,9 +275,91 @@ for(var k=1; k<2; k++){ /* pz.length */
  }
 };
 
-if(noCoo)  msg(noCoo),   statSay(5);
+function $i(id, parent){
+	return (parent || document).getElementById(id)
+}
+
+var hk;
+function saveHk(){
+ function K(id, b)
+ { return $i('Ym-bt'+id).checked? b: 0 }
+  kJump=K('JS',kShift)|K('JA',kAlt)|K('JW',kWin)|K('JC',kCtrl);
+  kMark=K('MS',kShift)|K('MA',kAlt)|K('MW',kWin)|K('MC',kCtrl);
+  svYm('#');
+}
+
+function setKeys(){
+ function J(j){return kJump&j? 'checked': ''}
+ function M(m){return kMark&m? 'checked': ''}
+  if(hk)   hk.parentNode.removeChild(hk);
+  hk = mk(
+D.documentElement,
+'section', "Y-marker-setKeys",
+"position: fixed!important;\
+z-index: 21489!important;\
+top: 10px; left: 16px; bottom: auto; right: auto;\
+background: rgb(221,255,221)!important;\
+padding: 2px 3px 2px 8px; margin:0;\
+border: 1px solid #131;\
+border-radius: 3px; \
+color: #131!important;\
+opacity: 1; display:block;\
+font: normal 12px/14px sans-serif !important;\
+");
+hk.innerHTML=('\
+<form><b><center>Y-marker hotkeys</center></b>\
+<b>Jump</b>: &nbsp; &nbsp; \
+Shift</b> <input type=checkbox id=Ym-btJS '+J(kShift)+'> &nbsp;&nbsp;\
+Alt <input type=checkbox id=Ym-btJA '+J(kAlt)+'> &nbsp;&nbsp;\
+Win <input type=checkbox id=Ym-btJW '+J(kWin)+'> &nbsp;&nbsp;\
+Ctrl <input type=checkbox id=Ym-btJC '+J(kCtrl)+'> <br>\
+<b>Mark</b>&nbsp;: &nbsp; &nbsp; \
+Shift <input type=checkbox id=Ym-btMS '+M(kShift)+'> &nbsp;&nbsp;\
+Alt <input type=checkbox id=Ym-btMA '+M(kAlt)+'>  &nbsp;&nbsp;\
+Win <input type=checkbox id=Ym-btMW '+M(kWin)+'>  &nbsp;&nbsp;\
+Ctrl <input type=checkbox id=Ym-btMC '+M(kCtrl)+'><hr><center>\
+<input type="button" tabIndex=1 value="Save" id="Ym-btSave"> &nbsp;\
+<input type="button" tabIndex=2 value="Cancel" id="Ym-btCancel"></center>\
+</form>\
+');
+
+hk.addEventListener("click",function(e){
+ var t= e.target,c=0;
+ if(!t || !t.id) return;
+ if(t.id=="Ym-btSave")try{
+   c=1;
+   saveHk();
+ }catch(e){console.log("Ym: problem in hotkey dialog\n"+e)}
+ else if(t.id=="Ym-btCancel"){
+   c=1;
+ }
+ if(c){
+   e.preventDefault(), e.stopPropagation();
+   hk.parentNode.removeChild(hk),hk=null;
+ }
+},false);
+
+}
+
+function wMsg(e){
+ if (e.source == window && e.data.substr(0,8) === 'Y-marker') {
+  e.stopPropagation();
+  if(e.data === 'Y-marker hotkeys')
+    return setKeys();
+  var m=e.data.match(/Y-marker\s*([0-9-])(\=?)/);
+  var p = (m[1]==='-')?0: +m[1]+1;
+  if(m[2])
+    markY(p);
+  else
+    jumpY(p);
+  statSay();
+ } 
+}
 
 addEventListener("keydown",onKeydown,false);
 addEventListener("keyup",klear,false);
- 
+GM_registerMenuCommand("Y-marker hotkeys", setKeys);
+
+window.addEventListener("message", wMsg, false);
+
 })();
