@@ -6,7 +6,7 @@
 // @include        https://*
 // @include        file://*
 // ** about:config -> greasemonkey.fileIsGreaseable <- true
-// @version 16.02.26
+// @version 16.02.27
 // @license  MIT
 // @released 2013-12-11
 // @run-at document-end
@@ -15,7 +15,8 @@
 // @grant GM_registerMenuCommand
 // @grant unsafeWindow
 // ==/UserScript==
-/* 
+/*  
+ 16.02.27 minor fixes
  16.02.26 
   [+] hotkey configuration dialogue invoked from GM menu;
   [+] Bookmarlets interface: 
@@ -82,7 +83,6 @@ function pt(y) {
 
 var Ym;
 var pz;
-var Hk;
 
 function ldYm(){
   var s,t,y;
@@ -292,37 +292,36 @@ function setKeys(){
  function J(j){return kJump&j? 'checked': ''}
  function M(m){return kMark&m? 'checked': ''}
   if(hk)   hk.parentNode.removeChild(hk);
-  hk = mk(
-D.documentElement,
-'section', "Y-marker-setKeys",
+  hk = D.createElement('section');
+  hk.style.cssText = 
 "position: fixed!important;\
-z-index: 21489!important;\
+z-index: 214748!important;\
 top: 10px; left: 16px; bottom: auto; right: auto;\
 background: rgb(221,255,221)!important;\
-padding: 2px 3px 2px 8px; margin:0;\
+padding: 4px; margin:0;\
 border: 1px solid #131;\
 border-radius: 3px; \
 color: #131!important;\
 opacity: 1; display:block;\
 font: normal 12px/14px sans-serif !important;\
-");
-hk.innerHTML=('\
-<form><b><center>Y-marker hotkeys</center></b>\
-<b>Jump</b>: &nbsp; &nbsp; \
-Shift</b> <input type=checkbox id=Ym-btJS '+J(kShift)+'> &nbsp;&nbsp;\
-Alt <input type=checkbox id=Ym-btJA '+J(kAlt)+'> &nbsp;&nbsp;\
-Win <input type=checkbox id=Ym-btJW '+J(kWin)+'> &nbsp;&nbsp;\
-Ctrl <input type=checkbox id=Ym-btJC '+J(kCtrl)+'> <br>\
-<b>Mark</b>&nbsp;: &nbsp; &nbsp; \
-Shift <input type=checkbox id=Ym-btMS '+M(kShift)+'> &nbsp;&nbsp;\
-Alt <input type=checkbox id=Ym-btMA '+M(kAlt)+'>  &nbsp;&nbsp;\
-Win <input type=checkbox id=Ym-btMW '+M(kWin)+'>  &nbsp;&nbsp;\
-Ctrl <input type=checkbox id=Ym-btMC '+M(kCtrl)+'><hr><center>\
+";
+  hk.innerHTML=('\
+<form style="padding:0;margin:0"><b>\
+<center style="padding-bottom:.5em">Y-marker hotkeys</center></b>\
+<b style="width:3em;display:inline-block;">Jump</b>: &nbsp;&nbsp;\
+Shift<input type=checkbox id=Ym-btJS '+J(kShift)+'> &nbsp;&nbsp;\
+Alt<input type=checkbox id=Ym-btJA '+J(kAlt)+'> &nbsp;&nbsp;\
+Win<input type=checkbox id=Ym-btJW '+J(kWin)+'> &nbsp;&nbsp;\
+Ctrl<input type=checkbox id=Ym-btJC '+J(kCtrl)+'> <br>\
+<b style="width:3em;display:inline-block;">Mark</b>: &nbsp;&nbsp;\
+Shift<input type=checkbox id=Ym-btMS '+M(kShift)+'> &nbsp;&nbsp;\
+Alt<input type=checkbox id=Ym-btMA '+M(kAlt)+'> &nbsp;&nbsp;\
+Win<input type=checkbox id=Ym-btMW '+M(kWin)+'> &nbsp;&nbsp;\
+Ctrl<input type=checkbox id=Ym-btMC '+M(kCtrl)+'><hr><center>\
 <input type="button" tabIndex=1 value="Save" id="Ym-btSave"> &nbsp;\
-<input type="button" tabIndex=2 value="Cancel" id="Ym-btCancel"></center>\
-</form>\
+<input type="button" tabIndex=2 value="Cancel" id="Ym-btCancel">\
+</center></form>\
 ');
-
 hk.addEventListener("click",function(e){
  var t= e.target,c=0;
  if(!t || !t.id) return;
@@ -338,11 +337,11 @@ hk.addEventListener("click",function(e){
    hk.parentNode.removeChild(hk),hk=null;
  }
 },false);
-
+ D.documentElement.appendChild(hk);
 }
 
 function wMsg(e){
- if (e.source == window && e.data.substr(0,8) === 'Y-marker') {
+ if(e.source==window && typeof e.data==='string' && e.data.substr(0,8)==='Y-marker'){
   e.stopPropagation();
   if(e.data === 'Y-marker hotkeys')
     return setKeys();
