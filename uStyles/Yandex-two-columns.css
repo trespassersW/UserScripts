@@ -1,7 +1,8 @@
-﻿@namespace url(http://www.w3.org/1999/xhtml);
+﻿
+@namespace url(http://www.w3.org/1999/xhtml);
 /* 
+   2016-02-28 * изменения в Яндексе
    2016-02-21 * стрелочка на правой панели
-   2016-02-19 ? изменения в расположении боковых панелей 
 */
 @-moz-document url-prefix("http://yandex.ru/yandsearch")
 ,regexp("https?://(www\\.)?yandex\\..+/(yand)?search.+")
@@ -232,11 +233,11 @@ body .serp-item__greenurl{
 }
 .serp-list ~ .intents {display:none !important; }
 
-div.serp-block div.serp-item { /* 2015-07-20 */
+div.serp-list div.serp-item { /* 2015-07-20 */
  background-image: linear-gradient(to top, 
  rgba(255,255,255, .5), rgba(224,224,255, .5) ) ;
  border-radius: 8px 16px 0 0 ;
- padding: 10px 2px 6px 2px !important;
+ padding: 4px 2px 4px 2px !important;
 }
 .intents__container {
  margin-top: 4px !important;
