@@ -1,8 +1,7 @@
-﻿
-@namespace url(http://www.w3.org/1999/xhtml);
+﻿@namespace url(http://www.w3.org/1999/xhtml);
 /* 
+   2016-02-29 * время/дата статьи
    2016-02-28 * изменения в Яндексе
-   2016-02-21 * стрелочка на правой панели
 */
 @-moz-document url-prefix("http://yandex.ru/yandsearch")
 ,regexp("https?://(www\\.)?yandex\\..+/(yand)?search.+")
@@ -307,19 +306,7 @@ display: inline-block !important; position: relative !important;
  border-radius: 10px;
  font-size: x-small !important;
 }
-/* 2015-11-19 
-.layout_type_serp .layout__col_size_5 
-.serp-block .serp-block_type_entity-search >div 
-* /
-.serp-block .serp-block_type_entity-search {
- width: 45% !important;
- padding-left: 10px !important;
-} 
-.content__right .serp-block_type_entity-search,
-.content__right .serp-block_type_entity-search div,
-{
- width: 97% !important;
-}/* */
+
 h2.serp-item__title >a{
 max-width: 505px !important;
 max-width: 47vw !important;
@@ -370,5 +357,11 @@ margin-left: 4px !important;
 .audio-track, .audio-playlist { margin-right: 0 !important; }
 /* 16-01-18 */
 .serp-header__wrapper{position:absolute!important;}
+/* 16-02-29 */
+.organic__outside-wrapper-right{ 
+display: inline-block !important; width: auto !important; 
+margin: 0 0 0 4px!important;
+}
+.organic__outside-wrapper-left{ margin-right: 0 !important;}
 /* dbg * / html *{border:thin solid red!important;}/* */
 }
