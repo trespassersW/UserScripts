@@ -55,11 +55,15 @@ a {border-bottom: 0.05px dotted rgba(47,95,255,.5) !important;}
 ,[class^="s_left"] .txt, [class^="a_left"] .txt 
 {width: 720px !important;}
 /*?*/
-
+/* kp 160303 */
+  .Page .boxOver {width: 95% !important;}
+  .topInfo.flex-container { position: absolute !important;}
+  .boxPage .boxCols {display: none !important;}
+/*  */
 /* ставим на место липкую траурную полосу */
 #fixedBox 
 { position: absolute !important; margin-top: 0em !important;}
-
+.federal .head-txt {position: absolute !important;}
 /*< побольше контента */
 .a_leftcol p
 ,.normalize /* computerra.ru */ 
@@ -71,7 +75,7 @@ a {border-bottom: 0.05px dotted rgba(47,95,255,.5) !important;}
  line-height: 1.1em !important;
  color: black !important;
  font-family: tahoma,sans-serif !important;
- font-size: 16px !important;
+ font-size: 12pt !important;
 /*<*/
 }
 /* KT */
