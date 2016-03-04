@@ -6,7 +6,7 @@
 // @include        https://*
 // @include        file://*
 // ** about:config -> greasemonkey.fileIsGreaseable <- true
-// @version 16.02.27
+// @version 16.03.04
 // @license  MIT
 // @released 2013-12-11
 // @run-at document-end
@@ -16,7 +16,7 @@
 // @grant unsafeWindow
 // ==/UserScript==
 /*  
- 16.02.27 minor fixes
+ 16.03.04 bookmarklets works in chrome
  16.02.26 
   [+] hotkey configuration dialogue invoked from GM menu;
   [+] Bookmarlets interface: 
@@ -341,7 +341,8 @@ hk.addEventListener("click",function(e){
 }
 
 function wMsg(e){
- if(e.source==window && typeof e.data==='string' && e.data.substr(0,8)==='Y-marker'){
+ //event.source!=window in Chrome
+ if(typeof e.data==='string' && e.data.substr(0,8)==='Y-marker'){
   e.stopPropagation();
   if(e.data === 'Y-marker hotkeys')
     return setKeys();
