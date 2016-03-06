@@ -1,26 +1,16 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
-/* dark on light */
+/* dark on yellow */
 /* http://userstyles.org/styles/90242/lib-ru-reader-light */
 @-moz-document url-prefix("http://www.lib.rus.ec")
-{
-#contents_bottom{
-position: absolute !important;background: #FAFAE8 !important; padding: 0!important;
-border: solid thin #444 !important;border-radius: 0px 0px 16px 10px !important;
-width:  40px !important; height: 1.2em !important;
-margin-top: -1.2em !important;display: block !important;
-left: 0px !important; top: -0.5em !important; right: auto !important; bottom: auto !important;
-overflow: hidden !important;z-index: 247 !important;text-indent: 0px !important;
-/*padding: 16px 48px 0 0 !important;*/
-margin-right: 0px !important;margin-bottom: 0px !important;opacity:  .6 !important;}
+{ article#seo{position: absolute; z-index:100500;} 
 }
-
 @-moz-document 
- regexp("https?://(.+\\.)?samlib.ru/.+")
-,regexp("https?://(.+\\.)?lib.ru/.+")
-,domain("lib.com.ru")
+ regexp("https?://(.+\\.)?samlib\\.ru/.+")
+,regexp("https?://(.+\\.)?lib\\.ru/.+")
+,regexp("https?://(.+\\.)?lib\\.com\\.ru/.+")
 ,regexp("https?://(.+\\.)?azlib.ru/.+")
 ,regexp("https?://(.+\\.)?lib\\.rus\\.ec.+/read.*") 
-,regexp("https?://(.+\\.)?flibusta\\.net.+/read.*")
+,regexp("https?://(.+\\.)?flibusta\\..+/read.*")
 ,regexp("https?://(.+\\.)?lib\\.ec.+/read.*")
 ,regexp("https?://(www\\.)?books\\.rusf\\.ru/.+")
 /* * /
