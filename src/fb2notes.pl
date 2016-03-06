@@ -7,9 +7,9 @@ use strict;
 use integer;
 #use encoding 'cp1251', STDOUT => 'cp866';
 use utf8;
-
 my $sFileOrDir = shift;
-
+my $o=0; # -o overwrite existing file[s].
+if( $sFileOrDir eq "-o" ) { $sFileOrDir= shift; $o=1; }
 if ( -f $sFileOrDir ) {
   Do ( $sFileOrDir );
   exit;
@@ -129,12 +129,12 @@ sub Do {
     $hNotesSections{$id} =~ s/\s+$//;
   
 #    $sDataAll =~ s/\Q$hNotes{$id}/ \[\[$hNotesSections{$id}\]\] /gsm;
-    $sDataAll =~ s/\Q$hNotes{$id}/\<sup\> \[$hNotesSections{$id}\]\ <\/sup\>/gsm;
+    $sDataAll =~ s/\Q$hNotes{$id}/\<sub\> \[$hNotesSections{$id}\]\ <\/sub\>/gsm;
     #print "No $k in Notes\n" if ( $hNotes{$k} eq '' );  
   }
 
   my $sFileOut = "$sFile";
-  $sFileOut =~ s/.fb2$/_notes.fb2/;
+  $o==0 and $sFileOut =~ s/.fb2$/_notes.fb2/;
   print "$sFileOut ". scalar @kNotes ." notes\n"; 
   open ( FP, ">:encoding($sEncoding)", "$sFileOut" ) || die "Cant open file $sFileOut";
   print FP "$sDataAll\n";
