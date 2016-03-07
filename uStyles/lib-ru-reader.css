@@ -1,5 +1,6 @@
-﻿@namespace url(http://www.w3.org/1999/xhtml);
+﻿@namespace FB url(http://www.gribuser.ru/xml/fictionbook/2.0);
 /* lime on spruce */
+/* 16.03.07 [+] styling fb2reader pages */
 /* http://userstyles.org/styles/90076/lib-ru-reader */
 @-moz-document url-prefix("http://www.samlib.ru")
 { article#seo{position: absolute; z-index:100500;} 
@@ -13,9 +14,10 @@
 ,regexp("https?://(.+\\.)?flibusta\\..+/read.*")
 ,regexp("https?://(.+\\.)?lib\\.ec.+/read.*")
 ,regexp("https?://(www\\.)?books\\.rusf\\.ru/.+")
+,regexp(".+\\.fb2(\\.zip)?(#.*)?$")
 /* * /
-,url-prefix(file://)
-/**/
+,url-prefix(file:///E:/LIT/)
+/* */
 {
 body, pre, dd, dt { 
 /*[[font-size]]*/     
@@ -56,7 +58,7 @@ pre {
 
  *[align="justify"]
 ,*[style*="justify"]
-,.book,.text
+,.book,.text, FB|p
 {
    text-align: left !important
 }
