@@ -7,10 +7,10 @@
 // @description    Translates selected text into a `tooltip' via Google translate 
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
-// @homepageURL https://openuserjs.org/scripts/trespassersW/translate.google_tooltip
-// @version 16.01.27
+// /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
+// @version 16.03.09
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 16.01.27   *  cosmetics
+// 16.03.09   + bookmarlets interface -- javascript:postMessage('tgtooltip auto|fr','*')
 // 16.01.17-2 *+ translation from input/textarea fields
 // 16.01.16.1 + alternative translation
 // 4.1.02 2016-01-03 * left-click only
@@ -349,7 +349,7 @@ function escCleanup(e){
   }
 }
 
-function lookup(evt){
+function lookup(evt,aS,aT){
  	var divResult = null;
 	var divDic = getId('divDic');
 	var divLookup = getId('divLookup');
@@ -422,6 +422,7 @@ function lookup(evt){
     if( evt && evt.target.id== 'imgLookBack' ){
      var t=gt_tl; gt_tl=gt_sl; gt_sl=t;
     }
+    if(aT){gt_tl=aT; gt_sl=aS;}
     gtRequest(txtSel,gt_sl,gt_tl);
 }
 
@@ -660,7 +661,9 @@ function getSelection(t){
 		txt = document.getSelection();
 	}else if (document.selection)	{
 		txt = document.selection.createRange().text;
-	} 
+	}
+  if(!t)
+   t= document.activeElement;
   inTextArea= ( t&& t.type&&  (/^(text|search)/i).test(t.type)) ? t : null;
   if(inTextArea){ 
    txt=t.value.substr(t.selectionStart,t.selectionEnd-t.selectionStart);
@@ -1484,12 +1487,12 @@ color:'+FG.t[i]+'!important;\
 padding-bottom: 3px !important; margin-bottom: 4px!important;}'+
 '#divExtract{word-spacing: normal !important;}'+
 '#divBottom {position: relative; width: 100%; font-size: smaller; text-decoration:none; }'+    
-'#historyLink {display: inline; position: relative; font-size:smaller; text-decoration:none;}'+
-'#sourceLink {display: inline; position: relative; margin-left: 1em;  font-size:smaller; text-decoration:none;}'+
-'#imgSourcesave {display: inline; position: relative; margin-left:2px;\
+'#divBottom #historyLink {display: inline; position: relative; font-size:smaller; text-decoration:none;}'+
+'#divBottom #sourceLink {display: inline; position: relative; margin-left: .5em;  font-size:smaller; text-decoration:none;}'+
+'#divBottom #imgSourcesave {display: inline; position: relative; margin-left:2px;\
 cursor:pointer;}'+
-'div#optionsLink {display: inline; position: relative; margin-left: 1.5em; font-size:smaller !important; text-decoration:none !important;}'+
-'#divDic #optionsLink [id^="options"] {margin-right: 2px; padding-left: 2px;}'+
+'#divBottom #optionsLink {display: inline; position: relative; margin-left: 1em; font-size:smaller !important; text-decoration:none !important;}'+
+'#divBottom #optionsLink [id^="options"] {margin-right: 2px; padding-left: 2px;}'+
 '#divDic #divOpt {position: relative; padding: 5px;'+
 'border-top: thin solid grey!important;}'+ 
 '#divLookup, #divOpt, #divBottom,#divSourcetext,#divHist,#divuse {direction: ltr !important;}'+
@@ -1832,33 +1835,24 @@ if (sT){
 
 // gmail spoils my timeout -- workaround
 // borrowed from dbaron.org/log/20100309-faster-timeouts :
-// Only add setZeroTimeout to the window object, and hide everything
-// else in a closure.
-//  (function() {
-
 var setZeroTimeout,handleMessage,
     timeouts = [],
-    messageName = "zero-timeout-150727";
+    messageName = "zero-timeout-160309";
 // Like setTimeout, but only takes a function argument.  There's
 // no time argument (always zero) and no arguments (you have to
 // use a closure).
-if(!isChrome){
-setZeroTimeout= function (fn) {
+setZeroTimeout= function(fn) {
           timeouts.push(fn);
           window.postMessage(messageName, "*");
       },
 handleMessage= function(event) {
-          if (event.source == window && event.data == messageName) {
+          if (typeof event.data==='string' && event.data === messageName) {
               event.stopPropagation();
               if (timeouts.length > 0) {
                   var fn = timeouts.shift();
                   fn();
       }   }    }
-} else {
-setZeroTimeout= function (fn) {
-  window.setTimeout(fn,1);
-}
-}
+//}
 
 window.addEventListener("message", handleMessage, true);
 // Add the one thing we want added to the window object.
@@ -1897,7 +1891,7 @@ function deURI(u,m){
  if(uq && uq[1]) 
   window.document.title=deURI(uq[1]);
 
- GM_registerMenuCommand("translate.google tootip", function(){ 
+function cmdGT(aS,aT){ 
   txtSel = getSelection(null) || txtSel;
   var p = {t: (pageYOffset+10)+"px",l:(window.pageXOffset+50)+"px", r:"auto" }
   if(!isInited) {css(-1); isInited=true; }
@@ -1907,10 +1901,22 @@ function deURI(u,m){
   }, null, null);
   if(!txtSel) txtSel="Google Translator";
   body.appendChild(divLookup);
-  lookup(); 
-  }
- );
+  if(aT){
+    lookup(null,aS,aT); 
+  } else  lookup(); 
+}
+// postMessage('tgtooltip auto|en','*')
+function wMsg(e){
+ //event.source!=window in Chrome
+ if(!(typeof e.data==='string' && e.data.substr(0,9)==='tgtooltip')) return;
+ e.stopPropagation();
+ var m=e.data.match(/tgtooltip\s*([a-zA-Z-]+)[\|\/]([a-zA-Z-]+)/);
+ if (m && m[2]) cmdGT(m[1],m[2]);
+ else cmdGT();
+}
 
+ GM_registerMenuCommand("translate.google tootip", function(){cmdGT()} );
+ window.addEventListener("message", wMsg, false);
 }
 main();
 }
