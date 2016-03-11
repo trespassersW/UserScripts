@@ -8,9 +8,10 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 16.03.09
+// @version 16.03.11
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 16.03.09   + bookmarlets interface -- javascript:postMessage('tgtooltip auto|fr','*')
+// 16.03.11 * small changes
+// 16.03.09   + bookmarlets interface -- javascript:postMessage('tgtooltip/auto/fr','*')
 // 16.01.17-2 *+ translation from input/textarea fields
 // 16.01.16.1 + alternative translation
 // 4.1.02 2016-01-03 * left-click only
@@ -46,16 +47,14 @@
 // - exit by ESC
 // - 1k letters limit -- don't strain your Google
 //*/
-// /grant GM_addStyle
 // @grant GM_getValue
-// #grant GM_log
 // @grant GM_openInTab
 // @grant GM_setValue
 // @grant GM_xmlhttpRequest
 // @grant GM_registerMenuCommand
 // @grant GM_setClipboard
-// @connect-src translate.google.com
-// @connect-src cdn.rawgit.com
+// @connect translate.google.com
+// @connect cdn.rawgit.com
 // @icon  data:image/jpg;base64, R0lGODlhIAARALP/AAAAAP///xMYfAqf////Zv/qDuCeH8VmB8DAwAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAgALAAAAAAgABEAQASdEMlJgb00awkMKQZYjB8RBsE4AtLQvtt0sXHcEcT1pbxK0hsXRmYIGUUgA3DiQjQtssInRAjglMsa4ibtlqSGgECQymmaAwDYUhSFfKoQDQ3LdA6Hoh6qbW4sJHpFWTUAOEA3Vj1WZjF+HQU9X18oPxl0Wx4kXoFiZF1zMEJgbW8qJnAHoU4takocpW5IIISYGh1HRlh9hRZ4eIRaEQA7
 //
 // ==/UserScript==
@@ -619,7 +618,7 @@ function extractResult(html){
   addEl(oL,'a',{id:'optionsTo','class':'gootransbutt gootranslink ' + (getId('divOpt') ? 'gtlActive':'gtlPassive')},  
   ['click', options],  gt_tl_gms );
   addEl(oL,'a',{id: 'gtpGoogle','class':'gootransbutt gootranslink',
-  title: 'translate.google.com', style: 'margin-left:12px;'
+  title: GTurl+'#'+last_sl + _l_ + last_tl +' %s', style: 'margin-left:12px;'
   }, ['click', goGoogle], imgGoGo);
   
   getId('divBottom').appendChild(oL);
@@ -1599,10 +1598,10 @@ stickStyle(
 '#divDic *::'+(isChrome?'':moz)+'selection {background: #047 !important; color: #FC8 !important; }'+
 '#divUse img, #divDic img, #divLookup img {display: inline; width: auto; height: auto;\
 margin: 0; padding:0;}'+ 
-'#divTtsLnk:after{ content:url('+imgPlay+') }'+
-'#divTtsLnk {padding: 0 2px; margin: 0 3px 0 5px;}'+
+'#divTtsLnk:after{ content:url('+imgPlay+');}'+
+'#divTtsLnk {padding: 0 2px; margin: 0 2px 0 2px !important;}'+
 '#divTtsIfh {width: 100%;overflow-x:hidden;\
-background-color: rgba(127,127,127,.25); padding: 3px 0;\
+background-color: rgba(127,127,127,.25); padding: 3px 0 !important;\
 }'+
 '#divResult, #divResult div, #divResult table, #divResult tr, #divResult tr td,\
 #divResult a, #divBottom, \
@@ -1910,7 +1909,7 @@ function wMsg(e){
  //event.source!=window in Chrome
  if(!(typeof e.data==='string' && e.data.substr(0,9)==='tgtooltip')) return;
  e.stopPropagation();
- var m=e.data.match(/tgtooltip\s*([a-zA-Z-]+)[\|\/]([a-zA-Z-]+)/);
+ var m=e.data.match(/tgtooltip[\s\?/|#]*([a-zA-Z-]+)[\|\/]([a-zA-Z-]+)/);
  if (m && m[2]) cmdGT(m[1],m[2]);
  else cmdGT();
 }
