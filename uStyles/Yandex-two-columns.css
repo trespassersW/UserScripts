@@ -1,8 +1,9 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
 /* 
    2016-02-29 * время/дата статьи
-   2016-02-28 * изменения в Яндексе
+   2016-03-16 * заплата для yandex.COM
 */
+
 @-moz-document url-prefix("http://yandex.ru/yandsearch")
 ,regexp("https?://(www\\.)?yandex\\..+/(yand)?search.+")
 {
@@ -364,4 +365,11 @@ margin: 0 0 0 4px!important;
 }
 .organic__outside-wrapper-left{ margin-right: 0 !important;}
 /* dbg * / html *{border:thin solid red!important;}/* */
+} 
+/* 160316 */
+@-moz-document regexp("https?://(www\\.)?yandex\\.com/(yand)?search.+"){
+ div.main .main__left,
+ div.main .content__right
+ { top: 168px !important;}
 }
+
