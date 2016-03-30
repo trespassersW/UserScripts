@@ -1,6 +1,6 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
 /* 
-  2016-02-06 W3C Recommendation 10 February 2015
+  2016-03-30 W3C Working Draft 21 April 2015
   2014 09-30 api.jquery.com
   2014 05 08 w3c selectors l4
   2014-03-29 kb.mozillazine.org
@@ -27,8 +27,8 @@ html body.ns-0 table tbody tr td#main div#globalWrapper div#bodyContent table#to
 ,regexp("https?://kb\\.mozillazine.org/.+")
 ,regexp("https?://api\\.jquery\\.com/.*")
 {
-[data-fill-with="table-of-contents"]
- div#article-nav
+[data-fill-with="table-of-contents"] div#article-nav
+,body div#toc > div.toc
 ,body> ul.toc:first-of-type 
 ,body> ol.toc:first-of-type 
 ,body > nav > ol.toc:first-of-type
@@ -75,6 +75,7 @@ transition: right 0.5s linear .5s;
 /* */
 } /* right, top 1s linear .2s;*/
 div#article-nav:hover 
+,body div#toc > div.toc:first-of-type:hover 
 ,body> ul.toc:first-of-type:hover
 ,body> ol.toc:first-of-type:hover 
 ,body> nav > ol.toc:first-of-type:hover
@@ -105,6 +106,7 @@ transition: right 1s linear .4s;;
 
 /* */
 div#article-nav *
+,body div#toc > div.toc:first-of-type *
 ,body> ul.toc:first-of-type  *
 ,body> ol.toc:first-of-type  *
 ,body > nav > ol.toc:first-of-type *
@@ -126,6 +128,7 @@ line-height: 100% !important;
 }/* */
 
 body> ul.toc:first-of-type ul 
+,body div#toc > div.toc:first-of-type ul
 ,body> ol.toc:first-of-type ol 
 ,body > nav > ol.toc:first-of-type ol 
 ,body > div.subtoc >ol:first-of-type ol 
@@ -149,6 +152,7 @@ margin-left: 2px !important; /* reduce indents */
 }
 
 div#article-nav:hover:before 
+,body div#toc > div.toc:first-of-type:hover:before  
 ,body> ul.toc:first-of-type:hover:before
 ,body> ol.toc:first-of-type:hover:before 
 ,body > nav > ol.toc:first-of-type:hover:before 
@@ -173,6 +177,7 @@ background-color: rgba(255,255,255,0.5) !important;
 }
 /* rgba(250,249,224,0.95)*/
 body> ul.toc:first-of-type:hover
+,body div#toc > div.toc:first-of-type:hover
 ,body> ol.toc:first-of-type:hover 
 ,body > nav > ol.toc:first-of-type:hover 
 ,body > div.subtoc >ol:first-of-type:hover 
@@ -205,12 +210,15 @@ body h2[id$="contents"]:after
 ,body h2[id$="h2_toc"]:before
 ,nav > button#toc-toggle:after 
 ,nav > button#toc-toggle:before
+,body div#toc > h2:first-of-type:before
+,body div#toc > h2:first-of-type:after
 ,#respecContents:before
 {
 content: "\a0 \21d8 \a0"
 }
 
 div#article-nav:before 
+,body div#toc > div.toc:first-of-type:before
 ,body> ul.toc:first-of-type:before, body> ol.toc:first-of-type:before 
 ,body > nav > ol.toc:first-of-type:before
 ,body > div.subtoc >ol:first-of-type:before
