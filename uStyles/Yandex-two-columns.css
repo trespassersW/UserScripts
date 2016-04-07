@@ -1,6 +1,6 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
 /* 
-   2016-02-29 * время/дата статьи
+   2016-04-07 * 'transition' hotfix
    2016-03-16 * заплата для yandex.COM
 */
 
@@ -60,20 +60,16 @@ border: 1px solid grey  !important;
 border-radius: 16px 0px 16px 0px !important;
 margin: 0 !important;
 padding: 0 !important;
-transition: all 0s linear 0.75s !important;
--webkit-transition: all 0s linear 0.75s !important;
-
+transition: visibility 0s linear 0.75s !important;
 }
 .main__left:hover {
 visibility: visible !important;
-transition: all 0s linear 0.3s !important;
--webkit-transition: all 0s linear 0.3s !important;
+transition: visibility 0s linear 0.3s !important;
 }
 
 .main__left:hover:before { 
 visibility: hidden !important;
-transition: all 0s linear 0.25s !important;
--webkit-transition: all 0s linear 0.25s !important;
+transition: visibility 0s linear 0.25s !important;
 }
 /* 23-03-15 ??!1 */
 .main__left:hover .navigation__more {visibility: visible !important;}
@@ -118,19 +114,17 @@ padding:12px !important;
 width: auto !important; 
 min-width: 40px !important;
 /* */
-transition: all 0s linear 0.75s !important;
--webkit-transition: all 0s linear 0.75s !important;
+transition: visibility 0s linear 0.75s !important;
 }
-.content__right:hover{
+.content__right:hover{ 
 visibility: visible !important;
-margin-right: 4px !important;
-transition: all 0s linear 0.3s !important;
--webkit-transition: all 0s linear 0.3s !important;
+margin-right: 0px !important;
+transition: visibility 0s linear 0.3s !important;
 }
 .content__right:hover:before{
 visibility: hidden !important;
-transition: all 0s linear 0.4s !important;
--webkit-transition: all 0s linear 0.2s !important;
+transition: visibility 0s linear 0.4s !important;
+-webkit-transition: visibility 0s linear 0.2s !important;
 }
 /* 2014-06-26 */
 .content__left h2 span.favicon{ 
@@ -167,36 +161,36 @@ margin-right: 0 !important;
  border-width: 1px 0 0 1px !important;
  border-radius: 0 16px 0 16px !important;
  visibility: hidden !important;
- transition: all 0s linear 0.6s !important;
- -webkit-transition: all 0s linear 0.6s !important;
+ transition: visibility 0s linear 0.6s !important;
+ -webkit-transition: visibility 0s linear 0.6s !important;
 }
 .content__left .pager > *{
  text-align: right !important;
 }
 .content__left .pager:hover {
  visibility: visible !important;
- transition: all 0s linear 0.25s !important;
- -webkit-transition: all 0s linear 0.25s !important;
+ transition: visibility 0s linear 0.25s !important;
+ -webkit-transition: visibility 0s linear 0.25s !important;
 }
 .content__left .pager:hover:before {
  visibility: hidden !important;
  opacity: 0 !important;
- transition: all 0s linear 0.25s !important;
- -webkit-transition: all 0s linear 0.25s !important;
+ transition: visibility 0s linear 0.25s !important;
+ -webkit-transition: visibility 0s linear 0.25s !important;
 }
 .map__overlay-pane,
 .ymaps-copyright-legend-container,
 .map__controls{
  opacity: .3 !important;
- transition: all 0s linear 0.5s !important;
- -webkit-transition: all 0s linear 0.5s !important;
+ transition: visibility 0s linear 0.5s !important;
+ -webkit-transition: visibility 0s linear 0.5s !important;
 }
 .map__overlay-pane:hover,
 .ymaps-copyright-legend-container:hover,
 .map__controls:hover{
  opacity: 1 !important;
-transition: all 0s linear 0.2s !important;
--webkit-transition: all 0s linear 0.2s !important;
+transition: opacity 0s linear 0.2s !important;
+-webkit-transition: opacity 0s linear 0.2s !important;
  transition-delay: .2s !important;
 }
 .main__center-inner >  .intents
@@ -276,8 +270,8 @@ content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAOCAYAAAB6pd+uA
 }
 .content__right:hover  .z-entity-search:before{
 visibility: hidden !important;
-transition: all 0s linear 0.3s !important;
--webkit-transition: all 0s linear 0.3s !important;
+transition: visibility 0s linear 0.3s !important;
+-webkit-transition: visibility 0s linear 0.3s !important;
 }
 .z-related-list {margin-top:0 !important;}
 /* 150227.17:00 */
@@ -364,6 +358,15 @@ display: inline-block !important; width: auto !important;
 margin: 0 0 0 4px!important;
 }
 .organic__outside-wrapper-left{ margin-right: 0 !important;}
+/* 160404 */
+.z-images__thumbs-list {width: auto !important;} 
+.z-video_carousel-size_small{ max-width: none !important;}
+/* */
+/* 160403 ?!1 * /
+div.main .main__left,
+div.main .content__right
+{ top: 168px !important;}
+/* */
 /* dbg * / html *{border:thin solid red!important;}/* */
 } 
 /* 160316 */
@@ -372,4 +375,5 @@ margin: 0 0 0 4px!important;
  div.main .content__right
  { top: 168px !important;}
 }
+/* */
 
