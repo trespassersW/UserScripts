@@ -11,7 +11,8 @@ Almost instantly you will see a tooltip with the translation. <hr>
 Also, you can run the script using Greasemonkey menu:<pre><i><b>Tools</b> → <b>Greasemonkey</b> → <b>User Script Commands</b></i>  → <b>translate.google tooltip</b></pre>
 <hr>
 Script uses <a href="http://www.senojflags.com">Country flag</a> &nbsp; <a href=https://rawgit.com/trespassersW/UserScripts/master/Flags/index.html?gtrantoltip#><em><strong>images</strong></em></a> &nbsp; from <a href="http://www.senojflags.com">Flags of all Countries</a>
-<hr> 
+<hr>
+* 16.04.08 [*] updated list of languages
 * 16.03.09 [+] bookmarlets interface --<br><code>javascript:postMessage('tgtooltip auto|fr','\*')
 javascript:postMessage('tgtooltip zh-CN|en','\*')</code><br><br>
 * 16.01.16.1 `+` alternative translation
