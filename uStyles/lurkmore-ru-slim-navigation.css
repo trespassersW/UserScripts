@@ -5,10 +5,7 @@
 /*http://userstyles.org/styles/45866/lurkmore-ru-slim-navigation*/
 @-moz-document  
  domain("lurkmore.to")
-,domain("lurkmore.co")
-,domain("lurkmo.re")
-,domain("lurkmore.net")
-,domain("lurkmore.ru")
+,regexp("https?://(.+\\.)?lu(rkmo|komo)(re)?\\.[a-z]+/.*")  
 {
  #content 
 ,#p-cactions

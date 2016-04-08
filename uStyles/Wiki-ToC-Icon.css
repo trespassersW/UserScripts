@@ -1,7 +1,7 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
 @-moz-document 
  domain("wikipedia.org")
-,regexp("https?://(.+\\.)?lurkmore\\.to/.*")
+,regexp("https?://(.+\\.)?lu(rkmo|komo)(re)?\\.[a-z]+/.*")
 ,regexp("https?://(.+\\.)?traditio-ru\\.org/.*")
 /* ..and far much many more..
  */
@@ -15,9 +15,9 @@
  Inspired by luckymouse' [userstyles.org/users/14255] style  userstyles.org/styles/40339/wikipedia-fixed-table-of-contents
 =================
  latest changes:
+2015-07-02 + affects lurkmo*.*
 2013-07-19 fixis: ToC in <div> etc.
 2013-06-10 fixis
-2013-02-11 - patch for Chrome
  - foregrounded icon
  - unhidden show/hide ToC button - it turned out that sometimes it's impossible to do without this crap.
  - strengthened CSS rules selectors - to not to commit a trespass upon extraneous site
