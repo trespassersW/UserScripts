@@ -3,7 +3,7 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 16.04.17
+// @version 16.04.17.1
 // 16.04.17 * hotfix -- 'time' becomes 'time-ago'
 // 16.02.06 * octicons as svg images
 // 15.08.12 ++ octicons for file extensions
@@ -382,7 +382,7 @@ var sDir,sCells,sExts;
    return prefs.upc? r.toUpperCase(): r;
   },
   function(a){
-   var c = getCell(a,3,'span.css-truncate>time','datetime');
+   var c = getCell(a,3,'span.css-truncate>time-ago','datetime');
    if(c) return c;
    return "2099-12-31T23:59:59Z"
   }
