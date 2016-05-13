@@ -2,8 +2,8 @@
 | :----: | :---- | ---------------------- |
 ##### *Script summary:*  Translates selected text into a ‘tooltip’ via Google translate 
 
-
-<b>Not working now. Do not install</b> <hr>
+Select word or phrase with <ins><strong><em>Alt</em></strong></ins> key pressed - then hover over an icon below the selection. 
+Almost instantly you will see a tooltip with the translation. <hr>
 ![screenshot](../res/gimble.png)<br><hr>
 ***Please look more closely at the picture below:***<br><hr>
 ![screenshot2](../res/tg3.gif) 
@@ -12,7 +12,7 @@ Also, you can run the script using Greasemonkey menu:<pre><i><b>Tools</b> → <b
 <hr>
 Script uses <a href="http://www.senojflags.com">Country flag</a> &nbsp; <a href=https://rawgit.com/trespassersW/UserScripts/master/Flags/index.html?gtrantoltip#><em><strong>images</strong></em></a> &nbsp; from <a href="http://www.senojflags.com">Flags of all Countries</a>
 <hr>
-* 16.04.08 [*] updated list of languages
+* 16.05.13 [*] changes in GT service
 * 16.03.09 [+] bookmarlets interface --<br><code>javascript:postMessage('tgtooltip auto|fr','\*')
 javascript:postMessage('tgtooltip zh-CN|en','\*')</code><br><br>
 * 16.01.16.1 `+` alternative translation
