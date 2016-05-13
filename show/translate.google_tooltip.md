@@ -2,8 +2,8 @@
 | :----: | :---- | ---------------------- |
 ##### *Script summary:*  Translates selected text into a ‘tooltip’ via Google translate 
 
-Select word or phrase with <ins><strong><em>Alt</em></strong></ins> key pressed - then hover over an icon below the selection. 
-Almost instantly you will see a tooltip with the translation. <hr>
+
+<b>Not working now. Do not install</b> <hr>
 ![screenshot](../res/gimble.png)<br><hr>
 ***Please look more closely at the picture below:***<br><hr>
 ![screenshot2](../res/tg3.gif) 
