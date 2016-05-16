@@ -1,0 +1,61 @@
+﻿@namespace url(http://www.w3.org/1999/xhtml);
+
+@-moz-document domain("maps.sputnik.ru") {
+
+div.main.ng-scope:before{
+position: fixed !important;
+visibility: visible !important;
+top: 10px  !important;
+left: 10px !important;
+right: auto !important; bottom: auto !important;
+z-index: 247247 !important;
+background-color: rgba(240, 240, 240, .7) !important;
+opacity: .9 !important;
+width:  64px !important; 
+height: 44px !important;
+text-align: center !important;
+border: thin solid grey !important;
+border-radius: 16px 0px 16px 0px !important;
+content: url(data:image/gif;base64,R0lGODlhNgAoAPf/AAD/6gCP/wDC/1MARQBcAHkATQBTAGMAdAByAHAAeQBzAFMAXABQAFQAVQBOAEsASQBcAC0AbQBsAGcAbwBvAGcALgBpAAAAZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABL5LAAAAJgAAHyRAB4ICPn4ACEAEnyRABUTeAA9AAB8kQAAAJD/DQAAfAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG0AAC1wYQDYEfdIAAAAEgAVABL67OkAAJh8kHyRQv///0KP/5x8kQAB0AAARfk8AIAAEsAQABL67OkAAEB8kHyRAP///wAA/w0AAHyQ/xL6cAnvAAB8gQAAABfsaP//AmgBBQIX7AAAGAAAAFgAAAAS+gAAQAAAADwAAAAS+gAAAAAAAAAAAAAAAAAADAACAAEAAHyQAf3sANxMf8B8kHyBDAACHPqMAJQAEgAS+gAACAAOAEgAAAEKtwAAAAIcAFMAAHyAGgACHAAAAADAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAJDcTCDafBx8gwAAAsD6EiH5BAkAAP8ALAAAAAA2ACgAAAjEAP8JHEiwoMGDCBMqXMiwocOHECNKnEixosEAFjMixKixo8AAHD1aBEkSpEiJJVOSPMlQpUuTLDe+nBmzoMqDLmt+LLkwpU6fLXnGFNoQqEiiDpF2VIqTINOMT3fCHBh1YlSjVFcufXrTptaRXb1+dRp2oICzaINOJTs2a1uCaAUUfYuVbUiEZx8qXYvzLVi+au9uBdzTL1TDfRFXrCtT8V/CdgWzzCnW8eCZjH9irqqZps65nD/3FY2SdGnTqFOrXj0wIAA7
+) !important;
+}
+div.main.ng-scope{
+position: fixed !important;
+top: 10px  !important;
+left: 10px !important;
+/*right: auto !important; bottom: auto !important;
+z-index: 247 !important;
+border: 1px solid grey  !important;
+border-radius: 16px 0px 16px 0px !important;
+*/
+opacity: .9 !important;
+visibility: hidden !important;
+margin: 0 !important;
+padding: 0 !important;
+transition: all 0s ease 0.75s !important;
+-webkit-transition: all 0s ease 0.75s !important;
+}
+div.main.ng-scope:hover{
+visibility: visible !important;
+transition: all 0s ease 0.3s !important;
+-webkit-transition: all 0s ease 0.3s !important;
+}
+div.main.ng-scope:hover:before { 
+visibility: hidden !important;
+transition: all 0s ease 0.25s !important;
+-webkit-transition: all 0s ease 0.25s !important;
+}
+.leaflet-right,
+.b-leaflet-control-location,
+.sp_copyrights{
+ opacity: .33 !important;
+  z-index:9999!important;
+}
+.leaflet-right:hover,
+.b-leaflet-control-location:hover,
+.sp_copyrights:hover{
+ opacity:1 !important;
+}
+
+}
+
