@@ -47,15 +47,13 @@ transition: all 0s ease 0.25s !important;
 }
 .leaflet-right,
 .b-leaflet-control-location,
-.sp_copyrights{
+span.map-copyright,a.map-copyright{
  opacity: .33 !important;
   z-index:9999!important;
 }
 .leaflet-right:hover,
 .b-leaflet-control-location:hover,
-.sp_copyrights:hover{
- opacity:1 !important;
+span.map-copyright:hover,a.map-copyright:hover{
+  opacity:1 !important; 
 }
-
 }
-
