@@ -25,7 +25,7 @@
 | **highlight-visited.css** | [src](highlight-visited.css) | various patches  |
 | **userstyle-uncover-meta.css** | [src](userstyle-uncover-meta.css) | - shows hidden stylish data  |
 | **github_octicons.css** | [![src](stylish.png)](github_octicons.css) | - resurrects octicons font on github.com   |
-| **spumaps.css** | [![src](stylish.png)](spumaps.css) [![src](../res/xDown.png)](https://raw.githubusercontent.com/trespassersW/UserScripts/master/uStyles/spumaps.css) | - прячет панель меню на картах maps.sputnik.ru  |
+| **sputnik-ru-maps.css** | [![src](stylish.png)](sputnik-ru-maps.css) | - прячет панель меню на картах maps.sputnik.ru  |
 ------------
 
 

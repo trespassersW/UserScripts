@@ -1,7 +1,6 @@
 ﻿@namespace url(http://www.w3.org/1999/xhtml);
-
+/* hides menu box on map */
 @-moz-document domain("maps.sputnik.ru") {
-
 div.main.ng-scope:before{
 position: fixed !important;
 visibility: visible !important;
@@ -32,28 +31,31 @@ opacity: .9 !important;
 visibility: hidden !important;
 margin: 0 !important;
 padding: 0 !important;
-transition: all 0s ease 0.75s !important;
--webkit-transition: all 0s ease 0.75s !important;
+transition-delay:  0.75s !important;
+-webkit-transition-delay:  0.75s !important;
 }
 div.main.ng-scope:hover{
 visibility: visible !important;
-transition: all 0s ease 0.3s !important;
--webkit-transition: all 0s ease 0.3s !important;
+transition-delay:  0.3s !important;
+-webkit-transition-delay:  0.3s !important;
 }
 div.main.ng-scope:hover:before { 
 visibility: hidden !important;
-transition: all 0s ease 0.25s !important;
--webkit-transition: all 0s ease 0.25s !important;
+transition-delay:  0.25s !important;
+-webkit-transition-delay:  0.25s !important;
 }
-.leaflet-right,
-.b-leaflet-control-location,
+.leaflet-top.leaflet-right,.leaflet-control-zoom,.leaflet-control-sm-geolocation,
 span.map-copyright,a.map-copyright{
  opacity: .33 !important;
   z-index:9999!important;
+transition-delay:  0.3s !important;
+-webkit-transition-delay:  0.3s !important;
 }
-.leaflet-right:hover,
-.b-leaflet-control-location:hover,
+.leaflet-top.leaflet-right:hover,.leaflet-control-zoom:hover,.leaflet-control-sm-geolocation:hover,
 span.map-copyright:hover,a.map-copyright:hover{
   opacity:1 !important; 
+transition-delay:  0.0s !important;
+-webkit-transition-delay:  0.0s !important;
 }
+
 }
