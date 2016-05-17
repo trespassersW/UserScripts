@@ -41,8 +41,8 @@ transition-delay:  0.3s !important;
 }
 div.main.ng-scope:hover:before { 
 visibility: hidden !important;
-transition-delay:  0.25s !important;
--webkit-transition-delay:  0.25s !important;
+transition-delay:  0.3s !important;
+-webkit-transition-delay:  0.3s !important;
 }
 .leaflet-top.leaflet-right,.leaflet-control-zoom,.leaflet-control-sm-geolocation,
 span.map-copyright,a.map-copyright{
