@@ -59,3 +59,31 @@ transition-delay:  0.0s !important;
 }
 
 }
+@-moz-document url-prefix("https://yandex.ru/maps/") {
+.header-view__search-layout,
+.header-view__control-panel-layout{
+ opacity: .3 !important;
+transition-delay:  0.3s !important;
+-webkit-transition-delay:  0.3s !important;
+}
+.sidebar-panel-view:hover,
+.map-layers-control:hover,
+.map-view__controls-layout:hover,
+.map-view__navigation-controls:hover,
+.header-view__search-layout:hover,
+.header-view__control-panel-layout:hover{
+ opacity: 1 !important;
+transition-delay:  0.2s !important;
+-webkit-transition-delay:  0.2s !important;
+}
+
+.sidebar-panel-view,
+.map-layers-control,
+.map-view__controls-layout,
+.map-view__navigation-controls{
+ opacity: .4 !important;
+transition-delay:  0.3s !important;
+-webkit-transition-delay:  0.3s !important;
+}
+
+}
