@@ -2,8 +2,6 @@
 
 @-moz-document domain("topnews.ru"){
 article#seo {display: none !important; visibility: hidden !important}
-/* hide monster banner on  old KT page */
-div.all-inner  td > div.notice {display: none !important;}
 }
 /*$*/
 @-moz-document domain("newsru.com")
@@ -55,10 +53,25 @@ a {border-bottom: 0.05px dotted rgba(47,95,255,.5) !important;}
 ,[class^="s_left"] .txt, [class^="a_left"] .txt 
 {width: 720px !important;}
 /*?*/
-/* kp 160303 */
+
+/* kp 160427 */
+  .article .photo::after { display:none !important;}
   .Page .boxOver {width: 95% !important;}
+  .head-samolet,
+  .menuHead,.formSearch,
   .topInfo.flex-container { position: absolute !important;}
   .boxPage .boxCols {display: none !important;}
+.topInfo.flex-container{width: 99.5% !important; }
+.newsDigest .container {
+ height: 60% !important;
+  margin-top: 0 !important;
+ border: 1px dotted grey !important;
+ border-width: 1px 0 !important;
+ 
+}
+/* kp.ru 160521 */
+main.main a:visited >h1 {color: #A40 !important;}
+
 /*  */
 /* ставим на место липкую траурную полосу */
 #fixedBox 
@@ -173,7 +186,7 @@ width: auto !important;
 }
 #mainlines-right .top10Block { 
 width: 222px !important;
-}
+} /* http://www.topnews.ru/ */
 img[style*="width: 400"],img[width="340"],
 .pvtPic img 
 {width: auto !important; height: auto !important; 
@@ -181,4 +194,17 @@ max-width: 50vw !important; }
 .cat_photosBlock .pvtElementLimiter .pvtElement1, .cat_photosBlock .pvtElementLimiter .pvtElement2 {
     width: 45% !important;
 }
-} /* http://www.topnews.ru/ */
+}/* topnews.ru */
+@-moz-document url-prefix("http://www.yaplakal.com/forum"){
+body {
+background-color: #666!important;
+background-image: none!important;
+/*background-image: repeating-linear-gradient(0deg, hsla(0, 0%, 65%, 1) 12px, hsla(0, 0%, 62%, 1) 24px,hsla(0, 0%, 65%, 1) 36px) !important;*/
+}
+/* */
+#content-inner form > table:nth-of-type(2){border: 2px  dotted red !important;padding-top:4px!important;}
+#content-inner form > table:not(:hover):nth-of-type(2) tr{ display: none !important; 
+}
+  /* */
+#top-line{display: none !important;}
+}/*yaplakal.com */
