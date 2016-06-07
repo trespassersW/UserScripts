@@ -8,9 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 16.05.13
+// @version 16.06.07
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 16.05.13 * changes in GT service
+// 16.06.07 * patched problem with '+' character
 // 16.03.09   + bookmarlets interface -- javascript:postMessage('tgtooltip/auto/fr','*')
 // 16.01.17-2 *+ translation from input/textarea fields
 // 16.01.16.1 + alternative translation
@@ -825,7 +825,7 @@ function detectedLang(da){
  if(ma && ma[1]) return ma[1]; return da;
 }
 var txr;
-function ltAmp(s){ return s.replace(/&/g,'\u00E6').replace(/</g,'\u227A'); }
+function ltAmp(s){ return s.replace(/&/g,'\u00E6').replace(/</g,'\u227A').replace(/\+/g,'\u271B'); }
 function altListClick(e){
  e.preventDefault, e.stopPropagation;
  var t=e.target;
@@ -942,20 +942,20 @@ try{
   if(!GM_getValue('histWc') && !getId('divOpt')) // no settings?
      options(); // show options
      
-} catch(e){   console.warn('errexDict: '+e+'\n'+txt);   badResponce(txt,e);}
+} catch(e){   console.warn('errexDict: '+e+'\n');   badResponce(txt,e);}
 }
 //
 function onTimerDict(){
- var tk=googleTK(txtSel,dictSL);
+ var tx=txtSel,
+ tk=googleTK(tx,dictSL);
  dictSL=tk.SL; 
  var q = dictURL + 
  "&hl="+ GM_getValue('to','auto') + 
  "&sl=" + gt_sl + "&tl=" + gt_tl + 
 "&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&otf=2&trs=1&inputm=1&ssel=0&tsel=0&source=btn&kc=3"+
  "&tk="+tk.tk+
- "&q="+ escAp(txtSel);
- //console.log('dict:'+ dictURL);
- _log('?dict')
+ "&q="+ tx;
+ _log('?dict');
  Request(q, extractDict);
 }
 
