@@ -19,8 +19,9 @@ background-color: #ddd !important;
 background-image: repeating-linear-gradient(
 0deg , hsla(0, 0%, 89%, 1) .0em, hsla(0, 0%, 85%, 1) 1em, hsla(0, 0%, 91%, 1) 2em) !important; 
 }
-#under,.under { background: transparent  !important; }
-
+#under,.under,
+.main.serp.i-bem
+{ background: transparent  !important; }
 }
 @-moz-document
  url-prefix("http://www.google.")
