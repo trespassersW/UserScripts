@@ -1,7 +1,7 @@
 @namespace url(http://www.w3.org/1999/xhtml);
 /* 
  userstyles.org/styles/63771/google-columnizer
- 2016-01-23 *  hotfix
+ 2016-06-20 *  'people also search for' panel
  2015-08-07 +  encrypted.google.com
  2015-05-25 ** bg color, intervals
  2015-05-08 ** exclude google images
@@ -338,9 +338,9 @@ body.vasq #hdtb_msb .hdtb_mitem.hdtb_msel, body.vasq #hdtb_msb .hdtb_mitem.hdtb_
  padding: 0 !important; margin: 0 !important;
  box-shadow: none; 
 }
-/* 150220 */
+/* 160620 */
 #gsr #botabar { 
-position: absolute; top: 110%; left: 0;  }
+position: relative !important; top: 120vh !important; left: 0 !important;  }
 #gsr ul.klcar { margin-left: 2em; }
 /* 150225 */ 
 body#gsr {overflow-y: auto !important;}
