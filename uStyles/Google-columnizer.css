@@ -1,7 +1,7 @@
 @namespace url(http://www.w3.org/1999/xhtml);
 /* 
  userstyles.org/styles/63771/google-columnizer
- 2016-06-20 *  'people also search for' panel
+ 2016-06-28 *  bugfix
  2015-08-07 +  encrypted.google.com
  2015-05-25 ** bg color, intervals
  2015-05-08 ** exclude google images
@@ -32,24 +32,6 @@ url-prefix("https://www.google.") {
  -moz-column-count: /*[[column-count]]*/ 2 /* */ !important; 
  -webkit-column-count: /*[[column-count]]*/ 2 /* */ !important; 
  column-count: /*[[column-count]]*/ 2 /* */ !important; 
-}
-#gsr div.mw #res 
-,div#ires
-{
- -moz-column-gap:6px!important; 
- -webkit-column-gap:6px!important; 
- column-gap:6px!important; 
- -moz-column-rule:  thin dotted gray !important;
- -webkit-column-rule:  thin dotted gray !important;
- column-rule:  thin dotted gray !important;
-  padding: 0px !important; 
-  width: auto !important; 
-}
-#gsr div.mw #res 
-{/* # of columns. Pay attention to the comments: */
- -moz-column-count: 2 /* 2 /* */ !important; 
- -webkit-column-count: 2 /* 2 /* */ !important; 
- column-count: 2 /* 2 /* */ !important; 
 }
 #gsr div.mw #res 
 ,div#ires
