@@ -1,6 +1,6 @@
 @namespace url(http://www.w3.org/1999/xhtml);
 /* 
-   2016-04-29 * video list
+   2016-06-29 * карты в результатах поиска
    2016-03-16 * заплата для yandex.COM
 */
 
@@ -362,7 +362,10 @@ margin: 0 0 0 4px!important;
 .z-video_design_new, 
 .z-images__thumbs-list {width: auto !important;} 
 .z-video_carousel-size_small {max-width: none !important;}
-
+/* 160629 */
+.z-maps .map,
+.z-maps .map *[style^="width"]
+{width:auto !important;}
 /* 160408 */
 .serp.serp__spin.i-bem.serp_js_inited.serp_loading_yes.serp__spin_progress_yes{z-index:-1!important;}/* */
 /* 160403 ?!1 * /
