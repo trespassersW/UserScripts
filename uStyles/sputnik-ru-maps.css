@@ -95,4 +95,32 @@ transition-delay:  0.2s !important;
 transition-delay:  0.3s !important;
 -webkit-transition-delay:  0.3s !important;
 }
+.leaflet-top.leaflet-right,.leaflet-control-zoom,.leaflet-control-sm-geolocation,
+span.map-copyright,a.map-copyright{
+ opacity: .33 !important;
+  z-index:9999!important;
+transition-delay:  0.3s !important;
+-webkit-transition-delay:  0.3s !important;
+}
+}
+@-moz-document domain("openstreetmap.org") {
+body.map-layout header{
+background: rgba(240,240,240,.7) !important;
+opacity: .4 !important;
+transition-delay:  0.3s !important;
+-webkit-transition-delay:  0.3s !important;
+}
+
+body.map-layout header:hover
+{
+opacity: 1 !important;
+transition-delay:  0.2s !important;
+-webkit-transition-delay:  0.2s !important;
+}
+.map-layout #content { top: 0 !important;}
+div#map-ui,
+.leaflet-top {
+    top: 50px !important;
+}
+nav.secondary li:hover {background: #D5D5D5 !important;}
 }
