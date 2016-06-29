@@ -121,6 +121,7 @@ transition-delay:  0.2s !important;
 div#map-ui,
 .leaflet-top {
     top: 50px !important;
+    height: 92% !important;
 }
 nav.secondary li:hover {background: #D5D5D5 !important;}
 }
