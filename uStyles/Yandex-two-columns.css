@@ -362,7 +362,8 @@ margin: 0 0 0 4px!important;
 .z-video_design_new, 
 .z-images__thumbs-list {width: auto !important;} 
 .z-video_carousel-size_small {max-width: none !important;}
-/* 160629 */
+/* 160610 */  
+.template-fact,
 .z-maps .map,
 .z-maps .map *[style^="width"]
 {width:auto !important;}
@@ -382,4 +383,3 @@ div.main .content__right
  { top: 168px !important;}
 }
 /* */
-
