@@ -69,6 +69,11 @@ a {border-bottom: 0.05px dotted rgba(47,95,255,.5) !important;}
  border-width: 1px 0 !important;
  
 }
+/* kp.ru 160713 */
+section#sectionNewsJS.news,
+.RadioPage #audio_panel {
+position: absolute !important;}
+img.image{max-width: 640px !important;}
 /* kp.ru 160521 */
 main.main a:visited >h1 {color: #A40 !important;}
 
@@ -208,3 +213,9 @@ background-image: none!important;
   /* */
 #top-line{display: none !important;}
 }/*yaplakal.com */
+@-moz-document domain("lenta.ru"){
+.xxxg-application {
+ width: auto !important;
+}
+}
+
