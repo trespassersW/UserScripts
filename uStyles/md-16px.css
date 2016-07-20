@@ -93,3 +93,6 @@ pre {
     line-height: 1.2 !important;
 }
 }
+@-moz-document regexp("file.+\\.md(#.*)?$"){
+  body {padding: 10px; background: rgb(233,233,222) ; border: 1px dotted grey !important;}
+}
