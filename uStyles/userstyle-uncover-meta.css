@@ -1,5 +1,8 @@
 @-moz-document domain("userstyles.org") 
-/* 16.01.22
+/*
+  16.08.06
+ - sub/category in styles list
+  16.01.22
  - shows author-id and total-install-count in styles list;  
  - zooms screenshots on mouseover  
 */ {
@@ -118,7 +121,7 @@
   link[rel^="stylish-update-url"]:after {
     content: ": Source";
   }
-/* !?! */
+/* !?! * /
   link[rel^="stylish-install"] {
     display: none !important;
   }
@@ -130,11 +133,12 @@
 
   article.style-brief:after {
     position: absolute;
-    content: "Author id: " attr(author-id);
+    content:  "Category: " attr(category) "/" attr(subcategory) " \00a0 \00a0 Author-id: " attr(author-id);
     right: 0px;
-    top: 0.8em;
+    top: 1.1em;
     left: auto;
     bottom: auto;
+    font-size: smaller;
 /*background: #FFEC8B; color: blue; opacity: .75; border-radius: 8px;*/
   }
 
@@ -145,6 +149,7 @@
     top: auto;
     left: auto;
     bottom: 0;
+    font-size: smaller;
   }
 /* */
   .listing-left-info {
@@ -188,5 +193,9 @@
   .style-brief-text header ~ p {
     max-width: 720px !important;
   }
+.style-brief-stats span {
+    min-width: 0 !important;
+    padding-right: 2em;
+}
 /* */
 }
