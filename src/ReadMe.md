@@ -16,7 +16,8 @@
 |	**altWheelScroll** | [![src](/res/Script.png)](altWheelScroll.user.js) [![dwn](/res/HDown.png)](/../../raw/master/src/altWheelScroll.user.js) | alt+wheel = horisontal scroll
 |	**halt!** | [![src](/res/Script.png)](halt!.user.js) [![dwn](/res/HDown.png)](/../../raw/master/src/halt!.user.js) |stops aeonian page loading
 |	**OUJS widelist** | [![src](/res/Script.png)](OUJS_widelist.user.js) [![dwn](/res/HDown.png)](/../../raw/master/src/OUJS_widelist.user.js) |extends list of scripts shown by OUJS to 100% width
-|	**GitHub_Sortable_Filelist** | [![src](/res/Script.png)](GitHub_Sortable_Filelist.user.js) [![dwn](/res/HDown.png)](/../../raw/master/src/ladybug.user.js) |CSS3 transition experiment
+|	**GitHub_Sortable_Filelist** | [![src](/res/Script.png)](GitHub_Sortable_Filelist.user.js) [![dwn](/res/HDown.png)](/../../raw/master/src/GitHub_Sortable_Filelist.user.js) |appends sorting function to github directories 
+|	**ladybug** | [![src](/res/Script.png)](ladybug.user.js) [![dwn](/res/HDown.png)](/../../raw/master/src/ladybug.user.js) |CSS3 transition experiment
 
 -------------
 
