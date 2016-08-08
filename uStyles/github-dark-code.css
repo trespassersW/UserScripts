@@ -1,10 +1,13 @@
-@namespace url(http://www.w3.org/1999/xhtml);
-/* 
- obsidian color scheme for code blocks on github
- borrowed from:
- https://userstyles.org/styles/37035/github-dark
+/* github-dark-code
+ Affects code blocks on github.com:
+  - Obsidian color scheme
+  - font: DejaVu Sans Mono; line-height: 1.2
+  
+ Adapted from: https://userstyles.org/styles/37035/github-dark 
+ License: https://creativecommons.org/licenses/by-sa/4.0/
 */
-@-moz-document domain("github.com") {
+@-moz-document domain("github.com"),domain("githubusercontent.com")
+{
   
 pre, .markdown-format pre, .markdown-body pre, .markdown-format .highlight pre, .markdown-body .highlight pre, body.blog pre, #facebox pre, .blob-expanded, .terminal, .copyable-terminal, #notebook .input_area, .blob-code-context, .ace_editor, .highlight {
     background: #293134 none repeat scroll 0 0 !important;
