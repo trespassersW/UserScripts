@@ -88,11 +88,73 @@ tt, code {
 }
 pre {
     font: 12px "DejaVu LGC Sans Mono",monospace !important;
-    margin-bottom: 0;
+    margin-bottom: 8px;
     margin-top: 0;
     line-height: 1.2 !important;
 }
 }
 @-moz-document regexp("file.+\\.md(#.*)?$"){
   body {padding: 10px; background: rgb(233,233,222) ; border: 1px dotted grey !important;}
+/*
+*/
+pre, pre code {
+  background: #293134 !important;
+  color: #E0E2E4 !important;
+}
+/* */
+.hljs,
+.hljs-subst {
+  color: #E0E2E4 !important;
+}
+.hljs-keyword,
+.hljs-attribute,
+.hljs-selector-tag,
+.hljs-meta-keyword,
+.hljs-doctag,
+.hljs-name {
+  color: #93c763!important;
+}
+.hljs-type,
+.hljs-string,
+.hljs-number,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-quote,
+.hljs-template-tag,
+.hljs-deletion {
+  color: #ec7600 !important;
+}
+
+.hljs-title,
+.hljs-section {
+  color: #6DBBAD !important;
+}
+/*
+.hljs-regexp,
+.hljs-symbol,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-link,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #d39745;
+}
+.hljs-literal {
+  color: #78A960;
+}
+*/
+.hljs-built_in,
+.hljs-bullet,
+.hljs-code,
+.hljs-addition {
+  color: #678cb1 !important;
+}
+/* * /
+.hljs-meta {
+  color: #1f7199;
+}
+.hljs-meta-string {
+  color: #4d99bf;
+}
+/* */
 }
