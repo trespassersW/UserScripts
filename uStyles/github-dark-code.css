@@ -1,7 +1,7 @@
 /* github-dark-code
  Affects code blocks on github.com:
-  - Obsidian color scheme
-  - font: DejaVu Sans Mono; line-height: 1.2
+  - Obsidian color theme
+  - font: Your Favorite monospace; line-height: 1.2
   
  Adapted from: https://userstyles.org/styles/37035/github-dark 
  License: https://creativecommons.org/licenses/by-sa/4.0/
@@ -108,7 +108,6 @@ pre, .markdown-format pre, .markdown-body pre, .markdown-format .highlight pre,
     background: #300 !important;
     border-color: #500 !important;
   }
-.blob-wrapper td, .ace_editor.ace-github-light{line-height: 1.2 !important;}
 .blob-num {
   color:#666 !important; 
   border-color: #555;
@@ -120,14 +119,18 @@ pre, .markdown-format pre, .markdown-body pre, .markdown-format .highlight pre,
 .expandable-line-num .diff-expander:hover, .blob-num[colspan]  {
     background: #1b1b1b !important;
   }
-/* * /
-[class^="blob-code"],.ace_content {
-    font-family: "DejaVu LGC Sans Mono", monospace !important;
-}
-/* custom code font */
-  pre, code, tt, kbd:not(.badmono), pre, samp, .blob-code, .file-data pre,
+/* Do not touch my favorite font! */
+pre, code, tt, kbd:not(.badmono), pre, samp, .blob-code, .file-data pre,
   .line-data, #gist-form .file .input textarea, .ace_editor.ace-github-light,
   .ace_editor, .blob-code-inner {
-    font-family: "DejaVu LGC Sans Mono", "DejaVu Sans Mono", Courier, monospace !important;
-  }  
+    font-family: monospace !important; 
+    line-height: 1.2 !important;   
+  }
+
+.blob-wrapper td {line-height: 1.2 !important;}
+
+div.ace_editor,table.highlight {
+    border:  solid #293134 !important;
+    border-width: .5em 0 !important;
+  }
 }
