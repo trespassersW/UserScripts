@@ -21,7 +21,7 @@
 ,url-prefix(file://)
 /**/
 {
-body, pre, dd, dt { 
+body, pre, dd, dt, p, font {
 /*[[font-size]]*/     
  font-size: 18px !important;
  line-height: 1.3 !important;
@@ -108,7 +108,7 @@ display: none !important; visibility: hidden !important;
 
 
 /*[[colours]]*/
-font , li, td { color: #363 !important;}
+font , li, td { color: #131 !important;}
 body, div, dd, pre,p
 ,font[color="black"]
 { color: #000F03 !important; }
@@ -167,6 +167,12 @@ html>body>div#contents, FB|a[type="note"]  FB|section {
 
 }
 
+
+/* rus.ec  '")}]} */
+@-moz-document regexp("https?://(.+\\.)?lib\\.rus\\.ec.+/read.*") 
+{
+div[id^="ad"] {  display: none !important; visibility: hidden !important; }
+}
 @-moz-document domain("mirf.ru") {
 
 table.image {
