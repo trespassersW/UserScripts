@@ -167,12 +167,12 @@ html>body>div#contents, FB|a[type="note"]  FB|section {
 
 }
 
-
 /* rus.ec  '")}]} */
 @-moz-document regexp("https?://(.+\\.)?lib\\.rus\\.ec.+/read.*") 
 {
 div[id^="ad"] {  display: none !important; visibility: hidden !important; }
 }
+
 @-moz-document domain("mirf.ru") {
 
 table.image {
