@@ -8,7 +8,7 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 16.06.07
+// @version 16.08.16
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
 // 16.08.16 + Word Definition is shown when source_language == target_language
 // 16.03.09   + bookmarlets interface -- javascript:postMessage('tgtooltip/auto/fr','*')
