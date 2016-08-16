@@ -12,8 +12,8 @@ Also, you can run the script using Greasemonkey menu:<pre><i><b>Tools</b> → <b
 <hr>
 Script uses <a href="http://www.senojflags.com">Country flag</a> &nbsp; <a href=https://rawgit.com/trespassersW/UserScripts/master/Flags/index.html?gtrantoltip#><em><strong>images</strong></em></a> &nbsp; from <a href="http://www.senojflags.com">Flags of all Countries</a>
 <hr>
-* 16.05.13 [*] changes in GT service
-* 16.03.09 [+] bookmarlets interface --<br><code>javascript:postMessage('tgtooltip auto|fr','\*')
+* 16.08.16 [ :tropical_fish: ] ***Word Definition*** is shown when `source_language == target_language` <br> <code>javascript:postMessage('tgtooltip en|en','\*')</code> 
+* 16.03.09 [+] bookmarlets interface --<br><code>javascript:postMessage('tgtooltip auto|fr','\*')</code><br><code>
 javascript:postMessage('tgtooltip zh-CN|en','\*')</code><br><br>
 * 16.01.16.1 `+` alternative translation
 * 3.7.2 2015-04-20 `*` TTS: <em>`alt`-select</em> text inside tooltip and <em>`[shift/ctrl]`-click</em> language icon below. <br>  :loudspeaker: [tts tips + 2015-10-31](./translate_tts_tips.md) 
