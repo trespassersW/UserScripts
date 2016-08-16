@@ -10,23 +10,13 @@
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
 // @version 16.06.07
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 16.06.07 * patched problem with '+' character
+// 16.08.16 + Word Definition is shown when source_language == target_language
 // 16.03.09   + bookmarlets interface -- javascript:postMessage('tgtooltip/auto/fr','*')
 // 16.01.17-2 *+ translation from input/textarea fields
 // 16.01.16.1 + alternative translation
-// 4.1.02 2016-01-03 * left-click only
-// 4.1.01 2015-12-17 * changes in translate.google API
-// 3.9.50 2015-10-17 + multi-sentence; GM_menu item
-// 3.9.10 2015-07-29 * fix for Ff39; + now works in chrome
-// 3.7.96 2015-05-10 * TTS in ff37; * DOMparser instead of IFRAME; * bugfixes
-// 3.7.8.2 2015-04-26 + new country flags host
 // 3.7.2 2015-04-20 * TTS: alt-select text inside tooltip and [ctrl/shift]-click language icon below
-//   * [shift] tts window in IFRAME (: only works on google.* and file://* :(
+//   * [shift] tts window in IFRAME 
 //   * [ctrl] tts window in new tab
-// 3.6.2.2 2015-04-19 * gray gradient background 
-// 3.5.1 2015-04-15
-//  + TTS: alt-select text inside tooltip and shift-click language icon below
-//  * From<->To buttons fix; * err handler
 // 3.0.0  - national flags icons -- from www.senojflags.com
 // 2.3  - new editable 'source text' field
 // 2.2.2  - backward translation - select text inside tooltip and click the icon under your selection.
@@ -34,10 +24,6 @@
 //  - Ability to change translation in the history -
 //    select desired translation in the tooltip window using ctrl or alt -
 //    which one is checked in your settings - then click on the icon below the selection.
-// 2.2  - history of translations 
-// 2.1.2 - Selected text is fetched in the moment when you hover over the icon.
-//    So, you can select a few letters, then adjust your selection using shift + arrows. 
-// 2.0.0d - native GT languages list
 // 2.0.0c Alt key option added
 // If something goes wrong:
 // Tools->SQLite manager-> Database-> Connect_database->
@@ -298,7 +284,7 @@ function showLookupIcon(evt){
     title: gt_tl_gms + '\u2192 '+gt_sl_gms +sayTip+gt_sl+')'},
     null, imgH+iFrom+imgT);
 //   	['mousedown', backLookup], imgH+iFrom+imgT);
-    gt_sl !='auto' && divUse.appendChild(divBack); 
+    if(gt_sl!='auto' && gt_sl!=gt_tl) divUse.appendChild(divBack); 
 
     addEl(divUse,'img',{id: 'imgUse', border: 0, 
     title: 'use in history\n[shift] add to history', src: imgUse}, 
@@ -325,7 +311,7 @@ function showLookupIcon(evt){
   iTo = getFlagSrc(GM_getValue('to'),'to');
   var iForw=buildEl('img', {'border':0, id:"imgLookForw", style: 'padding-left: 5px',
   src: iTo},  ['mouseover', lookup],null);
-  var sl=GM_getValue('from','auto');
+  var sl=GM_getValue('from','auto'),tl=GM_getValue('to','auto');
   iFrom = getFlagSrc(sl,'from');
   var iBack=buildEl('img', {'border':0, id:"imgLookBack",  style: 'padding-left: 5px',
   src: iFrom},
@@ -333,11 +319,12 @@ function showLookupIcon(evt){
    
   if(p.r == 'auto' ){ // left half
 	 divLookup.appendChild(iForw);
-	 sl != 'auto' && divLookup.appendChild(iBack);
+	 if(sl != 'auto' && (sl!=tl)) divLookup.appendChild(iBack);
   }else{ // right half
-	 sl != 'auto' && divLookup.appendChild(iBack);
+	 if(sl != 'auto' && (sl!=tl)) divLookup.appendChild(iBack);
 	 divLookup.appendChild(iForw);
   }
+  
 	body.appendChild(divLookup);
 }
 function escCleanup(e){
@@ -558,7 +545,7 @@ function histLookup(e){
 }
 
 function fastSwap(){
-    if(gt_sl != 'auto'){
+    if(gt_sl != 'auto' && gt_sl != gt_tl ){
     var t= gt_sl; gt_sl=gt_tl; gt_tl=t;
     gtRequest(txtSel,gt_sl,gt_tl);
     }
@@ -718,7 +705,6 @@ function options(evt){
 		addEl(dO,'span', null, null,' From: ');
     var gt_slist = getXId("gt-sl");
     gt_slist= gt_slist ? gt_slist.innerHTML+'' : languagesGoogle; 
-/* * / console.log(gt_slist) /* !!! */
 
     var oF =dO.appendChild(buildEl('select', {id:'optSelLangFrom'}, null, gt_slist));
 		oF.value =  GM_getValue('from', "auto");
@@ -818,7 +804,7 @@ try{
 function detectedLang(da){
  if(!da) return '';
  var gt_slist = getXId("gt-sl");
- //console.log(gt_slist.innerHTML)
+
  gt_slist= gt_slist ? gt_slist.innerHTML+'' : languagesGoogle;
  var re= new RegExp('ion value="'+da+'">(.*?)<\/opt');
  var ma= gt_slist.match(re);
@@ -844,7 +830,7 @@ function txtClip(e){
   if(txr) GM_setClipboard(txr);
 }
 function extractDict(txt){
-//console.log('!dict\n'+txt)
+
 var i,j,k,il,jl,kl,tr,sr,tx,sx,sp;
 try{
  if(!txt) return;
@@ -906,8 +892,12 @@ try{
    var oF = getId("optionsFrom");
    oF.textContent= oF.textContent+' - '+detectedLang(dA[2]) +' ';
   }
-  if(dA && dA[1] && dA[1][0] ){
-     var da=dA[1];
+  var da,db, dc, dfn, t;
+  if(dA && dA[1] && dA[1][0]) 
+    da=dA[1];
+  else if(dA && dA[12] && dA[12][0])
+    da=dA[12],dfn=1,db=dA[11];
+  if(da){
      dL=buildEl('div',{id: 'gtp_dict'});
      var dT=addEl(dL,'table');
      var dB=addEl(dT,'tbody');
@@ -917,12 +907,18 @@ try{
      for( i=0,il=da.length; i<il; i++){
        tr=addEl(dB,'tr');
        addEl(tr,'td',{'class': 'gtp-pos'}, null, da[i][0]);
-       for(var j=0,jl=da[i][2].length; j<jl; j++){
-        tr=addEl(dB,'tr');
-        addEl(tr,'td',{'class': 'gtp-word'}, null, da[i][2][j][0]);
-//        console.log(JSON.stringify(da[i][2][j]))
-        da[i][2][j][1]&&
-        addEl(tr,'td',{'class': showT}, null, da[i][2][j][1].join(', '));
+       var d2=dfn? da[i][1]: da[i][2];
+       for(var td,j=0,jl=d2.length; j<jl; j++){
+        td=addEl(dB,'tr');
+        var d2t=d2[j][0];
+        if(dfn && d2[j][2]) d2t+='<br><i>"'+d2[j][2]+'"</i>';
+
+//        if(j==0&&dfn&&(t=db[i])&&(t=t[1])&&(t=t[0])&&(t=t[0])&&t[0])// && dc[1][0])
+        if(dfn&&(t=db[i])&&(t=t[1])&&(t=t[j])&&(t=t[0])&&t[0])// && dc[1][0])
+          d2t+='<br><i><span>synonyms:</span> '+t.join(", ")+'</i>';         
+          addEl(td,'td',{'class': 'gtp-word'}, null, d2t);
+        !dfn && d2[j][1] &&
+        addEl(td,'td',{'class': showT}, null, d2[j][1].join(', '));
        }
      }
      var gtdir = (getId('divResult').style.direction=='rtl') ? 'left' : 'right';
@@ -932,6 +928,7 @@ try{
       killId('gtp_dict');
      if(dL) getId('divResult').appendChild(dL);
   }
+
   killId('divSourceshow');
   killId('divHist');
 
@@ -1537,6 +1534,8 @@ padding: 0 0 0 4px; margin: 0; border: none; border-top: 1px solid #AAA}' +
 'td.gtp-pos:before{ content:"\u2666 "; color:'+FG.t[i]+'!important;}'+
 'td.gtp-word {color:'+FG.t[i]+'!important; padding-left: 5px; padding-right: 10px;'+
 'vertical-align: top; white-space: normal;}'+
+'td.gtp-word i {color:'+FG.g[i]+'!important; padding-left:10px;}'+
+'#gtp_dict .gtp-word i span {color:'+FG.g[i]+'!important; font-style:italic!important;}'+
 'td.gtp-trans {/*overflow-x: hidden;*/ vertical-align: top; white-space: normal;'+
 ' width: 100%; color:'+FG.g[i]+'!important}'+
 'td.gtp-pos, td.gtp-word, td.gtp-trans {padding-bottom: 0px !important; padding-bottom: 1px !important;}'+
