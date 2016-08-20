@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!-- © 2016 trespassersW  license: MIT -->
+<html><head>  
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<title> custombuttons for translate.google tooltip </title>
+<style>
+#cb {background: #e1ebf2;}
+#cb button {height: 2em; min-width: 7.5em; padding-right: .5em; cursor: pointer; font-size: larger;}
+#cb button i:before {position: relative; top:4px; padding-right: 4px;}
+#cb button i.en:before{
+content:url(
+data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAJJSURBVHjapJNdSJNRGMd/Z3u3OTXXhx8xjRLDFWIk0jAk6WYYfaAZSUWGZkFdRNRFYAYFXhkI2gpKqISC1IsIUiKIchUEUQiuj4uiMT8m0wbNr+n2vu/p4l2K3Yn/m3Pg8Pye8/wf/kJKyWokACuQnjxXojgwowCOwPW2iS37y3k0bOfJwwHmYzFePK5n7Oxl0FRyH9zicGM3CZOFBhccypMox2tJdWZnK0Bay/AGmr+McmJvKUXbaul79hmTzYJ9x3bQdEw2C2V7XOzLUdmVZ2PWvZvm1lcAaQpg/vY9xL2NRdRMvqHUlYmzoRw9oREPjICqoic0qtIiFGVmECp20+kd4IPPD2AWQMFMcOSnxWZDavqyIcfOXARVJ7fLu9w4s4nEwgLpmzdtVQB+HW0kNcOBFo3Cv6VICWYTSEmw6hSYBOjGo7LOwdz0lHEHiMVimCciaNEpRLIWqSMUxWCpKgiBEAIJqI4M5tLtS4Cs++3kZGUlK5cUcFciEwkKBl//t3xBeHIS3KWYAEo87biruxiKWkh568N/447RWZdI3fAlMG8l5Z2PT00deOq6KfHcBjAA+YVO+p6eo8zXy/P+r9R9tCcbCQQCgIMHOuh3llFx2kNn/jjFhWuXAN6rFay/66XtZZjG9zrh0KjxVasCNgsAs9N/OHnkJq0/HLjOH+NadmjRg7jW00tnWOPKQGRxzEH/EOM7XUhNI+of4nckCEDThRaCl2qor66E/p64ABxALrBmhVmYBsYEYE4GybxCgAbExWrj/HcACIPUyGtYcDcAAAAASUVORK5CYII=)
+}
+#cb button i.auto:before{
+content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAC4jAAAuIwF4pT92AAABvUlEQVR42o2T3StDcRjHz5VbfwVjFy6UG3nJnZJyuUTRZEV5T+3iJNmQJLRI2CQXimly1kbTpHlvzKi5MHnZvMXMlGOKr37PaSctDhefc57zPM/n2+/UORwA7jfib09Qgu38WzZ080RyXzGgt68DNbqKH2GzPwNOAl44nFbUNVTD7RbgO/BQPWkeptnL87W03LgHKGGcc8kBzW21JEcjlwTJ8Q+Jh9grNo5O4Q+G5N7zO1BpD6OjswUDg50wjfTg8T4ow+m2pSXG2JIHKo2eCEdFua9xPlAAQxBmSLy+OpYCyj3ArShR2GqCqspImOy7cr948QZmywDB9/BI4SOw2SwUwpW4geALYPOFkKEbRNPkMnKaRlGoN1OfUboaR+jikGByStcr3dkzl7cC+CJA/dQaMhonML55Lte2wCPNCpwiLs72JTkJLsv+ieXLODLbZ4kykxv5xiWqtdM7WL/7RI4g0rLX7yUSMp1AvfgGveMUmbyAon4Xysc3iGyDk1g4E2Xhu8ygT1k1H0Pu0BbUxjVM+KMkMGqtJ9T76dgJmQLSZm7oFZT4TaaA9BItUuegCNtJFuUAdmELSij98l+cqP64JGrolQAAAABJRU5ErkJggg==)
+}
+#cb button i.ru:before{
+content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAADkSURBVHjapJM5TgNBEEVfzeZlQIOE5ARxClLOxC04CzFX4ArERAhZsoTEyDDurqa7SGxsIYJZKqnov9p+iZkxJQSogLN9HhIKfBZAY2abUdVFVhlQT5igzoB8AiDPAGKMg5UHTQFwc/fI6rKh/VLsz4b/u9FFXbF5b4+AnXe8rIW2C72qN8uSwtwJoHMwm5NSP0+EbyP4E8DD0z3XZUnqdr0A2XLBawjcHgBOPZYXINILYMlw6o8deFVsvoCq7AewhFf9BWg047n9GOMDFaABroDzgeIt8CZ7J1YjHBkBlanv/DMAwHdYum9dlZQAAAAASUVORK5CYII=)
+}
+#cb button i.pt:before{
+content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAI1SURBVHjapJNLSFRhGIaf/5yjc5xxnEaHaWwqJEWFSaaMiNy2aVNktO+yqiykZVBGO3eBixatgmhXtoqIEJGGJswQJRqsxrIa5+IFzbmcy5zztxG1y0b8Nt/i/Xh4+XhfIaVkJyOAWqB+fW9nLKCoAYGzz+4U/lYlYDoKIPAoDkL8SxjuvRvWAJ/jOsTDrRuCLRUUJMcjyyhC8ibXRNUV1Cruxs1UIQ3g0wDVdh3WrDKLlSKGo9IWWOPMvjxNpgAJkehnhn/uJrXkp05zaKqrx3YdAFUDMG2LQrlC0SrR25LldHSJocc9jL7bA1VJd1eWmxeTvGoI8iTdjCNVTNsCQAMoGyaRcI7zsQ90RfK8SJ5ithLnWA/kl0qMvN9P0DvP7f4xund952H6ILMLWwAtnkUG4lM06AWwVe4/KjI6kcIfdGmOetnbEeBHKUx1JUNn6BsD/jmuLcRJAgrAZEHlciLG5Hwj6BUOdWRwqx5K5SpfZn4x+nyFwwfyaIEyH3MB+hIxkllt04FpGLzONZDIHuFq7CtXzr1leibEy2QbqAonjn7iZPdThibauTfdio2PWmN1E2AZBl7FS7kqGJxsZ2Q+xI3+MW5dSIAUrAYtrqdiJDIhfDVVfJpN2TC2OLAsdCS6pqJrktRyiL7xRi51zuGpcXkw3kLFVgnVOYCKi8S0Np9oScdlJZ39I2UVYHBGB0BXcwghMf8TZwEEgCjg32YX1oCMANT1IqnbBDiAJXZa598DAP+m5+4+KeCCAAAAAElFTkSuQmCC)
+}
+#cb button i.fr:before{
+content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFESURBVHjapJM7TsNAEIa/9RqjKECEkGgoKOgoaHKCdByBc3APDsIRaHID01ASRTxEgxI5zsvetb1DkcSJCUaKMtJqZzSrb2f/nVEiwj6mgAA4Wu67mAWmPtDqdB6+f2e73ftK3L+92yJcPT2e+0CzKBzt9uW/1zVurpc1KxBh/vwC0PQBbW3BeJwyHE5rAebto/T9s1MkywC0D2CMJYpmRNG8FuBG49IvPE1u0wUMIEkMg8GMOJ5T9yn5KC59AWxiNgEJvV5GHCf1kvffS1+3Tkh9bw1I0wSRBs65ehU3cpJlpJnbBBi0PsS5+qaSFUBAihyTWwC8hYgG50ApVa6tjlvlPAVOSIxdV2CtJQiEIPDrnxAcVKoxdi2iFSmYTD4r58MwrMSvcfSntgpoARfA8Y6zMAG+FKCXg6R3BBSAVfuO888AocKXohfLXWQAAAAASUVORK5CYII=)
+}
+#cb button i.de:before{
+content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAENSURBVHjapJNNTsMwEIW/cdIKKZQIVWJT9hwgFyC3hVP0BGXDFnawQURRAsg/jW0WTSjdue1sLFt+bz7ZbyTGyDklwBy4HNdjygHfOVDWdf1xSvf1en2TA4X3nqqq0pBFiDGy2WwAihzInHP0fU/TNAeXp/cRkYPz5XKJcw4gywGstbRtS9u2SRRKKay1AOQAD1pRfGpCt4X/vyJyuJ8MouZHK+4mA6M185dXQtenEZRXmFm+JzDGsIgQQ0gyiMOA8cPe4PrRsLqdQUgMlfIMb1u4/yNwELMxVykIYaeZCKzdAhcgqWGMo2Zn4AYfeHruTgmjE6AEVsDiSPEX8C5ANg5SdqSBB5ycO86/AwCO1XbNM5YIzAAAAABJRU5ErkJggg==)
+}
+#cb button i.es:before{
+content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFzSURBVHjapJNNS1tBFIafkxnzoSZpsI1gFoLUP9CCm65KF+79df0H/QmlIARcudGFK0GCKJhFJX7cxNyZuXdmusiNGqngxQPDOQxzXt55OEdijLwnBKgCq0UuEw6YaKA9/L77N+IRVCmFjf6frgZW8Dn1r1/e6FkgRuzRMcCKBlR0GSEZ40ejxcdzPiIL12ptjegyAKUB1n871NItxDusXWJ6JzS7OVrCKy4q+MxBBzSAy1Ia+oZpcs9tX/Fw3sH+yGhvJzRqMkP9kmCeAoWANSmN2oD8sstw/4L4aY/WfcBf/4SN5D8O2thUA1ABMCYFMiq+Reuz5vzwF+nRARX/AQggYZbnR7Kip3BgjIWguNlK+Nis8m3TkvfOmPZqLMfwBHMe3mNM/iQw2DFIfZloThkTmX96AkwWAMxqqQcGxj5j4DJiNUD1bcMYQ8A69yjgfAycjEfITK/UOAvQBnpAs2TzGLgSQBWLpEoKeMDJe9f53wBKAZ093TMjpwAAAABJRU5ErkJggg==)
+}
+#cb button i.cn:before{
+content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFbSURBVHjapJO/SgNBEIe/vduLCSaKFhb6DCnFzs4XsMgjWlj4AD6BFhYKFqKgTSzSaBLN7f+xuJM7RSHRHywLy8w3Oz9mlIjwHymgA/TrexU54E0Dm+Pj0QSACGRADt39gLnQTZkftHd2uqOBdYmR3uGQYjfhnzPSXJHeYTCK2Lu8AquGJYC9vgFY10AupUdvTekdTYgnGvdYVQ5P0nTa+kW+vYV4D5BrgGAt9nZOmCzwDxlxkqG60D0ImCsN/msbKs+J1gKgAXww+Kcp5nKBKgQ0rA09i/Oi8iR880HAGdMATFnSuX8kzWZ8vvqHJvi7idnGBibPGkBZlvSzDJFURfj6FC1ISyl4SpcagDUWVRRISi2ngPTL8PiArUysW3AW0RqUWmqCRATjWiZaa6HbQxXFcjOYUpVTA1wU4eb15S+r4BSwCewBgxWT58BY1XZ16nsVRcCp/67zxwDGd5ld8bkQAQAAAABJRU5ErkJggg==)
+}
+#cb button i.ja:before{
+content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFdSURBVHjapJM/SwNBFMR/e3c5E2MMiNgEtAgiCmIjqF9AFCwEW7G3sbTxC1jaWNhqZUCxF0SwSBU48V+aaGVjE/VOcnfJ7lqYXGIiSJJpFvbNzNs3vBVaa/qBAGxgqH52gxDwLCCttX7rqbsQYwaQ7GOCpAWY7bdaSiqXV1Ru8qAU8cV5BleXEXbHlKYFIKXENJs+H4dHfJ7nEAhA8JW/Jrh/ZGRvN+JIKQEwAMIwjArV0gvu8Qmi7MN7CGUfUQ7wcqcEt3fNBOsaCyAIAhKJxE/huURQfMBoi0bhUi0+MTA3S0MTGfi+HxFjmQzCsNG1aks8CjCwxiciXkNjtBvYM9MMb24hlYdSLkp5SOWSWt8gvrTQYdDxAoDRg31iU5N4ZxcgFcm1FdI72784rZqs4zi6WziOo4GsBYS1Wo1CodDLIoUCSAMZINWl2AVeRT1q+6+N/AcSCEW/3/l7AEcJvRY+/EcCAAAAAElFTkSuQmCC)
+}
+#cb button i.it:before{
+content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAE+SURBVHjapJM9TsNAEIW/jW1ACiSCIk1KOoTEVRA03AauQwGcJAWiRhDEnyhCYhNnf+wdilhxDHakKCOtdkajfftm5o0SETYxBWwBu8W9jlngJwS6Z3dXX3+zN6eXlfj9/OIfQv/2uhcC7dznnPQOV363dXxUUFYIgrl/AGiHQOB8RmJTRjppBMiGLws/ONhHnAMIQgDjHBM9JdbTRgAfx2XjgoDcaABCAG00I5MQ2xShfip+PCkDAatNCTDThif5JLZpIwP3PFz4rU4HHbSWAVJa0TZefCOA+DLnM8fM+qUStCZqR/hVoloCUC7DODtnA/N6RDyqUJaqlZxaHBFBW1syMNaygxDNh1Iv2SiqsDGmbKKV3DN+/Kg8GAwGlfh1/F0rZwV0gT6wt+YuJMCbAoJikYI1AXLAqk3X+XcArNyT5mhM57UAAAAASUVORK5CYII=)
+}
+#cb button i.ar:before{
+content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAIvSURBVHjapJPNSxRxHMY/M/Ob3bXddV3DBTUh8yJdCiHwIIV0DXqB7nWLDv0NBt06Rt3q0E0PGaFBmGSGUCZKQR6ENV8wddfVfZ35zW/mN9NByd4u4nP5Hr7wgYfneYwoijiODCAGpA7uUaSAugAyN0aHCn9//TAg0BoAYZrYlv0P4cX1oZwAkjrUnMv1ABBFEX6oaU+1cibbARGsVbZZrxWxTRPDMAH4UsgDJAVg+WFATTmUZBWtNVd7L3Ktux9ZaxBvShDriTO2/InhxSlMA042NeOHAYAlADzfpyIbFBplLp/u42bnBRzHYWVjHa01bdlWrnT0sV4t8mppBmFYeL4PgAkgPUnJq9LQHpdyvbizn9koFgl8n3gsxlZ5D39+gcFsDwrNjqwiPXkIcKVHvrxJwa3SIgOcmRkCIUil0+yUSkTxOLsfpmltKHaVQ778A1d6vwMcwlBTk3W2kzaJ5VWyc/Ns1euYmWbK468xZ+cpZBJU3CphqHGls58QgJQSO2njKo+RlY8M3L3Dzq3bdHSdoimdRn9bpO3xEx5tLrDn1MidaMGX8hCgpIeIkqTsBCMLb+gebOfe2Cjm+ASh72M+uM9T1ng28ZKUnSCKQtSBhf0UlCJBREzY2Jbg4fvnTHadpX/gPKZpMLc0zOzqV2xLYBkmIRGeUr8AKtIh5fzmHy2b/v6Oyam3YIDAIi5s5H/qbAAZoBNIH3ELNWDDAKyDIVlHBGhAGced888BANVaBfgg0AbGAAAAAElFTkSuQmCC)
+}
+#cb button i.ko:before{
+content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAIYSURBVHjapJPBSxRhGMZ/883siOymoGwHp4zci4QEpka1YG27iHTy2KH+gG7B0i2ju7dudUgIhKAwD11kLyW0YG6il1pkL+lMB9tFdHV0tpnv7ZC7KEUgPpcPXr7neV9efq8hIpxGBmADicP3JGoAuxbQKSKbAFEUYRgGSql/OrTWiAimaf7pbhhnFRBvflhcXKRUKhGG4V/mMAxZWVmhWCweLcctwARYW1tjfn4e27a52NdHsrubRqUCWrBTKfZ8n4WFBbTWJJNJ+vv7AUyrOfrOzg6NRoP06CjJjg5qk5MEy8tYCO0Dl+h88pRMLsfrmRmq1SpRFLXGSPm+LyIinueJLyLbz1/IxuCgbN6+Kd+y41IYGZOtqSn5JSKu64rWWnzfFyClAIIgAKCnpwcbeP+xgvljA/d7lXu1QSb2szz7tIVFiOM4GIbR8iiAg4MDADzPw0RTHhrnjprgfnyCr6obXd/n58ANQOG6Lkc9rYBCoUA+n+fd7CyPHtwiPpalst+O3t7l8tA5Hj/MsrT0mXw+z9zcXCvAagZYlkUsFuPN21lGrl7jw8u7FL+sE4YR169cYK9eY3r6FY7jkEgkjgcEQUAmk6FcLtPW1kZXVxeWgtGR3tamFR2k02lqtRq5XI7V1dUWyudLpdJ6Exal1H9JjKKIWCwGwPDwcK8BdAIOcOaEt1AHPOOQRLtJ5AkUAQ3jtOf8ewCXbfT0h4zOXgAAAABJRU5ErkJggg==)
+}
+#cb button i.ur:before{
+content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAHeSURBVHjapJM9axRRFIafO1+767qJURyLFYKglSBROxVCrITkH1iIgr9AsLHRRrARFStBg4KViJWFRrTQdoKtgokRN1n2g5l1152ZuzP3WuzsMiuCCXmLezgH7sPL4T1Ca81uJAAH2JvVnUgCPQuY1lo3RtPz1y6AViCM/xI+3H3jWkA5P5w7egK0BiGGVSkwzZxlgUbjfVkFKFuAmQesb30HnQICW1jMVo+wtrmOUimkCgQcmHGRyQDANADSNB0D/F6A3+3gBy2Wzi1iWzbtdp3O7y7zpxeYP7WAHzSJpQTAAJBZMwYETcqVfZw9foZPnz/i93/h9wL6UUg/Cml1moRxCIAFEMcxpVIJgG+1NQgj3INV3JlD1NtbbLZrYDrceXYbJWBqaj/28OvQQRRFYwdKK5RQbDR+UiwUubR4BdVLUWHIQMYApFoRRTkHE4Bs6z82vnLvxX1uXLzOrHuYpyvPqZQq7CkUeeu9Q4by3wAxep0CNx/fotaqc3XpMiePzbGy+p4HLx8yiCLiOJncwUiOXQCVgmGCViy/esTy6ycIy0SHMTgWmBZS9scAmSQJnucB0G10huExcknUmUMhgHgizgKYBqpAZYe30AVqIkui83cit6EUkGK35/xnAEun1teq1Z2VAAAAAElFTkSuQmCC)
+}
+
+#inst {margin-left: auto; margin-right: auto; width: 12em; display: block;
+text-align: center;
+}
+#lft{
+ position: relative; float: left;
+ padding-left:.5em; width:45%;
+}
+#lft  {width: 45%;}
+#cb li { 
+display: inline-block; position: relative; list-style-type:none;
+}
+
+#rit{position: relative; float: right; 
+ border-left: 1px solid green; padding: 0 .6em;
+ min-width: 300px;
+ width: 50%;
+ line-height:1.2;
+}
+#cBcod{
+ font-family: monospace; 
+ background: #EFE;
+ border:  solid #373;
+ border-width: 0; 
+ white-space: pre-wrap;  word-wrap: break-word;
+ width:98%; height: 28em; margin: 4px auto 4px auto; 
+ padding: 4px;
+}
+/* */
+#cb h3 sup>a{text-decoration: none !important;}
+#cb h3, #cb hr {color: green}
+#inst span {border: thin dotted gray;}
+</style>
+</head>
+<body id=cb>
+<center> <h3> 
+Custom Buttons<sup><a href=https://addons.mozilla.org/firefox/addon/custom-buttons/>&#x21d7;</a></sup>
+ for <em>translate.google.tooltip</em> user.js<sup><a 
+href=https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md>&#x21d7;</a></sup>
+</h3>
+</center>
+<hr>
+<div id=lft><br><br>
+<ul id=lul>
+<li> <button id=en><i class=en></i>english</button>
+<li> <button id=ru><i class=ru></i>русский</button>
+<li> <button id=cn><i class=cn></i>中国</button>
+<li> <button id=pt><i class=pt></i>português</button>
+<li> <button id=es><i class=es></i>español</button>
+<li> <button id=fr><i class=fr></i>français</button>
+<li> <button id=it><i class=it></i>italiano</button>
+<li> <button id=de><i class=de></i>deutsch</button>
+<li> <button id=ja><i class=ja></i>日本の</button>
+<li> <button id=ar><i class=ar></i>تعريف</button>
+<li> <button id=ko><i class=ko></i>한국어</button>
+<li> <button id=ur><i class=ur></i>اردو زبان</button>
+</ul></div>
+<!--  -->
+<div id=rit>
+ <button id=inst>&nbsp;Install</button>
+ <u style="color: #777">Initialization code:</u><br>
+<textarea id=cBcod rows="15" cols="15" >
+choose a button on the left pane
+</textarea>
+</div>
+<div style="clear: both; color:grey">
+<hr>
+<b>©</b> 2016 trespassersW &nbsp; &nbsp; &nbsp;  License: MIT 
+</div>
+<script>
+(function(){"use strict";
+function $i(id){return document.getElementById(id);}
+function aE(id,ev,fn) {   
+ (typeof id === "string"? $i(id): id).addEventListener(ev,fn,false);
+}
+var btCodes={
+ en:{c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20EN%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAJJSURBVHjapJNdSJNRGMd/Z3u3OTXXhx8xjRLDFWIk0jAk6WYYfaAZSUWGZkFdRNRFYAYFXhkI2gpKqISC1IsIUiKIchUEUQiuj4uiMT8m0wbNr+n2vu/p4l2K3Yn/m3Pg8Pye8/wf/kJKyWokACuQnjxXojgwowCOwPW2iS37y3k0bOfJwwHmYzFePK5n7Oxl0FRyH9zicGM3CZOFBhccypMox2tJdWZnK0Bay/AGmr+McmJvKUXbaul79hmTzYJ9x3bQdEw2C2V7XOzLUdmVZ2PWvZvm1lcAaQpg/vY9xL2NRdRMvqHUlYmzoRw9oREPjICqoic0qtIiFGVmECp20+kd4IPPD2AWQMFMcOSnxWZDavqyIcfOXARVJ7fLu9w4s4nEwgLpmzdtVQB+HW0kNcOBFo3Cv6VICWYTSEmw6hSYBOjGo7LOwdz0lHEHiMVimCciaNEpRLIWqSMUxWCpKgiBEAIJqI4M5tLtS4Cs++3kZGUlK5cUcFciEwkKBl//t3xBeHIS3KWYAEo87biruxiKWkh568N/447RWZdI3fAlMG8l5Z2PT00deOq6KfHcBjAA+YVO+p6eo8zXy/P+r9R9tCcbCQQCgIMHOuh3llFx2kNn/jjFhWuXAN6rFay/66XtZZjG9zrh0KjxVasCNgsAs9N/OHnkJq0/HLjOH+NadmjRg7jW00tnWOPKQGRxzEH/EOM7XUhNI+of4nckCEDThRaCl2qor66E/p64ABxALrBmhVmYBsYEYE4GybxCgAbExWrj/HcACIPUyGtYcDcAAAAASUVORK5CYII%3D%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27auto/en%27%3B%20break%3B%0A%20case%201%3A%20//%20Shift%0A%20case%202%3A%20//%20Ctrl%0A%20case%204%3A%20m%3D%27en/en%27%3B%20//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20auto%20%3E%20en%5Cn%27+%0A%27Shift-click%3A%20%20word%20definition%5Cn%27+%0A%27%27%3B%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"
+}
+,ru:{c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAADkSURBVHjapJM5TgNBEEVfzeZlQIOE5ARxClLOxC04CzFX4ArERAhZsoTEyDDurqa7SGxsIYJZKqnov9p+iZkxJQSogLN9HhIKfBZAY2abUdVFVhlQT5igzoB8AiDPAGKMg5UHTQFwc/fI6rKh/VLsz4b/u9FFXbF5b4+AnXe8rIW2C72qN8uSwtwJoHMwm5NSP0+EbyP4E8DD0z3XZUnqdr0A2XLBawjcHgBOPZYXINILYMlw6o8deFVsvoCq7AewhFf9BWg047n9GOMDFaABroDzgeIt8CZ7J1YjHBkBlanv/DMAwHdYum9dlZQAAAAASUVORK5CYII%3D%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/ru%27%3B%20%20%20break%3B%0A%20case%201%3A%20m%3D%27ru/en%27%3B%20%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20%20break%3B//%20Ctrl%0A%20case%204%3A%20m%3D%27auto/ru%27%3B%20break%3B//%20Alt%0A%20case%203%3A%20m%3D%27ru/ru%27%3B%20%20%20break%3B//%20Shift-Ctrl%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%20%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20ru%5Cn%27+%0A%27Shift-click%3A%20%20ru%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20ru%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20%u043E%u043F%u0440%u0435%u0434%u0435%u043B%u0435%u043D%u0438%u0435%27%3B%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"
+}
+,fr:{c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20FR%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFESURBVHjapJM7TsNAEIa/9RqjKECEkGgoKOgoaHKCdByBc3APDsIRaHID01ASRTxEgxI5zsvetb1DkcSJCUaKMtJqZzSrb2f/nVEiwj6mgAA4Wu67mAWmPtDqdB6+f2e73ftK3L+92yJcPT2e+0CzKBzt9uW/1zVurpc1KxBh/vwC0PQBbW3BeJwyHE5rAebto/T9s1MkywC0D2CMJYpmRNG8FuBG49IvPE1u0wUMIEkMg8GMOJ5T9yn5KC59AWxiNgEJvV5GHCf1kvffS1+3Tkh9bw1I0wSRBs65ehU3cpJlpJnbBBi0PsS5+qaSFUBAihyTWwC8hYgG50ApVa6tjlvlPAVOSIxdV2CtJQiEIPDrnxAcVKoxdi2iFSmYTD4r58MwrMSvcfSntgpoARfA8Y6zMAG+FKCXg6R3BBSAVfuO888AocKXohfLXWQAAAAASUVORK5CYII%3D%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/fr%27%3B%20%20break%3B%0A%20case%201%3A%20m%3D%27fr/en%27%3B%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20break%3B//%20Ctrl%0A%20case%203%3A%20m%3D%27fr/fr%27%3B%20%20break%3B//%20Shift-Ctrl%0A%20case%204%3A%20m%3D%27auto/fr%27%3Bbreak%3B//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20fr%5Cn%27+%0A%27Shift-click%3A%20%20fr%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20fr%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20d%E9finition%27%3B%0A%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"
+}
+,cn:{c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20CN%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFbSURBVHjapJO/SgNBEIe/vduLCSaKFhb6DCnFzs4XsMgjWlj4AD6BFhYKFqKgTSzSaBLN7f+xuJM7RSHRHywLy8w3Oz9mlIjwHymgA/TrexU54E0Dm+Pj0QSACGRADt39gLnQTZkftHd2uqOBdYmR3uGQYjfhnzPSXJHeYTCK2Lu8AquGJYC9vgFY10AupUdvTekdTYgnGvdYVQ5P0nTa+kW+vYV4D5BrgGAt9nZOmCzwDxlxkqG60D0ImCsN/msbKs+J1gKgAXww+Kcp5nKBKgQ0rA09i/Oi8iR880HAGdMATFnSuX8kzWZ8vvqHJvi7idnGBibPGkBZlvSzDJFURfj6FC1ISyl4SpcagDUWVRRISi2ngPTL8PiArUysW3AW0RqUWmqCRATjWiZaa6HbQxXFcjOYUpVTA1wU4eb15S+r4BSwCewBgxWT58BY1XZ16nsVRcCp/67zxwDGd5ld8bkQAQAAAABJRU5ErkJggg%3D%3D%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/zh-CN%27%3B%20%20break%3B%0A%20case%201%3A%20m%3D%27zh-CN/en%27%3B%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20%20%20%20break%3B//%20Ctrl%0A%20case%203%3A%20m%3D%27zh-CN/zh-CN%27%3B%20break%3B//%20Shift-Ctrl%0A%20case%204%3A%20m%3D%27auto/zh-CN%27%3Bbreak%3B//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20cn%5Cn%27+%0A%27Shift-click%3A%20%20cn%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20cn%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20%u8BCD%20%u7684%u5B9A%u4E49%27%3B%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"
+}
+,pt:{c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20PT%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAI1SURBVHjapJNLSFRhGIaf/5yjc5xxnEaHaWwqJEWFSaaMiNy2aVNktO+yqiykZVBGO3eBixatgmhXtoqIEJGGJswQJRqsxrIa5+IFzbmcy5zztxG1y0b8Nt/i/Xh4+XhfIaVkJyOAWqB+fW9nLKCoAYGzz+4U/lYlYDoKIPAoDkL8SxjuvRvWAJ/jOsTDrRuCLRUUJMcjyyhC8ibXRNUV1Cruxs1UIQ3g0wDVdh3WrDKLlSKGo9IWWOPMvjxNpgAJkehnhn/uJrXkp05zaKqrx3YdAFUDMG2LQrlC0SrR25LldHSJocc9jL7bA1VJd1eWmxeTvGoI8iTdjCNVTNsCQAMoGyaRcI7zsQ90RfK8SJ5ithLnWA/kl0qMvN9P0DvP7f4xund952H6ILMLWwAtnkUG4lM06AWwVe4/KjI6kcIfdGmOetnbEeBHKUx1JUNn6BsD/jmuLcRJAgrAZEHlciLG5Hwj6BUOdWRwqx5K5SpfZn4x+nyFwwfyaIEyH3MB+hIxkllt04FpGLzONZDIHuFq7CtXzr1leibEy2QbqAonjn7iZPdThibauTfdio2PWmN1E2AZBl7FS7kqGJxsZ2Q+xI3+MW5dSIAUrAYtrqdiJDIhfDVVfJpN2TC2OLAsdCS6pqJrktRyiL7xRi51zuGpcXkw3kLFVgnVOYCKi8S0Np9oScdlJZ39I2UVYHBGB0BXcwghMf8TZwEEgCjg32YX1oCMANT1IqnbBDiAJXZa598DAP+m5+4+KeCCAAAAAElFTkSuQmCC%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/pt%27%3B%20%20break%3B%0A%20case%201%3A%20m%3D%27pt/en%27%3B%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20break%3B//%20Ctrl%0A%20case%203%3A%20m%3D%27pt/pt%27%3B%20%20break%3B//%20Shift-Ctrl%0A%20case%204%3A%20m%3D%27auto/pt%27%3Bbreak%3B//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20pt%5Cn%27+%0A%27Shift-click%3A%20%20pt%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20pt%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20defini%E7%E3o%27%3B%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"
+}
+,de:{c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20DE%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAENSURBVHjapJNNTsMwEIW/cdIKKZQIVWJT9hwgFyC3hVP0BGXDFnawQURRAsg/jW0WTSjdue1sLFt+bz7ZbyTGyDklwBy4HNdjygHfOVDWdf1xSvf1en2TA4X3nqqq0pBFiDGy2WwAihzInHP0fU/TNAeXp/cRkYPz5XKJcw4gywGstbRtS9u2SRRKKay1AOQAD1pRfGpCt4X/vyJyuJ8MouZHK+4mA6M185dXQtenEZRXmFm+JzDGsIgQQ0gyiMOA8cPe4PrRsLqdQUgMlfIMb1u4/yNwELMxVykIYaeZCKzdAhcgqWGMo2Zn4AYfeHruTgmjE6AEVsDiSPEX8C5ANg5SdqSBB5ycO86/AwCO1XbNM5YIzAAAAABJRU5ErkJggg%3D%3D%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/de%27%3B%20%20break%3B%0A%20case%201%3A%20m%3D%27de/en%27%3B%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20break%3B//%20Ctrl%0A%20case%203%3A%20m%3D%27de/de%27%3B%20%20break%3B//%20Shift-Ctrl%0A%20case%204%3A%20m%3D%27auto/de%27%3Bbreak%3B//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20de%5Cn%27+%0A%27Shift-click%3A%20%20de%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20de%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20Bildsch%E4rfe%27%3B%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"
+}
+,es:{c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20ES%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFzSURBVHjapJNNS1tBFIafkxnzoSZpsI1gFoLUP9CCm65KF+79df0H/QmlIARcudGFK0GCKJhFJX7cxNyZuXdmusiNGqngxQPDOQxzXt55OEdijLwnBKgCq0UuEw6YaKA9/L77N+IRVCmFjf6frgZW8Dn1r1/e6FkgRuzRMcCKBlR0GSEZ40ejxcdzPiIL12ptjegyAKUB1n871NItxDusXWJ6JzS7OVrCKy4q+MxBBzSAy1Ia+oZpcs9tX/Fw3sH+yGhvJzRqMkP9kmCeAoWANSmN2oD8sstw/4L4aY/WfcBf/4SN5D8O2thUA1ABMCYFMiq+Reuz5vzwF+nRARX/AQggYZbnR7Kip3BgjIWguNlK+Nis8m3TkvfOmPZqLMfwBHMe3mNM/iQw2DFIfZloThkTmX96AkwWAMxqqQcGxj5j4DJiNUD1bcMYQ8A69yjgfAycjEfITK/UOAvQBnpAs2TzGLgSQBWLpEoKeMDJe9f53wBKAZ093TMjpwAAAABJRU5ErkJggg%3D%3D%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/es%27%3B%20%20break%3B%0A%20case%201%3A%20m%3D%27es/en%27%3B%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20break%3B//%20Ctrl%0A%20case%203%3A%20m%3D%27es/es%27%3B%20%20break%3B//%20Shift-Ctrl%0A%20case%204%3A%20m%3D%27auto/es%27%3Bbreak%3B//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20es%5Cn%27+%0A%27Shift-click%3A%20%20es%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20es%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20definici%F3n%27%3B%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"
+}
+,it:{c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20IT%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAE+SURBVHjapJM9TsNAEIW/jW1ACiSCIk1KOoTEVRA03AauQwGcJAWiRhDEnyhCYhNnf+wdilhxDHakKCOtdkajfftm5o0SETYxBWwBu8W9jlngJwS6Z3dXX3+zN6eXlfj9/OIfQv/2uhcC7dznnPQOV363dXxUUFYIgrl/AGiHQOB8RmJTRjppBMiGLws/ONhHnAMIQgDjHBM9JdbTRgAfx2XjgoDcaABCAG00I5MQ2xShfip+PCkDAatNCTDThif5JLZpIwP3PFz4rU4HHbSWAVJa0TZefCOA+DLnM8fM+qUStCZqR/hVoloCUC7DODtnA/N6RDyqUJaqlZxaHBFBW1syMNaygxDNh1Iv2SiqsDGmbKKV3DN+/Kg8GAwGlfh1/F0rZwV0gT6wt+YuJMCbAoJikYI1AXLAqk3X+XcArNyT5mhM57UAAAAASUVORK5CYII%3D%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/it%27%3B%20%20break%3B%0A%20case%201%3A%20m%3D%27it/en%27%3B%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20break%3B//%20Ctrl%0A%20case%203%3A%20m%3D%27it/it%27%3B%20%20break%3B//%20Shift-Ctrl%0A%20case%204%3A%20m%3D%27auto/it%27%3Bbreak%3B//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20it%5Cn%27+%0A%27Shift-click%3A%20%20it%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20it%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20definizione%27%3B%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"
+}
+,ja:{c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20JA%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFdSURBVHjapJM/SwNBFMR/e3c5E2MMiNgEtAgiCmIjqF9AFCwEW7G3sbTxC1jaWNhqZUCxF0SwSBU48V+aaGVjE/VOcnfJ7lqYXGIiSJJpFvbNzNs3vBVaa/qBAGxgqH52gxDwLCCttX7rqbsQYwaQ7GOCpAWY7bdaSiqXV1Ru8qAU8cV5BleXEXbHlKYFIKXENJs+H4dHfJ7nEAhA8JW/Jrh/ZGRvN+JIKQEwAMIwjArV0gvu8Qmi7MN7CGUfUQ7wcqcEt3fNBOsaCyAIAhKJxE/huURQfMBoi0bhUi0+MTA3S0MTGfi+HxFjmQzCsNG1aks8CjCwxiciXkNjtBvYM9MMb24hlYdSLkp5SOWSWt8gvrTQYdDxAoDRg31iU5N4ZxcgFcm1FdI72784rZqs4zi6WziOo4GsBYS1Wo1CodDLIoUCSAMZINWl2AVeRT1q+6+N/AcSCEW/3/l7AEcJvRY+/EcCAAAAAElFTkSuQmCC%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/ja%27%3B%20%20break%3B%0A%20case%201%3A%20m%3D%27ja/en%27%3B%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20break%3B//%20Ctrl%0A%20case%203%3A%20m%3D%27ja/ja%27%3B%20%20break%3B//%20Shift-Ctrl%0A%20case%204%3A%20m%3D%27auto/ja%27%3Bbreak%3B//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20ja%5Cn%27+%0A%27Shift-click%3A%20%20ja%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20ja%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20%u5B9A%u7FA9%27%3B%0A%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"
+}
+,ar:{c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20AR%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAIvSURBVHjapJPNSxRxHMY/M/Ob3bXddV3DBTUh8yJdCiHwIIV0DXqB7nWLDv0NBt06Rt3q0E0PGaFBmGSGUCZKQR6ENV8wddfVfZ35zW/mN9NByd4u4nP5Hr7wgYfneYwoijiODCAGpA7uUaSAugAyN0aHCn9//TAg0BoAYZrYlv0P4cX1oZwAkjrUnMv1ABBFEX6oaU+1cibbARGsVbZZrxWxTRPDMAH4UsgDJAVg+WFATTmUZBWtNVd7L3Ktux9ZaxBvShDriTO2/InhxSlMA042NeOHAYAlADzfpyIbFBplLp/u42bnBRzHYWVjHa01bdlWrnT0sV4t8mppBmFYeL4PgAkgPUnJq9LQHpdyvbizn9koFgl8n3gsxlZ5D39+gcFsDwrNjqwiPXkIcKVHvrxJwa3SIgOcmRkCIUil0+yUSkTxOLsfpmltKHaVQ778A1d6vwMcwlBTk3W2kzaJ5VWyc/Ns1euYmWbK468xZ+cpZBJU3CphqHGls58QgJQSO2njKo+RlY8M3L3Dzq3bdHSdoimdRn9bpO3xEx5tLrDn1MidaMGX8hCgpIeIkqTsBCMLb+gebOfe2Cjm+ASh72M+uM9T1ng28ZKUnSCKQtSBhf0UlCJBREzY2Jbg4fvnTHadpX/gPKZpMLc0zOzqV2xLYBkmIRGeUr8AKtIh5fzmHy2b/v6Oyam3YIDAIi5s5H/qbAAZoBNIH3ELNWDDAKyDIVlHBGhAGced888BANVaBfgg0AbGAAAAAElFTkSuQmCC%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/ar%27%3B%20%20break%3B%0A%20case%201%3A%20m%3D%27ar/en%27%3B%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20break%3B//%20Ctrl%0A%20case%203%3A%20m%3D%27ar/ar%27%3B%20%20break%3B//%20Shift-Ctrl%0A%20case%204%3A%20m%3D%27auto/ar%27%3Bbreak%3B//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20ar%5Cn%27+%0A%27Shift-click%3A%20%20ar%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20ar%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20%u062A%u0639%u0631%u064A%u0641%27%3B%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"
+}
+,ko:{c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20KO%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAIYSURBVHjapJPBSxRhGMZ/883siOymoGwHp4zci4QEpka1YG27iHTy2KH+gG7B0i2ju7dudUgIhKAwD11kLyW0YG6il1pkL+lMB9tFdHV0tpnv7ZC7KEUgPpcPXr7neV9efq8hIpxGBmADicP3JGoAuxbQKSKbAFEUYRgGSql/OrTWiAimaf7pbhhnFRBvflhcXKRUKhGG4V/mMAxZWVmhWCweLcctwARYW1tjfn4e27a52NdHsrubRqUCWrBTKfZ8n4WFBbTWJJNJ+vv7AUyrOfrOzg6NRoP06CjJjg5qk5MEy8tYCO0Dl+h88pRMLsfrmRmq1SpRFLXGSPm+LyIinueJLyLbz1/IxuCgbN6+Kd+y41IYGZOtqSn5JSKu64rWWnzfFyClAIIgAKCnpwcbeP+xgvljA/d7lXu1QSb2szz7tIVFiOM4GIbR8iiAg4MDADzPw0RTHhrnjprgfnyCr6obXd/n58ANQOG6Lkc9rYBCoUA+n+fd7CyPHtwiPpalst+O3t7l8tA5Hj/MsrT0mXw+z9zcXCvAagZYlkUsFuPN21lGrl7jw8u7FL+sE4YR169cYK9eY3r6FY7jkEgkjgcEQUAmk6FcLtPW1kZXVxeWgtGR3tamFR2k02lqtRq5XI7V1dUWyudLpdJ6Exal1H9JjKKIWCwGwPDwcK8BdAIOcOaEt1AHPOOQRLtJ5AkUAQ3jtOf8ewCXbfT0h4zOXgAAAABJRU5ErkJggg%3D%3D%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/ko%27%3B%20%20break%3B%0A%20case%201%3A%20m%3D%27ko/en%27%3B%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20break%3B//%20Ctrl%0A%20case%203%3A%20m%3D%27ko/ko%27%3B%20%20break%3B//%20Shift-Ctrl%0A%20case%204%3A%20m%3D%27auto/ko%27%3Bbreak%3B//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20ko%5Cn%27+%0A%27Shift-click%3A%20%20ko%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20ko%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20%uC815%uC758%27%3B%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"
+}
+,ur:{c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20UR%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAHeSURBVHjapJM9axRRFIafO1+767qJURyLFYKglSBROxVCrITkH1iIgr9AsLHRRrARFStBg4KViJWFRrTQdoKtgokRN1n2g5l1152ZuzP3WuzsMiuCCXmLezgH7sPL4T1Ca81uJAAH2JvVnUgCPQuY1lo3RtPz1y6AViCM/xI+3H3jWkA5P5w7egK0BiGGVSkwzZxlgUbjfVkFKFuAmQesb30HnQICW1jMVo+wtrmOUimkCgQcmHGRyQDANADSNB0D/F6A3+3gBy2Wzi1iWzbtdp3O7y7zpxeYP7WAHzSJpQTAAJBZMwYETcqVfZw9foZPnz/i93/h9wL6UUg/Cml1moRxCIAFEMcxpVIJgG+1NQgj3INV3JlD1NtbbLZrYDrceXYbJWBqaj/28OvQQRRFYwdKK5RQbDR+UiwUubR4BdVLUWHIQMYApFoRRTkHE4Bs6z82vnLvxX1uXLzOrHuYpyvPqZQq7CkUeeu9Q4by3wAxep0CNx/fotaqc3XpMiePzbGy+p4HLx8yiCLiOJncwUiOXQCVgmGCViy/esTy6ycIy0SHMTgWmBZS9scAmSQJnucB0G10huExcknUmUMhgHgizgKYBqpAZYe30AVqIkui83cit6EUkGK35/xnAEun1teq1Z2VAAAAAElFTkSuQmCC%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/ur%27%3B%20%20break%3B%0A%20case%201%3A%20m%3D%27ur/en%27%3B%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20break%3B//%20Ctrl%0A%20case%203%3A%20m%3D%27ur/ur%27%3B%20%20break%3B//%20Shift-Ctrl%0A%20case%204%3A%20m%3D%27auto/ur%27%3Bbreak%3B//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20ur%5Cn%27+%0A%27Shift-click%3A%20%20ur%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20ur%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20%u0644%u0641%u0638%20%u062A%u0639%u0631%u06CC%u0641%20%27%3B%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"
+}
+};
+var cButt; // id of currentl selection
+function isCB(s){
+ return typeof s === "string" && (/^custombutton:\/\//).test(s);
+}
+
+function btClik(e){
+ var ti,m,t=e.target;
+ if(e && (t) && (t.nodeName=='BUTTON') && (ti=t.id)
+      && btCodes[ti])
+  {var icod=
+   decodeURIComponent(btCodes[ti].c.
+    replace(/%u([\dA-F]{4})|%([A-F][\dA-F])/g,
+     function(m,p,p1) // correct non-standard URI encoding
+       {return encodeURIComponent(String.fromCharCode(parseInt(p||p1,16)))}
+   ));
+   if(isCB(btCodes[ti].c))
+    $i('inst').disabled=false,  cButt=ti;
+   else
+    $i('inst').disabled=true,   cButt=null;
+   icod=icod.replace(/^[\w\W]+?initcode><!\[CDATA\[/g,'');
+   icod=icod.replace(/\]\]><[\w\W]+$/,'');
+   $i('cBcod').value=icod;
+   $i('inst').innerHTML='Install &nbsp; <span>&nbsp;'+t.innerHTML+'&nbsp;</span>';
+ }
+}
+function instClik(e){
+ if(cButt && btCodes[cButt] && isCB(btCodes[cButt].c) )
+  location.href= btCodes[cButt].c;
+ else alert('no such country '+(cButt||'!!11'));
+}
+
+aE('lft','click',btClik);
+aE('inst','click',instClik);
+$i('inst').disabled=true;
+})();
+
+</script>
+</body>
+<!-- button code ----
+this.onclick=function(e){
+if(e.button!==0) return;
+e.preventDefault(),e.stopPropagation();
+var m, k = (e.shiftKey)|(e.ctrlKey<<1)|(e.altKey<<2);
+switch(k){
+ default: 
+ case 0: m='en/ru';   break;
+ case 1: m='ru/en';   break;// Shift
+ case 2: m='en/en';   break;// Ctrl
+ case 4: m='auto/ru'; break;// Alt
+ case 3: m='ru/ru';   break;// Shift-Ctrl
+}
+content.postMessage('tgtooltip#'+m,'*'); 
+};
+self.tooltipText = self.name+'\n'+
+'          clik:  en → ru\n'+
+'Shift-click:  ru → en\n'+
+'    Alt-clik:  auto → ru\n'+
+' Ctrl-click:  definition\n'+
+' S-C-click:  определение';
+---->
+</html>
