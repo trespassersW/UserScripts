@@ -12,7 +12,7 @@ Also, you can run the script using Greasemonkey menu:<pre><i><b>Tools</b> → <b
 <hr>
 Script uses <a href="http://www.senojflags.com">Country flag</a> &nbsp; <a href=https://rawgit.com/trespassersW/UserScripts/master/Flags/index.html?gtrantoltip#><em><strong>images</strong></em></a> &nbsp; from <a href="http://www.senojflags.com">Flags of all Countries</a>
 <hr>
-* 16.08.16 [ :tropical_fish: ] ***Word Definition*** is shown when `source_language == target_language` <br> <img alt="definition" title="GT definition" src=https://github.com/trespassersW/UserScripts/raw/master/res/gt_def.png><br> *bookmarklet:* `javascript:postMessage('tgtooltip en|en','\*')`<br><em><a href=https://addons.mozilla.org/firefox/addon/custom-buttons>Custom button:</em></a> `content.postMessage('tgtooltip en|en','*')`<br><br>
+* 16.08.16 [ :tropical_fish: ] ***Word Definition*** is shown when `source_language == target_language` <br> <img alt="definition" title="GT definition" src=https://github.com/trespassersW/UserScripts/raw/master/res/gt_def.png><br> *bookmarklet:* `javascript:postMessage('tgtooltip en|en','\*')`<br><em><a href=https://addons.mozilla.org/firefox/addon/custom-buttons>Custom button:</em></a> `content.postMessage('tgtooltip en|en','*')`<br>Sample custombuttons can be found <a href=https://rawgit.com/trespassersW/UserScripts/master/htm/customButt.htm>here</a><br><br>
 * 16.03.09 [+] bookmarlets interface --<br><code>javascript:postMessage('tgtooltip auto|fr','\*')</code><br><code>
 javascript:postMessage('tgtooltip zh-CN|en','\*')</code><br><br>
 * 16.01.16.1 `+` alternative translation
