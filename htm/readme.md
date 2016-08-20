@@ -1,4 +1,6 @@
 #### Custom Buttons for **translate.google.tooltip** user.js
+ 
+  ![screenshot](cbutts.png) 
 
 =====
 
