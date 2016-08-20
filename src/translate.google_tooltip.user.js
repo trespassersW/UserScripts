@@ -8,8 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 16.08.16
+// @version 16.08.20
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 16.08.20 * tooltip for Google button
 // 16.08.16 + Word Definition is shown when source_language == target_language
 // 16.03.09   + bookmarlets interface -- javascript:postMessage('tgtooltip/auto/fr','*')
 // 16.01.17-2 *+ translation from input/textarea fields
@@ -616,7 +617,7 @@ function extractResult(html){
   addEl(oL,'a',{id:'optionsTo','class':'gootransbutt gootranslink ' + (getId('divOpt') ? 'gtlActive':'gtlPassive')},  
   ['click', options],  gt_tl_gms );
   addEl(oL,'a',{id: 'gtpGoogle','class':'gootransbutt gootranslink',
-  title: GTurl+'#'+last_sl + _l_ + last_tl +' %s', style: 'margin-left:12px;'
+  title: GTurl+'#'+gt_sl + _l_ + gt_tl +'/ %s', style: 'margin-left:12px;'
   }, ['click', goGoogle], imgGoGo);
   
   getId('divBottom').appendChild(oL);
