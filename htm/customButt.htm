@@ -4,9 +4,10 @@
 <meta http-equiv=Content-Type content="text/html; charset=utf-8">
 <title> custombuttons for translate.google tooltip </title>
 <style>
-#cb {background: #e1ebf2;}
-#cb button {height: 2em; min-width: 7.5em; padding-right: .5em; cursor: pointer; font-size: larger;}
-#cb button i:before {position: relative; top:4px; padding-right: 4px;
+#cb {background: #e1ebf2; position: relative;}
+#cb button {height: 2em; min-width: 7.5em; padding-right: .5em; cursor: pointer; font-size: 12pt;}
+#bmk a:before,
+#cb i:before {position: relative; top:3px; padding-right: 4px;
 content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAC4jAAAuIwF4pT92AAABvUlEQVR42o2T3StDcRjHz5VbfwVjFy6UG3nJnZJyuUTRZEV5T+3iJNmQJLRI2CQXimly1kbTpHlvzKi5MHnZvMXMlGOKr37PaSctDhefc57zPM/n2+/UORwA7jfib09Qgu38WzZ080RyXzGgt68DNbqKH2GzPwNOAl44nFbUNVTD7RbgO/BQPWkeptnL87W03LgHKGGcc8kBzW21JEcjlwTJ8Q+Jh9grNo5O4Q+G5N7zO1BpD6OjswUDg50wjfTg8T4ow+m2pSXG2JIHKo2eCEdFua9xPlAAQxBmSLy+OpYCyj3ArShR2GqCqspImOy7cr948QZmywDB9/BI4SOw2SwUwpW4geALYPOFkKEbRNPkMnKaRlGoN1OfUboaR+jikGByStcr3dkzl7cC+CJA/dQaMhonML55Lte2wCPNCpwiLs72JTkJLsv+ieXLODLbZ4kykxv5xiWqtdM7WL/7RI4g0rLX7yUSMp1AvfgGveMUmbyAon4Xysc3iGyDk1g4E2Xhu8ygT1k1H0Pu0BbUxjVM+KMkMGqtJ9T76dgJmQLSZm7oFZT4TaaA9BItUuegCNtJFuUAdmELSij98l+cqP64JGrolQAAAABJRU5ErkJggg==)
 }
 
@@ -15,45 +16,68 @@ text-align: center;
 }
 #lft{
  position: relative; float: left;
- padding-left:.5em; width:45%;
-}
-
-#cb li { 
-display: inline-block; position: relative; list-style-type:none;
+ padding-left:.5em; width: 50%;
 }
 
 #rit{position: relative; float: right; 
  border-left: 1px solid green; padding: 0 .6em;
  min-width: 200px;
- width: 50%;
+ width: 44%;
  line-height:1.2;
 }
+
+#cb li { 
+display: inline-block; position: relative; list-style-type:none;
+padding-right:.5em;
+}
+
 #cBcod{
+ font-family: monospace; 
  font-family: monospace; 
  background: #EFE;
  border:  solid #373;
  border-width: 0; 
  white-space: pre-wrap;  word-wrap: break-word;
- width:98%; height: 26em; margin: 4px auto 4px auto; 
- padding: 4px;
+ width:98%; height: 25em; margin: 4px auto 4px auto; 
+ padding: 4px 4px 4px 8px;
 }
 /* */
 #cb h3 sup>a{text-decoration: none !important;}
 #cb h3, #cb hr {color: green}
 #inst span {border: thin dotted gray;}
 #rit em {color: #777}
+
+#sshot{float:right;
+position: relative; border: 1px solid grey; border-radius: 4px; padding: 2px;
+width: 200px; background: #e1ebf2; margin: 0 -26px 0 4px; text-align: center;
+}
+#cb ul{
+    list-style-type: none;
+    margin-block-end: 0;
+    margin-block-start: 0;
+    padding-inline-start: .5em;
+    margin: .5em 0 0 .5em;
+    text-align:left;
+}
+#bmk a {background:#EED; color: buttontext;
+text-align:center; text-decoration:none !important; min-width:7.5em; border: thin solid #777;
+position:relative; display:inline-block; margin: 0px 2px 4px 0; padding: 1px 1px 2px 1px; 
+cursor: grabbing;}
+#cbnot { /*-moz-column-count:2;-webkit-column-count:2;column-count:2;*/
+position: relative;border-top:1px solid grey;padding: .5em 0; 
+}
 </style>
 </head>
+<html>
 <body id=cb>
-<center> <h3> 
+<h3>&nbsp; &nbsp; 
 Custom Buttons<sup><a href=https://addons.mozilla.org/firefox/addon/custom-buttons/>&#x21d7;</a></sup>
- for <em>translate.google.tooltip</em> user.js<sup><a 
+ for <em>translate.google tooltip</em> user.js<sup><a 
 href=https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md>&#x21d7;</a></sup>
 <noscript><span style="color:red"> Turn ON JS please</span> </noscript></h3>
-</center>
 <hr>
-<div id=lft><br><br>
-<ul id=lul>
+<div id=lft>
+<ul id=lul style="margin-bottom:.5em;">
 <li> <button id=en><i class=en></i>english</button>
 <li> <button id=ru><i class=ru></i>русский</button>
 <li> <button id=cn><i class=cn></i>中国</button>
@@ -67,19 +91,64 @@ href=https://github.com/trespassersW/UserScripts/blob/master/show/translate.goog
 <li> <button id=ko><i class=ko></i>한국어</button>
 <li> <button id=ur><i class=ur></i>اردو زبان</button>
 </ul>
-<style>
-#sshot{
-position: absolute; right: 0; border: 1px solid grey; border-radius:  4px; padding:6px 0 0 0;
-text-align: center; width: 200px;
-}
-</style>
-<div id=sshot>
+<div id=cbnot>
+<div id=sshot title=screenshot>
 <!--img src=https://raw.githubusercontent.com/trespassersW/UserScripts/master/htm/cbutts.png-->
 <img src="data:image/png;base64,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">
 </div>
+<div style="color:#333;margin:.5em 0 0 0;">
+ <b style=" color:#D22; font-style:italic">Note:</b>
+ <div style="padding-left:1em;">
+To use these <em>custom buttons</em>, you need to have the following things in your browser: <br>
+<a href=https://addons.mozilla.org/firefox/addon/greasemonkey/>Greasemonkey</a>
+ and 
+<a href=https://addons.mozilla.org/firefox/addon/custom-buttons/>Custom&nbsp;Buttons</a>
+ addons, plus <a href=https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
+>translate.google&nbsp;tooltip</a>
+ userscript.
+ </div>
 </div>
-<!--div style="position: absolute; bottom: 1px; right:1px;">xyu</div>
+<span style="clear:right"></span>
+</div>
+<hr>
 
+<div id=bmk>
+<h4 style="color:green;text-align:left; padding:.5em 0 0 1em; margin:0;" >Bookmarklets</h4>
+<div style="color:#333;text-align:left;"><em style="color: #D22;"><strong>Installation:</strong></em>
+ drag item to your <strong>Bookmarks Toolbar</strong>.
+</div> 
+<ul style="text-align:left">
+<a class="auto" title="Word Definition" href=
+"javascript:postMessage('tgtooltip#en/en','*')">Define</a><br>
+<li><a class="en" title="auto → British" href=
+"javascript:postMessage('tgtooltip#auto/en','*')">english</a>
+<li><a class="ru" title="auto → Russian" href=
+"javascript:postMessage('tgtooltip#auto/pt','*')">русский</a>
+<li><a class="cn" title="auto → Chiness"  href=
+"javascript:postMessage('tgtooltip#auto/zh-CN','*')">中国</a>
+<li><a class="pt" title="auto → Portuguese" href=
+"javascript:postMessage('tgtooltip#auto/pt','*')">português</a>
+<li><a class="es" title="auto → Spanish" href=
+"javascript:postMessage('tgtooltip#auto/es','*')">español</a>
+<li><a class="fr" title="auto → French" href=
+"javascript:postMessage('tgtooltip#auto/fr','*')">français</a>
+<li><a class="it" title="auto → Italian" href=
+"javascript:postMessage('tgtooltip#auto/it','*')">italiano</a>
+<li><a class="de" title="auto → German" href=
+"javascript:postMessage('tgtooltip#auto/de','*')">deutch</a>
+<li><a class="ja" title="auto → Japanese" href=
+"javascript:postMessage('tgtooltip#auto/ja','*')">日本の</a>
+<li><a class="ar" title="auto → Arabic" href=
+"javascript:postMessage('tgtooltip#auto/ar','*')">تعريف</a>
+<li><a class="ko" title="auto → Korean" href=
+"javascript:postMessage('tgtooltip#auto/ko','*')">한국어</a>
+<li><a class="ur" title="auto → Urdu" href=
+"javascript:postMessage('tgtooltip#auto/ur','*')">اردو زبان</a>
+
+</ul>
+
+</div>
+</div>
 
 <!--  -->
 <div id=rit>
@@ -89,33 +158,24 @@ text-align: center; width: 200px;
  <em style="padding-left: 1em;">Language:</em>
  <span id="cBlan"> </span><br>
  <em>Initialization code:</em><br>
-<textarea id=cBcod rows="13" cols="15" >
+<textarea id=cBcod rows="11" cols="15" >
 choose a button on the left pane
 </textarea>
 </div>
 <hr style="clear: both">
-<div style="color:#333; padding-bottom: .5em; margin-bottom: .5em; border-bottom: 1px solid grey; width:auto;">
-<b style=" color:#D22"><em>Note:</em></b> To use these buttons, you need to have the following things
- in your browser : 
- <a href=https://addons.mozilla.org/firefox/addon/greasemonkey/>Greasemonkey</a>
- and 
- <a href=https://addons.mozilla.org/firefox/addon/custom-buttons/>Custom Buttons</a>
- addons, plus <a href=https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md>translate.google tooltip</a>
- userscript.
-</div>
 <div style=" color:grey">
 <b>©</b> 2016 <a href=https://github.com/trespassersW/UserScripts/tree/master/htm/readme.md>trespassersW</a> &nbsp; &nbsp; &nbsp;  License: MIT 
 </div>
 <script>
 (function(){"use strict";
-function $i(id){return document.getElementById(id);}
+function $i(id,node){return (node||document).getElementById(id)}
 function aE(id,ev,fn) {   
  (typeof id === "string"? $i(id): id).addEventListener(ev,fn,false);
 }
 var btCodes={
  en:{d:"British",c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20EN%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAJJSURBVHjapJNdSJNRGMd/Z3u3OTXXhx8xjRLDFWIk0jAk6WYYfaAZSUWGZkFdRNRFYAYFXhkI2gpKqISC1IsIUiKIchUEUQiuj4uiMT8m0wbNr+n2vu/p4l2K3Yn/m3Pg8Pye8/wf/kJKyWokACuQnjxXojgwowCOwPW2iS37y3k0bOfJwwHmYzFePK5n7Oxl0FRyH9zicGM3CZOFBhccypMox2tJdWZnK0Bay/AGmr+McmJvKUXbaul79hmTzYJ9x3bQdEw2C2V7XOzLUdmVZ2PWvZvm1lcAaQpg/vY9xL2NRdRMvqHUlYmzoRw9oREPjICqoic0qtIiFGVmECp20+kd4IPPD2AWQMFMcOSnxWZDavqyIcfOXARVJ7fLu9w4s4nEwgLpmzdtVQB+HW0kNcOBFo3Cv6VICWYTSEmw6hSYBOjGo7LOwdz0lHEHiMVimCciaNEpRLIWqSMUxWCpKgiBEAIJqI4M5tLtS4Cs++3kZGUlK5cUcFciEwkKBl//t3xBeHIS3KWYAEo87biruxiKWkh568N/447RWZdI3fAlMG8l5Z2PT00deOq6KfHcBjAA+YVO+p6eo8zXy/P+r9R9tCcbCQQCgIMHOuh3llFx2kNn/jjFhWuXAN6rFay/66XtZZjG9zrh0KjxVasCNgsAs9N/OHnkJq0/HLjOH+NadmjRg7jW00tnWOPKQGRxzEH/EOM7XUhNI+of4nckCEDThRaCl2qor66E/p64ABxALrBmhVmYBsYEYE4GybxCgAbExWrj/HcACIPUyGtYcDcAAAAASUVORK5CYII%3D%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27auto/en%27%3B%20break%3B%0A%20case%201%3A%20//%20Shift%0A%20case%202%3A%20//%20Ctrl%0A%20case%204%3A%20m%3D%27en/en%27%3B%20//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20auto%20%3E%20en%5Cn%27+%0A%27Shift-click%3A%20%20word%20definition%5Cn%27+%0A%27%27%3B%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"}
-,ru:{d:'Russian',c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20RU%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAADkSURBVHjapJM5TgNBEEVfzeZlQIOE5ARxClLOxC04CzFX4ArERAhZsoTEyDDurqa7SGxsIYJZKqnov9p+iZkxJQSogLN9HhIKfBZAY2abUdVFVhlQT5igzoB8AiDPAGKMg5UHTQFwc/fI6rKh/VLsz4b/u9FFXbF5b4+AnXe8rIW2C72qN8uSwtwJoHMwm5NSP0+EbyP4E8DD0z3XZUnqdr0A2XLBawjcHgBOPZYXINILYMlw6o8deFVsvoCq7AewhFf9BWg047n9GOMDFaABroDzgeIt8CZ7J1YjHBkBlanv/DMAwHdYum9dlZQAAAAASUVORK5CYII%3D%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/ru%27%3B%20%20%20break%3B%0A%20case%201%3A%20m%3D%27ru/en%27%3B%20%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20%20break%3B//%20Ctrl%0A%20case%204%3A%20m%3D%27auto/ru%27%3B%20break%3B//%20Alt%0A%20case%203%3A%20m%3D%27ru/ru%27%3B%20%20%20break%3B//%20Shift-Ctrl%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%20%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20ru%5Cn%27+%0A%27Shift-click%3A%20%20ru%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20ru%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20%u043E%u043F%u0440%u0435%u0434%u0435%u043B%u0435%u043D%u0438%u0435%27%3B%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"},
-fr:{d:"French",c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20FR%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFESURBVHjapJM7TsNAEIa/9RqjKECEkGgoKOgoaHKCdByBc3APDsIRaHID01ASRTxEgxI5zsvetb1DkcSJCUaKMtJqZzSrb2f/nVEiwj6mgAA4Wu67mAWmPtDqdB6+f2e73ftK3L+92yJcPT2e+0CzKBzt9uW/1zVurpc1KxBh/vwC0PQBbW3BeJwyHE5rAebto/T9s1MkywC0D2CMJYpmRNG8FuBG49IvPE1u0wUMIEkMg8GMOJ5T9yn5KC59AWxiNgEJvV5GHCf1kvffS1+3Tkh9bw1I0wSRBs65ehU3cpJlpJnbBBi0PsS5+qaSFUBAihyTWwC8hYgG50ApVa6tjlvlPAVOSIxdV2CtJQiEIPDrnxAcVKoxdi2iFSmYTD4r58MwrMSvcfSntgpoARfA8Y6zMAG+FKCXg6R3BBSAVfuO888AocKXohfLXWQAAAAASUVORK5CYII%3D%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/fr%27%3B%20%20break%3B%0A%20case%201%3A%20m%3D%27fr/en%27%3B%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20break%3B//%20Ctrl%0A%20case%203%3A%20m%3D%27fr/fr%27%3B%20%20break%3B//%20Shift-Ctrl%0A%20case%204%3A%20m%3D%27auto/fr%27%3Bbreak%3B//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20fr%5Cn%27+%0A%27Shift-click%3A%20%20fr%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20fr%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20d%E9finition%27%3B%0A%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"}
+,ru:{d:'Russian',c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20RU%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAADkSURBVHjapJM5TgNBEEVfzeZlQIOE5ARxClLOxC04CzFX4ArERAhZsoTEyDDurqa7SGxsIYJZKqnov9p+iZkxJQSogLN9HhIKfBZAY2abUdVFVhlQT5igzoB8AiDPAGKMg5UHTQFwc/fI6rKh/VLsz4b/u9FFXbF5b4+AnXe8rIW2C72qN8uSwtwJoHMwm5NSP0+EbyP4E8DD0z3XZUnqdr0A2XLBawjcHgBOPZYXINILYMlw6o8deFVsvoCq7AewhFf9BWg047n9GOMDFaABroDzgeIt8CZ7J1YjHBkBlanv/DMAwHdYum9dlZQAAAAASUVORK5CYII%3D%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/ru%27%3B%20%20%20break%3B%0A%20case%201%3A%20m%3D%27ru/en%27%3B%20%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20%20break%3B//%20Ctrl%0A%20case%204%3A%20m%3D%27auto/ru%27%3B%20break%3B//%20Alt%0A%20case%203%3A%20m%3D%27ru/ru%27%3B%20%20%20break%3B//%20Shift-Ctrl%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%20%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20ru%5Cn%27+%0A%27Shift-click%3A%20%20ru%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20ru%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20%u043E%u043F%u0440%u0435%u0434%u0435%u043B%u0435%u043D%u0438%u0435%27%3B%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"}
+,fr:{d:"French",c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20FR%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFESURBVHjapJM7TsNAEIa/9RqjKECEkGgoKOgoaHKCdByBc3APDsIRaHID01ASRTxEgxI5zsvetb1DkcSJCUaKMtJqZzSrb2f/nVEiwj6mgAA4Wu67mAWmPtDqdB6+f2e73ftK3L+92yJcPT2e+0CzKBzt9uW/1zVurpc1KxBh/vwC0PQBbW3BeJwyHE5rAebto/T9s1MkywC0D2CMJYpmRNG8FuBG49IvPE1u0wUMIEkMg8GMOJ5T9yn5KC59AWxiNgEJvV5GHCf1kvffS1+3Tkh9bw1I0wSRBs65ehU3cpJlpJnbBBi0PsS5+qaSFUBAihyTWwC8hYgG50ApVa6tjlvlPAVOSIxdV2CtJQiEIPDrnxAcVKoxdi2iFSmYTD4r58MwrMSvcfSntgpoARfA8Y6zMAG+FKCXg6R3BBSAVfuO888AocKXohfLXWQAAAAASUVORK5CYII%3D%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/fr%27%3B%20%20break%3B%0A%20case%201%3A%20m%3D%27fr/en%27%3B%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20break%3B//%20Ctrl%0A%20case%203%3A%20m%3D%27fr/fr%27%3B%20%20break%3B//%20Shift-Ctrl%0A%20case%204%3A%20m%3D%27auto/fr%27%3Bbreak%3B//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20fr%5Cn%27+%0A%27Shift-click%3A%20%20fr%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20fr%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20d%E9finition%27%3B%0A%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"}
 ,cn:{d:"Chinese",c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20CN%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFbSURBVHjapJO/SgNBEIe/vduLCSaKFhb6DCnFzs4XsMgjWlj4AD6BFhYKFqKgTSzSaBLN7f+xuJM7RSHRHywLy8w3Oz9mlIjwHymgA/TrexU54E0Dm+Pj0QSACGRADt39gLnQTZkftHd2uqOBdYmR3uGQYjfhnzPSXJHeYTCK2Lu8AquGJYC9vgFY10AupUdvTekdTYgnGvdYVQ5P0nTa+kW+vYV4D5BrgGAt9nZOmCzwDxlxkqG60D0ImCsN/msbKs+J1gKgAXww+Kcp5nKBKgQ0rA09i/Oi8iR880HAGdMATFnSuX8kzWZ8vvqHJvi7idnGBibPGkBZlvSzDJFURfj6FC1ISyl4SpcagDUWVRRISi2ngPTL8PiArUysW3AW0RqUWmqCRATjWiZaa6HbQxXFcjOYUpVTA1wU4eb15S+r4BSwCewBgxWT58BY1XZ16nsVRcCp/67zxwDGd5ld8bkQAQAAAABJRU5ErkJggg%3D%3D%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/zh-CN%27%3B%20%20break%3B%0A%20case%201%3A%20m%3D%27zh-CN/en%27%3B%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20%20%20%20break%3B//%20Ctrl%0A%20case%203%3A%20m%3D%27zh-CN/zh-CN%27%3B%20break%3B//%20Shift-Ctrl%0A%20case%204%3A%20m%3D%27auto/zh-CN%27%3Bbreak%3B//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20cn%5Cn%27+%0A%27Shift-click%3A%20%20cn%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20cn%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20%u8BCD%20%u7684%u5B9A%u4E49%27%3B%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"}
 ,pt:{d:"Portuguese",c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20PT%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAI1SURBVHjapJNLSFRhGIaf/5yjc5xxnEaHaWwqJEWFSaaMiNy2aVNktO+yqiykZVBGO3eBixatgmhXtoqIEJGGJswQJRqsxrIa5+IFzbmcy5zztxG1y0b8Nt/i/Xh4+XhfIaVkJyOAWqB+fW9nLKCoAYGzz+4U/lYlYDoKIPAoDkL8SxjuvRvWAJ/jOsTDrRuCLRUUJMcjyyhC8ibXRNUV1Cruxs1UIQ3g0wDVdh3WrDKLlSKGo9IWWOPMvjxNpgAJkehnhn/uJrXkp05zaKqrx3YdAFUDMG2LQrlC0SrR25LldHSJocc9jL7bA1VJd1eWmxeTvGoI8iTdjCNVTNsCQAMoGyaRcI7zsQ90RfK8SJ5ithLnWA/kl0qMvN9P0DvP7f4xund952H6ILMLWwAtnkUG4lM06AWwVe4/KjI6kcIfdGmOetnbEeBHKUx1JUNn6BsD/jmuLcRJAgrAZEHlciLG5Hwj6BUOdWRwqx5K5SpfZn4x+nyFwwfyaIEyH3MB+hIxkllt04FpGLzONZDIHuFq7CtXzr1leibEy2QbqAonjn7iZPdThibauTfdio2PWmN1E2AZBl7FS7kqGJxsZ2Q+xI3+MW5dSIAUrAYtrqdiJDIhfDVVfJpN2TC2OLAsdCS6pqJrktRyiL7xRi51zuGpcXkw3kLFVgnVOYCKi8S0Np9oScdlJZ39I2UVYHBGB0BXcwghMf8TZwEEgCjg32YX1oCMANT1IqnbBDiAJXZa598DAP+m5+4+KeCCAAAAAElFTkSuQmCC%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/pt%27%3B%20%20break%3B%0A%20case%201%3A%20m%3D%27pt/en%27%3B%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20break%3B//%20Ctrl%0A%20case%203%3A%20m%3D%27pt/pt%27%3B%20%20break%3B//%20Shift-Ctrl%0A%20case%204%3A%20m%3D%27auto/pt%27%3Bbreak%3B//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20pt%5Cn%27+%0A%27Shift-click%3A%20%20pt%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20pt%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20defini%E7%E3o%27%3B%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"}
 ,de:{d:"German",c:"custombutton://%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0D%0A%3Ccustombutton%20xmlns%3Acb%3D%22http%3A//xsms.nm.ru/custombuttons/%22%3E%0A%20%20%3Cname%3Etranslate.google%20tooltip%20DE%3C/name%3E%0A%20%20%3Cimage%3E%3C%21%5BCDATA%5Bdata%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAENSURBVHjapJNNTsMwEIW/cdIKKZQIVWJT9hwgFyC3hVP0BGXDFnawQURRAsg/jW0WTSjdue1sLFt+bz7ZbyTGyDklwBy4HNdjygHfOVDWdf1xSvf1en2TA4X3nqqq0pBFiDGy2WwAihzInHP0fU/TNAeXp/cRkYPz5XKJcw4gywGstbRtS9u2SRRKKay1AOQAD1pRfGpCt4X/vyJyuJ8MouZHK+4mA6M185dXQtenEZRXmFm+JzDGsIgQQ0gyiMOA8cPe4PrRsLqdQUgMlfIMb1u4/yNwELMxVykIYaeZCKzdAhcgqWGMo2Zn4AYfeHruTgmjE6AEVsDiSPEX8C5ANg5SdqSBB5ycO86/AwCO1XbNM5YIzAAAAABJRU5ErkJggg%3D%3D%5D%5D%3E%3C/image%3E%0A%20%20%3Cmode%3E0%3C/mode%3E%0A%20%20%3Cinitcode%3E%3C%21%5BCDATA%5Bthis.onclick%3Dfunction%28e%29%7B%0Aif%28e.button%21%3D%3D0%29%20return%3B%0Ae.preventDefault%28%29%2Ce.stopPropagation%28%29%3B%0Avar%20m%2C%20k%20%3D%20%28e.shiftKey%29%7C%28e.ctrlKey%3C%3C1%29%7C%28e.altKey%3C%3C2%29%3B%0Aswitch%28k%29%7B%0A%20default%3A%20%0A%20case%200%3A%20m%3D%27en/de%27%3B%20%20break%3B%0A%20case%201%3A%20m%3D%27de/en%27%3B%20%20break%3B//%20Shift%0A%20case%202%3A%20m%3D%27en/en%27%3B%20%20break%3B//%20Ctrl%0A%20case%203%3A%20m%3D%27de/de%27%3B%20%20break%3B//%20Shift-Ctrl%0A%20case%204%3A%20m%3D%27auto/de%27%3Bbreak%3B//%20Alt%0A%7D%0Acontent.postMessage%28%27tgtooltip%23%27+m%2C%27*%27%29%3B%20%0A%7D%3B%0Aself.tooltipText%3D%20self.name+%27%5Cn%27+%0A%27%20%20%20%20%20%20%20%20%20%20clik%3A%20%20en%20%u2192%20de%5Cn%27+%0A%27Shift-click%3A%20%20de%20%u2192%20en%5Cn%27+%0A%27%20%20%20%20Alt-clik%3A%20%20auto%20%u2192%20de%5Cn%27+%0A%27%20Ctrl-click%3A%20%20definition%5Cn%27+%0A%27%20S-C-click%3A%20%20Bildsch%E4rfe%27%3B%0A%5D%5D%3E%3C/initcode%3E%0A%20%20%3Ccode%3E%3C%21%5BCDATA%5B/*CODE*/%5D%5D%3E%3C/code%3E%0A%20%20%3Caccelkey%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/accelkey%3E%0A%20%20%3Chelp%3E%3C%21%5BCDATA%5B%5D%5D%3E%3C/help%3E%0A%20%20%3Cattributes/%3E%0A%3C/custombutton%3E"}
@@ -139,7 +199,7 @@ function deCB(cb){
  return(
   decodeURIComponent(cb.
   replace(/%u([\dA-F]{4})|%([A-F][\dA-F])/g,
-   function(m,p,p1) // correct non-standard URI encoding
+   function(m,p,p1) // rectify non-standard URI encoding
     {return encodeURIComponent(String.fromCharCode(parseInt(p||p1,16)))}
  )));
 }
@@ -150,7 +210,7 @@ function mkIcons(){
   cd=deCB(btCodes[b].c);
   m=cd.match(/<image><!\[CDATA\[([\w\W]+?)\]\]>/); //  donnot  use /.+/ NEVERMORE
   if(m && m[1]) 
-   css+="#cb button i."+b+":before{content:url("+m[1]+")}\n"
+   css+="#cb ."+b+":before{content:url("+m[1]+")}\n"
   $i(b).title=btCodes[b].d;
  } 
  var cs=document.createElement("style"); cs.type="text/css";
@@ -159,22 +219,26 @@ function mkIcons(){
 }
 
 function btClik(e){
- var ti,m,t=e.target;
- if(e && (t) && (t.nodeName=='BUTTON') && (ti=t.id)
+ var ti,m,icod,t;
+ if(e && (t=e.target)){
+   if( (t.nodeName=='BUTTON') && (ti=t.id)
       && btCodes[ti])
-  {var icod=deCB(btCodes[ti].c);
-   if(isCB(icod))
-    $i('inst').disabled=false,  cButt=ti;
-   else
-    $i('inst').disabled=true,   cButt=null;
-   m=icod.match(/\<name\>([\w\W]+?)<\/name\>/);
-   $i('cBnam').textContent = (m && m[1]) || ' ';
-   m=icod.match(/initcode><!\[CDATA\[([\w\W]+?)\]\]><\/initcode/);
-   icod=(m && m[1]) || '/* nothing */';
-   $i('cBcod').value=icod;
-   $i('inst').innerHTML='Install &nbsp; <span>&nbsp;'+t.innerHTML+'&nbsp;</span>';
-   $i('cBlan').textContent = btCodes[ti].d;
- }
+   {icod=deCB(btCodes[ti].c);
+    if(isCB(icod))
+     $i('inst').disabled=false,  cButt=ti;
+    else
+     $i('inst').disabled=true,   cButt=null;
+    m=icod.match(/\<name\>([\w\W]+?)<\/name\>/);
+    $i('cBnam').textContent = (m && m[1]) || ' ';
+    m=icod.match(/initcode><!\[CDATA\[([\w\W]+?)\]\]><\/initcode/);
+    icod=(m && m[1]) || '/* nothing */';
+    $i('cBcod').value=icod;
+    $i('inst').innerHTML='Install &nbsp; <span>&nbsp;'+t.innerHTML+'&nbsp;</span>';
+    $i('cBlan').textContent = btCodes[ti].d;
+ }else if(t.nodeName=='A'){
+   e.preventDefault();e.stopPropagation();
+   window.status='dont clik on me';
+ }}
 }
 
 function instClik(e){
@@ -192,6 +256,7 @@ $i('inst').disabled=true;
 
 </script>
 </body>
+</html>
 <!-- button code ----
 this.onclick=function(e){
 if(e.button!==0) return;
@@ -214,4 +279,3 @@ self.tooltipText = self.name+'\n'+
 ' Ctrl-click:  definition\n'+
 ' S-C-click:  определение';
 ---->
-</html>
