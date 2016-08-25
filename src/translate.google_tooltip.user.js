@@ -10,7 +10,7 @@
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
 // @version 16.08.20
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 16.08.20 * tooltip for Google button
+// 16.08.25 + Keeps tooltip window position after dragging
 // 16.08.16 + Word Definition is shown when source_language == target_language
 // 16.03.09   + bookmarlets interface -- javascript:postMessage('tgtooltip/auto/fr','*')
 // 16.01.17-2 *+ translation from input/textarea fields
@@ -66,7 +66,7 @@ var version= 3790;
 
 var HREF_NO = 'javascript:void(0)';
 
-var llii=0, _log = function(){ /* * /
+var llii=0, _log = function(){ /* * 
  for (var s=++llii +':', li=arguments.length, i = 0; i<li; i++) 
   s+=' ' + arguments[i];
  console.log(s)
@@ -219,7 +219,7 @@ function forwLookup(e){
     killId('divUse');
     var t=gt_tl; gt_tl=gt_sl; gt_sl=t;
     gtRequest(txtSel,gt_sl,gt_tl);
-   	currentURL = GTurl +  "#" + gt_sl + _l_ + gt_tl + _l_ + escAp(txtSel);
+   	currentURL = GTurl +  "/" + gt_sl + _l_ + gt_tl + _l_ + escAp(txtSel);
 }
  var Gctrl, Galt;
  var sayTip="\n[shift / ctrl] listen (";
@@ -540,7 +540,7 @@ function histLookup(e){
   var lang = ht[ix][2].match(/([a-zA-Z-]+)[\|\/]([a-zA-Z-]+)/);
   gt_sl=lang[1]; gt_tl=lang[2];
   txtSel = txt; 
-	getId('divResult').innerHTML = 'Loading...'
+	getId('divResult').innerHTML = 'Loading...';
   gtRequest(txtSel,gt_sl,gt_tl);
   } catch(e){console.log('broken history\n'+e)}
 }
@@ -639,10 +639,7 @@ function extractResult(html){
    // console.log("result:\n"+tx);
   }catch(e){console.log("result_box\n"+e)} 
 	dR.innerHTML = '<div  id=gdptrantxt>'+
-//' class=gootranslink href=# target=_blank>' +  // +'<br>&nbsp;';
   tx + '</div>';
- // dR.childNodes[0].setAttribute('href',currentURL); //<a href
- // dR.childNodes[0].setAttribute('title',deURI(currentURL,"&text="));
  setTxtDir(dR,GT_tl);
   dict();
 }
@@ -1303,11 +1300,14 @@ var dragOK=false;                               // True if we're allowed to move
 var dragXoffset=0;                              // How much we've moved the element on the horozontal
 var dragYoffset=0;                              // How much we've moved the element on the verticle
 var didDrag=false;								//set to true when we do a drag
+var dragX, dragY;
 function moveHandler(e){
 	if (e == null) return;// { e = window.event } 
-	if ( e.button<=1 && dragOK ){
-		savedTarget.style.left = e.clientX - dragXoffset + 'px';
-		savedTarget.style.top = e.clientY - dragYoffset + 'px';
+	if ( e.button<=1 && dragOK ){ var x,y;
+		savedTarget.style.left = (x=e.clientX - dragXoffset) + 'px';
+		savedTarget.style.top = (y=e.clientY - dragYoffset) + 'px';
+    dragX=x-pageXOffset;
+    dragY=y-pageYOffset;
 		return false;
 	}
 }
@@ -1431,7 +1431,6 @@ function googleTK(text, SL) {
 }
 // ]&tk=
 function stickStyle(css){
- //console.log(css) // !!!!
  var s=document.createElement("style"); s.type="text/css";
  s.appendChild(document.createTextNode(css));
  return (document.head||document.documentElement).appendChild(s);
@@ -1912,14 +1911,23 @@ function deURI(u,m){
 
 function cmdGT(aS,aT){ 
   txtSel = getSelection(null) || txtSel;
-  var p = {t: (pageYOffset+10)+"px",l:(window.pageXOffset+50)+"px", r:"auto" }
   if(!isInited) {css(-1); isInited=true; }
+  /* 16.08.25 */
+  if(!txtSel) txtSel="Google Translator";
+  if(aT&& getId('divResult')){
+   killId('divUse');    
+   getId('divResult').innerHTML = 'Loading...'
+   gtRequest(txtSel,gt_sl=aS,gt_tl=aT);
+   return;
+  }
+  var p = {t: pageYOffset+10+"px",l: pageXOffset+50+"px", r:"auto" };
+  if(savedTarget) // was dragged
+    p.t=dragY+pageYOffset +"px", p.l=dragX+pageXOffset+"px";
   var divLookup = getId('divLookup') ||
   buildEl('div', {id:'divLookup', style: 'z-index:100000'+
    ';border: none;' +
    ';top:'  + p.t  +';left:' + p.l  +';right:' + p.r  +';bottom: auto'
   }, null, null);
-  if(!txtSel) txtSel="Google Translator";
   body.appendChild(divLookup);
   if(aT){
     lookup(null,aS,aT); 
