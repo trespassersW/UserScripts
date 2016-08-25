@@ -1307,7 +1307,7 @@ function moveHandler(e){
 		savedTarget.style.left = (x=e.clientX - dragXoffset) + 'px';
 		savedTarget.style.top = (y=e.clientY - dragYoffset) + 'px';
     dragX=x-pageXOffset;
-    dragY=y-pageYOffset;
+    dragY=y-pageYOffset; if(dragY<=0)dragY=0;
 		return false;
 	}
 }
