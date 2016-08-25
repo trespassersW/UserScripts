@@ -2,14 +2,16 @@
 <!-- © 2016 trespassersW  license: MIT -->
 <html><head>  
 <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK REL="SHORTCUT ICON"  HREF="tranlator.png">
 <title> custombuttons for translate.google tooltip </title>
 <style>
 #cb {background: #e1ebf2; position: relative;}
 #cb button {height: 2em; min-width: 7.5em; padding-right: .5em; cursor: pointer; font-size: 12pt;}
-#bmk a:before,
-#lft i:before,#rit i:before 
+#cb .ico:before
 {position: relative; top:3px; padding-right: 4px;}
-
+#cb .ico.auto::before{
+content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAC4jAAAuIwF4pT92AAABvUlEQVR42o2T3StDcRjHz5VbfwVjFy6UG3nJnZJyuUTRZEV5T+3iJNmQJLRI2CQXimly1kbTpHlvzKi5MHnZvMXMlGOKr37PaSctDhefc57zPM/n2+/UORwA7jfib09Qgu38WzZ080RyXzGgt68DNbqKH2GzPwNOAl44nFbUNVTD7RbgO/BQPWkeptnL87W03LgHKGGcc8kBzW21JEcjlwTJ8Q+Jh9grNo5O4Q+G5N7zO1BpD6OjswUDg50wjfTg8T4ow+m2pSXG2JIHKo2eCEdFua9xPlAAQxBmSLy+OpYCyj3ArShR2GqCqspImOy7cr948QZmywDB9/BI4SOw2SwUwpW4geALYPOFkKEbRNPkMnKaRlGoN1OfUboaR+jikGByStcr3dkzl7cC+CJA/dQaMhonML55Lte2wCPNCpwiLs72JTkJLsv+ieXLODLbZ4kykxv5xiWqtdM7WL/7RI4g0rLX7yUSMp1AvfgGveMUmbyAon4Xysc3iGyDk1g4E2Xhu8ygT1k1H0Pu0BbUxjVM+KMkMGqtJ9T76dgJmQLSZm7oFZT4TaaA9BItUuegCNtJFuUAdmELSij98l+cqP64JGrolQAAAABJRU5ErkJggg==)
+} 
 #inst {margin-left: auto; margin-right: auto; width: 12em; display: block;
 text-align: center;
 }
@@ -17,19 +19,16 @@ text-align: center;
  position: relative; float: left;
  padding-left:.5em; width: 50%;
 }
-
 #rit{position: relative; float: right; 
  border-left: 1px solid green; padding: 0 .6em;
  min-width: 200px;
  width: 44%;
  line-height:1.2;
 }
-
 #cb li { 
 display: inline-block; position: relative; list-style-type:none;
 padding-right:.5em;
 }
-
 #cBcod{
  font-family: monospace; 
  font-family: monospace; 
@@ -40,20 +39,16 @@ padding-right:.5em;
  width:98%; height: 25em; margin: 4px auto 4px auto; 
  padding: 4px 4px 4px 8px;
 }
-/* */
 #cb h3 sup>a{text-decoration: none !important;}
 #cb h3, #cb hr {color: green}
 #inst span {border: thin dotted gray;}
 #rit em {color: #777}
-
 #sshot{float:right;
 position: relative; border: 1px solid grey; border-radius: 4px; padding: 2px;
 width: 200px; background: #e1ebf2; margin: 0 -26px 0 4px; text-align: center;
 }
 #cb ul{
     list-style-type: none;
-    margin-block-end: 0;
-    margin-block-start: 0;
     padding-inline-start: .5em;
     margin: .5em 0 0 .5em;
     text-align:left;
@@ -68,7 +63,7 @@ position: relative;border-top:1px solid grey;padding: .5em 0;
 </style>
 </head>
 <html>
-<body id=cb>
+<body><body><article id=cb>
 <h3>&nbsp; &nbsp; 
 Custom Buttons<sup><a href=https://addons.mozilla.org/firefox/addon/custom-buttons/>&#x21d7;</a></sup>
  for <em>translate.google tooltip</em> user.js<sup><a 
@@ -77,18 +72,18 @@ href=https://github.com/trespassersW/UserScripts/blob/master/show/translate.goog
 <hr>
 <div id=lft>
 <ul id=lul style="margin-bottom:.5em;">
-<li> <button id=en><i class=en></i>english</button>
-<li> <button id=ru><i class=ru></i>русский</button>
-<li> <button id=cn><i class=cn></i>中国</button>
-<li> <button id=pt><i class=pt></i>português</button>
-<li> <button id=es><i class=es></i>español</button>
-<li> <button id=fr><i class=fr></i>français</button>
-<li> <button id=it><i class=it></i>italiano</button>
-<li> <button id=de><i class=de></i>deutsch</button>
-<li> <button id=ja><i class=ja></i>日本の</button>
-<li> <button id=ar><i class=ar></i>تعريف</button>
-<li> <button id=ko><i class=ko></i>한국어</button>
-<li> <button id=ur><i class=ur></i>اردو زبان</button>
+<li> <button id=en><i class="ico en"></i>english</button>
+<li> <button id=ru><i class="ico ru"></i>русский</button>
+<li> <button id=cn><i class="ico cn"></i>中国</button>
+<li> <button id=pt><i class="ico pt"></i>português</button>
+<li> <button id=es><i class="ico es"></i>español</button>
+<li> <button id=fr><i class="ico fr"></i>français</button>
+<li> <button id=it><i class="ico it"></i>italiano</button>
+<li> <button id=de><i class="ico de"></i>deutsch</button>
+<li> <button id=ja><i class="ico ja"></i>日本の</button>
+<li> <button id=ar><i class="ico ar"></i>تعريف</button>
+<li> <button id=ko><i class="ico ko"></i>한국어</button>
+<li> <button id=ur><i class="ico ur"></i>اردو زبان</button>
 </ul>
 <div id=cbnot>
 <div id=sshot title=screenshot>
@@ -117,31 +112,31 @@ To use these <em>custom buttons</em>, you need to have the following things in y
  drag item to your <strong>Bookmarks Toolbar</strong>.
 </div> 
 <ul style="text-align:left">
-<a class="auto" title="Word Definition" href=
+<a class="ico auto" title="Word Definition" href=
 "javascript:postMessage('tgtooltip#en/en','*')">Define</a><br>
-<li><a class="en" title="auto → British" href=
+<li><a class="ico en" title="auto → British" href=
 "javascript:postMessage('tgtooltip#auto/en','*')">english</a>
-<li><a class="ru" title="auto → Russian" href=
+<li><a class="ico ru" title="auto → Russian" href=
 "javascript:postMessage('tgtooltip#auto/ru','*')">русский</a>
-<li><a class="cn" title="auto → Chiness"  href=
+<li><a class="ico cn" title="auto → Chiness"  href=
 "javascript:postMessage('tgtooltip#auto/zh-CN','*')">中国</a>
-<li><a class="pt" title="auto → Portuguese" href=
+<li><a class="ico pt" title="auto → Portuguese" href=
 "javascript:postMessage('tgtooltip#auto/pt','*')">português</a>
-<li><a class="es" title="auto → Spanish" href=
+<li><a class="ico es" title="auto → Spanish" href=
 "javascript:postMessage('tgtooltip#auto/es','*')">español</a>
-<li><a class="fr" title="auto → French" href=
+<li><a class="ico fr" title="auto → French" href=
 "javascript:postMessage('tgtooltip#auto/fr','*')">français</a>
-<li><a class="it" title="auto → Italian" href=
+<li><a class="ico it" title="auto → Italian" href=
 "javascript:postMessage('tgtooltip#auto/it','*')">italiano</a>
-<li><a class="de" title="auto → German" href=
+<li><a class="ico de" title="auto → German" href=
 "javascript:postMessage('tgtooltip#auto/de','*')">deutch</a>
-<li><a class="ja" title="auto → Japanese" href=
+<li><a class="ico ja" title="auto → Japanese" href=
 "javascript:postMessage('tgtooltip#auto/ja','*')">日本の</a>
-<li><a class="ar" title="auto → Arabic" href=
+<li><a class="ico ar" title="auto → Arabic" href=
 "javascript:postMessage('tgtooltip#auto/ar','*')">تعريف</a>
-<li><a class="ko" title="auto → Korean" href=
+<li><a class="ico ko" title="auto → Korean" href=
 "javascript:postMessage('tgtooltip#auto/ko','*')">한국어</a>
-<li><a class="ur" title="auto → Urdu" href=
+<li><a class="ico ur" title="auto → Urdu" href=
 "javascript:postMessage('tgtooltip#auto/ur','*')">اردو زبان</a>
 
 </ul>
@@ -209,7 +204,7 @@ function mkIcons(){
   cd=deCB(btCodes[b].c);
   m=cd.match(/<image><!\[CDATA\[([\w\W]+?)\]\]>/); //  donnot  use /.+/ NEVERMORE
   if(m && m[1]) 
-   css+="#cb ."+b+":before{content:url("+m[1]+")}\n"
+   css+="#cb .ico."+b+":before{content:url("+m[1]+")}\n"
   $i(b).title=btCodes[b].d;
  } 
  var cs=document.createElement("style"); cs.type="text/css";
@@ -254,7 +249,7 @@ $i('inst').disabled=true;
 })();
 
 </script>
-</body>
+</article></body>
 </html>
 <!-- button code ----
 this.onclick=function(e){
