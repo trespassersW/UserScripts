@@ -8,7 +8,7 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 16.08.20
+// @version 16.08.25
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
 // 16.08.25 + Keeps tooltip window position after dragging
 // 16.08.16 + Word Definition is shown when source_language == target_language
