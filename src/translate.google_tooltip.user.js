@@ -8,9 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 16.08.25
+// @version 16.08.26
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 16.08.25 + Keeps tooltip window position after dragging
+// 16.08.26 + option for left/right tooltip position; keeps tooltip position after dragging
 // 16.08.16 + Word Definition is shown when source_language == target_language
 // 16.03.09   + bookmarlets interface -- javascript:postMessage('tgtooltip/auto/fr','*')
 // 16.01.17-2 *+ translation from input/textarea fields
@@ -776,6 +776,12 @@ function options(evt){
      b.paletteN=ii;
      b.addEventListener('click',bgClick,false); 
     }
+    /* 160826 */
+    b=addEl(dO,'label');
+    d=addEl(b,'input',{id:"gtpwPos", type:"checkbox", style:"display:none"},['change', 
+    function(e){GM_setValue('gtpwPos',e.target.checked)}], null);
+    addEl(b,'span',{'class':"gtptogl",title:"position of tooltip window"});
+    d.checked=GM_getValue('gtpwPos',false);
     getId('optionsTo').className='gootransbutt gootranslink gtlActive';
 		//cancel
 	}
@@ -1081,7 +1087,7 @@ function saveOptions(evt){
 	GM_setValue('alt', alt);
 	GM_setValue('sourceBH', sourceBH);
 	GM_setValue('sourceDP', sourceDP);
-  GM_setValue('noFlags',nf)
+  GM_setValue('noFlags',nf);
 	getId('divDic').removeChild(getId('divOpt'));
 	getId('optionsLink').title='Settings';
   return;
@@ -1274,7 +1280,7 @@ function buildEl(type, attrArray, eL, html)
 }
 
 function getId(id, parent){
-	if(!parent)
+  if(!parent)
 		return document.getElementById(id);
 	return parent.getElementById(id);	
 }
@@ -1457,7 +1463,7 @@ width: auto;height: auto; border: none; border-radius: 0; background: none; box-
 '#divResult table *{ line-height: 0.9 !important}'+
 '#divDic, #divDic *, #divSelflag, #divSelflag *{\
 font-family: Tahoma, sans-serif!important;\
-font-size: small!important;\
+font-size: normal!important;\
 font-style: normal!important;\
 font-weight: normal!important;\
 font-stretch: normal!important;\
@@ -1473,7 +1479,7 @@ color:'+FG.t[i]+'\
 '#divSelflag{ max-width: 180px; }'+
 '.gootranslink, #divDic .gootranslink ,#divSelflag .gootranslink\
 {color:'+FG.l[i]+'!important; text-decoration: none !important;\
-font: small normal Tahoma,sans-serif !important;'+
+font: normal normal Tahoma,sans-serif !important;'+
 'cursor:pointer !important; }'  +  
 '#divDic a.gootranslink:visited,\
  #divDic a.gootranslink:hover,\
@@ -1500,12 +1506,12 @@ height:1.5em!important; min-height:1.5em!important;\
 color:'+FG.t[i]+'!important;\
 padding-bottom: 3px !important; margin-bottom: 4px!important;}'+
 '#divExtract{word-spacing: normal !important;}'+
-'#divBottom {position: relative; width: 100%; font-size: smaller; text-decoration:none; }'+    
-'#divBottom #historyLink {display: inline; position: relative; font-size:smaller; text-decoration:none;}'+
-'#divBottom #sourceLink {display: inline; position: relative; margin-left: .5em;  font-size:smaller; text-decoration:none;}'+
+'#divBottom {position: relative; width: 100%; font-size: normal; text-decoration:none; }'+    
+'#divBottom #historyLink {display: inline; position: relative; font-size:normal; text-decoration:none;}'+
+'#divBottom #sourceLink {display: inline; position: relative; margin-left: .5em;  font-size:normal; text-decoration:none;}'+
 '#divBottom #imgSourcesave {display: inline; position: relative; margin-left:2px;\
 cursor:pointer;}'+
-'#divBottom #optionsLink {display: inline; position: relative; margin-left: 1em; font-size:smaller !important; text-decoration:none !important;}'+
+'#divBottom #optionsLink {display: inline; position: relative; margin-left: 1em; font-size:normal !important; text-decoration:none !important;}'+
 '#divBottom #optionsLink [id^="options"] {margin-right: 2px; padding-left: 2px;}'+
 '#divDic #divOpt {position: relative; padding: 5px;'+
 'border-top: thin solid grey!important;}'+ 
@@ -1514,7 +1520,7 @@ cursor:pointer;}'+
 'border-top: thin solid grey!important; color:'+FG.t[i]+'!important;}'+ 
 '#divResult #gtp_dict {background:'+BG.C[i]+'!important;color:'+FG.t[i]+'!important;\
  padding:3px!important; border-radius:3px;'+
-'margin-bottom: .1em!important; overflow-y:auto !important; overflow-x:hidden; font-size:small;}'+
+'margin-bottom: .1em!important; overflow-y:auto !important; overflow-x:hidden; font-size:normal;}'+
 '#divDic #divOpt {background:'+BG.C[i]+'!important; position:relative; padding:5px; text-align:left !important;}'+
 '#divLookup, #divUse {background-color:transparent !important; position:absolute;\
  padding: 3px; margin: 0;}'+
@@ -1606,8 +1612,18 @@ background:'+ BG.C[i] +'!important; color:'+FG.t[i]+'!important;}'+
     border-top: 2px groove '+FG.g[i]+' !important;\
     margin-top: 0.5em;\
     color:'+FG.g[i]+'!important;\
-}'
-);
+    width: .8em !important;\
+}\
+.gtptogl{  position: relative;  display: inline-block;\
+  cursor: pointer;font-weight:bold!important; }\
+.gtptogl:before {position: absolute; bottom: -4px;\
+ background:' + '#EEE' + '!important;color:'+'#007FFF'+'!important;\
+ content: "L"; font-weight:bold!important;\
+ border: solid grey; border-width: 1px 8px 1px 1px;\
+ margin: 0 0 0 2px; padding:0;}\
+input#gtpwPos:checked + .gtptogl:before{content: "R";\
+border-width: 1px 1px 1px 8px; }\
+');
 
 if(-1 !== n) return;
 stickStyle(
@@ -1650,7 +1666,7 @@ border: 1px #aaa solid;\
 border-radius: 6px;\
 background-color: #dfd;\
 padding: 1px 4px;\
-font-size: small; line-height:0.9;\
+font-size: normal; line-height:0.9;\
 -webkit-transition: visibility .2s linear .2s;\
 transition: visibility .2s linear .2s;\
 }\
@@ -1920,9 +1936,13 @@ function cmdGT(aS,aT){
    gtRequest(txtSel,gt_sl=aS,gt_tl=aT);
    return;
   }
+  
   var p = {t: pageYOffset+10+"px",l: pageXOffset+50+"px", r:"auto" };
   if(savedTarget) // was dragged
     p.t=dragY+pageYOffset +"px", p.l=dragX+pageXOffset+"px";
+  else if(GM_getValue('gtpwPos',false))
+      p.l = pageXOffset+Math.floor(window.innerWidth/2)+"px";
+
   var divLookup = getId('divLookup') ||
   buildEl('div', {id:'divLookup', style: 'z-index:100000'+
    ';border: none;' +
