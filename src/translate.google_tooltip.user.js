@@ -8,8 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 16.08.26
+// @version 16.08.27
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 16.08.27 * CSS hotfixes
 // 16.08.26 + option for left/right tooltip position; keeps tooltip position after dragging
 // 16.08.16 + Word Definition is shown when source_language == target_language
 // 16.03.09   + bookmarlets interface -- javascript:postMessage('tgtooltip/auto/fr','*')
@@ -62,11 +63,10 @@ var   GTurl= "https://translate.google"+GTsuffix+"/?";
 //var dictURL= "https://translate.google"+GTsuffix+"/translate_a/t?client=t";
 var dictURL= "https://translate.google"+GTsuffix+"/translate_a/single?client=t";
 var  ttsURL= "https://translate.google.com/translate_tts?client=t";
-var version= 3790;
 
 var HREF_NO = 'javascript:void(0)';
 
-var llii=0, _log = function(){ /* * 
+var llii=0, _log = function(){ /* *
  for (var s=++llii +':', li=arguments.length, i = 0; i<li; i++) 
   s+=' ' + arguments[i];
  console.log(s)
@@ -637,9 +637,9 @@ function extractResult(html){
   try{
    tx=getXId("result_box").textContent
    // console.log("result:\n"+tx);
-  }catch(e){console.log("result_box\n"+e)} 
-	dR.innerHTML = '<div  id=gdptrantxt>'+
-  tx + '</div>';
+  }catch(e){tx=e;console.log("result_box\n"+e)} 
+	dR.innerHTML = '<div id=gdptrantxt>'+
+  (tx||'Reading...') + '</div>';
  setTxtDir(dR,GT_tl);
   dict();
 }
@@ -961,7 +961,7 @@ function onTimerDict(){
 }
 
 function dict(){
-  var dR=getId('divResult');
+// var dR=getId('divResult');
     killId('gtp_dict');
 //    var dD=buildEl('div',{id:"gtp_dict"},null,dict)
 //    dR.appendChild(dD);
@@ -1460,10 +1460,10 @@ width: auto;height: auto; border: none; border-radius: 0; background: none; box-
 '#divResult {overflow: visible !important; padding:3px !important; margin: 0 5px 3px 0 !important; '+
 'position: relative; z-index: auto !important;}'+
 '#gtp_dict {max-height: 480px !important; overflow: auto !important;}'+
-'#divResult table *{ line-height: 0.9 !important}'+
+'#divResult table *{ line-height: 1 !important}'+
 '#divDic, #divDic *, #divSelflag, #divSelflag *{\
 font-family: Tahoma, sans-serif!important;\
-font-size: normal!important;\
+font-size:medium!important;\
 font-style: normal!important;\
 font-weight: normal!important;\
 font-stretch: normal!important;\
@@ -1479,7 +1479,7 @@ color:'+FG.t[i]+'\
 '#divSelflag{ max-width: 180px; }'+
 '.gootranslink, #divDic .gootranslink ,#divSelflag .gootranslink\
 {color:'+FG.l[i]+'!important; text-decoration: none !important;\
-font: normal normal Tahoma,sans-serif !important;'+
+font: normal medium Tahoma,sans-serif !important;'+
 'cursor:pointer !important; }'  +  
 '#divDic a.gootranslink:visited,\
  #divDic a.gootranslink:hover,\
@@ -1491,7 +1491,7 @@ font: normal normal Tahoma,sans-serif !important;'+
 '#gtp_dict tr>td{font-size:1em !important; line-height:1!important;\
  background:transparent!important;'+
 '}'+
-'a.goohistlink {background:'+BG.F[i] +'!important;}'+
+'#gtp_dict a.goohistlink {background:'+BG.F[i] +'!important;}'+
 '#gtp_dict {margin: 0; position: relative;}'+
 '#gtp_dict ol {padding: 0 .5em 0 0; margin-left: 0.2em;}'+
 '#gtp_dict li {list-style: square inside; display: list-item;}'+
@@ -1506,12 +1506,12 @@ height:1.5em!important; min-height:1.5em!important;\
 color:'+FG.t[i]+'!important;\
 padding-bottom: 3px !important; margin-bottom: 4px!important;}'+
 '#divExtract{word-spacing: normal !important;}'+
-'#divBottom {position: relative; width: 100%; font-size: normal; text-decoration:none; }'+    
-'#divBottom #historyLink {display: inline; position: relative; font-size:normal; text-decoration:none;}'+
-'#divBottom #sourceLink {display: inline; position: relative; margin-left: .5em;  font-size:normal; text-decoration:none;}'+
+'#divBottom {position: relative; width: 100%; font-size:medium; text-decoration:none; }'+    
+'#divBottom #historyLink {display: inline; position: relative; font-size:medium; text-decoration:none;}'+
+'#divBottom #sourceLink {display: inline; position: relative; margin-left: .5em;  font-size:medium; text-decoration:none;}'+
 '#divBottom #imgSourcesave {display: inline; position: relative; margin-left:2px;\
 cursor:pointer;}'+
-'#divBottom #optionsLink {display: inline; position: relative; margin-left: 1em; font-size:normal !important; text-decoration:none !important;}'+
+'#divBottom #optionsLink {display: inline; position: relative; margin-left: 1em; font-size:medium !important; text-decoration:none !important;}'+
 '#divBottom #optionsLink [id^="options"] {margin-right: 2px; padding-left: 2px;}'+
 '#divDic #divOpt {position: relative; padding: 5px;'+
 'border-top: thin solid grey!important;}'+ 
@@ -1520,7 +1520,7 @@ cursor:pointer;}'+
 'border-top: thin solid grey!important; color:'+FG.t[i]+'!important;}'+ 
 '#divResult #gtp_dict {background:'+BG.C[i]+'!important;color:'+FG.t[i]+'!important;\
  padding:3px!important; border-radius:3px;'+
-'margin-bottom: .1em!important; overflow-y:auto !important; overflow-x:hidden; font-size:normal;}'+
+'margin-bottom: .1em!important; overflow-y:auto !important; overflow-x:hidden; font-size:medium;}'+
 '#divDic #divOpt {background:'+BG.C[i]+'!important; position:relative; padding:5px; text-align:left !important;}'+
 '#divLookup, #divUse {background-color:transparent !important; position:absolute;\
  padding: 3px; margin: 0;}'+
@@ -1536,17 +1536,19 @@ padding: 0 0 0 4px; margin: 0; border: none; border-top: 1px solid #AAA}' +
 'border-radius: 3px; margin-top: 5px; }'+
 '#divDic .goounsaved {background-color: #EF9024!important;'+
 'border-radius: 3px; margin-top: 5px; }'+
-'td.gtp-pos { color:'+FG.t[i]+'!important; font-weight: bold !important;  text-align: left; }'+
-'td.gtp-pos:before{ content:"\u2666 "; color:'+FG.t[i]+'!important;}'+
-'td.gtp-word {color:'+FG.t[i]+'!important; padding-left: 5px; padding-right: 10px;'+
+'#gtp_dict td.gtp-pos { color:'+FG.g[i]+'!important; font-style: italic !important;  text-align: left; }'+
+'#gtp_dict td.gtp-pos:before{ content:"\u25BE "; font-style: normal!important; color:'+FG.g[i]+'!important;}'+
+'#gtp_dict td.gtp-word {color:'+FG.t[i]+'!important; padding-left: 5px; padding-right: 10px;'+
 'vertical-align: top; white-space: normal;}'+
-'td.gtp-word i {color:'+FG.g[i]+'!important; padding-left:10px;}'+
-'#gtp_dict .gtp-word i span {color:'+FG.g[i]+'!important; font-style:italic!important;}'+
-'td.gtp-trans {/*overflow-x: hidden;*/ vertical-align: top; white-space: normal;'+
+'#gtp_dict .gtp-word i,'+
+'#gtp_dict .gtp-word i span{color:'+FG.g[i]+'!important;}'+
+'#gtp_dict .gtp-word i { padding-left:10px;}'+
+'#gtp_dict .gtp-word i span {font-style:italic!important;}'+
+'#gtp_dict td.gtp-trans {/*overflow-x: hidden;*/ vertical-align: top; white-space: normal;'+
 ' width: 100%; color:'+FG.g[i]+'!important}'+
-'td.gtp-pos, td.gtp-word, td.gtp-trans {padding-bottom: 0px !important; padding-bottom: 1px !important;}'+
-'.gtp-hide {display: none}'+
-'.gtp-block {display: block}'+
+'#gtp_dict td.gtp-pos, #gtp_dict td.gtp-word, #gtp_dict td.gtp-trans {padding-bottom: 1px !important;}'+
+'#gtp_dict .gtp-hide {display: none}'+
+'#gtp_dict .gtp-block {display: block}'+
 '#divTtsIfr{position: relative;padding: 0!important;margin:3px 0 0 0!important;\
 background:'+ BG.C[i] +'!important; color:'+FG.t[i]+'!important;}'+
 '#gdptrantxt {font-size: 1em !important; line-height: 1;\
@@ -1612,7 +1614,6 @@ background:'+ BG.C[i] +'!important; color:'+FG.t[i]+'!important;}'+
     border-top: 2px groove '+FG.g[i]+' !important;\
     margin-top: 0.5em;\
     color:'+FG.g[i]+'!important;\
-    width: .8em !important;\
 }\
 .gtptogl{  position: relative;  display: inline-block;\
   cursor: pointer;font-weight:bold!important; }\
@@ -1641,7 +1642,7 @@ background-color: rgba(127,127,127,.25); padding: 3px 0 !important;\
 #divOpt select, #divOpt input, .gootranslink, \
 #divDic img, #divDic input, #divDic textarea\
 { padding:0 0 0 0; margin: 0 0 0 0; background: none repeat scroll 0 0 transparent;\
-  border: none; line-height: 0.95; float: none}'+
+  border: none; line-height: .9; float: none}'+
 '#divOpt {line-height: 2.3 !important;}\
 div#divBottom{padding-top: 3px;}\
 .gootransbutt#optionsLink{margin-top:0; padding-top: 3px; padding-bottom: 1px;}\
@@ -1666,7 +1667,7 @@ border: 1px #aaa solid;\
 border-radius: 6px;\
 background-color: #dfd;\
 padding: 1px 4px;\
-font-size: normal; line-height:0.9;\
+font-size:medium; line-height:1;\
 -webkit-transition: visibility .2s linear .2s;\
 transition: visibility .2s linear .2s;\
 }\
@@ -1856,10 +1857,6 @@ sourceBH = GM_getValue('sourceBH',3);
 sourceDP = GM_getValue('sourceDP',10);
 if(!sourceDP) sourceDP = 10;
 
-var av = GM_getValue('version');
-if( av!= version ){
-  GM_setValue('version',version);
-}
 sT=GM_getValue('sourceText');
 if (sT){ 
  try{
