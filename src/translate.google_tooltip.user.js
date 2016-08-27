@@ -1491,7 +1491,7 @@ font: normal medium Tahoma,sans-serif !important;'+
 '#gtp_dict tr>td{font-size:1em !important; line-height:1!important;\
  background:transparent!important;'+
 '}'+
-'#gtp_dict a.goohistlink {background:'+BG.F[i] +'!important;}'+
+'#divDic a.goohistlink {background:'+BG.F[i] +'!important;}'+
 '#gtp_dict {margin: 0; position: relative;}'+
 '#gtp_dict ol {padding: 0 .5em 0 0; margin-left: 0.2em;}'+
 '#gtp_dict li {list-style: square inside; display: list-item;}'+
