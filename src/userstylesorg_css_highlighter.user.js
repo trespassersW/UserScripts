@@ -5,7 +5,7 @@
 // @include         http://userstyles.org/styles/*
 // @include         https://userstyles.org/styles/*
 // /include         file:///E:/userscripts.org/styles/*
-// @version         16.08.28
+// @version         16.08.28.1
 // 16.08.28 + keeps highliting status between sessions
 // 2.1.1 2016-01-04 + ctrl-clik copies CSS code to clipboard
 // 2.0.1 cut extra empty lines
@@ -230,11 +230,12 @@ if(!HiliteUsoCod) return;
 
 // suggested by @darkred
 var observer = new MutationObserver(function (mutations) {
-    mutations.forEach(function (m) {
-        if( document.querySelector('#hiBeauty')) {
+    mutations.some(function (m) {
+        if( document.getElementById('hiBeauty')) {
            observer.disconnect(); 
-           hiBeauty();
+           hiBeauty(); return true;
         }
+        return false;
 })});
 observer.observe(document.querySelector('#stylish-code'), {childList: true});
 
