@@ -5,7 +5,8 @@
 // @include         http://userstyles.org/styles/*
 // @include         https://userstyles.org/styles/*
 // /include         file:///E:/userscripts.org/styles/*
-// @version         2.1.0
+// @version         16.08.28
+// 16.08.28 + keeps highliting status between sessions
 // 2.1.1 2016-01-04 + ctrl-clik copies CSS code to clipboard
 // 2.0.1 cut extra empty lines
 // 2.0 dark grey background;
@@ -139,6 +140,7 @@ border: none\
 function hiStat(x){
  vc.className=bt.className= x;
  bt.setAttribute('title',x? 'raw text': 'highlight');
+ if(locStor) locStor.setItem('HiliteUsoCod', !!x);
 }
 function isBeauty(){
  sc=document.getElementById("stylish-code");
@@ -155,14 +157,15 @@ function isBeauty(){
 }
 
 function hiBeauty(e){
- if(e) e.preventDefault(),e.stopPropagation();
  sc=document.getElementById("stylish-code");
+ if(e){
+ e.preventDefault(),e.stopPropagation();
  if(e.shiftKey || e.altKey) return;
  if(e.ctrlKey) {  // 2016-01-04
    GM_setClipboard(sc.textContent);
    window.status = 'CSS copied to clipboard';
    return;
- }
+ }}
  if(isBeauty()!=0) return;
  if(!( highlighted && tc && tc === sc.textContent )){
  tc =  sc.textContent;
@@ -212,7 +215,27 @@ function sbclik(){
   vc = document.getElementById("view-code");
   }
   bt.className='';
+  //if(HiliteOn) alert('HiOn'),HiliteOn=0;
 }
   sb.addEventListener('mousedown', sbclik, false);
+
+var locStor,HiliteUsoCod=false;
+try { // localStorage throws 'security error' when cookies are disabled
+  locStor = localStorage;
+  HiliteUsoCod = locStor.getItem("HiliteUsoCod")==='true';
+// see SQlite manager -> %FFpath%\webappstore.sqlite -> find -> key -> contains HiliteUso
+} catch(e){ locStor = false; };
+
+if(!HiliteUsoCod) return;
+
+// suggested by @darkred
+var observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (m) {
+        if( document.querySelector('#hiBeauty')) {
+           observer.disconnect(); 
+           hiBeauty();
+        }
+})});
+observer.observe(document.querySelector('#stylish-code'), {childList: true});
 
 })();
