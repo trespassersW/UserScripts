@@ -12,8 +12,7 @@ Also, you can run the script using Greasemonkey menu: <br> &nbsp;  <code><i><b>T
 
 <hr>
 * 16.08.27 `[+]` option for left/right tooltip position; `[*]` CSS hotfixes
-* 16.08.16 [ :tropical_fish: ] ***Word Definition*** is shown when `source_language == target_language` <br> <img alt="definition" title="GT definition" src=https://github.com/trespassersW/UserScripts/raw/master/res/gt_def.png><br> *bookmarklet:* `javascript:postMessage('tgtooltip en|en','\*')`<br><em>Custom button:</em> `content.postMessage('tgtooltip en|en','*')`<br>Sample bookmarklets and custombuttons can be found <a href=https://rawgit.com/trespassersW/UserScripts/master/htm/customButt.htm>here</a><br>
-
+* 16.08.16 [ :tropical_fish: ] ***Word Definition*** is shown when `source_language == target_language` <br> <img alt="definition" title="GT definition" src=https://github.com/trespassersW/UserScripts/raw/master/res/gt_def.png><br> *bookmarklet:* `javascript:postMessage('tgtooltip en|en','\*')`<br><em>Custom button:</em> `content.postMessage('tgtooltip en|en','*')`
 * 16.01.16.1 `+` alternative translation
 * 3.7.2 2015-04-20 `*` TTS: <em>`alt`-select</em> text inside tooltip and <em>`[shift/ctrl]`-click</em> language icon below. <br>  :loudspeaker: [tts tips + 2015-10-31](./translate_tts_tips.md) 
 
