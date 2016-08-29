@@ -8,7 +8,8 @@
 html,body#body.body {padding:0;margin:0;}
 html,body#body.body,#cb {background: #e1ebf2;}
 body#body.body{position: relative; min-height: 99vh;}
-#cb  {position: relative; padding: 18px 4px;}
+#cb pre, #cb code, #cb textarea {font-family: "DejaVu LGC Sans Mono", "DejaVu Sans Mono", momospace;}
+#cb  {position: relative; padding: 18px 4px; font-family: Tahoma, sans-serif;}
 #cb button {height: 2em; min-width: 7.5em; padding-right: .5em; cursor: pointer; font-size: 12pt;}
 #cb .ico:before
 {position: relative; top:3px; padding-right: 4px;}
@@ -33,8 +34,6 @@ display: inline-block; position: relative; list-style-type:none;
 padding-right:.5em;
 }
 #cBcod{
- font-family: monospace; 
- font-family: monospace; 
  background: #EFE;
  border:  solid #373;
  border-width: 0; 
@@ -75,17 +74,17 @@ href=https://github.com/trespassersW/UserScripts/blob/master/show/translate.goog
 <div id=lft>
 <ul id=lul style="margin-bottom:.5em;">
 <li> <button id=en><i class="ico en"></i>english</button>
-<li> <button id=ru><i class="ico ru"></i>русский</button>
-<li> <button id=cn><i class="ico cn"></i>中国</button>
-<li> <button id=pt><i class="ico pt"></i>português</button>
-<li> <button id=es><i class="ico es"></i>español</button>
-<li> <button id=fr><i class="ico fr"></i>français</button>
+<li> <button id=ru><i class="ico ru"></i>&#1088;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</button>
+<li> <button id=cn><i class="ico cn"></i>&#20013;&#22269;</button>
+<li> <button id=pt><i class="ico pt"></i>portugu&ecirc;s</button>
+<li> <button id=es><i class="ico es"></i>espa&ntilde;ol</button>
+<li> <button id=fr><i class="ico fr"></i>fran&ccedil;ais</button>
 <li> <button id=it><i class="ico it"></i>italiano</button>
 <li> <button id=de><i class="ico de"></i>deutsch</button>
-<li> <button id=ja><i class="ico ja"></i>日本の</button>
-<li> <button id=ar><i class="ico ar"></i>تعريف</button>
-<li> <button id=ko><i class="ico ko"></i>한국어</button>
-<li> <button id=ur><i class="ico ur"></i>اردو زبان</button>
+<li> <button id=ja><i class="ico ja"></i>&#26085;&#26412;&#12398;</button>
+<li> <button id=ar><i class="ico ar"></i>&#1578;&#1593;&#1585;&#1610;&#1601;</button>
+<li> <button id=ko><i class="ico ko"></i>&#54620;&#44397;&#50612;</button>
+<li> <button id=ur><i class="ico ur"></i>ا&#1585;&#1583;&#1608; &#1586;&#1576;&#1575;&#1606;</button>
 </ul>
 <div id=cbnot>
 <div id=sshot title=screenshot>
@@ -116,33 +115,40 @@ To use these <em>custom buttons</em>, you need to have the following things in y
 <ul style="text-align:left">
 <a class="ico auto" title="Word Definition" href=
 "javascript:postMessage('tgtooltip#en/en','*')">Define</a><br>
-<li><a class="ico en" title="auto → British" href=
+<li><a class="ico en" title="auto &rarr; British" href=
 "javascript:postMessage('tgtooltip#auto/en','*')">english</a>
-<li><a class="ico ru" title="auto → Russian" href=
-"javascript:postMessage('tgtooltip#auto/ru','*')">русский</a>
-<li><a class="ico cn" title="auto → Chiness"  href=
-"javascript:postMessage('tgtooltip#auto/zh-CN','*')">中国</a>
-<li><a class="ico pt" title="auto → Portuguese" href=
-"javascript:postMessage('tgtooltip#auto/pt','*')">português</a>
-<li><a class="ico es" title="auto → Spanish" href=
-"javascript:postMessage('tgtooltip#auto/es','*')">español</a>
-<li><a class="ico fr" title="auto → French" href=
-"javascript:postMessage('tgtooltip#auto/fr','*')">français</a>
-<li><a class="ico it" title="auto → Italian" href=
+<li><a class="ico ru" title="auto &rarr; Russian" href=
+"javascript:postMessage('tgtooltip#auto/ru','*')">&#1088;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</a>
+<li><a class="ico cn" title="auto &rarr; Chiness"  href=
+"javascript:postMessage('tgtooltip#auto/zh-CN','*')">&#20013;&#22269;</a>
+<li><a class="ico pt" title="auto &rarr; Portuguese" href=
+"javascript:postMessage('tgtooltip#auto/pt','*')">portugu&ecirc;s</a>
+<li><a class="ico es" title="auto &rarr; Spanish" href=
+"javascript:postMessage('tgtooltip#auto/es','*')">espa&ntilde;ol</a>
+<li><a class="ico fr" title="auto &rarr; French" href=
+"javascript:postMessage('tgtooltip#auto/fr','*')">fran&ccedil;ais</a>
+<li><a class="ico it" title="auto &rarr; Italian" href=
 "javascript:postMessage('tgtooltip#auto/it','*')">italiano</a>
-<li><a class="ico de" title="auto → German" href=
+<li><a class="ico de" title="auto &rarr; German" href=
 "javascript:postMessage('tgtooltip#auto/de','*')">deutch</a>
-<li><a class="ico ja" title="auto → Japanese" href=
-"javascript:postMessage('tgtooltip#auto/ja','*')">日本の</a>
-<li><a class="ico ar" title="auto → Arabic" href=
-"javascript:postMessage('tgtooltip#auto/ar','*')">تعريف</a>
-<li><a class="ico ko" title="auto → Korean" href=
-"javascript:postMessage('tgtooltip#auto/ko','*')">한국어</a>
-<li><a class="ico ur" title="auto → Urdu" href=
-"javascript:postMessage('tgtooltip#auto/ur','*')">اردو زبان</a>
-
+<li><a class="ico ja" title="auto &rarr; Japanese" href=
+"javascript:postMessage('tgtooltip#auto/ja','*')">&#26085;&#26412;&#12398;</a>
+<li><a class="ico ar" title="auto &rarr; Arabic" href=
+"javascript:postMessage('tgtooltip#auto/ar','*')">&#1578;&#1593;&#1585;&#1610;&#1601;</a>
+<li><a class="ico ko" title="auto &rarr; Korean" href=
+"javascript:postMessage('tgtooltip#auto/ko','*')">&#54620;&#44397;&#50612;</a>
+<li><a class="ico ur" title="auto &rarr; Urdu" href=
+"javascript:postMessage('tgtooltip#auto/ur','*')">&#1575;&#1585;&#1583;&#1608; &#1586;&#1576;&#1575;&#1606;</a>
 </ul>
-
+<br>
+<style>
+#bukod { position: relative;
+height:1.2em; width:auto; background:#EFE; padding: 0 .5em; margin: 0 .5em; color:#344;
+}
+</style>
+<pre id=bukod  contentEditable="true">
+&nbsp;
+</pre>
 </div>
 </div>
 
@@ -231,7 +237,7 @@ function btClik(e){
     $i('cBlan').textContent = btCodes[ti].d;
  }else if(t.nodeName=='A'){
    e.preventDefault();e.stopPropagation();
-   window.status='dont clik on me';
+   $i('bukod').textContent=t.href;
  }}
 }
 
