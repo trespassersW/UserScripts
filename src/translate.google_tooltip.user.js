@@ -180,7 +180,7 @@ function cleanUp(s){
 
  //divExtract='';
  if(documentcontentEditable)
-    documentcontent.Editable=documentcontentEditable,
+    document.content.Editable=documentcontentEditable,
     documentcontentEditable = false;
  if(documentdesignMode == 'on')
     document.designMode='on',
