@@ -1,5 +1,5 @@
-@namespace url(http://www.w3.org/1999/xhtml);
 /* 
+@namespace url(http://www.w3.org/1999/xhtml);
    2016-06-29 * карты в результатах поиска
    2016-03-16 * заплата для yandex.COM
 */
@@ -227,7 +227,7 @@ body .serp-item__greenurl{
 }
 .serp-list ~ .intents {display:none !important; }
 
-div.serp-list div.serp-item { /* 2015-07-20 */
+.serp-list .serp-item { /* 2015-07-20 */
  background-image: linear-gradient(to top, 
  rgba(255,255,255, .5), rgba(224,224,255, .5) ) ;
  border-radius: 8px 16px 0 0 ;
