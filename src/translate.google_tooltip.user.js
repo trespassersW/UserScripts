@@ -8,8 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 16.09.01
+// @version 16.09.06
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 16.09.06 * proper right tooltip position 
 // 16.09.01 + 'previous translation' button; [*] top of tooltip at top of client window
 // 16.08.26 + option for left/right tooltip position; keeps tooltip position after dragging
 // 16.08.16 + Word Definition is shown when source_language == target_language
@@ -1959,11 +1960,11 @@ function cmdGT(aS,aT){
    return;
   }
   
-  var p = {t: pageYOffset+5+"px",l: pageXOffset+25+"px", r:"auto" };
+  var p = {t: pageYOffset+5+"px",l: pageXOffset+10+"px", r:"auto" };
   if(savedTarget) // was dragged
     p.t=dragY+pageYOffset +"px", p.l=dragX+pageXOffset+"px";
-  else if(GM_getValue('gtpwPos',false))
-      p.l = pageXOffset+Math.floor(window.innerWidth/2)+"px";
+  else if(GM_getValue('gtpwPos',false)) /* 160905 */
+        p.l = 'auto', p.r=(10-pageXOffset)+'px';
 
   var divLookup = getId('divLookup') ||
   buildEl('div', {id:'divLookup', style: 'z-index:100000'+
