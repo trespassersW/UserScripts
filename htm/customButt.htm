@@ -8,6 +8,8 @@
 html,body#body.body {padding:0;margin:0;}
 html,body#body.body,#cb {background: #e1ebf2;}
 body#body.body{position: relative; min-height: 99vh;}
+#cb q::before,#cb q::after{content: "'"}
+#cb q {color:#930;}
 #cb pre, #cb code, #cb textarea {font-family: "DejaVu LGC Sans Mono", "DejaVu Sans Mono", momospace;}
 #cb  {position: relative; padding: 18px 4px; font-family: Tahoma, sans-serif;}
 #cb button {height: 2em; min-width: 7.5em; padding-right: .5em; cursor: pointer; font-size: 12pt;}
@@ -160,9 +162,7 @@ height:1.2em; width:auto; background:#EFE; padding: 0 .5em; margin: 0 .5em; colo
  <em style="padding-left: 1em;">Language:</em>
  <span id="cBlan"> </span><br>
  <em>Initialization code:</em><br>
-<textarea id=cBcod rows="11" cols="15" >
-choose a button on the left pane
-</textarea>
+<pre contentEditable="true"  id="cBcod">choose a button on the left pane</pre>
 </div>
 <hr style="clear: both">
 </article>
@@ -196,14 +196,13 @@ function isCB(s){
 }
 
 function deCB(cb){
- return(
-  decodeURIComponent(cb.
+ var r= decodeURIComponent(cb.
   replace(/%u([\dA-F]{4})|%([A-F][\dA-F])/g,
    function(m,p,p1) // rectify non-standard URI encoding
     {return encodeURIComponent(String.fromCharCode(parseInt(p||p1,16)))}
- )));
+ ));
+ return r;
 }
-
 function mkIcons(){
  var css="", cd,m,b;
  for( b in btCodes){
@@ -218,6 +217,7 @@ function mkIcons(){
  document.head.appendChild(cs);
 }
 
+var reQ=/'([\w\W]*?)'/g;
 function btClik(e){
  var ti,m,icod,t;
  if(e && (t=e.target)){
@@ -232,12 +232,12 @@ function btClik(e){
     $i('cBnam').textContent = (m && m[1]) || ' ';
     m=icod.match(/initcode><!\[CDATA\[([\w\W]+?)\]\]><\/initcode/);
     icod=(m && m[1]) || '/* nothing */';
-    $i('cBcod').value=icod;
+    $i('cBcod').innerHTML=icod.replace(reQ,"<q>$1</q>");
     $i('inst').innerHTML='Install &nbsp; <span>&nbsp;'+t.innerHTML+'&nbsp;</span>';
     $i('cBlan').textContent = btCodes[ti].d;
  }else if(t.nodeName=='A'){
    e.preventDefault();e.stopPropagation();
-   $i('bukod').textContent=t.href;
+   $i('bukod').innerHTML=t.href.replace(reQ,"<q>$1</q>");
  }}
 }
 
@@ -256,7 +256,7 @@ $i('inst').disabled=true;
 
 </script>
 <div style="color:grey; position: absolute; right: 2em; bottom: 4px;">
-<b>©</b> 2016 <a href=https://github.com/trespassersW/UserScripts/tree/master/htm/readme.md>trespassersW</a> &nbsp; &nbsp; &nbsp;  License: MIT 
+<b>©</b> 2016 <a title="Feedback" href=https://github.com/trespassersW/UserScripts/tree/master/htm/readme.md>trespassersW</a> &nbsp; &nbsp; &nbsp;  License: MIT 
 </div>
 </body>
 </html>
