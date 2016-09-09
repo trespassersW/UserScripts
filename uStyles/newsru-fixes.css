@@ -213,9 +213,11 @@ background-image: none!important;
   /* */
 #top-line{display: none !important;}
 }/*yaplakal.com */
-@-moz-document domain("lenta.ru"){
-.xxxg-application {
- width: auto !important;
+
+/* 160909 tass.ru */
+@-moz-document url-prefix("http://tass.ru/"){
+[class^="b-footer"]{
+     display: none !important;
 }
 }
 
