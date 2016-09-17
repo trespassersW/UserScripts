@@ -69,7 +69,8 @@ a {border-bottom: 0.05px dotted rgba(47,95,255,.5) !important;}
  border-width: 1px 0 !important;
  
 }
-/* kp.ru 160713 */
+/* kp.ru 160713  160917 */
+header .informer,
 section#sectionNewsJS.news,
 .RadioPage #audio_panel {
 position: absolute !important;}
@@ -213,9 +214,13 @@ background-image: none!important;
   /* */
 #top-line{display: none !important;}
 }/*yaplakal.com */
-
-/* 160909 tass.ru */
+@-moz-document domain("lenta.ru"){
+.xxxg-application {
+ width: auto !important;
+}
+}
 @-moz-document url-prefix("http://tass.ru/"){
+  
 [class^="b-footer"]{
      display: none !important;
 }
