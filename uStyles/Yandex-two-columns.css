@@ -48,7 +48,6 @@ border-radius: 16px 0px 16px 0px !important;
 .main__left{
 position: absolute !important;
 /* */
-
 top: 390px !important;
 left: 0 !important; /* */
 right: auto !important; bottom: auto !important; /* */
@@ -84,7 +83,7 @@ padding: 8px 0 0 12px !important;
 .content__right:before {
 position: absolute !important;
 visibility: visible !important;
-top:  0px !important;
+top: 40px !important;
 right: 0px !important;
 left: auto !important; bottom: auto !important;
 width: 64px !important;
@@ -93,21 +92,21 @@ border: 1px solid #444 !important;
 border-radius: 16px 0 16px 0 !important;
 background: rgba(236, 236, 254,.9) !important;
 opacity: .9 !important;
-z-index: 249 !important;
+z-index: 47483647 !important;
 content: "" !important; 
 }
 .content__right{ /* */
 position: absolute !important;
 visibility: hidden !important;
 opacity: 1 !important;
-top:   390px !important;
+top:   350px !important;
 right: 0 !important; 
 left: auto !important; bottom: auto !important;
 min-height: 1.2em !important;
 border: 1px solid #444 !important;
 border-radius: 16px 0 16px 0 !important;
 background: rgba(236, 236, 254, .9) !important;
-z-index: 249 !important;
+z-index: 249500 !important;
 margin: 0 0 0 0 !important; 
 padding:12px !important;
 /* 151119 */
@@ -261,8 +260,8 @@ body .serp-item__greenurl{
 .content__right  .z-entity-search:before {
 display: block!important;
 visibility: visible !important;
-position: absolute !important;top:1px!important; right:0 !important; 
-z-index: 214748 !important;
+position: absolute !important;top:40px!important; right:0 !important; 
+z-index: 147483647 !important;
 /*content: "\21e9" */
 content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAOCAYAAAB6pd+uAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAABIUlEQVRIx+2WsUrDYBSFz0nFREgwoUueoFuRLllqCy6CCqKLoItrfQefwMlXcHNWRNGhTkbaoQVBAt0sgmRRG5A/4YfrUqQ4uAiBhJ71DodzOffjAiUXc/Qy2u3tCwCLcRzvRNHjVx6mC3mlC4J1n+QWAFSr1RUAYS5bza0q5KxXJbfalP0G5wHnFP1D9XrL8TzvREQesizrWpY1BgCtdYvksmEYm0mSHA8G3fdCUtR13T2SHZId0zTPfghTqRwB2CdJ27ZHAE4LWVGl1JWIvEwpejhD1AOSFJEPrfVNYW+w3797S9N0VUSef89EZKy1bobhdVT4T6bRWPMcx7kk2ZyGe1JKbfR6t6+ledVqtWDJ9/1zAM5kMtkdDu8/Mdf/9Q3ZjVsP7qiLvwAAAABJRU5ErkJggg==
 )
