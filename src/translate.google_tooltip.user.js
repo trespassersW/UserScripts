@@ -8,7 +8,7 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 16.10.26
+// @version 16.10.27
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
 // 16.10.26 + phonetic transcription
 // 16.09.01 + 'previous translation' button; [*] top of tooltip at top of client window
@@ -223,9 +223,9 @@ function forwLookup(e){
    	currentURL = GTurl +  "/" + gt_sl + _l_ + gt_tl + _l_ + escAp(txtSel);
 }
  var Gctrl, Galt;
+ Gctrl=GM_getValue('ctrl',false), Galt=GM_getValue('alt',true);
  var sayTip="\n[shift / ctrl] listen (";
 function showLookupIcon(evt){
-  Gctrl=GM_getValue('ctrl',false), Galt=GM_getValue('alt',true);
 	if((!evt.ctrlKey && Gctrl)
 	 ||(!evt.altKey && Galt)
 //  to avoid collision
@@ -1113,8 +1113,8 @@ function saveOptions(evt){
   GM_setValue('histWc',maxWC);
 	GM_setValue('from', from);
 	GM_setValue('to', to);
-	GM_setValue('ctrl', ctrl);
-	GM_setValue('alt', alt);
+	GM_setValue('ctrl', Gctrl=ctrl);
+	GM_setValue('alt', Galt=alt);
 	GM_setValue('sourceBH', sourceBH);
 	GM_setValue('sourceDP', sourceDP);
   GM_setValue('noFlags',nf);
@@ -1663,7 +1663,7 @@ stickStyle(
 '#divDic, #divDic textarea, #divDic iframe {resize: both !important; }'+
 '#divDic *::'+(isChrome?'':moz)+'selection {background: #047 !important; color: #FC8 !important; }'+
 '#divUse img, #divDic img, #divLookup img {display: inline; width: auto; height: auto;\
-margin: 0; padding:0; verical-align: baseline !important;}'+ 
+margin: 0; padding:0; vertical-align: baseline !important;}'+ 
 '#divTtsLnk:after{ content:url('+imgPlay+');}'+
 '#divTtsLnk {padding: 0 2px; margin: 0 2px 0 2px !important;}'+
 '#divTtsIfh {width: 100%;overflow-x:hidden;\
