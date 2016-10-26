@@ -8,9 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 16.09.06
+// @version 16.10.26
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 16.09.06 * proper right tooltip position 
+// 16.10.26 + phonetic transcription
 // 16.09.01 + 'previous translation' button; [*] top of tooltip at top of client window
 // 16.08.26 + option for left/right tooltip position; keeps tooltip position after dragging
 // 16.08.16 + Word Definition is shown when source_language == target_language
@@ -620,7 +620,7 @@ function extractResult(html){
 // 2013-10-20
 	var _sl = detectedLang(gt_sl);
 	var _tl = detectedLang(gt_tl);
-/* ?!11 150415 */ _log('**',_sl+'>'+_tl)
+/* ?!11 150415  _log('**',_sl+'>'+_tl) */
     if( 1 || ex_sl !== gt_sl ) 
       gt_sl_gms = _sl, gt_tl_gms =_tl; 
     else 
@@ -932,9 +932,15 @@ try{
      var showT = 'gtp-trans gtp-hide',showI = "&raquo;&raquo;"
      if(GM_getValue('showTrans',false) === true)
       showT = 'gtp-trans gtp-block', showI = "&laquo;&laquo;"
+    var trs = dA[0][1];
+    if(trs && trs[3]){
+     trs = trs[3] + (trs[2]? '&nbsp; &#x25B9; ' + trs[2]: '');
+       tr=addEl(dB,'tr');
+       addEl(tr,'td',{'class': 'gtp-pos gtp-trs', colspan:2}, null, trs);
+    }
      for( i=0,il=da.length; i<il; i++){
        tr=addEl(dB,'tr');
-       addEl(tr,'td',{'class': 'gtp-pos'}, null, da[i][0]);
+       addEl(tr,'td',{'class': 'gtp-pos', colspan:2}, null, da[i][0]);
        var d2=dfn? da[i][1]: da[i][2];
        for(var td,j=0,jl=d2.length; j<jl; j++){
         td=addEl(dB,'tr');
@@ -1523,12 +1529,12 @@ font: normal medium Tahoma,sans-serif !important;'+
 '#optSelLangFrom,#optSelLangTo {max-width: 150px; text-align: left !important; \
 height:1.5em!important; min-height:1.5em!important;\
 }'+
-'#divDic input{vertical-align: baseline !important;}'+
+'#divDic input, #divDic select, #divDic img {vertical-align: baseline !important;}'+
 '#divDic input[type="checkbox"]{vertical-align: text-bottom !important;}'+
 '#divOpt span {color:'+FG.t[i]+'!important;}'+
 '#optSelLangFrom,#optSelLangTo,#divDic input[type="textbox"]{background:'+BG.E[i]+'!important;\
 color:'+FG.t[i]+'!important;\
-padding-bottom: 3px !important; margin-bottom: 4px!important;}'+
+}'+
 '#divExtract{word-spacing: normal !important;}'+
 '#divBottom {position: relative; width: 100%; font-size:medium; text-decoration:none; }'+    
 '#divBottom #historyLink {display: inline; position: relative; font-size:medium; text-decoration:none;}'+
@@ -1571,6 +1577,8 @@ padding: 0 0 0 4px; margin: 0; border: none; border-top: 1px solid #AAA}' +
 '#gtp_dict td.gtp-trans {/*overflow-x: hidden;*/ vertical-align: top; white-space: normal;'+
 ' width: 100%; color:'+FG.g[i]+'!important}'+
 '#gtp_dict td.gtp-pos, #gtp_dict td.gtp-word, #gtp_dict td.gtp-trans {padding-bottom: 1px !important;}'+
+'#gtp_dict td.gtp-pos.gtp-trs:before {content: "\u25C3 " !important;}'+
+'#gtp_dict td.gtp-pos.gtp-trs {font-style: normal !important;}'+
 '#gtp_dict .gtp-hide {display: none}'+
 '#gtp_dict .gtp-block {display: block}'+
 '#divTtsIfr{position: relative;padding: 0!important;margin:3px 0 0 0!important;\
@@ -1655,7 +1663,7 @@ stickStyle(
 '#divDic, #divDic textarea, #divDic iframe {resize: both !important; }'+
 '#divDic *::'+(isChrome?'':moz)+'selection {background: #047 !important; color: #FC8 !important; }'+
 '#divUse img, #divDic img, #divLookup img {display: inline; width: auto; height: auto;\
-margin: 0; padding:0;}'+ 
+margin: 0; padding:0; verical-align: baseline !important;}'+ 
 '#divTtsLnk:after{ content:url('+imgPlay+');}'+
 '#divTtsLnk {padding: 0 2px; margin: 0 2px 0 2px !important;}'+
 '#divTtsIfh {width: 100%;overflow-x:hidden;\
@@ -1664,10 +1672,10 @@ background-color: rgba(127,127,127,.25); padding: 3px 0 !important;\
 '#divResult, #divResult div, #divResult table, #divResult tr, #divResult tr td,\
 #divResult a, #divBottom, \
 #divOpt select, #divOpt input, .gootranslink, \
-#divDic img, #divDic input, #divDic textarea\
+#divDic img, #divDic input, #divDic textarea, #divDic label, #divDic li\
 { padding:0 0 0 0; margin: 0 0 0 0; background: none repeat scroll 0 0 transparent;\
-  border: none; line-height: .9; float: none}'+
-'#divOpt {line-height: 2.3 !important;}\
+  border: none; line-height: 1.2; float: none}'+
+'#divOpt input { padding: 4px 0 !important;}\
 div#divBottom{padding-top: 3px;}\
 .gootransbutt#optionsLink{margin-top:0; padding-top: 3px; padding-bottom: 1px;}\
 #divOpt .gtBGColor{ border:thin solid blue !important; cursor: pointer;\
