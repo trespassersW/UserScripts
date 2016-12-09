@@ -1,8 +1,8 @@
 @namespace url(http://www.w3.org/1999/xhtml);
 /* 
  userstyles.org/styles/63771/google-columnizer
+ 2016-12-09 *  newspapers section
  2016-08-13 *  search bar in search results; maps in gsr
- 2015-08-07 +  encrypted.google.com
  2015-05-25 ** bg color, intervals
  2015-05-08 ** exclude google images
  2015-04-21 ** any time any result
@@ -346,6 +346,7 @@ body#gsr {overflow-y: auto !important;}
 #gsr ._SMl ._daj { right: -2px !important; opacity:.6!important;}
 #gsr ._SMl ._eaj { left: -12px !important; opacity:.6!important;}
 #gsr #lu_map{ width: 99% !important; height: auto !important;}
+._h3g { left: 0!important; right:0!important; top:0!important; bottom:0!important;}
 
 /* 151124 * / #searchform .gb_ga.gb_g {display: none !important; 
 /* */
