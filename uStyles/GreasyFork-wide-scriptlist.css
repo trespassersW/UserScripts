@@ -3,7 +3,7 @@
  GreasyFork wide scriptlist
    forked from greasy-fork-compact [https://userstyles.org/styles/104650]
    by wOxxOm [https://userstyles.org/users/67605]
-* 015-11-22 'Control panel' in one line
+* 016-12-25 changes in layout
 * 015-09-03 number of dayly installs exceeded one thousand
 * 015-04-07 !important fix for Chrome
 * 015-01-15 fix for greasyfork.org-langfilter.user.js
@@ -45,7 +45,7 @@
 .script-list li {
 background-image: linear-gradient(to top,
  rgba(255,255,255, .75), rgba(237,237,255, .75) ) !important;
- padding-bottom: .5em;
+ padding: .1em;
 }
 
 .script-list { margin-top: 3em !important; }
@@ -188,6 +188,8 @@ margin-top: 0 !important; margin-bottom: 0 !important;
 [id^="script-list-"] li { display: list-item !important;}
 
 ol.script-list h2 { font-size: 12pt !important; }
+.script-list h2 { width: 100% !important;}
+.list-option-groups ~ ol { width: 100% !important;}
 }
 
 @-moz-document regexp("https://greasyfork\\.org/(.*?/)?(users/.*)$") {
