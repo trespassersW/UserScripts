@@ -226,3 +226,12 @@ background-image: none!important;
 }
 }
 
+@-moz-document url-prefix("http://gosvopros.ru/"){
+.scroll-social,
+.opacity-fon-subscr, .disclaimer-block-subscr{
+ display:none !important;
+} 
+body {background-image: repeating-linear-gradient(
+0deg , hsla(0, 0%, 92%, 1) .0em, hsla(0, 0%, 86%, 1) 1em, hsla(0, 0%, 93%, 1) 2em) !important; 
+}
+}
