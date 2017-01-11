@@ -3,7 +3,7 @@
  GreasyFork wide scriptlist
    forked from greasy-fork-compact [https://userstyles.org/styles/104650]
    by wOxxOm [https://userstyles.org/users/67605]
-* 016-12-25 changes in layout
+* 017-01-10 [+] wide forum pages
 * 015-09-03 number of dayly installs exceeded one thousand
 * 015-04-07 !important fix for Chrome
 * 015-01-15 fix for greasyfork.org-langfilter.user.js
@@ -157,7 +157,7 @@ dd.script-list-updated-date span {padding-right: .5ex !important; letter-spacing
  position: absolute !important;
  margin: 0 !important;
  padding:4px !important;
- left: 45% !important;
+ left: 39% !important;
  top: 2.5em !important;
  z-index:9 !important;
  max-height: none !important;
@@ -170,8 +170,6 @@ dd.script-list-updated-date span {padding-right: .5ex !important; letter-spacing
 }
 #script-list-option-groups:hover{
  opacity: .95 !important;
- padding-bottom: 1em !important;
-
 }
 
 div.list-option-group[id^="script-list-"] {
@@ -190,6 +188,14 @@ margin-top: 0 !important; margin-bottom: 0 !important;
 ol.script-list h2 { font-size: 12pt !important; }
 .script-list h2 { width: 100% !important;}
 .list-option-groups ~ ol { width: 100% !important;}
+.script-list-author{display:inline-block !important;}
+#browse-script-list.script-list li article h2 {max-width:55%!important;}
+.list-option-group ul {padding:0 !important;}
+#script-info, .user-list, .text-content {
+    padding: 0 .2em 1em .2em !important;
+}
+#site-nav nav  { z-index: 9999 !important; }
+
 }
 
 @-moz-document regexp("https://greasyfork\\.org/(.*?/)?(users/.*)$") {
@@ -209,4 +215,14 @@ dd.script-list-author {display: none !important;}
 @-moz-document regexp("https://(greas|sleaz)yfork\\.org/.*/code$") {
 body {padding-bottom: 1em !important;}
 }
+/*  patch for forum page https://greasyfork.org/en/forum/ */
+@-moz-document regexp("https://(greas|sleaz)yfork\\.org/.*/forum.*") {
+#Body  {max-width: none !important; }
+#Body .Row {max-width: none !important;margin: 0 !important; padding: 5px !important; width: 99% !important; }
+#Content{width: calc( 100% - 220px ) !important;}
+.Title,.Meta-Discussion {position: relative !important; display: inline-block !important;}
+.Meta-Discussion {padding-left: 1em !important; }
+}
+
 /* */
+
