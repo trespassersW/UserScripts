@@ -1,7 +1,8 @@
 @-moz-document domain("userstyles.org") 
 /*
-  16.08.06
- - sub/category in styles list
+17.01.12 - wide forum pages
+16.08.06
+ - sub/category in styles list  
   16.01.22
  - shows author-id and total-install-count in styles list;  
  - zooms screenshots on mouseover  
@@ -198,4 +199,5 @@
     padding-right: 2em;
 }
 /* */
+.Row { width: 99% !important;}
 }
