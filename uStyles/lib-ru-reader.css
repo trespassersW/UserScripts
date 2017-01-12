@@ -1,5 +1,6 @@
 @namespace FB url(http://www.gribuser.ru/xml/fictionbook/2.0);
-/* lime on spruce    
+/* lime on spruce
+   17.01.12 [+] about:reader (about:config -> reader.parse-on-load.enabled <-true)
    16.08.13 [+] www.oldsf.ru
    16.03.24 [+] styling fb2reader pages */
 /* http://userstyles.org/styles/90076/lib-ru-reader */
@@ -17,6 +18,7 @@
 ,regexp("https?://(www\\.)?books\\.rusf\\.ru/.+")
 ,regexp("https?://(www\\.)?oldsf\\.ru/.+/.+")
 ,regexp(".+\\.fb2(\\.zip)?(#.*)?$")
+,regexp("about:reader.+")
 /* */
 ,url-prefix(file:///E:/LIT/)
 /* */
@@ -148,6 +150,9 @@ html>body>div#contents, FB|a[type="note"]  FB|section {
   border-color: green;
   box-shadow: 2px 2px 3px green;
 }
+/* about:reader */
+#container.content-width3 { max-width: 780px !important; margin-left: 2em !important;}
+#reader-toolbar.toolbar { background-color: transparent !important; }
 /* */
 }
 
