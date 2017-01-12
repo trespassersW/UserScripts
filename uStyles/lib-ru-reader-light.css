@@ -18,7 +18,7 @@
 ,regexp("https?://(www\\.)?books\\.rusf\\.ru/.+")
 ,regexp("https?://(www\\.)?oldsf\\.ru/.+/.+")
 ,regexp(".+\\.fb2(\\.zip)?(#.*)?$")
-,regexp("about:reader.+")
+,url-prefix(about:reader)
 /* * /
 ,url-prefix(file://)
 /**/
@@ -158,7 +158,8 @@ html>body>div#contents, FB|a[type="note"]  FB|section {
 }
 /* about:reader */
 #container.content-width3 { max-width: 780px !important; margin-left: 2em !important;}
-#reader-toolbar.toolbar { background-color: transparent !important; }
+#reader-toolbar.toolbar, #reader-toolbar.toolbar button 
+{ background-color: transparent !important; border-color: transparent !important;}
 /* */
 }
 
@@ -189,3 +190,4 @@ table.image {
 font-family: Tahoma, sans-serif !important;}
 
 }
+
