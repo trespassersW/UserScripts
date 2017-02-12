@@ -1,4 +1,4 @@
-»¿// ==UserScript==
+// ==UserScript==
 // @name           translate.google tooltip
 // @namespace      trespassersW
 // @author      trespassersW
@@ -889,7 +889,7 @@ try{
  formatted=GM_getValue('formatted',false);
  try{ 
  if(A) {
-   console.log(JSON.stringify(A));
+  // console.log(JSON.stringify(A));
  for( j=0,jl=A.length; j<jl; j++){
      if( !A[j][2] && !A[j][2][0] ){
       tr+=A[j][0].replace('\n','<br>').replace('\s','&nbsp;');
