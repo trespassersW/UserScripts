@@ -699,8 +699,8 @@ function getSelection(t){
   if(inTextArea){ 
    txt=t.value.substr(t.selectionStart,t.selectionEnd-t.selectionStart);
   }
-  txtSel=ltAmp(txt);
-  txtSelO=txt;
+  txtSel=ltAmp(txt+'');
+  txtSelO=txtSel;
 	return txtSel;
 }
 function swapLang(){
