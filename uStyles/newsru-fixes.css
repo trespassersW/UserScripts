@@ -75,8 +75,8 @@ section#sectionNewsJS.news,
 .RadioPage #audio_panel {
 position: absolute !important;}
 img.image{max-width: 640px !important;}
-/* kp.ru 160521 */
-main.main a:visited >h1 {color: #A40 !important;}
+/* kp.ru 170218 */
+main.main a:visited >h1,a:visited [class*="itle"]  {color: #A40 !important;}
 
 /*  */
 /* ставим на место липкую траурную полосу */
@@ -207,7 +207,7 @@ background-color: #666!important;
 background-image: none!important;
 /*background-image: repeating-linear-gradient(0deg, hsla(0, 0%, 65%, 1) 12px, hsla(0, 0%, 62%, 1) 24px,hsla(0, 0%, 65%, 1) 36px) !important;*/
 }
-/* */
+/* * /
 #content-inner form > table:nth-of-type(2){border: 2px  dotted red !important;padding-top:4px!important;}
 #content-inner form > table:not(:hover):nth-of-type(2) tr{ display: none !important; 
 }
@@ -234,4 +234,5 @@ background-image: none!important;
 body {background-image: repeating-linear-gradient(
 0deg , hsla(0, 0%, 92%, 1) .0em, hsla(0, 0%, 86%, 1) 1em, hsla(0, 0%, 93%, 1) 2em) !important; 
 }
+.main {padding-left: .5em !important; }
 }
