@@ -3,6 +3,7 @@
  GreasyFork wide scriptlist
    forked from greasy-fork-compact [https://userstyles.org/styles/104650]
    by wOxxOm [https://userstyles.org/users/67605]
+* 017-02-22 [*] search menu position
 * 017-01-10 [+] wide forum pages
 * 015-09-03 number of dayly installs exceeded one thousand
 * 015-04-07 !important fix for Chrome
@@ -158,7 +159,7 @@ dd.script-list-updated-date span {padding-right: .5ex !important; letter-spacing
  margin: 0 !important;
  padding:4px !important;
  left: 39% !important;
- top: 2.5em !important;
+ top: 1.8em !important;
  z-index:9 !important;
  max-height: none !important;
  max-width: 50% !important;
@@ -167,6 +168,9 @@ dd.script-list-updated-date span {padding-right: .5ex !important; letter-spacing
  line-height: 1.1 !important;
  background: rgba(248, 219, 219, .85) !important;
  border-radius: 0 0 6px 6px !important;
+}
+.sidebar-search input[type="search"] {
+    margin: 0 0 5px;
 }
 #script-list-option-groups:hover{
  opacity: .95 !important;
@@ -177,6 +181,7 @@ display: inline-block !important;
 vertical-align: top !important;
 padding-top: 0 !important; padding-bottom: 0 !important;
 margin-top: 0 !important; margin-bottom: 0 !important;
+line-height: 0.5 !important;
 }
 
 [id^="script-list-"] li { display: none }
@@ -194,7 +199,7 @@ ol.script-list h2 { font-size: 12pt !important; }
 #script-info, .user-list, .text-content {
     padding: 0 .2em 1em .2em !important;
 }
-#site-nav nav  { z-index: 9999 !important; }
+#site-nav >nav{ z-index: 999 !important; }
 
 }
 
