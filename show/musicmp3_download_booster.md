@@ -16,7 +16,7 @@
 ====
 
 *  1.3.1 2015/11/29 исправление для FF42+ 
-* v 1.2.2b ссылки для поиска диска на сайтах [amazon.com](http://www.amazon.com/gp/new-releases/music/408264/ref=zg_bsnr_nav_m_3_292809) и [discogs.com](http://www.discogs.com/search/?sort=date_added%2Cdesc&genre_exact=Rock)
+* v 1.2.2b ссылки для поиска диска на сайтах: [amazon.com](http://www.amazon.com/gp/new-releases/music/408264/ref=zg_bsnr_nav_m_3_292809) и [discogs.com](http://www.discogs.com/search/?sort=date_added%2Cdesc&genre_exact=Rock)
 
 -----
 
