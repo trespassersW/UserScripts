@@ -11,3 +11,7 @@
 * <small>15.08.07  + case-insensitive sorting </small>
 * <small>16.02.06 * octicons as svg images</small>
 * <small>16.04.17 * hotfix</small>
+
+======
+
+License: <a href=https://opensource.org/licenses/MIT>MIT</a>
