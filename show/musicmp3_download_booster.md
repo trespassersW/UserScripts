@@ -19,3 +19,5 @@
 * v 1.2.2b ссылки для поиска диска на сайтах [amazon.com](http://www.amazon.com/gp/new-releases/music/408264/ref=zg_bsnr_nav_m_3_292809) и [discogs.com](http://www.discogs.com/search/?sort=date_added%2Cdesc&genre_exact=Rock)
 
 -----
+
+License: <a href=https://opensource.org/licenses/MIT>MIT</a>
