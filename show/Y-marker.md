@@ -20,3 +20,5 @@ You can save current position in displayed webpage using shortcuts  **Shift-Alt-
 * you can control the script through bookmarklets: <br> &nbsp; - *jump to bookmark #0:* <pre><code>javascript:postMessage('Y-marker0','\*')</code></pre> &nbsp; - *set up  bookmark #0:* <pre><code>javascript:postMessage('Y-marker0=','\*')</code></pre> 
 
 ******
+
+License: <a href=https://opensource.org/licenses/MIT>MIT</a>
