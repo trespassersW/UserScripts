@@ -1,5 +1,6 @@
 @-moz-document domain("userstyles.org") 
 /*
+17.03.11 table border: none
 17.01.12 - wide forum pages
 16.08.06
  - sub/category in styles list  
@@ -201,5 +202,5 @@
 /* */
 .Row { width: 99% !important;}
 /* .Item-Body .Message {max-width:860px !important;} */
+.statistic table, th, td {    border: none !important; }
 }
-
