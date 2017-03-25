@@ -1,12 +1,14 @@
-﻿﻿![pic](../res/ymark.png) | **Y-marker** **[[`source`]](../src/Y-marker.user.js)** **[[`Install`]](/../../raw/master/src/Y-marker.user.js  "You must have GreaseMonkey installed")** 
+﻿![pic](../res/ymark.png) | **Y-marker** **[[`source`]](../src/Y-marker.user.js)** **[[`Install`]](/../../raw/master/src/Y-marker.user.js  "You must have GreaseMonkey installed")** 
 --- |-----  
 description | <i>Sets up keyboard shortcuts for placing bookmarks and navigation inside webpage</i>
 
 You can save current position in displayed webpage using shortcuts  **Shift-Alt-0‥9**; &nbsp; later, you may return to saved position by pressing **Alt -0‥9**. &nbsp;  Markers created in this way are kept in browser's persistent memory and they will be restored next time you open the page.
 
-<hr>
+------
+
 ![shot](../res/ymshot.png "www.gutenberg.org")
-<hr>
+
+------
 
 ### notes
 
