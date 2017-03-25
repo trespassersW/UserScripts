@@ -1,6 +1,5 @@
-<hr>    | ![userpic](res/tpw.png)  | <hr>
+————— | ![userpic](res/tpw.png)  | —————
 :---: | :---: | :---
-   |   |  
 <img height="48" alt=babelfish src=res/babelfish.gif> | **[translate.google tooltip](show/translate.google_tooltip.md)** | Translates selected text into a ‘tooltip’ via Google translate
 <img height="22" alt=yandex2 src=res/yaya.png> |  **[Yandex-two-columns](show/Yandex-two-columns.md)** | две колонки результатов Яндекса 
 <img height="22" alt="ru-hyphens" src=res/squint-eyes.png> | **[ru-en-hyphens](show/ru-en-hyphens-global.md)** |пере-нос слов / hyphen-ation
