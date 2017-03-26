@@ -16,4 +16,4 @@
 <hr>
 ‣ 2016-03-16 `*` заплата для yandex.**com** <br> ‣  2016-06-29 `*` карты в результатах поиска
 
-[![C](http://i.creativecommons.org/l/by/3.0/80x15.png "copyleft")] (http://creativecommons.org/licenses/by/3.0/) © **Yandex-two-columns** by *trespassersW*
+[![C](http://i.creativecommons.org/l/by/3.0/80x15.png "copyleft")](http://creativecommons.org/licenses/by/3.0/) © **Yandex-two-columns** by *trespassersW*
