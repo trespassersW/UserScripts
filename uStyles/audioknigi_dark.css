@@ -403,8 +403,9 @@ color: #F6F7B9 !important;
 .currentSpeed.horizontal a,
 .currentSpeed.horizontal a:hover,
 .jp-seek-bar.seekBar.horizontal a,
-.jp-seek-bar.seekBar.horizontal a:hover
-{  background-color: #F00 !important; border: thin solid #F33 !important;}
+.jp-seek-bar.seekBar.horizontal a:focus
+{  background-color: #b00 !important; border:  solid #b00 !important;
+border-width: 1px 3px !important; border-radius: 5px !important;}
 .infobox-yellow {background-color: black !important;}
 a.stream-topic:visited {color: pink !important;}
 .nav li a  {color: #CCC !important;}
@@ -416,4 +417,3 @@ a.stream-topic:visited {color: pink !important;}
 background-color: #272727 !important;
 }
 }
-
