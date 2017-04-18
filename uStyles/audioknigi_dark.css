@@ -390,13 +390,30 @@ background-color: #626F61 !important;
 color: #F6F7B9 !important;
 }
 
-.jp-seek-bar.seekBar {background:#777 !important;}
-.jp-play-bar.playBar {background:#444 !important;}
+.webPlayer.light .controls .rightblock .volumeBar,
+.currentSpeed.horizontal,
+.jp-seek-bar.seekBar
+ {background-color:#777 !important;}
+.jp-volume-bar-value,
+.jp-play-bar.playBar
+{background-color:#444 !important;}
 
-.jp-seek-bar.seekBar.horizontal a { color:white !important; background: red !important;}
-.webPlayer.light .curvol {
-    background: #ff7a81 !important;
-}
-.infobox-yellow {background: black !important;}
+.currentVolume.horizontal a,
+.currentVolume.horizontal a:hover,
+.currentSpeed.horizontal a,
+.currentSpeed.horizontal a:hover,
+.jp-seek-bar.seekBar.horizontal a,
+.jp-seek-bar.seekBar.horizontal a:hover
+{  background-color: #F00 !important; border: thin solid #F33 !important;}
+.infobox-yellow {background-color: black !important;}
 a.stream-topic:visited {color: pink !important;}
+.nav li a  {color: #CCC !important;}
+.nav li.active a, .nav li.active:hover a {color: #FFF !important;}
+.nav.navbar-nav.navbar-menu li a:hover, .nav.navbar-nav.navbar-menu li a:focus,
+.nav li:hover a 
+{color: #F77 !important;}
+.jp-playlist ul li a.jp-playlist-current{
+background-color: #272727 !important;
 }
+}
+
