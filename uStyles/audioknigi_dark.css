@@ -389,6 +389,14 @@ background: none #666 !important;
 background-color: #626F61 !important;
 color: #F6F7B9 !important;
 }
+html *::after, html *::before {
+    background: transparent none repeat scroll 0 0 !important;
+    border-color: #666 !important;
+    color: #ccc !important;
+}
+*::before, *::after {
+    box-sizing: border-box;
+}
 
 .webPlayer.light .controls .rightblock .volumeBar,
 .currentSpeed.horizontal,
@@ -416,4 +424,16 @@ a.stream-topic:visited {color: pink !important;}
 .jp-playlist ul li a.jp-playlist-current{
 background-color: #272727 !important;
 }
+
+.topic .picture-side img:hover {
+    /* height: 98vh !important; */
+    max-height: none !important;
+    max-width: none !important;
+    z-index: 2223322 !important;
+    position: absolute !important;
+    left:0 !important;
 }
+.book-single-progress, .book-progress {background-color: #363037 !important;}
+.book-single-progress, .book-progress {border-radius: 35px !important; }
+}
+
