@@ -8,7 +8,7 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 17.03.11
+// @version 17.02.12
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
 // 17.03.11 + keep text formatting 
 // 16.10.26 + phonetic transcription
@@ -854,7 +854,10 @@ function detectedLang(da){
  if(ma && ma[1]) return ma[1]; return da;
 }
 var txr;
-function ltAmp(s){ return s.replace(/&/g,'\u00E6').replace(/</g,'\u227A').replace(/\+/g,'\u271B'); }
+function ltAmp(s){ 
+//s=s.replace(/\s(\s*)/g,'\n$1');
+return s.replace(/&/g,'\u00E6').replace(/</g,'\u227A').replace(/\+/g,'\u271B'); 
+}
 function altListClick(e){
  e.preventDefault, e.stopPropagation;
  var t=e.target;
@@ -881,7 +884,7 @@ try{
    throw 'Bad Google responce!!1' +'\n' +txt;
  txt=txt.replace(/,(?=,)/g,',""');
  txt=txt.replace(/\[(?=,)/g,'[""');
- 
+
  var dA=JSON.parse(txt);
  var dL='';
  var punctRE=/^[\s\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]+$/;
@@ -971,7 +974,7 @@ try{
         if(dfn && d2[j][2]) d2t+='<br><i>"'+d2[j][2]+'"</i>';
 
 //        if(j==0&&dfn&&(t=db[i])&&(t=t[1])&&(t=t[0])&&(t=t[0])&&t[0])// && dc[1][0])
-        if(dfn&&(t=db[i])&&(t=t[1])&&(t=t[j])&&(t=t[0])&&t[0])// && dc[1][0])
+        if(dfn && db && (t=db[i])&&(t=t[1])&&(t=t[j])&&(t=t[0])&&t[0])// && dc[1][0])
           d2t+='<br><i><span>synonyms:</span> '+t.join(", ")+'</i>';         
           addEl(td,'td',{'class': 'gtp-word'}, null, d2t);
         !dfn && d2[j][1] &&
