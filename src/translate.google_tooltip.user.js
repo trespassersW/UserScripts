@@ -8,9 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 17.05.07
+// @version 17.05.07.1
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 17.05.07 * bugfix
+// 17.05.07.1 * bugfixes
 // 17.03.11 + keep text formatting 
 // 16.10.26 + phonetic transcription
 // 16.09.01 + 'previous translation' button; [*] top of tooltip at top of client window
@@ -1662,7 +1662,7 @@ background:'+ BG.C[i] +'!important; color:'+FG.t[i]+'!important;}'+
  border-radius: 0 5px 5px 5px !important;\
 }\
 #gdptrantxt >span  ul li {\
- white-space: nowrap;\
+ white-space: normal;\
  color:'+FG.l[i]+'!important;\
 }\
 #gdptrantxt >span  ul li:hover {\
