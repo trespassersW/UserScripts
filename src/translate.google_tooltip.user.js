@@ -8,9 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 17.05.06
+// @version 17.05.07
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 17.05.06 * bugfix
+// 17.05.07 * bugfix
 // 17.03.11 + keep text formatting 
 // 16.10.26 + phonetic transcription
 // 16.09.01 + 'previous translation' button; [*] top of tooltip at top of client window
@@ -897,7 +897,7 @@ try{
  if(A) {
   // console.log(JSON.stringify(A));
  for( j=0,jl=A.length; j<jl; j++){
-     if( !A[j][2] && !A[j][2][0] ){
+     if( !A[j][2] || !A[j][2][0] ){
       tr+=A[j][0].replace('\n','<br>').replace('\s','&nbsp;');
      continue;
      }
