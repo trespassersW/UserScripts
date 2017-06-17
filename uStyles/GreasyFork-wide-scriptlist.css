@@ -3,7 +3,7 @@
  GreasyFork wide scriptlist
    forked from greasy-fork-compact [https://userstyles.org/styles/104650]
    by wOxxOm [https://userstyles.org/users/67605]
-* 017-02-22 [*] search menu position
+* 017-06-17 [*] hotfix
 * 017-01-10 [+] wide forum pages
 * 015-09-03 number of dayly installs exceeded one thousand
 * 015-04-07 !important fix for Chrome
@@ -200,6 +200,7 @@ ol.script-list h2 { font-size: 12pt !important; }
     padding: 0 .2em 1em .2em !important;
 }
 #site-nav >nav{ z-index: 999 !important; }
+.ad.carbon-ad {display: none !important;}
 
 }
 
