@@ -11,8 +11,7 @@
 // @run-at document-end
 // @grant none
 // ==/UserScript==
-(function(){
-function rulat(s){
+(function(D){
 const rabc={
  'а':"а", 'б':"b", 'в':"w", 'г':"g", 'д':"d", 'е':"je"
 ,'ё':"yo", 'ж':"ż", 'з':"z", 'и':"i", 'й':"j", 'к':"k"
@@ -26,9 +25,10 @@ const rabc={
 ,'Ф':"F", 'Х':"Ch", 'Ц':"C", 'Ч':"Cz", 'Ш':"Sz", 'Щ':"Szcz"
 ,'Ъ':"`", 'Ы':"Y", 'Ь':"'", 'Э':"E", 'Ю':"Yu", 'Я':"Ya"
 };
+function rulat(s){
 for (var c,r, a=s.split(''), lat='', k=a.length, i=0; i<k; i++)
  r=a[i],c=rabc[r],lat+= c? c : r;
 return lat;
 }
-document.body.innerHTML=rulat(document.body.innerHTML);
-})();
+D.innerHTML=rulat(D.innerHTML);
+})(document.body);
