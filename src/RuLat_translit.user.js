@@ -1,8 +1,8 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name        RuLat_translit
 // @namespace   oujsForum
 // @description russian -> polish transliteration
-//   !!! works on all sites in .ru domain ::
+//   !!! affects all sites in .ru domain :::
 // @include /^https?.+\.ru(\/.*)?$/
 // @exclude http*://www.google.ru/reader/*
 // @author trespassersW
@@ -11,6 +11,7 @@
 // @run-at document-end
 // @grant none
 // ==/UserScript==
+(function(){
 function rulat(s){
 const rabc={
  'а':"а", 'б':"b", 'в':"w", 'г':"g", 'д':"d", 'е':"je"
@@ -30,4 +31,4 @@ for (var c,r, a=s.split(''), lat='', k=a.length, i=0; i<k; i++)
 return lat;
 }
 document.body.innerHTML=rulat(document.body.innerHTML);
-
+})();
