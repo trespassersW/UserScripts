@@ -1,7 +1,8 @@
 /* 
 @namespace url(http://www.w3.org/1999/xhtml);
+  2017-08-03 * убрана дырка перед списком результатов
+  2016-10-29 * задний фон навигации
   2016-10-23 * убирание горизонтального скролбара
-   2016-03-16 * заплата для yandex.COM
 */
 
 @-moz-document url-prefix("http://yandex.ru/yandsearch")
@@ -51,14 +52,14 @@ position: absolute !important;
 top: 390px !important;
 left: 0 !important; /* */
 right: auto !important; bottom: auto !important; /* */
-z-index: 247 !important;
+z-index: 2147483647 !important;
 background-color: rgba(255, 240, 220, .9) !important;
 opacity:  1 !important;
 visibility: hidden !important;
 border: 1px solid grey  !important;
 border-radius: 16px 0px 16px 0px !important;
 margin: 0 !important;
-padding: 0 !important;
+padding: 0 0 1.2em 0 !important;
 transition: visibility 0s linear 0.75s !important;
 }
 .main__left:hover {
@@ -202,7 +203,8 @@ transition: opacity 0s linear 0.2s !important;
 .footer__col {
     padding-bottom: 0 !important;
 }
-div.main {background-color: #FEFDFC;}
+div.navigation,
+div.main  {background-color: transparent !important;}
 /* 2014-07-20 */
 .serp-item__extra-wrap .serp-item__data {
  overflow: visible !important; }
@@ -367,15 +369,12 @@ margin: 0 0 0 4px!important;
 .z-maps .map *[style^="width"],
 .navigation
 {width:auto !important;}
-/* 160408 */
-.serp.serp__spin.i-bem.serp_js_inited.serp_loading_yes.serp__spin_progress_yes{z-index:-1!important;}/* */
-/* 160403 ?!1 * /
-div.main .main__left,
-div.main .content__right
-{ top: 168px !important;}
-/* */
-/* dbg * / html *{border:thin solid red!important;}/* */
-} 
+/* 170803 */
+.main.main_logo-description_yes{
+    margin-top: -430px !important;
+}
+.serp.serp__spin.i-bem.serp_js_inited.serp_loading_yes.serp__spin_progress_yes{z-index:-1!important;}
+}
 /* 160316 */
 @-moz-document regexp("https?://(www\\.)?yandex\\.com/(yand)?search.+"){
  div.main .main__left,
@@ -383,3 +382,4 @@ div.main .content__right
  { top: 168px !important;}
 }
 /* */
+
