@@ -8,9 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 17.05.07.1
+// @version 17.08.08
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 17.05.07.1 * bugfixes
+// 17.08.08 * bugfix
 // 17.03.11 + keep text formatting 
 // 16.10.26 + phonetic transcription
 // 16.09.01 + 'previous translation' button; [*] top of tooltip at top of client window
@@ -209,7 +209,7 @@ function backLookup(e){
     }
     killId('divUse');
     gtRequest(txtSel,gt_sl,gt_tl);
-   	currentURL = GTurl +  "/" + gt_sl + _l_ + gt_tl + _l_ + escAp(xtx);
+   	currentURL = GTurl +  "/" + gt_sl + _l_ + gt_tl + _l_ + escAp(txtSel);
 }
 //GET https://translate.google.com/?langpair=en|ru&text=Varnish
 //POST https://translate.google.com/translate_a/t?client=t&hl=ru&sl=en&tl=ru&text=Varnish
@@ -222,7 +222,7 @@ function forwLookup(e){
     killId('divUse');
     var t=gt_tl; gt_tl=gt_sl; gt_sl=t;
     gtRequest(txtSel,gt_sl,gt_tl);
-   	currentURL = GTurl +  "/" + gt_sl + _l_ + gt_tl + _l_ + escAp(xtx);
+   	currentURL = GTurl +  "/" + gt_sl + _l_ + gt_tl + _l_ + escAp(txtSel);
 }
  var Gctrl, Galt;
  Gctrl=GM_getValue('ctrl',false), Galt=GM_getValue('alt',true);
