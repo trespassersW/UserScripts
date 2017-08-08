@@ -10,8 +10,8 @@
 // -homepageURL http://userscripts-mirror.org/scripts/show/120602
 // -updateURL https://userscripts-mirror.org/scripts/source/120602.meta.js
 // @version 2.017.0803
+//   2017-08-03 * убрана дырка перед списком результатов
 //   2016-10-23 * убивание горизонтального скролбара
-//   2016-03-16 * заплата для yandex.COM
 // @grant GM_setValue
 // @grant GM_getValue
 // @grant GM_addStyle
