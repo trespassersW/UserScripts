@@ -1,6 +1,7 @@
 @namespace url(http://www.w3.org/1999/xhtml);
 /* 
  userstyles.org/styles/63771/google-columnizer
+ 2017-09-03 *  navigation bar
  2016-12-09 *  newspapers section
  2016-08-13 *  search bar in search results; maps in gsr
  2015-05-25 ** bg color, intervals
@@ -304,7 +305,7 @@ margin-bottom: 6px !important;
 #gsr #hdtbMenus {padding:0 !important;}
 #gsr #extabar div:empty {display:none !important;}
 #gsr #resultStats {
-    top: -2px !important;
+    top: 2px !important;
 }
 #gsr #hdtbMenus .hdtb-mn-cont {top: 2px !important;}
 #gsr #hdtbMenus.hdtb-td-o {
@@ -347,8 +348,10 @@ body#gsr {overflow-y: auto !important;}
 #gsr ._SMl ._eaj { left: -12px !important; opacity:.6!important;}
 #gsr #lu_map{ width: 99% !important; height: auto !important;}
 ._h3g { left: 0!important; right:0!important; top:0!important; bottom:0!important;}
+  .hdtb-mn-cont{padding-top: 8px !important;}
+  #hdtb {margin-top: -27px !important;}
+  body.vasq #hdtb-msb .hdtb-mitem.hdtb-msel, body.vasq #hdtb-msb .hdtb-mitem.hdtb-msel-pre{
+    padding-bottom: 4px !important;
+  }
 
-/* 151124 * / #searchform .gb_ga.gb_g {display: none !important; 
-/* */
-/* * /body div {border-left: 1px dotted red !important;}/* */
 }
