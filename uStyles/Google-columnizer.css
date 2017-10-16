@@ -1,7 +1,7 @@
 @namespace url(http://www.w3.org/1999/xhtml);
 /* 
  userstyles.org/styles/63771/google-columnizer
- 2017-09-03 *  navigation bar
+ 2017-10-16 *  wide right panel
  2016-12-09 *  newspapers section
  2016-08-13 *  search bar in search results; maps in gsr
  2015-05-25 ** bg color, intervals
@@ -353,5 +353,5 @@ body#gsr {overflow-y: auto !important;}
   body.vasq #hdtb-msb .hdtb-mitem.hdtb-msel, body.vasq #hdtb-msb .hdtb-mitem.hdtb-msel-pre{
     padding-bottom: 4px !important;
   }
-
+#gsr #rhs .rhsvw {width: 55vw !important;}
 }
