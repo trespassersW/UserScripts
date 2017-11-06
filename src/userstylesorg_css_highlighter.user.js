@@ -14,7 +14,7 @@
 // 1.1 fresh versions of formater/hiliter; switching  butifying on/off; fixed &lt;/&amp; issue
 //
 // @author          trespassersW
-// @license         MIT License
+// @license         MIT
 // @released        2013-11-20
 // @updated         2016-01-04
 // @grant  GM_setClipboard
