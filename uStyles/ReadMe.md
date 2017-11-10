@@ -33,5 +33,5 @@
 ------------
 
 
-[my styles on userstyles.org](https://userstyles.org/users/95149?as=1&sort=updated_date&)
+[my styles on userstyles.org](https://userstyles.org/users/95149)
 
