@@ -2,7 +2,7 @@
 // @name           Yandex-two-columns
 // @namespace      trespassersW
 // @description    две колонки результатов Яндекса - и ничего лишнего
-// @include        http://yandex.ru/yandsearch*
+// @include  http://yandex.ru/yandsearch*
 // @include  /^https?:\/\/(www\.)?yandex\..+\/(yand)?search.+/
 // @run-at document-start
 // @license MIT

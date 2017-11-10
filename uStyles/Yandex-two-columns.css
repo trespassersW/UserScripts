@@ -1,7 +1,7 @@
 /* 
 @namespace url(http://www.w3.org/1999/xhtml);
-  2017-10-06 **** стрелочка в иконке для правой колонки
-  2017-10-05 * убрана дырка перед списком результатов
+  2017-11-10 * спрятана реклама яндекс браузера
+  2017-10-05 *** стрелочка в иконке для правой колонки
   2016-10-29 * задний фон навигации
 */
 
@@ -380,6 +380,7 @@ margin: 0 0 0 4px!important;
 .navigation_type_horizontal{ /* 170827 */
   position: relative!important;
 }
+.distr-popup__content {display:none!important; visibility:hidden!important;}
 }
 /* 160316 */
 @-moz-document regexp("https?://(www\\.)?yandex\\.com/(yand)?search.+"){
