@@ -8,9 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 17.11.30
+// @version 17.11.301
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 17.11.30 * syncronous XmlHttpRequest for Fx57/GM4.1
+// 17.11.301 * syncronous XmlHttpRequest for Fx57/GM4.1; gm4-polyfill
 // 17.03.11 + keep text formatting 
 // 16.10.26 + phonetic transcription
 // 16.09.01 + 'previous translation' button; [*] top of tooltip at top of client window
@@ -39,6 +39,7 @@
 // - 1k letters limit -- don't strain your Google
 //*/
 // @grant GM_getValue
+// @require https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
 // @grant GM_openInTab
 // @grant GM_setValue
 // @grant GM_xmlhttpRequest
@@ -49,7 +50,7 @@
 // @icon  data:image/jpg;base64, R0lGODlhIAARALP/AAAAAP///xMYfAqf////Zv/qDuCeH8VmB8DAwAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAgALAAAAAAgABEAQASdEMlJgb00awkMKQZYjB8RBsE4AtLQvtt0sXHcEcT1pbxK0hsXRmYIGUUgA3DiQjQtssInRAjglMsa4ibtlqSGgECQymmaAwDYUhSFfKoQDQ3LdA6Hoh6qbW4sJHpFWTUAOEA3Vj1WZjF+HQU9X18oPxl0Wx4kXoFiZF1zMEJgbW8qJnAHoU4takocpW5IIISYGh1HRlh9hRZ4eIRaEQA7
 //
 // ==/UserScript==
-
+alert('xyJlu');
 if(document.body){ 
 
 var main = function (){ "use strict";
