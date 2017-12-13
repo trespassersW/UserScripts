@@ -1,9 +1,9 @@
 /* 
 @namespace url(http://www.w3.org/1999/xhtml);
+  2017-12-13 * hotfix
   2017-12-12 * перемены в яндексе
   2017-11-10 * спрятана реклама яндекс браузера
   2017-10-05 *** стрелочка в иконке для правой колонки
-  2016-10-29 * задний фон навигации
 */
 
 @-moz-document url-prefix("http://yandex.ru/yandsearch")
@@ -28,6 +28,7 @@ div.content__left  {
 /* */
  width: auto !important;
  min-width: 350px !important;
+ border-top: thin dotted gray !important;
 }
 /* left column *************** */
 .main__left:before{
@@ -214,8 +215,7 @@ margin: 0 !important;  padding: 0 4px !important; text-align: right !important;w
 .b-serp-item__date {color: #789 !important; }
 .serp-navigation {
     margin-top: -8px !important;
-    padding-top: 0px !important;
-    padding-bottom: 18px !important;
+    margin-bottom: 22px !important;
 }
 .b-page_baseline_serp3 .z-news__links {
     margin-top: -8px !important;
