@@ -8,9 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 17.08.08
+// @version 17.11.28
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 17.08.08 * bugfix
+// 17.12.28 + TTS button for source text
 // 17.03.11 + keep text formatting 
 // 16.10.26 + phonetic transcription
 // 16.09.01 + 'previous translation' button; [*] top of tooltip at top of client window
@@ -39,6 +39,7 @@
 // - 1k letters limit -- don't strain your Google
 //*/
 // @grant GM_getValue
+// @require https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
 // @grant GM_openInTab
 // @grant GM_setValue
 // @grant GM_xmlhttpRequest
@@ -99,7 +100,8 @@ var maxHT=20, maxWC=3;
 var sourceBH = 3, sourceDP =10;
 var ht=null;  // history table, 
 
-var imgForw,imgBack,imgSwap,imgUse,imgSave,imgFlags,imgForwSrc,imgBackSrc,imgClip,imgGoGo,imgWayBack,imgFmt;
+var imgForw,imgBack,imgSay,imgSwap,imgUse,imgSave,imgFlags,imgForwSrc,imgBackSrc,imgClip,imgGoGo,imgWayBack,imgFmt;
+var saySrc, sayDst;
 var txtSel,txtSelO; // text selected
 var currentURL, Qtxt='***'; var e6 =999999;
 var TKK;// = Math.round(Math.random()*e6)+"."+Math.round(Math.random()*e6);
@@ -513,6 +515,7 @@ function Request(url,cb){
 			url: Url,
       data: Data,
       headers: Hdr,
+      synchronous: false, /* 17.11.30 */
 			onload: function(resp) {
           if(cb)
            cb(resp.responseText)
@@ -636,12 +639,16 @@ function extractResult(html){
   getId('divBottom').removeChild(getId('optionsLink'));
   var oL= buildEl('div', {id:'optionsLink', title: 'Settings', 'class':''},
   null, null);
+  addEl(oL,'a',{id:'gtplaySrc','class':'gootransbutt gootranslink',  title: 'TTS'}, 
+  ['mousedown', saySrc] ,  imgSay); 
   addEl(oL,'a',{id:'optionsFrom','class':'gootransbutt gootranslink'},  
   ['click', options],  gt_sl_gms +' '); 
   addEl(oL,'a',{id:'optionsFast','class':'gootransbutt gootranslink', 
   title: 'swap languages'}, ['click', fastSwap], imgSwap);
   addEl(oL,'a',{id:'optionsTo','class':'gootransbutt gootranslink ' + (getId('divOpt') ? 'gtlActive':'gtlPassive')},  
   ['click', options],  gt_tl_gms );
+ // addEl(oL,'a',{id:'gtpsaySrc','class':'gootransbutt gootranslink'},  
+ // ['click', sayDst] ,  imgSay); 
   if(wayBack[0])
    addEl(oL,'a',{id: 'gtpGoBack','class':'gootransbutt gootranslink',
    title: 'previous translation', style: 'margin-left:9px;'
@@ -1282,6 +1289,7 @@ function flagRequest(f){
 	url: f,
   //binary: true,
   overrideMimeType: "text/plain; charset=x-user-defined",
+  synchronous: false, /* 17.11.30 */
   headers: {	    
     "User-Agent": UA
    ,"Accept":  "image/png,image/*;q=0.8,*/*;q=0.5"
@@ -1783,6 +1791,8 @@ imgBackSrc= imgD+
 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAAXNSR0IArs4c6QAAAGBQTFRFEgAAAVixAmTDXmJaBHPcB43ReXxzaYGJCZrkHpbWH5vfKqHgEqn6RaTSm52UMLb/TLv1f7jPV8L/urqvcMr/is3trcrPx8rBz9TKvdzk3t3O5OLU5+XV6ebY7evf9vTrdcYePwAAAAF0Uk5TAEDm2GYAAAABYktHRACIBR1IAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAoklEQVQY003PWxKDIAwF0CCPYouCKIIB7f532UTttPfvnkkyE4Ar+3Ecb8pdoRGM859UY4yUxow/4CpPcM6HuCzLoxaZacV9IY1G0mWGsG0sUs4M1rnU9hRjpCt4AZZ9CyGWOauyg7UB09qC97UqpRhWDFNN3jfFAf0qiFiLcwK4g57KNAw0JUTXqY4gZ2vtgEKwMFBItL47QN/3T8oLxPnVB4gUDOnY6pKLAAAAAElFTkSuQmCC';
 imgBack = imgH+imgBackSrc+imgT;
 
+imgSay = "<img border=0 style="+'"margin-bottom: -3px;"'+
+"src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB3ElEQVR42rVTvUsCcRju/DrOj1NBzVOH1KFEJGuvIYKm6i+ooamhwaGG/A8aChukJSiolqKgLYoai5Z2UVOUEj3SUzu/9XouOMnQCKIfvMP93t/7vO/zPO8RQ388xL8C2Gy2qXa7/ZLNZp+/3huNRrpQKJQGAjAMM2o2m8MymWwGn/l4PM6Uy+WmmKNpmnS5XLlqtRqIRCIHPQAGg4FC16BKpdrodDr3tVptX61WnySTSRPHcW8Oh2MaoFWSJMc1Gs1uJpPxEG63e0Gn0+2IkyFIxDvOeiwWO8YUE3a7/SmVSplApQyATaVSuZbL5TzIXbZarUfC7/ezjUbjolgs3qFYqFQq1+DHiRNJAAD0arXaR0w0j+5hjH/UbDY5vV4fEAEEiDSLcW6/ayEBpNNpE3QJiQ1QyAJkBDUh3N39CgA5s8ViOYQur4iaQqEYZll2z2q1XkkUzkul0icAKNzk8/keCsj5oP5ZvV5fQvcLUNoS9QKtZQKWLCK5/VVEnufXo9FoV0TJBZ/PF5bL5XMQcRK5BwCe9tgIIAoFQXTZEATh00aKoro2goYXNvJYpBW8WYU7Y30XCdxG8bjvIkF5rdPpjMO1pUQicf3jKkPlKXj9AsGeB73535/pN+cD5ocErGex9gcAAAAASUVORK5CYII='>";
 imgSwap = "<img border=0 style="+'"margin-bottom: -3px;"'+
 "src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAQCAYAAAD52jQlAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAGFJREFUOMu1kkESwCAIAxM+7vTlevJipYKkOWeWQAB2ar2jIFMD31ABEACYBj5kLKkooX9TGTSwUqZQusbToOnd+CxbQiQxXeMccPEVrNzOA//YvkKp9SNnWQo2ZcK6PgocHMgoj3uaTsAAAAAASUVORK5CYII='>";
 imgGoGo="<img border=0 style="+'"margin: 0 0 -3px 0;"'+
@@ -2013,6 +2023,42 @@ function cmdGT(aS,aT){
     lookup(null,aS,aT); 
   } else  lookup(); 
 }
+
+function playTTS(lang, text) {
+    text = text.replace(/[«»'"]/g, ' ');
+    var tk=googleTK(text,soundSL);
+    soundSL=tk.SL;
+    var Url = ttsURL + "&ie=UTF-8&total=1&idx=0" +
+        "&tl=" + lang +
+        "&textlen=" + text.length +
+        "&tk=" + tk.tk+
+        "&q=" + text;
+    var context = new AudioContext();
+    var source = context.createBufferSource();
+
+    var soundRequest = GM_xmlhttpRequest({
+        method: "GET",
+        url: Url,
+        responseType: 'arraybuffer',
+        onload: function(response) {
+            try {
+                    context.decodeAudioData(response.response, function(buffer) {
+                        source.buffer = buffer;
+                        source.connect(context.destination);
+                        source.start(0);
+                    });
+            } catch(e) {
+                GM_log(e);
+            }
+        }
+    });
+}
+
+saySrc= function (evt){
+  evt.preventDefault(),evt.stopPropagation(); 
+   playTTS(gt_sl,txtSel||txtselO);
+}
+sayDst=function (){}
 // postMessage('tgtooltip auto|en','*')
 function wMsg(e){
  //event.source!=window in Chrome
