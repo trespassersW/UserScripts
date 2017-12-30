@@ -8,9 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 17.11.28
+// @version 17.11.30
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 17.12.28 + TTS button for source text
+// 17.12.30 +* TTS button for source text
 // 17.03.11 + keep text formatting 
 // 16.10.26 + phonetic transcription
 // 16.09.01 + 'previous translation' button; [*] top of tooltip at top of client window
@@ -2026,6 +2026,7 @@ function cmdGT(aS,aT){
 }
 
 function playTTS(lang, text) {
+  try{
     text = text.replace(/[«»'"]/g, ' ');
     var tk=googleTK(text,soundSL);
     soundSL=tk.SL;
@@ -2034,7 +2035,8 @@ function playTTS(lang, text) {
         "&textlen=" + text.length +
         "&tk=" + tk.tk+
         "&q=" + text;
-    var context = new AudioContext();
+    var AuCtx=  window.AudioContext || window.webkitAudioContext;
+    var context = new AuCtx();
     var source = context.createBufferSource();
 
     var soundRequest = GM_xmlhttpRequest({
@@ -2048,11 +2050,10 @@ function playTTS(lang, text) {
                         source.connect(context.destination);
                         source.start(0);
                     });
-            } catch(e) {
-                GM_log(e);
-            }
+            } catch(e) {console.log(e)}
         }
     });
+  }catch(e){console.log(e)}
 }
 
 saySrc= function (evt){
