@@ -38,8 +38,9 @@
 // - exit by ESC
 // - 1k letters limit -- don't strain your Google
 //*/
-// @grant GM_getValue
 // @require https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
+// @grant GM_info
+// @grant GM_getValue
 // @grant GM_openInTab
 // @grant GM_setValue
 // @grant GM_xmlhttpRequest
