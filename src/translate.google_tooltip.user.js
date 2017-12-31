@@ -8,7 +8,7 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 17.11.30
+// @version 17.12.31
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
 // 17.12.30 +* TTS button for source text
 // 17.03.11 + keep text formatting 
@@ -38,7 +38,7 @@
 // - exit by ESC
 // - 1k letters limit -- don't strain your Google
 //*/
-// @require https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
+// /require https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
 // @grant GM_info
 // @grant GM_getValue
 // @grant GM_openInTab
