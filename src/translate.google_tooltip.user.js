@@ -8,9 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 17.12.31
+// @version 18.01.15
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 17.12.30 +* TTS button for source text
+// 18.01.15 ++ TTS buttons for source  and translation
 // 17.03.11 + keep text formatting 
 // 16.10.26 + phonetic transcription
 // 16.09.01 + 'previous translation' button; [*] top of tooltip at top of client window
@@ -101,7 +101,7 @@ var maxHT=20, maxWC=3;
 var sourceBH = 3, sourceDP =10;
 var ht=null;  // history table, 
 
-var imgForw,imgBack,imgSay,imgSwap,imgUse,imgSave,imgFlags,imgForwSrc,imgBackSrc,imgClip,imgGoGo,imgWayBack,imgFmt;
+var imgForw,imgBack,imgSay,imgSaY,imgSwap,imgUse,imgSave,imgFlags,imgForwSrc,imgBackSrc,imgClip,imgGoGo,imgWayBack,imgFmt;
 var saySrc, sayDst;
 var txtSel,txtSelO; // text selected
 var currentURL, Qtxt='***'; var e6 =999999;
@@ -640,7 +640,7 @@ function extractResult(html){
   getId('divBottom').removeChild(getId('optionsLink'));
   var oL= buildEl('div', {id:'optionsLink', title: 'Settings', 'class':''},
   null, null);
-  addEl(oL,'a',{id:'gtplaySrc','class':'gootransbutt gootranslink',  title: 'TTS'}, 
+  addEl(oL,'a',{id:'gtplaySrc','class':'gootransbutt gootranslink',  title: 'TTS '+gt_sl}, 
   ['mousedown', saySrc] ,  imgSay); 
   addEl(oL,'a',{id:'optionsFrom','class':'gootransbutt gootranslink'},  
   ['click', options],  gt_sl_gms +' '); 
@@ -648,6 +648,8 @@ function extractResult(html){
   title: 'swap languages'}, ['click', fastSwap], imgSwap);
   addEl(oL,'a',{id:'optionsTo','class':'gootransbutt gootranslink ' + (getId('divOpt') ? 'gtlActive':'gtlPassive')},  
   ['click', options],  gt_tl_gms );
+  addEl(oL,'a',{id:'gtplayDst','class':'gootransbutt gootranslink',  title: 'TTS '+gt_tl}, 
+  ['mousedown', sayDst] ,  imgSaY); 
  // addEl(oL,'a',{id:'gtpsaySrc','class':'gootransbutt gootranslink'},  
  // ['click', sayDst] ,  imgSay); 
   if(wayBack[0])
@@ -1792,8 +1794,10 @@ imgBackSrc= imgD+
 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAAXNSR0IArs4c6QAAAGBQTFRFEgAAAVixAmTDXmJaBHPcB43ReXxzaYGJCZrkHpbWH5vfKqHgEqn6RaTSm52UMLb/TLv1f7jPV8L/urqvcMr/is3trcrPx8rBz9TKvdzk3t3O5OLU5+XV6ebY7evf9vTrdcYePwAAAAF0Uk5TAEDm2GYAAAABYktHRACIBR1IAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAoklEQVQY003PWxKDIAwF0CCPYouCKIIB7f532UTttPfvnkkyE4Ar+3Ecb8pdoRGM859UY4yUxow/4CpPcM6HuCzLoxaZacV9IY1G0mWGsG0sUs4M1rnU9hRjpCt4AZZ9CyGWOauyg7UB09qC97UqpRhWDFNN3jfFAf0qiFiLcwK4g57KNAw0JUTXqY4gZ2vtgEKwMFBItL47QN/3T8oLxPnVB4gUDOnY6pKLAAAAAElFTkSuQmCC';
 imgBack = imgH+imgBackSrc+imgT;
 
+imgSaY = "<img border=0 style="+'"margin-bottom: -3px;"'+
+"src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA+ElEQVR42sXTMYiBYRzH8XfhupIurHRZrrAoRlLKyOSUblE3qNtuuk0xn0EpjEwGm1E2u+ViMJk4DOJKKXyfepTevG8vpwyf5fk//Z73/3+eV3Hm98p/KLcMsJ7Z4EbISEAGSzycFE2YY4cOXrQCXPjDO4IIy6Ide6TRxQYFPKoDiujBgRlyMJ8E+OXmN0ywxgIjxEVhiCy+8IMIVvCoAoQnvCKFqjhQLG7loFr4Rh2NM1+gFhV1RfYmTm2ihBrasiVDAX184gNjBDCAT6OFpFQ5tpCTvVvlYMqqW9AbYkIUbPhFHs/wXnqNQgxTWK55SHoMP+X7/Y0Hq9jeA/Cgqm4AAAAASUVORK5CYII='>";
 imgSay = "<img border=0 style="+'"margin-bottom: -3px;"'+
-"src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB3ElEQVR42rVTvUsCcRju/DrOj1NBzVOH1KFEJGuvIYKm6i+ooamhwaGG/A8aChukJSiolqKgLYoai5Z2UVOUEj3SUzu/9XouOMnQCKIfvMP93t/7vO/zPO8RQ388xL8C2Gy2qXa7/ZLNZp+/3huNRrpQKJQGAjAMM2o2m8MymWwGn/l4PM6Uy+WmmKNpmnS5XLlqtRqIRCIHPQAGg4FC16BKpdrodDr3tVptX61WnySTSRPHcW8Oh2MaoFWSJMc1Gs1uJpPxEG63e0Gn0+2IkyFIxDvOeiwWO8YUE3a7/SmVSplApQyATaVSuZbL5TzIXbZarUfC7/ezjUbjolgs3qFYqFQq1+DHiRNJAAD0arXaR0w0j+5hjH/UbDY5vV4fEAEEiDSLcW6/ayEBpNNpE3QJiQ1QyAJkBDUh3N39CgA5s8ViOYQur4iaQqEYZll2z2q1XkkUzkul0icAKNzk8/keCsj5oP5ZvV5fQvcLUNoS9QKtZQKWLCK5/VVEnufXo9FoV0TJBZ/PF5bL5XMQcRK5BwCe9tgIIAoFQXTZEATh00aKoro2goYXNvJYpBW8WYU7Y30XCdxG8bjvIkF5rdPpjMO1pUQicf3jKkPlKXj9AsGeB73535/pN+cD5ocErGex9gcAAAAASUVORK5CYII='>";
+"src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA90lEQVR42r3TIWgCURzH8VdUBJGhVkUsgloEjY7BwKhJBbEIC4LNZDvQ7MJA0MWZDGvGsWZfERdMJp0ziArCYPo9+AsXbqgTDZ9w7/3vx//9753y1rbqHOrSAQkETNadhwKCeMMvvmEx7NmwQNEswI46NnhHHlu4Zf8WcTxgDZ++mMIIc6wwQUFeiBoCrNAwgwd9PCpZaCOHLG4MHe0DQljiDgNUUcKnkoL7P2Zh7KCDFzTwKgP+OTZAb7mHZzyhK91s9kdoISPMjhDBEDGMUUYFH3pR+sgh6s9NqXXKLLRTP2MYftTwBdd/LpIDUyTPucrX+5kO2gFZJd4DreYhRQAAAABJRU5ErkJggg=='>";
 imgSwap = "<img border=0 style="+'"margin-bottom: -3px;"'+
 "src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAQCAYAAAD52jQlAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAGFJREFUOMu1kkESwCAIAxM+7vTlevJipYKkOWeWQAB2ar2jIFMD31ABEACYBj5kLKkooX9TGTSwUqZQusbToOnd+CxbQiQxXeMccPEVrNzOA//YvkKp9SNnWQo2ZcK6PgocHMgoj3uaTsAAAAAASUVORK5CYII='>";
 imgGoGo="<img border=0 style="+'"margin: 0 0 -3px 0;"'+
@@ -2060,7 +2064,10 @@ saySrc= function (evt){
   evt.preventDefault(),evt.stopPropagation(); 
    playTTS(gt_sl,txtSel||txtselO);
 }
-sayDst=function (){}
+sayDst=function (evt){
+  evt.preventDefault(),evt.stopPropagation(); 
+ txr&&  playTTS(gt_tl,txr);
+}
 // postMessage('tgtooltip auto|en','*')
 function wMsg(e){
  //event.source!=window in Chrome
