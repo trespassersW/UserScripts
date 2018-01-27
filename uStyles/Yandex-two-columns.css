@@ -1,6 +1,6 @@
 /* 
 @namespace url(http://www.w3.org/1999/xhtml);
-  2017-12-13 * hotfix
+  2018.01.27 * hotfix
   2017-12-12 * перемены в яндексе
   2017-11-10 * спрятана реклама яндекс браузера
   2017-10-05 *** стрелочка в иконке для правой колонки
@@ -260,8 +260,8 @@ body .serp-item__greenurl{
 .content__left .region-change, .content__left .competitors
  { display: inline-block !important; padding-left: 2em !important;}
 /* 151119  .z-entity__content-right */
-.content__right div[class*="t-construct-adapter__"]:before,
-.z-entity-search:before {
+.content__right .serp-list_right_yes:before
+{ 
 display: block!important;
 visibility: visible !important;
 position: absolute !important;top:40px!important; right:0 !important; 
@@ -272,8 +272,8 @@ content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAOCAYAAAB6pd+uA
 }
 
 
-.content__right:hover  div[class*="t-construct-adapter__"]:before,
-.content__right:hover  .z-entity-search:before{
+.content__right:hover .serp-list_right_yes:before
+{
 visibility: hidden !important;
 transition: visibility 0s linear 0.3s !important;
 -webkit-transition: visibility 0s linear 0.3s !important;
