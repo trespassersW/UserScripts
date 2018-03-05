@@ -1,44 +1,40 @@
-﻿@namespace url(http://www.w3.org/1999/xhtml);
-/* hides menu box on map */
+@namespace url(http://www.w3.org/1999/xhtml);
+/* 
+hides menu box on map 
+--
+2018-03-05 * hotfixes
+*/
 @-moz-document url-prefix("https://yandex.ru/maps/") {
 
-.header-view__search-layout,
-.header-view__control-panel-layout{
+.header-view__main-layout
+,.header-view__controls-layout
+,.map-controls-view
+{
  opacity: .3 !important;
 transition-delay:  0.3s !important;
 -webkit-transition-delay:  0.3s !important;
 }
-.sidebar-panel-view:hover,
-.map-layers-control:hover,
-.map-view__controls-layout:hover,
-.map-view__navigation-controls:hover,
-.header-view__search-layout:hover,
-.header-view__control-panel-layout:hover{
+.map-controls-view:hover
+,.header-view__main-layout:hover
+,.header-view__controls-layout:hover
+,.sidebar-panel-view:hover
+{
  opacity: 1 !important;
 transition-delay:  0.2s !important;
 -webkit-transition-delay:  0.2s !important;
 }
 
-.sidebar-panel-view,
-.map-layers-control,
-.map-view__controls-layout,
-.map-view__navigation-controls{
- opacity: .4 !important;
-transition-delay:  0.3s !important;
--webkit-transition-delay:  0.3s !important;
-}
-.leaflet-top.leaflet-right,.leaflet-control-zoom,.leaflet-control-sm-geolocation,
-span.map-copyright,a.map-copyright{
- opacity: .33 !important;
-  z-index:9999!important;
+.sidebar-panel-view
+{
+ opacity: .2 !important;
 transition-delay:  0.3s !important;
 -webkit-transition-delay:  0.3s !important;
 }
 
 }
 
-@-moz-document domain("maps.sputnik.ru"), domain("openstreetmap.org") {
-
+@-moz-document domain("openstreetmap.org") ,domain("maps.sputnik.ru")
+{
 div#content div#sidebar:before,
 div.main.ng-scope:before{
 position: fixed !important;
