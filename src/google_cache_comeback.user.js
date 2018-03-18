@@ -2,6 +2,7 @@
 // @name        google cache comeback
 // @namespace   trespassersW
 // @description Brings back links to cached pages in the  Google search results
+// @license     MIT
 // @include     http://www.google.*
 // @include     https://www.google.*
 // @include     http://webcache.googleusercontent.*
