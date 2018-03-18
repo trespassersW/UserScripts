@@ -2,17 +2,18 @@
 // @name        google cache comeback
 // @namespace   trespassersW
 // @description Brings back links to cached pages in the  Google search results
-// @license     MIT
+// @license      MIT
 // @include     http://www.google.*
 // @include     https://www.google.*
 // @include     http://webcache.googleusercontent.*
 // @include     https://webcache.googleusercontent.*
 // /homepageURL http://userscripts.org/scripts/show/156216
 // /updateURL https://userscripts.org/scripts/source/156216.meta.js
-// @version   2.016.0130
+// @version   2.018.0318
 // @grant GM_addStyle
 // @grant GM_log
 // @run-at document-start
+// 2018-03-18 * prevent Cached+Similar from overlapping text when they are wrapped onto a new line
 // 2016-01-30 * hotfix: li.g became div.g
 // 2014-07-20 run-at start + run-at end
 // 2013-05-31 2.2.4 plain cache links; thanks to luckymouse[userstyles.org/styles/64844]
@@ -239,6 +240,8 @@ div.f[style*="white-space:nowrap"] {white-space:normal !important;} \
 .s .f.slp:empty{display:none!important;}\
 .s span.st {display:inline-block !important;}\
 .cr-dwn-arw{margin-left: 2px!important;}\
+/*2018-03-18 */\
+.g .f {height: auto !important;}\
 ';
 //
 insideCache  = location.href.indexOf('webcache')>=0;
