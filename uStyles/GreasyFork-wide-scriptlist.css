@@ -3,7 +3,7 @@
  GreasyFork wide scriptlist
    forked from greasy-fork-compact [https://userstyles.org/styles/104650]
    by wOxxOm [https://userstyles.org/users/67605]
-* 017-06-17 [*] hotfix
+* 018-03-30 [*] hotfix
 * 017-01-10 [+] wide forum pages
 * 015-09-03 number of dayly installs exceeded one thousand
 * 015-04-07 !important fix for Chrome
@@ -151,7 +151,7 @@ span.ok-rating-count   {width:2ex !important; text-align:right!important;}
 span.bad-rating-count  {width:2ex !important; text-align:right!important;}
 dd.script-list-created-date
 {width:auto !important; transform: scale(0.85) !important;letter-spacing: -1px!important;}
-dd.script-list-updated-date{ float: right !important; }
+dd.script-list-updated-date{ float: right !important; width: auto!important;}
 dd.script-list-updated-date span {padding-right: .5ex !important; letter-spacing: -1px !important;}
 #script-list-option-groups{
  overflow: hidden !important;
