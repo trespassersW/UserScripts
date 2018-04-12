@@ -3,7 +3,8 @@
 // @namespace   trespassersW
 // @description appends sorting function to github directories
 // @include https://github.com/*
-// @version 16.04.17.1
+// @version 18.04.12.1
+// 18.04.12 * hotfix 
 // 16.04.17 * hotfix -- 'time' becomes 'time-ago'
 // 16.02.06 * octicons as svg images
 // 15.08.12 ++ octicons for file extensions
@@ -289,7 +290,9 @@ function filext(x){
  return m[2].toLowerCase();
 }
 function setIcon(tr){
-  var xt,xs,xn,xi,tc,tn,ti=tr.querySelector('td.icon > .octicon-file-text');
+  var xt,xs,xn,xi,tc,tn,ti;
+   //ti=tr.querySelector('td.icon > .octicon-file-text');
+   ti=tr.querySelector('td.icon > .octicon-file');
   if(!ti) return;
   tc=tr.querySelector('td.content > span.css-truncate');
   if(!tc) return;
