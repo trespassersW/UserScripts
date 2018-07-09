@@ -1,6 +1,6 @@
 /* 
 @namespace url(http://www.w3.org/1999/xhtml);
-  2018.01.27 * hotfix
+  2018.07.09 * hotfix
   2017-12-12 * перемены в яндексе
   2017-11-10 * спрятана реклама яндекс браузера
   2017-10-05 *** стрелочка в иконке для правой колонки
@@ -336,6 +336,7 @@ body .header_fixed_yes
 .content__left .related { margin-bottom: 2px !important; }
 .footer .footer__line { display: inline-block !important; padding-left: 2em !important; }
 /* AdBlock rule: yandex.ru##[class^="distro"] */
+  .serp-footer__main,
   .footer .distro { display: none !important; }
 /* */
 .footer__inner{padding:  0 !important;}
