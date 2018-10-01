@@ -1,4 +1,4 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name           translate.google tooltip
 // @namespace      trespassersW
 // @author      trespassersW
@@ -8,8 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 18.01.15
+// @version 18.10.01
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 18.10.01 * changes in GT API
 // 18.01.15 ++ TTS buttons for source  and translation
 // 17.03.11 + keep text formatting 
 // 16.10.26 + phonetic transcription
@@ -611,14 +612,16 @@ function extractResult(html){
     badResponce(html);   return;
   }
   //-----------------------------------------------------------------------------------
-	// TKK=eval('((function(){var a\x3d4264492758;var b\x3d-1857761911;return 406375+\x27.\x27+(a+b)})())');
-	var res = /;TKK=(.*?\'\));/i.exec(html);
-	if (res != null) {
+	if(!TKK){ 
+  var res = /;TKK='(.*?)\'/.exec(html);
+  if(res && res[1]) TKK=res[1];
+	if (!TKK) {
 		var res2 = /var a=(.*?);.*?var b=(.*?);.*?return (\d+)/i.exec(res[1].replace(/\\x3d/g, '='));
 		if (res2 != null) {
 			TKK = Number(res2[3]) + '.' + (Number(res2[1]) + Number(res2[2]));
 		}
-	}
+	}}
+  if(!TKK) {console.log("gttp: ERROR - can't get TKK!!!"); stopScript();}  
 
 //-----------------------------------------------------------------------------------
 	  html2 = html2[1].replace(/\<script[^\<]+\<\/script\>/g, '');//remove script tags...
@@ -1659,6 +1662,7 @@ background:'+ BG.C[i] +'!important; color:'+FG.t[i]+'!important;}'+
  margin:  1.1em 0 0 0 !important;\
  transition: visibility .0s linear .2s;\
 }\
+#gdptrantxt >span >ul >li{ -moz-hyphens:none !important; hyphens: none !important;}\
 #gdptrantxt  >span:hover > ul{\
  visibility: visible;\
  transition-delay:  400ms ;\
