@@ -133,4 +133,7 @@ div.ace_editor,table.highlight {
     border:  solid #293134 !important;
     border-width: .5em 0 !important;
   }
+.cm-string{color: #e77 !important;}
+.cm-keyword{color: #93c763 !important;}
+.cm-variable{color: #ccf !important;}
 }
