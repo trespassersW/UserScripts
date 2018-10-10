@@ -25,8 +25,7 @@
 | **highlight-visited.css** | [src](highlight-visited.css) | various patches  |
 | **userstyle-uncover-meta.css** | [src](userstyle-uncover-meta.css) | - shows hidden stylish data  |
 | **github_octicons.css** | [![src](stylish.png)](github_octicons.css) | - resurrects octicons font on github.com   |
-| **github-dark-code.css** | [![src](stylish.png)](github-dark-code.css) | - [obsidian](../../../raw/master/res/darkСode.gif) color theme for code blocks on github   |
-| **sputnik-ru-maps.css** | [![src](stylish.png)](sputnik-ru-maps.css) | - прячет панель меню на картах maps.sputnik.ru  |
+| **github-dark-code.css** | [![src](stylish.png)](github-dark-code.css) | - [obsidian](../../../raw/master/res/darkСode.gif "screenshot") color theme for code blocks on github   |
 | **md-16px.css** | [![src](stylish.png)](md-16px.css) | - Tahoma 16px for markdown files   |
 
 
