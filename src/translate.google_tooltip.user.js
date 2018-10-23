@@ -8,7 +8,7 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 18.10.01
+// @version 18.10.23
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
 // 18.10.23 * changes in GT API
 // 18.01.15 ++ TTS buttons for source  and translation
