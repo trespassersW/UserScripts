@@ -8,8 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 18.10.23
+// @version 18.10.24
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 18.10.24 * no changes in GT API
 // 18.10.23 * changes in GT API
 // 18.01.15 ++ TTS buttons for source  and translation
 // 17.03.11 + keep text formatting 
@@ -613,19 +614,23 @@ function extractResult(html){
   }
   //-----------------------------------------------------------------------------------
 	if(!TKK){ 
- // tkk:'427857.2665959115'
-   var res = /tkk:'(.*?)'/.exec(html);
+// tkk:'427857.2665959115'
+// TKK='427882.1140482906'
+ var res = /TKK\='(.*?)'/.exec(html);
+
   if(res && res[1]) TKK=res[1];
 	if (!TKK) {
-   /****
+/**** /
 		var res2 = /var a=(.*?);.*?var b=(.*?);.*?return (\d+)/i.exec(res[1].replace(/\\x3d/g, '='));
 		if (res2 != null) {
 			TKK = Number(res2[3]) + '.' + (Number(res2[1]) + Number(res2[2]));
 		}
+/****/ 
+/**** / 
   var iH=html;
   iH=iH.replace(/\</g,'&lt;').replace(/&/g,'&amp;');
   getId('divResult').innerHTML = '<pre>'+iH+'</pre>';
-	****/
+/****/
   }  }
   if(!TKK) {console.log("gttp: ERROR - can't get TKK!!!"); stopScript();}  
 
