@@ -8,10 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 18.10.24
+// @version 18.11.30
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
-// 18.10.24 * no changes in GT API
-// 18.10.23 * changes in GT API
+// 18.11.30 * changes in GT API
 // 18.01.15 ++ TTS buttons for source  and translation
 // 17.03.11 + keep text formatting 
 // 16.10.26 + phonetic transcription
@@ -616,7 +615,8 @@ function extractResult(html){
 	if(!TKK){ 
 // tkk:'427857.2665959115'
 // TKK='427882.1140482906'
- var res = /TKK\='(.*?)'/.exec(html);
+ var res = /tkk\:'(.*?)'/.exec(html);
+ if (!res) res=/TKK\='(.*?)'/.exec(html);
 
   if(res && res[1]) TKK=res[1];
 	if (!TKK) {
@@ -638,10 +638,11 @@ function extractResult(html){
 	  html2 = html2[1].replace(/\<script[^\<]+\<\/script\>/g, '');//remove script tags...
 	  killId('divExtract');
     divExtract = (new DOMParser()).parseFromString(html2, "text/html");
-
+// !!!
+    
     ex_sl= gt_sl, ex_tl=gt_tl;
   }
-  try{ 	//gather info
+ //!!! try{ 	//gather info
 // 2013-10-20
 	var _sl = detectedLang(gt_sl);
 	var _tl = detectedLang(gt_tl);
@@ -682,7 +683,7 @@ function extractResult(html){
   }, ['click', goGoogle], imgGoGo);
     
   getId('divBottom').appendChild(oL);
-  }catch(e){ console.log('gather\n'+e); }
+//!!!  }catch(e){ console.log('gather\n'+e); }
 //	var translation = getXId("result_box").textContent;
 // first run: resolve tl = auto
   if(GT_tl == 'auto')try{
@@ -696,10 +697,12 @@ function extractResult(html){
   stayOnTop();
   var dR=getId('divResult');
   var tx='translating..';
+ /* //!!!  
   try{
    tx=getXId("result_box").textContent
 
   }catch(e){tx=e;console.log("result_box\n"+e)} 
+  */
 	dR.innerHTML = '<div id=gdptrantxt>'+
   (tx||'Reading...') + '</div>';
  setTxtDir(dR,GT_tl);
@@ -1372,7 +1375,9 @@ function getId(id, parent){
 function getXId(id){
    var r=divExtract.getElementById(id);
    if(r) return r;
-   throw "Xel bug " + id; 
+   // console.log("no ID: "+ id); // !!!
+   // throw "Xel bug " + id; // !!!
+   return null;
 }
 
 function getTag(name, parent){
