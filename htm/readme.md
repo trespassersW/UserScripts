@@ -4,7 +4,7 @@
 
 =====
 
-View: https://rawgit.com/trespassersW/UserScripts/master/htm/customButt.htm
+View: https://cdn.jsdelivr.net/gh/trespassersW/UserScripts/htm/customButt.htm
 
 ----
 
