@@ -8,8 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 18.11.30
+// @version 19.04.02
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 19.04.02 * TTS in detected language
 // 18.11.30 * changes in GT API
 // 18.01.15 ++ TTS buttons for source  and translation
 // 17.03.11 + keep text formatting 
@@ -83,6 +84,7 @@ _i=console.info.bind(console);
 _i("tgtt..");
 var URL='*'; var tURL;
 var GT_tl='auto';
+var autoLang;
 var body;
 
 // http://www.senojflags.com/
@@ -912,7 +914,6 @@ try{
    throw 'Bad Google responce!!1' +'\n' +txt;
  txt=txt.replace(/,(?=,)/g,',""');
  txt=txt.replace(/\[(?=,)/g,'[""');
-
  var dA=JSON.parse(txt);
  var dL='';
  var punctRE=/^[\s\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]+$/;
@@ -970,7 +971,8 @@ try{
   ['click',txtClip],'');
   
 // detected lang
-  if(gt_sl=='auto' && dA[2]){
+  
+ if(gt_sl=='auto' && dA[2] && (autoLang=dA[2])){
    var oF = getId("optionsFrom");
    oF.textContent= oF.textContent+' - '+detectedLang(dA[2]) +' ';
   }
@@ -2082,7 +2084,7 @@ function playTTS(lang, text) {
 
 saySrc= function (evt){
   evt.preventDefault(),evt.stopPropagation(); 
-   playTTS(gt_sl,txtSel||txtselO);
+   playTTS(gt_sl=='auto'? autoLang : gt_sl, txtSel||txtselO);
 }
 sayDst=function (evt){
   evt.preventDefault(),evt.stopPropagation(); 
