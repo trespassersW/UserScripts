@@ -8,8 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 19.04.02
+// @version 19.09.11
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 19.09.11 * encodeURIComponent( translated_txt )
 // 19.04.02 * TTS in detected language
 // 18.11.30 * changes in GT API
 // 18.01.15 ++ TTS buttons for source  and translation
@@ -68,20 +69,20 @@ var moz=isChrome? "-webkit-": "-moz-";
 
 var   GTurl= "https://translate.google"+GTsuffix+"/?"; 
 //var dictURL= "https://translate.google"+GTsuffix+"/translate_a/t?client=t";
-var dictURL= "https://translate.google"+GTsuffix+"/translate_a/single?client=t";
+var dictURL= "https://translate.google"+GTsuffix+"/translate_a/single?client=webapp";
 var  ttsURL= "https://translate.google.com/translate_tts?client=t";
 
 var HREF_NO = 'javascript:void(0)';
 
-var llii=0, _log = function(){ /* *
+var llii=1, _log = function(){ /* * /
  for (var s=++llii +':', li=arguments.length, i = 0; i<li; i++) 
   s+=' ' + arguments[i];
  console.log(s)
 /* */
 },_i=function(){};
 //_log=console.log.bind(console);
-_i=console.info.bind(console);
-_i("tgtt..");
+//_i=console.info.bind(console);
+console.log("tgTT..19.09.11 20:00");
 var URL='*'; var tURL;
 var GT_tl='auto';
 var autoLang;
@@ -635,6 +636,7 @@ function extractResult(html){
 /****/
   }  }
   if(!TKK) {console.log("gttp: ERROR - can't get TKK!!!"); stopScript();}  
+  else console.log('TKK:'+TKK);
 
 //-----------------------------------------------------------------------------------
 	  html2 = html2[1].replace(/\<script[^\<]+\<\/script\>/g, '');//remove script tags...
@@ -911,7 +913,7 @@ var i,j,k,il,jl,kl,tr,sr,tx,sx,sp;
 try{
  if(!txt) return;
  if(txt.substr(0,1) !== '[')
-   throw 'Bad Google responce!!1' +'\n' +txt;
+   throw 'Bad Google responce!!1' +'\n' +txt.substr(0,15);
  txt=txt.replace(/,(?=,)/g,',""');
  txt=txt.replace(/\[(?=,)/g,'[""');
  var dA=JSON.parse(txt);
@@ -1031,19 +1033,27 @@ try{
      
 } catch(e){   console.warn('errexDict: '+e+'\n');   badResponce(txt,e);}
 }
-//
+/** /
+function encode_utf8(s) {
+  return unescape(encodeURIComponent(s));
+}
+function decode_utf8(s) {
+  return decodeURIComponent(escape(s));
+}
+/**/
 function onTimerDict(){
  formatted=GM_getValue("formatted",false);
  var tx=txtSel,
  tk=googleTK(tx,dictSL);
  dictSL=tk.SL; 
+ _i("_tk_\n"+tk.tk);
  var q = dictURL + 
  "&hl="+ GM_getValue('to','auto') + 
  "&sl=" + gt_sl + "&tl=" + gt_tl + 
-"&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&otf=2&trs=1&inputm=1&ssel=0&tsel=0&source=btn&kc=3"+
+"&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ssel=5&tsel=5&kc=1"+
  "&tk="+tk.tk+
- "&q="+ tx;
- _log('?dict');
+ "&q="+ encodeURIComponent(tx);
+ _log('?dict\n'+q);
  Request(q, extractDict);
 }
 
