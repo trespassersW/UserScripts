@@ -8,8 +8,9 @@
 // @include        *
 //  about:config -> greasemonkey.fileIsGreaseable <- true
 // /homepahe https://github.com/trespassersW/UserScripts/blob/master/show/translate.google_tooltip.md
-// @version 19.09.11
+// @version 19.09.16
 //* This is a descendant of lazyttrick's  http://userscripts.org/scripts/show/36898.
+// 19.09.16 * tiny fix
 // 19.09.11 * encodeURIComponent( translated_txt )
 // 19.04.02 * TTS in detected language
 // 18.11.30 * changes in GT API
@@ -82,7 +83,7 @@ var llii=1, _log = function(){ /* * /
 },_i=function(){};
 //_log=console.log.bind(console);
 //_i=console.info.bind(console);
-console.log("tgTT..19.09.11 20:00");
+console.log("tgTT..19.09.16 1900");
 var URL='*'; var tURL;
 var GT_tl='auto';
 var autoLang;
@@ -636,7 +637,7 @@ function extractResult(html){
 /****/
   }  }
   if(!TKK) {console.log("gttp: ERROR - can't get TKK!!!"); stopScript();}  
-  else console.log('TKK:'+TKK);
+//  else console.log('TKK:'+TKK);
 
 //-----------------------------------------------------------------------------------
 	  html2 = html2[1].replace(/\<script[^\<]+\<\/script\>/g, '');//remove script tags...
@@ -888,7 +889,7 @@ function detectedLang(da){
 var txr;
 function ltAmp(s){ 
 //s=s.replace(/\s(\s*)/g,'\n$1');
-return s.replace(/&/g,'\u00E6').replace(/</g,'\u227A').replace(/\+/g,'\u271B'); 
+return trim(s.replace(/&/g,'\u00E6').replace(/</g,'\u227A').replace(/\+/g,'\u271B')); 
 }
 function altListClick(e){
  e.preventDefault, e.stopPropagation;
