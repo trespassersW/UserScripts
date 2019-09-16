@@ -12,7 +12,7 @@
 
 ----
 
-Run: https://rawgit.com/trespassersW/UserScripts/master/htm/engidioms/sayings.htm
+Run: https://cdn.jsdelivr.net/gh/trespassersW/UserScripts/htm/engidioms/sayings.htm
 
 download ![ zip ](https://github.com/trespassersW/UserScripts/raw/master/htm/engidioms/engidioms.zip)
 
